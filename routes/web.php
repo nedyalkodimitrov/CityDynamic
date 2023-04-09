@@ -16,12 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::group([
-    'prefix' => "controlPanel",
-    'middleware' => ['auth']
+    'prefix' => "adminPanel",
+
 ], function () {
 
-    Route::get('/', [\App\Http\Controllers\Web\Admin\AdminController::class, 'index'])->name('homeAdmin');
-    Route::get('/panel', [\App\Http\Controllers\Web\Admin\AdminController::class, "showAdminPanel"]);
+    Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('homeAdmin');
+//    Route::get('/panel', [\App\Http\Controllers\Web\Admin\AdminController::class, "showAdminPanel"]);
 
 
 

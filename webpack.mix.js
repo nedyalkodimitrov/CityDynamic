@@ -4,7 +4,7 @@ const WebpackRTLPlugin = require('webpack-rtl-plugin');
 const folder = {
     src: "resources/", // source files
     dist: "public/", // build files
-    dist_assets: "public/assets/" //build assets files
+    dist_assets: "public/assets-admin/" //build assets-admin files
 };
 
 /*
@@ -63,7 +63,7 @@ const folder = {
             {"name": "leaflet", "assets": ["./node_modules/leaflet/dist/leaflet.js", "./node_modules/leaflet/dist/leaflet.css"]},
             {"name": "bootstrap-filestyle2", "assets": ["./node_modules/bootstrap-filestyle2/src/bootstrap-filestyle.min.js"]},
             {"name": "echarts", "assets": ["./node_modules/echarts/dist/echarts.min.js"]},
-            {"name": "owl.carousel", "assets": ["./node_modules/owl.carousel/dist/owl.carousel.min.js", "./node_modules/owl.carousel/dist/assets/owl.carousel.min.css","./node_modules/owl.carousel/dist/assets/owl.theme.default.min.css"]},
+            {"name": "owl.carousel", "assets": ["./node_modules/owl.carousel/dist/owl.carousel.min.js", "./node_modules/owl.carousel/dist/assets-admin/owl.carousel.min.css","./node_modules/owl.carousel/dist/assets-admin/owl.theme.default.min.css"]},
             {"name": "toastr", "assets": ["./node_modules/toastr/build/toastr.min.js", "./node_modules/toastr/build/toastr.min.css"]},
             {"name": "rwd-table", "assets": ["./node_modules/admin-resources/rwd-table/rwd-table.min.js", "./node_modules/admin-resources/rwd-table/rwd-table.min.css"]},
             {"name": "bootstrap-editable", "assets": ["./node_modules/bootstrap-editable/js/index.js", "./node_modules/bootstrap-editable/css/bootstrap-editable.css"]},
@@ -113,7 +113,7 @@ const folder = {
         ]
     };
 
-	//copying third party assets
+	//copying third party assets-admin
     lodash(third_party_assets).forEach(function (assets, type) {
         if (type == "css_js") {
             lodash(assets).forEach(function (plugin) {
@@ -149,7 +149,7 @@ const folder = {
     var out = folder.dist_assets + "fonts";
     mix.copyDirectory(folder.src + "fonts", out);
 
-    // copy all images 
+    // copy all images
     var out = folder.dist_assets + "images";
     mix.copyDirectory(folder.src + "images", out);
 
@@ -159,7 +159,7 @@ const folder = {
 
     mix.sass('resources/scss/bootstrap-dark.scss', folder.dist_assets + "css").minify(folder.dist_assets + "css/bootstrap-dark.css");
     mix.sass('resources/scss/app-dark.scss', folder.dist_assets + "css").options({ processCssUrls: false }).minify(folder.dist_assets + "css/app-dark.css");
-   
+
     mix.webpackConfig({
         plugins: [
             new WebpackRTLPlugin()
@@ -167,7 +167,7 @@ const folder = {
     });
 
 
-    //copying demo pages related assets
+    //copying demo pages related assets-admin
     var app_pages_assets = {
         js: [
             folder.src + "js/pages/apexcharts.init.js",
