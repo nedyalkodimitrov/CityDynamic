@@ -104,10 +104,10 @@ Route::group([
 
 
 
-    Route::get('/busStations', [\App\Http\Controllers\Admin\StationController::class, 'showStations'])->name('company.showStations');
-    Route::get('/busStations/{id}', [\App\Http\Controllers\Admin\StationController::class, 'showStationCreate'])->name('company.showStationForm');
-    Route::post('/busStations/makeRequest', [\App\Http\Controllers\Admin\StationController::class, 'showStation'])->name('company.showStation');
-    Route::post('/busStations/makeRequest', [\App\Http\Controllers\Admin\StationController::class, 'showStationEdit'])->name('company.showStationEdit');
+    Route::get('/busStations', [\App\Http\Controllers\Companies\StationController::class, 'showStations'])->name('company.showStations');
+    Route::get('/busStations/{id}', [\App\Http\Controllers\Companies\StationController::class, 'showStation'])->name('company.showStation');
+    Route::post('/busStations/makeRequest/{id}', [\App\Http\Controllers\Companies\StationController::class, 'makeStationRequest'])->name('company.makeStationRequest');
+    Route::post('/busStations/decline/{id}', [\App\Http\Controllers\Companies\StationController::class, 'declineStationRequest'])->name('company.declineStationRequest');
 
     Route::get('/destinations', [\App\Http\Controllers\Admin\StationController::class, 'showStations'])->name('company.showDestinations');
     Route::get('/destinations/create', [\App\Http\Controllers\Admin\StationController::class, 'showStationCreate'])->name('company.showDestinationsForm');
