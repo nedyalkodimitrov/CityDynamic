@@ -93,7 +93,6 @@ Route::group([
     'prefix' => "companyPanel",
 
 ], function () {
-
     Route::get('/', [\App\Http\Controllers\Companies\HomeController::class, 'showHome'])->name('company.home');
 
     Route::get('/buses', [\App\Http\Controllers\Companies\BusController::class, 'showBuses'])->name('company.showBuses');
@@ -102,30 +101,25 @@ Route::group([
     Route::get('/buses/{id}', [\App\Http\Controllers\Companies\BusController::class, 'showBus'])->name('company.showBus');
     Route::post('/buses/create', [\App\Http\Controllers\Companies\BusController::class, 'editBus'])->name('company.editBus');
 
+    Route::get('/busStations', [\App\Http\Controllers\Companies\StationController::class, 'showStations'])->name('company.showStations');
+    Route::get('/busStations/{id}', [\App\Http\Controllers\Companies\StationController::class, 'showStation'])->name('company.showStation');
+    Route::post('/busStations/makeRequest/{id}', [\App\Http\Controllers\Companies\StationController::class, 'makeStationRequest'])->name('company.makeStationRequest');
+    Route::post('/busStations/decline/{id}', [\App\Http\Controllers\Companies\StationController::class, 'declineStationRequest'])->name('company.declineStationRequest');
 
+    Route::get('/destinations', [\App\Http\Controllers\Companies\DestinationController::class, 'showDestinations'])->name('company.showDestinations');
+    Route::get('/destinations/create', [\App\Http\Controllers\Companies\DestinationController::class, 'showDestinationCreate'])->name('company.showDestinationsForm');
+    Route::post('/destinations/create', [\App\Http\Controllers\Companies\DestinationController::class, 'createDestination'])->name('company.createDestination');
+    Route::get('/destinations/{id}', [\App\Http\Controllers\Companies\DestinationController::class, 'showDestination'])->name('company.showDestination');
+    Route::post('/destinations/{id}/edit', [\App\Http\Controllers\Companies\DestinationController::class, 'editDestination'])->name('company.editDestination');
 
-    Route::get('/busStations', [\App\Http\Controllers\Admin\StationController::class, 'showStations'])->name('company.showStations');
-    Route::get('/busStations/{id}', [\App\Http\Controllers\Admin\StationController::class, 'showStationCreate'])->name('company.showStationForm');
-    Route::post('/busStations/makeRequest', [\App\Http\Controllers\Admin\StationController::class, 'showStation'])->name('company.showStation');
-    Route::post('/busStations/makeRequest', [\App\Http\Controllers\Admin\StationController::class, 'showStationEdit'])->name('company.showStationEdit');
-
-    Route::get('/destinations', [\App\Http\Controllers\Admin\StationController::class, 'showStations'])->name('company.showDestinations');
-    Route::get('/destinations/create', [\App\Http\Controllers\Admin\StationController::class, 'showStationCreate'])->name('company.showDestinationsForm');
-    Route::post('/destinations/create', [\App\Http\Controllers\Admin\StationController::class, 'showStation'])->name('company.createDestination');
-    Route::get('/destinations/{id}', [\App\Http\Controllers\Admin\StationController::class, 'showStationEdit'])->name('company.showDestination');
-    Route::post('/destinations/{id}/edit', [\App\Http\Controllers\Admin\StationController::class, 'editStation'])->name('company.editDestination');
-
-    Route::get('/courses', [\App\Http\Controllers\Admin\StationController::class, 'showStations'])->name('company.showCourses');
-    Route::get('/courses/create', [\App\Http\Controllers\Admin\StationController::class, 'showStationCreate'])->name('company.showCoursesForm');
-    Route::post('/courses/create', [\App\Http\Controllers\Admin\StationController::class, 'showStation'])->name('company.createCourses');
-    Route::get('/courses/{id}', [\App\Http\Controllers\Admin\StationController::class, 'showStationEdit'])->name('company.showCourse');
-    Route::post('/courses/{id}/edit', [\App\Http\Controllers\Admin\StationController::class, 'editStation'])->name('company.editCourse');
-
-
-
-
+    Route::get('/courses', [\App\Http\Controllers\Companies\CourseController::class, 'showCourses'])->name('company.showCourses');
+    Route::get('/courses/create', [\App\Http\Controllers\Companies\CourseController::class, 'showCourseCreate'])->name('company.showCoursesForm');
+    Route::post('/courses/create', [\App\Http\Controllers\Companies\CourseController::class, 'createCourse'])->name('company.createCourses');
+    Route::get('/courses/{id}', [\App\Http\Controllers\Companies\CourseController::class, 'showCourse'])->name('company.showCourse');
+    Route::post('/courses/{id}/edit', [\App\Http\Controllers\Companies\CourseController::class, 'editCourse'])->name('company.editCourse');
 });
 
 
 
 Route::get('/', [\App\Http\Controllers\Companies\HomeController::class, 'showHome'])->name('root');
+Route::get('/file', [\App\Http\Controllers\Controller::class, 'file'])->name('file');

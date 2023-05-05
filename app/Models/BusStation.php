@@ -15,7 +15,7 @@ class BusStation extends Model
     }
     public function getCompanies()
     {
-        return $this->belongsToMany(BusCompany::class, "bus_companies_bus_stations_tables", "busCompany", "id");
+        return $this->belongsToMany(BusCompany::class, "bus_companies_bus_stations_tables", "bus_company", "bus_station");
     }
     public function getBuses()
     {

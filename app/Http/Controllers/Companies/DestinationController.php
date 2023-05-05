@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BusStation;
 use App\Models\Destination;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DestinationController extends Controller
 {
@@ -13,26 +14,23 @@ class DestinationController extends Controller
     {
         $destinations = Destination::all();
 
-        return view('admin.pages.destination.destinations')->with('destinations', $destinations);
+        return view('companies.pages.destinations.destinations')->with('destinations', $destinations);
     }
 
     public function showDestination($destinationId)
     {
         $destination = Destination::find($destinationId);
-        return view('admin.pages.destination.destination')->with('destination', $destination);
+        return view('companies.pages.destination.destination')->with('destination', $destination);
     }
 
     public function showDestinationCreate()
     {
-        $busStations = BusStation::all();
-        return view('admin.pages.destination.destinationCreate')->with('busStations', $busStations);
+        $user = Auth::user();
+        $busStations = $user->getCompany->getStations;
+
+        return view('companies.pages.destinations.destinationForm')->with('busStations', $busStations);
     }
 
-    public function showDestinationEdit()
-    {
-        $busStations = BusStation::all();
-        return view('admin.pages.destination.destinationEdit')->with('busStations', $busStations);
-    }
 
     public function createDestination(Request $request)
     {
