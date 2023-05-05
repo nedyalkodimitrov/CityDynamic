@@ -59,10 +59,13 @@ class User extends Authenticatable implements JWTSubject
     }
 
 
-    public function workDays(){
-        return $this->hasMany(WorkDay::class, "user");
+    public function getCompany()
+    {
+        return $this->hasOne(BusCompany::class, 'admin', 'id');
     }
-    public function jobStats(){
-        return $this->hasMany(JobStat::class, "user");
+    public function getStation()
+    {
+        return $this->hasOne(BusStation::class, 'admin', 'id');
     }
+
 }

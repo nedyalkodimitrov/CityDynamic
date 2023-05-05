@@ -4,11 +4,11 @@
 @endsection
 
 @section("content")
-    <h1 class="col-12 text-center mb-2">Създай автобус</h1>
+    <h1 class="col-12 text-center mb-2">Създай компание</h1>
     <form class="col-12 col-md-9 mx-auto col-lg-9">
         <div class="form-group col-12">
-            <label for="exampleInputEmail1">Какво е името на автобуса</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Въведете име на автобуса">
+            <label for="exampleInputEmail1">Какво е името на компанията</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Въведете име на компанията">
         </div>
         <div class="form-group col-12 mt-3">
             <label for="exampleInputEmail1">Какъв е модела на автобуса </label>

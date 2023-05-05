@@ -3,27 +3,62 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bus;
+use App\Models\BusStation;
 use Illuminate\Http\Request;
 
 class BusController extends Controller
 {
     public function showBuses()
     {
-        return view('admin.pages.bus.buses');
+        return view('admin.pages.buses.buses');
     }
 
-    public function showBus()
+    public function showBus($id)
     {
-        return view('admin.pages.bus.bus');
+        $bus = Bus::find($id);
+
+        return view('admin.pages.buses.bus')->with('bus', $bus);
     }
 
     public function showBusCreate()
     {
-        return view('admin.pages.bus.busCreate');
+        return view('admin.pages.buses.busForm');
     }
 
-    public function showBusEdit()
+    public function showBusEdit($busId)
     {
-        return view('admin.pages.bus.busEdit');
+
+        $bus = Bus::find($busId);
+        $busStations = BusStation::all();
+        return view('admin.pages.buses.busEdit')->with('bus', $bus)->with('busStations', $busStations);
     }
+
+
+    public function createBus(Request $request){
+
+            $bus = new Bus();
+            $bus->name = $request->name;
+            $bus->model = $request->model;
+            $bus->seats = $request->name;
+            $bus->save();
+
+            return redirect()->route('showBuses');
+
+    }
+
+    public function editBus($busId, Request $request){
+
+            $bus = Bus::find($busId);
+            $bus->name = $request->name;
+            $bus->model = $request->model;
+            $bus->seats = $request->name;
+            $bus->save();
+
+            return redirect()->route('showBuses');
+
+    }
+
+
+
 }

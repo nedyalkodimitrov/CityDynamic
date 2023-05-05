@@ -3,27 +3,34 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BusStation;
+use App\Models\Destination;
 use Illuminate\Http\Request;
 
 class DestinationController extends Controller
 {
     public function showDestinations()
     {
-        return view('admin.pages.destination.destinations');
+        $destinations = Destination::all();
+
+        return view('admin.pages.destination.destinations')->with('destinations', $destinations);
     }
 
-    public function showDestination()
+    public function showDestination($destinationId)
     {
-        return view('admin.pages.destination.destination');
+        $destination = Destination::find($destinationId);
+        return view('admin.pages.destination.destination')->with('destination', $destination);
     }
 
     public function showDestinationCreate()
     {
-        return view('admin.pages.destination.destinationCreate');
+        $busStations = BusStation::all();
+        return view('admin.pages.destination.destinationCreate')->with('busStations', $busStations);
     }
 
     public function showDestinationEdit()
     {
-        return view('admin.pages.destination.destinationEdit');
+        $busStations = BusStation::all();
+        return view('admin.pages.destination.destinationEdit')->with('busStations', $busStations);
     }
 }

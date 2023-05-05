@@ -23,11 +23,15 @@ return new class extends Migration {
             $table->unsignedBigInteger("bus");
             $table->foreign('bus')->references('id')->on('buses')
                 ->onDelete('cascade');
+            $table->unsignedBigInteger("driver");
+            $table->foreign('driver')->references('id')->on('users')
+                ->onDelete('cascade');
 
             $table->string("currentLocation");
             $table->date("date");
             $table->time("startTime");
             $table->time("endTime");
+
         });
     }
 

@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('bus_companies', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->unsignedBigInteger("admin");
+            $table->foreign('admin')->references('id')->on('users')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

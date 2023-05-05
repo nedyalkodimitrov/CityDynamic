@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BusCompany;
+use Faker\Provider\ar_EG\Company;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -12,9 +14,10 @@ class CompanyController extends Controller
         return view('admin.pages.company.companies');
     }
 
-    public function showCompany()
+    public function showCompany($companyId)
     {
-        return view('admin.pages.company.company');
+        $stations = BusCompany::find($companyId)->getStations;
+        return view('admin.pages.company.company')->with('stations', $stations);
     }
 
     public function showCompanyCreate()
@@ -25,6 +28,15 @@ class CompanyController extends Controller
     public function showCompanyEdit()
     {
         return view('admin.pages.company.companyEdit');
+    }
+
+    public function createCompany(){
+        $companies = new BusCompany();
+        $companies->save();
+    }
+    public function editCompany($companyId, Request $request){
+        $company = BusCompany::find($companyId);
+        $company->save();
     }
 
 
