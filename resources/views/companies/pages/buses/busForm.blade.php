@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('companies.layouts.master')
 
 @section('title')Admin Panel
 @endsection

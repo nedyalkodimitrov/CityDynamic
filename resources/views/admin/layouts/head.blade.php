@@ -15,33 +15,27 @@
                     <i class="fas fa-tachometer-alt fa-fw me-3"></i
                     ><span>Начало</span>
                 </a>
+
                 <a
-                    href="#"
-                    class="list-group-item list-group-item-action py-2 ripple active"
-                >
-                    <i class="fas fa-chart-area fa-fw me-3"></i
-                    ><span>Автобуси</span>
-                </a>
-                <a
-                    href="#"
+                    href="{{route("admin.showStations")}}"
                     class="list-group-item list-group-item-action py-2 ripple"
                 ><i class="fas fa-lock fa-fw me-3"></i><span>Станции</span></a
                 >
                 <a
-                    href="#"
+                    href="{{route("admin.showCompanies")}}"
                     class="list-group-item list-group-item-action py-2 ripple"
                 ><i class="fas fa-chart-line fa-fw me-3"></i
                     ><span>Компании</span></a
                 >
-                <a
-                    href="#"
-                    class="list-group-item list-group-item-action py-2 ripple"
-                >
-                    <i class="fas fa-chart-pie fa-fw me-3"></i><span>Дестинации</span>
-                </a>
+{{--                <a--}}
+{{--                    href="#"--}}
+{{--                    class="list-group-item list-group-item-action py-2 ripple"--}}
+{{--                >--}}
+{{--                    <i class="fas fa-chart-pie fa-fw me-3"></i><span>Дестинации</span>--}}
+{{--                </a>--}}
 
                 <a
-                    href="#"
+                    href="{{route("admin.showUsers")}}"
                     class="list-group-item list-group-item-action py-2 ripple"
                 ><i class="fas fa-users fa-fw me-3"></i><span>Users</span></a
                 >

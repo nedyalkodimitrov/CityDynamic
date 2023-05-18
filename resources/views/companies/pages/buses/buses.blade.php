@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('companies.layouts.master')
 
 @section("title")
     Вашите автобуси
@@ -6,7 +6,7 @@
 
 @section("content")
 
-    <h1 class="col-12 text-center mb-2">Вашите автобуси</h1>
+    <h1 class="col-12 text-center mb-2">Вашите автобуси <a href="{{route("company.showBusCreateForm")}}"><i class="fas fa-plus"></i></a></h1>
 
     @foreach($buses as $bus)
         <div class="card col-3" style="width: 18rem;">

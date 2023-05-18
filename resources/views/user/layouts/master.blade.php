@@ -23,14 +23,14 @@
     @yield("title")
 </head>
 <body>
-    @include("stations.layouts.head")
+    @include("user.layouts.head")
     <!--Main layout-->
-    <main style="margin-top: 58px">
+    <main style="margin: 0; padding: 0;">
         <div class="container pt-4">
         @yield('content')
         </div>
     </main>
-    @include("stations.layouts.footer")
+    @include("user.layouts.footer")
 
     @yield("scripts")
 </body>

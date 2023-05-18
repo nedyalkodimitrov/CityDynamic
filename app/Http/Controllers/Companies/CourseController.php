@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,23 +13,36 @@ class CourseController extends Controller
     public function showCourses()
     {
         $user = Auth::user();
-        $user->getCompany->getCourses;
+        $destinations = $user->getCompany->getDestinations()->pluck("id");
+        $courses = Course::whereIn("id", $destinations)->get();
 
-        return view('companies.pages.courses.courses');
+
+
+
+        return view('companies.pages.courses.courses')->with("courses", $courses);
     }
 
     public function showCourse($id)
     {
-        return view('companies.pages.courses.course');
+        $user = Auth::user();
+        $destinations = $user->getCompany->getDestinations;
+        $buses = $user->getCompany->getBuses;
+        $course = Course::find($id);
+        return view('companies.pages.courses.course')->with("destinations", $destinations)->with("buses", $buses)
+            ->with("courseId", $id)->with("course", $course);
     }
 
     public function showCourseCreate()
     {
-        return view('companies.pages.courses.courseCreate');
+        $user = Auth::user();
+        $destinations = $user->getCompany->getDestinations;
+        $buses = $user->getCompany->getBuses;
+
+        return view('companies.pages.courses.courseForm')->with("destinations", $destinations)->with("buses", $buses);
     }
 
 
-    public function createCourse(){
+    public function createCourse(Request $request){
         $course = new Course();
         $course->destination = $request->destination;
         $course->bus = $request->bus;
@@ -36,6 +50,13 @@ class CourseController extends Controller
         $course->startTime = $request->startTime;
         $course->endTime = $request->endTime;
         $course->save();
+
+        $ticket = new Ticket();
+        $ticket->course = $course->id;
+        $ticket->price = $request->price;
+        $ticket->save();
+        return redirect()->back();
+
     }
 
     public function editCourse($courseId, Request $request){
@@ -46,6 +67,10 @@ class CourseController extends Controller
         $course->startTime = $request->startTime;
         $course->endTime = $request->endTime;
         $course->save();
+        $ticket = $course->getTicket;
+        $ticket->price = $request->price;
+        $ticket->save();
+        return redirect()->back();
     }
 
 

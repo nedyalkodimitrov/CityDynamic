@@ -17,36 +17,36 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::group([
     'prefix' => "adminPanel",
-
+    "middleware" => ["auth", "roleCheck:Admin"]
 ], function () {
 
     Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('homeAdmin');
 
-    Route::get('/buses', [\App\Http\Controllers\Admin\BusController::class, 'showBuses'])->name('showBuses');
-    Route::get('/buses/create', [\App\Http\Controllers\Admin\BusController::class, 'showBusCreate'])->name('showBusCreateForm');
-    Route::post('/buses/create', [\App\Http\Controllers\Admin\BusController::class, 'createBus'])->name('createBus');
-    Route::get('/buses/{$id}', [\App\Http\Controllers\Admin\BusController::class, 'showBusEdit'])->name('showBus');
-    Route::post('/buses/create', [\App\Http\Controllers\Admin\BusController::class, 'editBus'])->name('editBus');
+    Route::get('/users', [\App\Http\Controllers\Admin\UserController::class, 'showUsers'])->name('admin.showUsers');
+    Route::get('/users/create', [\App\Http\Controllers\Admin\UserController::class, 'showUserCreate'])->name('admin.showUserCreate');
+    Route::post('/users/create', [\App\Http\Controllers\Admin\UserController::class, 'createUser'])->name('admin.createUser');
+    Route::get('/users/{id}', [\App\Http\Controllers\Admin\UserController::class, 'showUser'])->name('admin.showUser');
+    Route::post('/users/{id}', [\App\Http\Controllers\Admin\UserController::class, 'editUser'])->name('admin.editUser');
 
 
-    Route::get('/busCompanies', [\App\Http\Controllers\Admin\CompanyController::class, 'showCompanies'])->name('showCompanies');
-    Route::get('/busCompanies/create', [\App\Http\Controllers\Admin\CompanyController::class, 'showCompanyCreate'])->name('showCompanyCreate');
-    Route::post('/busCompanies/create', [\App\Http\Controllers\Admin\CompanyController::class, 'createCompany'])->name('createCompany');
-    Route::get('/busCompanies/{$id}', [\App\Http\Controllers\Admin\CompanyController::class, 'showCompanyEdit'])->name('showCompanyEdit');
-    Route::post('/busCompanies/create', [\App\Http\Controllers\Admin\CompanyController::class, 'editCompany'])->name('editCompany');
+    Route::get('/busCompanies', [\App\Http\Controllers\Admin\CompanyController::class, 'showCompanies'])->name('admin.showCompanies');
+    Route::get('/busCompanies/create', [\App\Http\Controllers\Admin\CompanyController::class, 'showCompanyCreate'])->name('admin.showCompanyCreate');
+    Route::post('/busCompanies/create', [\App\Http\Controllers\Admin\CompanyController::class, 'createCompany'])->name('admin.createCompany');
+    Route::get('/busCompanies/{id}', [\App\Http\Controllers\Admin\CompanyController::class, 'showCompany'])->name('admin.showCompany');
+    Route::post('/busCompanies/{id}', [\App\Http\Controllers\Admin\CompanyController::class, 'editCompany'])->name('admin.editCompany');
 
-    Route::get('/busStations', [\App\Http\Controllers\Admin\StationController::class, 'showStations'])->name('showStations');
-    Route::get('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'showStationCreate'])->name('showStationCreate');
-    Route::post('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'showStation'])->name('showStation');
-    Route::get('/busStations/{$id}', [\App\Http\Controllers\Admin\StationController::class, 'showStationEdit'])->name('showStationEdit');
-    Route::post('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'editStation'])->name('editStation');
+    Route::get('/busStations', [\App\Http\Controllers\Admin\StationController::class, 'showStations'])->name('admin.showStations');
+    Route::get('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'showStationCreate'])->name('admin.showStationCreate');
+    Route::post('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'createStation'])->name('admin.createStation');
+    Route::get('/busStations/{id}', [\App\Http\Controllers\Admin\StationController::class, 'showStation'])->name('admin.showStation');
+    Route::post('/busStations/{id}', [\App\Http\Controllers\Admin\StationController::class, 'editStation'])->name('admin.editStation');
 
-    Route::get('/busStations', [\App\Http\Controllers\Admin\StationController::class, 'showStations'])->name('showStations');
-    Route::get('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'showStationCreate'])->name('showStationCreate');
-    Route::post('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'showStation'])->name('showStation');
-    Route::get('/busStations/{$id}', [\App\Http\Controllers\Admin\StationController::class, 'showStationEdit'])->name('showStationEdit');
-    Route::post('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'editStation'])->name('editStation');
-
+//    Route::get('/busStations', [\App\Http\Controllers\Admin\StationController::class, 'showStations'])->name('showStations');
+//    Route::get('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'showStationCreate'])->name('showStationCreate');
+//    Route::post('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'showStation'])->name('showStation');
+//    Route::get('/busStations/{$id}', [\App\Http\Controllers\Admin\StationController::class, 'showStationEdit'])->name('showStationEdit');
+//    Route::post('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'editStation'])->name('editStation');
+//
 
 
 
@@ -54,29 +54,21 @@ Route::group([
 
 Route::group([
     'prefix' => "stationPanel",
+    "middleware" => ["auth", "roleCheck:Bus Station Admin"]
 
 ], function () {
 
-    Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('homeAdmin');
+    Route::get('/', [\App\Http\Controllers\Stations\HomeController::class, 'showHome'])->name('station.home');
 
-    Route::get('/buses', [\App\Http\Controllers\Admin\BusController::class, 'showBuses'])->name('showBuses');
-    Route::get('/buses/create', [\App\Http\Controllers\Admin\BusController::class, 'showBusCreate'])->name('showBusCreateForm');
-    Route::post('/buses/create', [\App\Http\Controllers\Admin\BusController::class, 'createBus'])->name('createBus');
-    Route::get('/buses/{$id}', [\App\Http\Controllers\Admin\BusController::class, 'showBusEdit'])->name('showBus');
-    Route::post('/buses/create', [\App\Http\Controllers\Admin\BusController::class, 'editBus'])->name('editBus');
+    Route::get('/busCompanies', [\App\Http\Controllers\Stations\CompanyController::class, 'showAllCompanies'])->name('station.showCompanies');
+    Route::get('/busCompanies/requests', [\App\Http\Controllers\Stations\CompanyController::class, 'showCompanyRequests'])->name('station.showCompanyRequests');
+    Route::get('/busCompanies/requests/{id}', [\App\Http\Controllers\Stations\CompanyController::class, 'showCompanyRequest'])->name('station.showCompanyRequest');
+    Route::post('/busCompanies/accept/{id}', [\App\Http\Controllers\Stations\CompanyController::class, 'acceptCompanyRequest'])->name('station.acceptCompanyRequest');
+    Route::post('/busCompanies/decline/{id}', [\App\Http\Controllers\Stations\CompanyController::class, 'declineCompanyRequest'])->name('station.decCompanyRequest');
+    Route::get('/busCompanies/{id}', [\App\Http\Controllers\Stations\CompanyController::class, 'showCompany'])->name('station.showCompany');
 
-
-    Route::get('/busCompanies', [\App\Http\Controllers\Admin\CompanyController::class, 'showCompanies'])->name('showCompanies');
-    Route::get('/busCompanies/create', [\App\Http\Controllers\Admin\CompanyController::class, 'showCompanyCreate'])->name('showCompanyCreate');
-    Route::post('/busCompanies/create', [\App\Http\Controllers\Admin\CompanyController::class, 'createCompany'])->name('createCompany');
-    Route::get('/busCompanies/{$id}', [\App\Http\Controllers\Admin\CompanyController::class, 'showCompanyEdit'])->name('showCompanyEdit');
-    Route::post('/busCompanies/create', [\App\Http\Controllers\Admin\CompanyController::class, 'editCompany'])->name('editCompany');
-
-    Route::get('/busStations', [\App\Http\Controllers\Admin\StationController::class, 'showStations'])->name('showStations');
-    Route::get('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'showStationCreate'])->name('showStationCreate');
-    Route::post('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'showStation'])->name('showStation');
-    Route::get('/busStations/{$id}', [\App\Http\Controllers\Admin\StationController::class, 'showStationEdit'])->name('showStationEdit');
-    Route::post('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'editStation'])->name('editStation');
+    Route::get('/destinations', [\App\Http\Controllers\Stations\DestinationController::class, 'showDestinations'])->name('station.showDestinations');
+    Route::get('/destinations/{id}', [\App\Http\Controllers\Stations\DestinationController::class, 'showDestination'])->name('station.showDestination');
 
     Route::get('/busStations', [\App\Http\Controllers\Admin\StationController::class, 'showStations'])->name('showStations');
     Route::get('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'showStationCreate'])->name('showStationCreate');
@@ -91,6 +83,7 @@ Route::group([
 
 Route::group([
     'prefix' => "companyPanel",
+    "middleware" => ["auth", "roleCheck:Bus Company Admin"]
 
 ], function () {
     Route::get('/', [\App\Http\Controllers\Companies\HomeController::class, 'showHome'])->name('company.home');
@@ -114,12 +107,14 @@ Route::group([
 
     Route::get('/courses', [\App\Http\Controllers\Companies\CourseController::class, 'showCourses'])->name('company.showCourses');
     Route::get('/courses/create', [\App\Http\Controllers\Companies\CourseController::class, 'showCourseCreate'])->name('company.showCoursesForm');
-    Route::post('/courses/create', [\App\Http\Controllers\Companies\CourseController::class, 'createCourse'])->name('company.createCourses');
+    Route::post('/courses/create', [\App\Http\Controllers\Companies\CourseController::class, 'createCourse'])->name('company.createCourse');
     Route::get('/courses/{id}', [\App\Http\Controllers\Companies\CourseController::class, 'showCourse'])->name('company.showCourse');
     Route::post('/courses/{id}/edit', [\App\Http\Controllers\Companies\CourseController::class, 'editCourse'])->name('company.editCourse');
 });
 
 
 
-Route::get('/', [\App\Http\Controllers\Companies\HomeController::class, 'showHome'])->name('root');
-Route::get('/file', [\App\Http\Controllers\Controller::class, 'file'])->name('file');
+Route::get('/', [\App\Http\Controllers\User\UserController::class, 'showHome'])->name('root');
+Route::get('/courses/{id}', [\App\Http\Controllers\User\UserController::class, 'showCourses'])->name('user.showCourses');
+Route::get('/course/{id}', [\App\Http\Controllers\User\UserController::class, 'showCourse'])->name('user.showCourse');
+//Route::get('/orderCourse/{id}', [\App\Http\Controllers\User\UserController::class, 'showHome'])->name('root');

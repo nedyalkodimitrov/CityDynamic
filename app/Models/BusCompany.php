@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class BusCompany extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     public function getBuses()
     {
         return $this->hasMany(Bus::class, "busCompany", "id");
@@ -15,7 +16,7 @@ class BusCompany extends Model
 
     public function getStations()
     {
-        return $this->belongsToMany(BusStation::class, "bus_companies_bus_stations_tables", "bus_station", "bus_company");
+        return $this->belongsToMany(BusStation::class, "bus_companies_bus_stations_tables", "bus_company", "bus_station");
     }
     //todo add migrations for company relations in destinations
     public function getDestinations(){
@@ -24,6 +25,12 @@ class BusCompany extends Model
 
     public function getRequestedStations()
     {
-        return $this->belongsToMany(BusStation::class, "bus_companies_bus_stations_request", "bus_station", "bus_company");
+        return $this->belongsToMany(BusStation::class, "bus_companies_bus_stations_request", "bus_company", "bus_station");
     }
+
+    public function getAdmin()
+    {
+        return $this->belongsTo(User::class, "admin", "id");
+    }
+
 }

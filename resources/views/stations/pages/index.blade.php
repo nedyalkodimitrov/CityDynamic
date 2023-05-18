@@ -1,10 +1,10 @@
-@extends('admin.layouts.master')
+@extends('stations.layouts.master')
 
-@section('title')Admin Panel
+@section('title')Station Panel
 @endsection
 
 @section("content")
 
-    <h1>this is good</h1>
+    <h1></h1>
 
 @endsection
