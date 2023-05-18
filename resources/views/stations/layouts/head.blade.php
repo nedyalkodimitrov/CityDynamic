@@ -16,35 +16,18 @@
                     ><span>Начало</span>
                 </a>
                 <a
-                    href="#"
+                    href="{{route("station.showCompanies")}}"
                     class="list-group-item list-group-item-action py-2 ripple active"
                 >
                     <i class="fas fa-chart-area fa-fw me-3"></i
-                    ><span>Автобуси</span>
+                    ><span>Компании</span>
                 </a>
                 <a
-                    href="#"
+                    href="{{route("station.showDestinations")}}"
                     class="list-group-item list-group-item-action py-2 ripple"
-                ><i class="fas fa-lock fa-fw me-3"></i><span>Станции</span></a
+                ><i class="fas fa-lock fa-fw me-3"></i><span>Дестинации</span></a
                 >
-                <a
-                    href="#"
-                    class="list-group-item list-group-item-action py-2 ripple"
-                ><i class="fas fa-chart-line fa-fw me-3"></i
-                    ><span>Компании</span></a
-                >
-                <a
-                    href="#"
-                    class="list-group-item list-group-item-action py-2 ripple"
-                >
-                    <i class="fas fa-chart-pie fa-fw me-3"></i><span>Дестинации</span>
-                </a>
 
-                <a
-                    href="#"
-                    class="list-group-item list-group-item-action py-2 ripple"
-                ><i class="fas fa-users fa-fw me-3"></i><span>Users</span></a
-                >
 
             </div>
         </div>
@@ -73,7 +56,7 @@
 
             <!-- Brand -->
             <a class="navbar-brand" href="#">
-              <h2>Dynamic Cities</h2>
+                <h2>Dynamic Cities</h2>
             </a>
             <!-- Search form -->
 
@@ -103,7 +86,9 @@
                                 <i class="fa fa-check text-success ms-2"></i
                                 ></a>
                         </li>
-                        <li><hr class="dropdown-divider" /></li>
+                        <li>
+                            <hr class="dropdown-divider"/>
+                        </li>
                         <li>
                             <a class="dropdown-item" href="#"
                             ><i class="poland flag"></i>Polski</a
@@ -171,7 +156,8 @@
                     >
                         <li><a class="dropdown-item" href="#">My profile</a></li>
                         <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                        <li>
+                            <form action="{{route("logout")}}" method="post"> @csrf <button>logout</button></form></li>
                     </ul>
                 </li>
             </ul>

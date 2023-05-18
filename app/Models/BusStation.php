@@ -17,6 +17,10 @@ class BusStation extends Model
     {
         return $this->belongsToMany(BusCompany::class, "bus_companies_bus_stations_tables", "bus_company", "bus_station");
     }
+    public function getCompanyRequests()
+    {
+        return $this->belongsToMany(BusCompany::class, "bus_companies_bus_stations_request", "bus_company", "bus_station");
+    }
     public function getBuses()
     {
         return $this->hasMany(Bus::class, "busStation", "id");
@@ -24,5 +28,10 @@ class BusStation extends Model
 
     public function getDestinations(){
         return $this->hasMany(Destination::class, "startBusStation", "id");
+    }
+
+    public function getAdmin()
+    {
+        return $this->belongsTo(User::class, "admin", "id");
     }
 }

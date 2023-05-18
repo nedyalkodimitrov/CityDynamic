@@ -23,4 +23,7 @@ class Course extends Model
     {
         return $this->belongsTo(BusStation::class, "busStation", "id");
     }
+    public function getTicket(){
+        return $this->hasOne(Ticket::class, "course", "id");
+    }
 }

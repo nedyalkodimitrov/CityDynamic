@@ -16,12 +16,12 @@ class CheckRole
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $role)
     {
-        if (Auth::check()) {
+        if (Auth::user()->getRoleNames()->first() == $role) {
             return $next($request);
         }
-        return redirect('/login');
+        return redirect('/');
 
     }
 }

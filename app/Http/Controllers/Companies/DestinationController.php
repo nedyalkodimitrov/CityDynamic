@@ -40,7 +40,7 @@ class DestinationController extends Controller
         $destination->endBusStation = $request->endBusStation;
         $destination->save();
 
-        return redirect()->route('showDestinations');
+        return redirect()->route('company.showDestinations');
     }
 
     public function editDestination($destinationId, Request $request)

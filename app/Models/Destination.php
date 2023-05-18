@@ -9,6 +9,7 @@ class Destination extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
     public function getStartBusStation()
     {
         return $this->belongsTo(BusStation::class, "startBusStation", "id");
