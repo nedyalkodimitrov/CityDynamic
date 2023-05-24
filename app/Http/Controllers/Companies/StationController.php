@@ -32,9 +32,11 @@ class StationController extends Controller
         $request = $company->getRequestedStations()->where("bus_station", $station->id)->get();
         if(count($request) > 0 ){
             $isRequestToThisStation = true;
-            if ($request[0]->isApproved == 1){
-                $isApproved = true;
-            }
+        }
+
+        if (count($company->getStations()->where("bus_station", $station->id)->get())){
+            $isApproved = true;
+            $isRequestToThisStation = true;
         }
         return view('companies.pages.stations.station')
             ->with(["station" => $station])
@@ -54,8 +56,17 @@ class StationController extends Controller
         $user = Auth::user();
         $company = $user->getCompany;
         $company->getRequestedStations()->detach($id);
-        return redirect()->back();
+        return redirect()->route("company.showStations");
     }
+
+    public function unpairStation($id){
+        $user = Auth::user();
+        $company = $user->getCompany;
+        $company->getStations()->detach($id);
+        return redirect()->route("company.showStations");
+    }
+
+
 
 
 

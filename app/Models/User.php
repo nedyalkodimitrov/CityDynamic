@@ -68,4 +68,8 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(BusStation::class, 'admin', 'id');
     }
 
+    public function getOrders(){
+        return $this->hasMany(Order::class, "user");
+    }
+
 }

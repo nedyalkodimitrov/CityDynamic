@@ -15,11 +15,11 @@ class BusStation extends Model
     }
     public function getCompanies()
     {
-        return $this->belongsToMany(BusCompany::class, "bus_companies_bus_stations_tables", "bus_company", "bus_station");
+        return $this->belongsToMany(BusCompany::class, "bus_companies_bus_stations_tables", "bus_station", "bus_company");
     }
     public function getCompanyRequests()
     {
-        return $this->belongsToMany(BusCompany::class, "bus_companies_bus_stations_request", "bus_company", "bus_station");
+        return $this->belongsToMany(BusCompany::class, "bus_companies_bus_stations_request", "bus_station", "bus_company");
     }
     public function getBuses()
     {

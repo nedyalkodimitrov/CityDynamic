@@ -22,4 +22,7 @@ class Destination extends Model
     {
         return $this->belongsTo(BusStation::class, "endBusStation", "id");
     }
+    public function getCompany(){
+        return $this->belongsTo(BusCompany::class, "busCompany");
+    }
 }

@@ -62,8 +62,8 @@
 
                     <!-- Icon dropdown -->
 
-                    <li class="" style="margin-right: 2em"><a class="dropdown-item " href="{{route("login")}}">Login</a></li>
-                    <li><a class="dropdown-item ml-3" href="{{route("register")}}">Register</a></li>
+                    <li class="" style="margin-right: 2em"><a class="dropdown-item " href="{{route("login")}}">Влез</a></li>
+                    <li><a class="dropdown-item ml-3" href="{{route("register")}}">Регистрация</a></li>
                     <!-- Avatar -->
 
                 </ul>

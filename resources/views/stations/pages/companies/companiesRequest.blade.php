@@ -12,8 +12,7 @@
         <div class="card col-12 row" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">{{$company->name}}</h5>
-                <p class="card-text"> | 25 <i class="fas fa-users"></i></p>
-                <a href="{{route("station.showCompanyRequest", ["id" => $company->id])}}" class="btn btn-primary col-12">Виж още</a>
+                <a href="{{route("station.showCompanyRequest", ["id" => $company->id])}}" class="btn btn-danger col-12">Виж заявката</a>
             </div>
         </div>
     @empty

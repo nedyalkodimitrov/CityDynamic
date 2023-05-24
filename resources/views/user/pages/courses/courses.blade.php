@@ -14,8 +14,10 @@
                 <div class="card col-11">
                     <div class="card-body row align-center">
                         <p class="col-3 p-0 m-0" style="align-self: center">Ден: {{$course->date}} <i class="fas fa-calendar"></i></p>
-                        <p class="col-3 p-0 m-0"  style="align-self: center">Час на тръгване: {{$course->startTime}} <i class="fas fa-clock"></i></p>
-                        <p class="col-3 p-0 m-0"  style="align-self: center">Час на пристигане: {{$course->endTime}} <i class="fas fa-clock"></i></p>
+                        <p class="col-2 p-0 m-0"  style="align-self: center">Час на тръгване: {{$course->startTime}} <i class="fas fa-clock"></i></p>
+                        <p class="col-2 p-0 m-0"  style="align-self: center">Час на пристигане: {{$course->endTime}} <i class="fas fa-clock"></i></p>
+                        <p class="col-2 p-0 m-0"  style="align-self: center"> Компания: {{$course->getDestination->getCompany->name}} </p>
+
                         <a href="{{route("user.showCourse", ["id"=>$course->id])}}" class="btn btn-primary col-3">Резервирай</a>
                     </div>
 

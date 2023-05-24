@@ -7,8 +7,8 @@
 @section("content")
 
     <div class="col-12">
-        <h1 class="col-12 text-center mb-2"> Курсове <a class="btn btn-success"
-                                                        href="{{route("company.showCoursesForm")}}">+</a></h1>
+        <h1 class="col-12 text-center mb-2" style="position: relative"> Курсове <a style="position: absolute; right: 0" class="btn btn-success"
+                                                        href="{{route("company.showCoursesForm")}}"> Създай курс </a></h1>
     </div>
     <div class="col-12 row">
         @forelse($courses as $course)

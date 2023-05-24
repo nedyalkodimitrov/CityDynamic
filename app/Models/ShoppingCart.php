@@ -16,4 +16,7 @@ class ShoppingCart extends Model
     {
         return $this->belongsTo(User::class, "user", "id");
     }
+    public function getTicket(){
+        return $this->belongsTo(Ticket::class, "ticket","id");
+    }
 }

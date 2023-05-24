@@ -41,13 +41,6 @@ Route::group([
     Route::get('/busStations/{id}', [\App\Http\Controllers\Admin\StationController::class, 'showStation'])->name('admin.showStation');
     Route::post('/busStations/{id}', [\App\Http\Controllers\Admin\StationController::class, 'editStation'])->name('admin.editStation');
 
-//    Route::get('/busStations', [\App\Http\Controllers\Admin\StationController::class, 'showStations'])->name('showStations');
-//    Route::get('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'showStationCreate'])->name('showStationCreate');
-//    Route::post('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'showStation'])->name('showStation');
-//    Route::get('/busStations/{$id}', [\App\Http\Controllers\Admin\StationController::class, 'showStationEdit'])->name('showStationEdit');
-//    Route::post('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'editStation'])->name('editStation');
-//
-
 
 
 });
@@ -92,12 +85,13 @@ Route::group([
     Route::get('/buses/create', [\App\Http\Controllers\Companies\BusController::class, 'showBusCreate'])->name('company.showBusCreateForm');
     Route::post('/buses/create', [\App\Http\Controllers\Companies\BusController::class, 'createBus'])->name('company.createBus');
     Route::get('/buses/{id}', [\App\Http\Controllers\Companies\BusController::class, 'showBus'])->name('company.showBus');
-    Route::post('/buses/create', [\App\Http\Controllers\Companies\BusController::class, 'editBus'])->name('company.editBus');
+    Route::post('/buses/{id}', [\App\Http\Controllers\Companies\BusController::class, 'editBus'])->name('company.editBus');
 
     Route::get('/busStations', [\App\Http\Controllers\Companies\StationController::class, 'showStations'])->name('company.showStations');
     Route::get('/busStations/{id}', [\App\Http\Controllers\Companies\StationController::class, 'showStation'])->name('company.showStation');
     Route::post('/busStations/makeRequest/{id}', [\App\Http\Controllers\Companies\StationController::class, 'makeStationRequest'])->name('company.makeStationRequest');
     Route::post('/busStations/decline/{id}', [\App\Http\Controllers\Companies\StationController::class, 'declineStationRequest'])->name('company.declineStationRequest');
+    Route::post('/busStations/unpair/{id}', [\App\Http\Controllers\Companies\StationController::class, 'unpairStation'])->name('company.unpairStation');
 
     Route::get('/destinations', [\App\Http\Controllers\Companies\DestinationController::class, 'showDestinations'])->name('company.showDestinations');
     Route::get('/destinations/create', [\App\Http\Controllers\Companies\DestinationController::class, 'showDestinationCreate'])->name('company.showDestinationsForm');
@@ -113,8 +107,21 @@ Route::group([
 });
 
 
+Route::group([
+    "middleware" => ["auth"]
+
+], function () {
+    Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('get.logout');
+    Route::post('/putInCart/{id}', [\App\Http\Controllers\User\UserController::class, 'putInTheCart'])->name('user.putInCart');
+    Route::get('/cart', [\App\Http\Controllers\User\UserController::class, 'showCart'])->name('user.showCart');
+    Route::post('/buy', [\App\Http\Controllers\User\UserController::class, 'buy'])->name('user.buy');
+    Route::get('/profile', [\App\Http\Controllers\User\UserController::class, 'showProfile'])->name('user.showProfile');
+    Route::get('/purchases', [\App\Http\Controllers\User\UserController::class, 'showPurchases'])->name('user.showPurchases');
+    Route::get('/purchase/{id}', [\App\Http\Controllers\User\UserController::class, 'showPurchase'])->name('user.showPurchase');
+    Route::post('/removeFromCart/{id}', [\App\Http\Controllers\User\UserController::class, 'removeFromCart'])->name('user.removeFromCart');
+
+});
 
 Route::get('/', [\App\Http\Controllers\User\UserController::class, 'showHome'])->name('root');
 Route::get('/courses/{id}', [\App\Http\Controllers\User\UserController::class, 'showCourses'])->name('user.showCourses');
 Route::get('/course/{id}', [\App\Http\Controllers\User\UserController::class, 'showCourse'])->name('user.showCourse');
-//Route::get('/orderCourse/{id}', [\App\Http\Controllers\User\UserController::class, 'showHome'])->name('root');

@@ -24,7 +24,7 @@ class StationController extends Controller
         $companyAdmins = User::role('Bus Station Admin')->get();
         $users = [];
         foreach ($companyAdmins as $busAdmin) {
-            if ($busAdmin->getCompany == null){
+            if ($busAdmin->getStation == null){
                 array_push($users, $busAdmin);
             }
         }
@@ -39,7 +39,7 @@ class StationController extends Controller
         $companyAdmins = User::role('Bus Station Admin')->get();
         $users = [];
         foreach ($companyAdmins as $busAdmin) {
-            if ($busAdmin->getCompany == null){
+            if ($busAdmin->getStation == null){
                 array_push($users, $busAdmin);
             }
         }
@@ -56,7 +56,7 @@ class StationController extends Controller
         $busStation->city = $request->city;
         $busStation->save();
 
-        return redirect()->route('showStations');
+        return redirect()->route('admin.showStations');
     }
 
     public function editStation($busStationId, Request $request){
@@ -66,7 +66,7 @@ class StationController extends Controller
         $busStation->city = $request->city;
         $busStation->save();
 
-        return redirect()->route('showStations');
+        return redirect()->route('admin.showStations');
     }
 
 }

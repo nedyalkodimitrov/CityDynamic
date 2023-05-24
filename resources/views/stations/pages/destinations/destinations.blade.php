@@ -6,7 +6,7 @@
 
 @section("content")
 
-    <h1 class="col-12 text-center mb-2">Дестинации <a href="{{route("station.showCompanyRequests")}}"><i class="fas fa-envelope"></i></a></h1>
+    <h1 class="col-12 text-center mb-2">Компании <a href="{{route("station.showCompanyRequests")}}"><i class="fas fa-envelope"></i></a></h1>
     <div class="col-12 mx-auto row">
         @forelse($destinations as $destination)
 

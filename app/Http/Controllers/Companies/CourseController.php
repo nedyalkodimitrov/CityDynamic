@@ -14,9 +14,8 @@ class CourseController extends Controller
     {
         $user = Auth::user();
         $destinations = $user->getCompany->getDestinations()->pluck("id");
-        $courses = Course::whereIn("id", $destinations)->get();
 
-
+        $courses = Course::whereIn("destination", $destinations)->get();
 
 
         return view('companies.pages.courses.courses')->with("courses", $courses);

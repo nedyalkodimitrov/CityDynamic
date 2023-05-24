@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bus extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     public function getCompany()
     {
         return $this->belongsTo(BusCompany::class, "busCompany", "id");

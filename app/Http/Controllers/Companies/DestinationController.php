@@ -12,7 +12,9 @@ class DestinationController extends Controller
 {
     public function showDestinations()
     {
-        $destinations = Destination::all();
+         $user = Auth::user();
+        $company = $user->getCompany;
+        $destinations = $company->getDestinations;
 
         return view('companies.pages.destinations.destinations')->with('destinations', $destinations);
     }
@@ -20,7 +22,9 @@ class DestinationController extends Controller
     public function showDestination($destinationId)
     {
         $destination = Destination::find($destinationId);
-        return view('companies.pages.destination.destination')->with('destination', $destination);
+        $user = Auth::user();
+        $busStations = $user->getCompany->getStations;
+        return view('companies.pages.destinations.destination')->with('destination', $destination)->with('busStations', $busStations);
     }
 
     public function showDestinationCreate()
@@ -34,10 +38,12 @@ class DestinationController extends Controller
 
     public function createDestination(Request $request)
     {
+        $busCompany = Auth::user()->getCompany;
         $destination = new Destination();
         $destination->name = $request->name;
         $destination->startBusStation = $request->startBusStation;
         $destination->endBusStation = $request->endBusStation;
+        $destination->busCompany = $busCompany->id;
         $destination->save();
 
         return redirect()->route('company.showDestinations');
@@ -51,7 +57,7 @@ class DestinationController extends Controller
         $destination->endBusStation = $request->endBusStation;
         $destination->save();
 
-        return redirect()->route('showDestinations');
+        return redirect()->route('company.showDestinations');
     }
 
     public function deleteDestination($destinationId)

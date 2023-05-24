@@ -48,14 +48,15 @@ class BusController extends Controller
     public function createBus(Request $request)
     {
         $user = auth()->user();
+        $busCompany = Auth::user()->getCompany;
         $bus = new Bus();
         $bus->name = $request->name;
         $bus->model = $request->model;
-        $bus->seats = $request->name;
-        $bus->busComapany = $request->name;
+        $bus->seats = $request->seats;
+        $bus->busCompany = $busCompany->id;
         $bus->save();
 
-        return redirect()->route('showBuses');
+        return redirect()->route('company.showBuses');
 
     }
 
@@ -65,10 +66,10 @@ class BusController extends Controller
         $bus = Bus::find($busId);
         $bus->name = $request->name;
         $bus->model = $request->model;
-        $bus->seats = $request->name;
+        $bus->seats = $request->seats;
         $bus->save();
 
-        return redirect()->route('showBuses');
+        return redirect()->route('company.showBuses');
 
     }
 }

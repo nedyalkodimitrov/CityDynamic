@@ -5,7 +5,7 @@
 @endsection
 
 @section("content")
-    <h1 class="col-12 text-center mb-2">Създай компание</h1>
+    <h1 class="col-12 text-center mb-2">Редактирай автобусна станция</h1>
     <form class="col-12 col-md-9 mx-auto col-lg-9" action="{{route("admin.editStation", ["id" => $station->id])}}" method="post">
         @csrf
         <div class="form-group col-12">
@@ -43,7 +43,7 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary col-12 mt-3">Създай автобус</button>
+        <button type="submit" class="btn btn-primary col-12 mt-3">Запамети промените</button>
     </form>
 
 @endsection

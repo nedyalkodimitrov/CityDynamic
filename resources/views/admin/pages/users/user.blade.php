@@ -5,20 +5,20 @@
 @endsection
 
 @section("content")
-    <h1 class="col-12 text-center mb-2">Редактирай автобус</h1>
+    <h1 class="col-12 text-center mb-2">Редактирай потребител</h1>
     <form class="col-12 col-md-9 mx-auto col-lg-9" action="{{route("admin.editUser", ["id" => $user->id])}}"
           method="post">
         @csrf
         <div class="form-group col-12">
             <label for="exampleInputEmail1">Име</label>
             <input type="text" name="name" value="{{$user->name}}" class="form-control" id="exampleInputEmail1"
-                   placeholder="">
+                   placeholder="Име">
         </div>
         <div class="form-group col-12 mt-3">
             <label for="exampleInputEmail1">Имейл</label>
             <input type="email" name="email" value="{{$user->email}}" class="form-control" id="exampleInputEmail1"
                    aria-describedby="emailHelp"
-                   placeholder="Модел на автобуса ">
+                   placeholder="Имейл ">
         </div>
         <div class="form-group col-12 mt-3">
             <label for="exampleInputPassword1">Роля</label>
@@ -39,7 +39,7 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary col-12 mt-3">Създай автобус</button>
+        <button type="submit" class="btn btn-primary col-12 mt-3">Запамети промените</button>
     </form>
 
 @endsection

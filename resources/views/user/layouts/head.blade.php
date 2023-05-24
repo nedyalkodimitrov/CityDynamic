@@ -1,4 +1,34 @@
 <!--Main Navigation-->
+<style>
+    /*shopping-cart-red: #DF0000;*/
+
+    .fa-stack[data-count]:after {
+        position: absolute;
+        right: 0%;
+        top: 0%;
+        content: attr(data-count);
+        font-size: 40%;
+        padding: .6em;
+        border-radius: 999px;
+        line-height: .75em;
+        color: white;
+        color: #1f1a1a;;
+        text-align: center;
+        min-width: 2em;
+        font-weight: bold;
+        background: white;
+        border-style: solid;
+    }
+
+    .fa-circle {
+        color: #1f1a1a;
+    }
+
+    .red-cart {
+        color: #1f1a1a;
+        background: white;
+    }
+</style>
 <header>
 
     <nav
@@ -21,7 +51,7 @@
             </button>
 
             <!-- Brand -->
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{route("root")}}">
                 <h2>Dynamic Cities</h2>
             </a>
             <!-- Search form -->
@@ -30,8 +60,21 @@
             <ul class="navbar-nav ms-auto d-flex flex-row">
                 <!-- Notification dropdown -->
 
-               @if(\Illuminate\Support\Facades\Auth::check())
+
+                @if(\Illuminate\Support\Facades\Auth::check())
+                    <div style="
+    display: flex;
+    align-items: center;
+">
+                        <a href="{{route("user.showCart")}}">
+                         <span class="fa-stack  has-badge" data-count="{{$itemsCount}}" style="font-size: 1.5em">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                    </span>
+                        </a>
+                    </div>
                     <li class="nav-item dropdown">
+
                         <a
                             class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
                             href="#"
@@ -43,7 +86,7 @@
                             <img
                                 src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
                                 class="rounded-circle"
-                                height="22"
+                                height="45"
                                 alt=""
                                 loading="lazy"
                             />
@@ -52,17 +95,28 @@
                             class="dropdown-menu dropdown-menu-end"
                             aria-labelledby="navbarDropdownMenuLink"
                         >
-                            <li><a class="dropdown-item" href="#">My profile</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li>
-                                <form action="{{route("logout")}}" method="post"> @csrf <button>logout</button></form></li>
+                            @if(\Illuminate\Support\Facades\Auth::user()->getRoleNames()->first() == "Admin")
+                                <li><a class="dropdown-item" href="{{route("homeAdmin")}}">Админ Панел</a></li>
+                            @elseif(\Illuminate\Support\Facades\Auth::user()->getRoleNames()->first() == "Bus Station Admin")
+                                <li><a class="dropdown-item" href="{{route("station.home")}}">Панел за автогари</a>
+                                </li>
+
+                            @elseif(\Illuminate\Support\Facades\Auth::user()->getRoleNames()->first() == "Bus Company Admin")
+                                <li><a class="dropdown-item" href="{{route("company.home")}}">Панел за компании</a>
+                                </li>
+
+                            @endif
+                            <li><a class="dropdown-item" href="{{route("user.showProfile")}}">Профил</a></li>
+                            <li><a class="dropdown-item" href="{{route("user.showPurchases")}}">Покупки</a></li>
+                            <li><a class="dropdown-item" href="{{route("get.logout")}}">Излез</a></li>
                         </ul>
                     </li>
 
                 @else
-                    <li class="" style="margin-right: 2em"><a class="dropdown-item " href="{{route("login")}}">Login</a></li>
-                    <li><a class="dropdown-item ml-3" href="{{route("register")}}">Register</a></li>
-               @endif
+                    <li class="" style="margin-right: 2em"><a class="dropdown-item " href="{{route("login")}}">Влез</a>
+                    </li>
+                    <li><a class="dropdown-item ml-3" href="{{route("register")}}">Регистритай се</a></li>
+                @endif
                 <!-- Icon dropdown -->
 
                 <!-- Avatar -->

@@ -25,7 +25,7 @@
             <select class="form-select" name="bus" id="">
                 <option value="" disabled selected>Избери автобус</option>
                 @forelse($buses as $bus)
-                    <option value="{{$bus->id}}">{{$bus->name}}</option>
+                    <option value="{{$bus->id}}">{{$bus->name}} {{$bus->model}} - ({{$bus->seats }} места)</option>
                 @empty
                     <option value="" disabled>Нямате автобуси</option>
                 @endforelse

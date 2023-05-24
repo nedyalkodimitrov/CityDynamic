@@ -6,7 +6,7 @@
 
 @section("content")
 
-    <h1 class="col-12 text-center mb-2">Свързани автогари</h1>
+    <h1 class="col-12 text-center mb-2">Вашите автогари</h1>
     <div class="col-12 row mb-4">
         @forelse($connectedStations as $station)
 
@@ -25,7 +25,8 @@
             <p class="text-center" style="width: 100%; font-size: 1.1em;">Нямате наличи връзки с автогари</p>
         @endforelse
     </div>
-    <h1 class="col-12 text-center mb-2">Налични автогари</h1>
+    <hr>
+    <h1 class="col-12 text-center mb-4">Автогари, към които не сте свързани</h1>
     <div class="col-12 col row">
         @forelse($notConnectedStations as $station)
             <div class="col-3 ">

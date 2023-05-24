@@ -6,7 +6,8 @@
 
 @section("content")
 
-    <h1 class="col-12 text-center mb-2">Вашите автобуси <a href="{{route("admin.showStationCreate")}}"><i class="fas fa-plus"></i></a></h1>
+    <h1 class="col-12 text-center mb-4" style="position:relative;">Автогари  <a style="position: absolute; right: 0" class="btn btn-success"
+                                                                                                                                  href="{{route("admin.showStationCreate")}}"> Създай автогара </a></h1>
     {{----}}
     <div class="col-12 row ">
 

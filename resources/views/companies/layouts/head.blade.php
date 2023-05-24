@@ -7,35 +7,35 @@
     >
         <div class="position-sticky">
             <div class="list-group list-group-flush mx-3 mt-4">
+
                 <a
                     href="{{route('company.home')}}"
-                    class="list-group-item list-group-item-action py-2 ripple"
-                    aria-current="true"
+                    class="list-group-item list-group-item-action py-2 ripple "
                 >
-                    <i class="fas fa-tachometer-alt fa-fw me-3"></i
+                    <i class="fas fa-home fa-fw me-3"></i
                     ><span>Начало</span>
                 </a>
                 <a
                     href="{{route('company.showBuses')}}"
-                    class="list-group-item list-group-item-action py-2 ripple active"
+                    class="list-group-item list-group-item-action py-2 ripple "
                 >
-                    <i class="fas fa-chart-area fa-fw me-3"></i
+                    <i class="fas fa-bus fa-fw me-3"></i
                     ><span>Автобуси</span>
                 </a>
                 <a
                     href="{{route("company.showStations")}}"
                     class="list-group-item list-group-item-action py-2 ripple"
-                ><i class="fas fa-lock fa-fw me-3"></i><span>Станции</span></a
+                ><i class="fas fa-building fa-fw me-3"></i><span>Станции</span></a
                 >
                 <a
                     href="{{route("company.showDestinations")}}"
                     class="list-group-item list-group-item-action py-2 ripple"
-                ><i class="fas fa-chart-line fa-fw me-3"></i
+                ><i class="fas fa-map-location-dot fa-fw me-3"></i
                     ><span>Дестинации</span></a
                 ><a
                     href="{{route("company.showCourses")}}"
                     class="list-group-item list-group-item-action py-2 ripple"
-                ><i class="fas fa-chart-line fa-fw me-3"></i
+                ><i class="fas fa-calendar fa-fw me-3"></i
                     ><span>Курсове</span></a
                 >
 
@@ -163,9 +163,8 @@
                         class="dropdown-menu dropdown-menu-end"
                         aria-labelledby="navbarDropdownMenuLink"
                     >
-                        <li><a class="dropdown-item" href="#">My profile</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                        <li><a class="dropdown-item" href="#">Профил</a></li>
+                        <li><a class="dropdown-item" href="{{route("get.logout")}}">Илез</a></li>
                     </ul>
                 </li>
             </ul>

@@ -17,7 +17,7 @@
                         <form action="{{route("company.unpairStation",["id" => $station->id])}}" method="post" class="col-3">
                             @csrf
                             <button
-                                class="btn btn-success col-12">Премагни тази автогара
+                                class="btn btn-danger col-12">Премахни тази автогара
                             </button>
 
                         </form>
@@ -41,15 +41,15 @@
                 @endif
             </div>
 
-            @forelse($station->getCompanies as $company)
+{{--            @forelse($station->getCompanies as $company2)--}}
 
-                <p class="card-text"> | {{$company->name}} <i class="fas fa-users"></i>|{{$company->getCity->name}}
-                    , {{$company->getCity->getCountry->name}} <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                </p>
-            @empty
-                <p class="text-center" style="width: 100%; font-size: 1.1em;">Тази автогара още няма компании</p>
+{{--                <p class="card-text"> | {{$company2->name}} <i class="fas fa-users"></i>|{{$company2->getCity->name}}--}}
+{{--                    , {{$company2->getCity->getCountry->name}} <i class="fas fa-map-marker-alt" aria-hidden="true"></i>--}}
+{{--                </p>--}}
+{{--            @empty--}}
+{{--                <p class="text-center" style="width: 100%; font-size: 1.1em;">Тази автогара още няма компании</p>--}}
 
-            @endforelse
+{{--            @endforelse--}}
 
             <p class="card-text"></p>
         </div>

@@ -8,23 +8,23 @@
         <div class="position-sticky">
             <div class="list-group list-group-flush mx-3 mt-4">
                 <a
-                    href="#"
+                    href="{{route("homeAdmin")}}"
                     class="list-group-item list-group-item-action py-2 ripple"
                     aria-current="true"
                 >
-                    <i class="fas fa-tachometer-alt fa-fw me-3"></i
+                    <i class="fas fa-home fa-fw me-3"></i
                     ><span>Начало</span>
                 </a>
 
                 <a
                     href="{{route("admin.showStations")}}"
                     class="list-group-item list-group-item-action py-2 ripple"
-                ><i class="fas fa-lock fa-fw me-3"></i><span>Станции</span></a
+                ><i class="fas fa-building fa-fw me-3"></i><span>Автогари</span></a
                 >
                 <a
                     href="{{route("admin.showCompanies")}}"
                     class="list-group-item list-group-item-action py-2 ripple"
-                ><i class="fas fa-chart-line fa-fw me-3"></i
+                ><i class="fas fa-industry   fa-fw me-3"></i
                     ><span>Компании</span></a
                 >
 {{--                <a--}}
@@ -37,7 +37,7 @@
                 <a
                     href="{{route("admin.showUsers")}}"
                     class="list-group-item list-group-item-action py-2 ripple"
-                ><i class="fas fa-users fa-fw me-3"></i><span>Users</span></a
+                ><i class="fas fa-users fa-fw me-3"></i><span>Потребители</span></a
                 >
 
             </div>
@@ -87,58 +87,7 @@
                     >
                         <i class="united kingdom flag m-0"></i>
                     </a>
-                    <ul
-                        class="dropdown-menu dropdown-menu-end"
-                        aria-labelledby="navbarDropdown"
-                    >
-                        <li>
-                            <a class="dropdown-item" href="#"
-                            ><i class="united kingdom flag"></i>English
-                                <i class="fa fa-check text-success ms-2"></i
-                                ></a>
-                        </li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li>
-                            <a class="dropdown-item" href="#"
-                            ><i class="poland flag"></i>Polski</a
-                            >
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#"
-                            ><i class="china flag"></i>中文</a
-                            >
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#"
-                            ><i class="japan flag"></i>日本語</a
-                            >
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#"
-                            ><i class="germany flag"></i>Deutsch</a
-                            >
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#"
-                            ><i class="france flag"></i>Français</a
-                            >
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#"
-                            ><i class="spain flag"></i>Español</a
-                            >
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#"
-                            ><i class="russia flag"></i>Русский</a
-                            >
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#"
-                            ><i class="portugal flag"></i>Português</a
-                            >
-                        </li>
-                    </ul>
+
                 </li>
 
                 <!-- Avatar -->
@@ -154,7 +103,7 @@
                         <img
                             src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
                             class="rounded-circle"
-                            height="22"
+                            height="45"
                             alt=""
                             loading="lazy"
                         />
@@ -163,9 +112,7 @@
                         class="dropdown-menu dropdown-menu-end"
                         aria-labelledby="navbarDropdownMenuLink"
                     >
-                        <li><a class="dropdown-item" href="#">My profile</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                        <li><a class="dropdown-item" href="{{route("get.logout")}}">Излез</a></li>
                     </ul>
                 </li>
             </ul>

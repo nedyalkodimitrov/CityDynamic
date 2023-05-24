@@ -18,6 +18,7 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, $role)
     {
+
         if (Auth::user()->getRoleNames()->first() == $role) {
             return $next($request);
         }
