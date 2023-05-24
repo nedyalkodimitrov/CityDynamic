@@ -52,7 +52,7 @@
 
             <!-- Brand -->
             <a class="navbar-brand" href="{{route("root")}}">
-                <h2>Dynamic Cities</h2>
+                <img src="{{asset("assets/images/logo.png")}}" alt="" width="200px">
             </a>
             <!-- Search form -->
 
@@ -130,9 +130,5 @@
 <!--Main Navigation-->
 
 <!--Main layout-->
-<main style="margin-top: 58px">
-    <div class="container pt-4">
 
-    </div>
-</main>
 <!--Main layout-->

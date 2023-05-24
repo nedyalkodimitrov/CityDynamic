@@ -4,10 +4,13 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Admin\StationController;
 use App\Http\Controllers\Controller;
+use App\Models\BusCompany;
+use App\Models\City;
 use App\Models\Course;
 use App\Models\Destination;
 use App\Models\Order;
 use App\Models\ShoppingCart;
+use Faker\Provider\ar_EG\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,9 +25,81 @@ class UserController extends Controller
         } else {
             $items = [];
         }
+
+        $cities = City::all();
+
+
+        $companies = BusCompany::all();
         $destinations = Destination::all();
-        return view('user.pages.index')->with("destinations", $destinations)->with("itemsCount", count($items));
+        return view('user.pages.index')->with("destinations", $destinations)->with("itemsCount", count($items))->with("companies", $companies)->with("cities", $cities);
     }
+
+    public function getEndCities(Request $request)
+    {
+
+        try {
+            $startCity = City::find($request->startCity);
+
+            $endCities = [];
+            foreach ($startCity->getStations as $station) {
+                foreach ($station->getDestinations as $destination) {
+                    $city = $destination->getEndBusStation->getCity;
+                    array_push($endCities, $city);
+                }
+            }
+            return $endCities;
+
+        } catch (\Throwable $throwable) {
+            return $throwable->getMessage();
+
+        }
+    }
+
+
+    public function searchCourses(Request $request)
+    {
+
+        $destinations = Destination::join('bus_stations as startBus', 'startBus.id', '=', 'startBusStation')
+            ->join('bus_stations as endBus', 'endBusStation', '=', 'endBus.id')
+            ->where("startBus.city", $request->startCity)
+            ->where("endBus.city", $request->endCity)
+            ->select("destinations.*")
+            ->get();
+
+ $destination = Destination::join('bus_stations as startBus', 'startBus.id', '=', 'startBusStation')
+            ->join('bus_stations as endBus', 'endBusStation', '=', 'endBus.id')
+            ->where("startBus.city", $request->startCity)
+            ->where("endBus.city", $request->endCity)
+            ->select("destinations.*")
+            ->first();
+
+
+        if (Auth::check()) {
+            $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
+
+        } else {
+            $items = [];
+        }
+
+        $courses = [];
+        foreach ($destinations as $destination) {
+
+            $destinationCourses = $destination->getCourses;
+
+
+            foreach ($destinationCourses as $course) {
+                ;
+                array_push($courses, $course);
+            }
+
+
+
+        }
+
+        return view('user.pages.courses.courses')->with("courses", $courses)->with("destination", $destination)->with("itemsCount", count($items));
+
+    }
+
 
     public function showCourses($id)
     {
@@ -64,7 +139,7 @@ class UserController extends Controller
         $course = Course::find($courseId);
 
         $boughtCourseTicketNumbers = ShoppingCart::where("ticket", $course->getTicket->id)->count();
-        if ($boughtCourseTicketNumbers < $course->getBus->seats){
+        if ($boughtCourseTicketNumbers < $course->getBus->seats) {
             $cart = new ShoppingCart();
             $cart->user = $user->id;
             $cart->ticket = $course->getTicket->id;
@@ -139,6 +214,7 @@ class UserController extends Controller
 
 
     }
+
     public function showPurchase($orderId)
     {
         $user = Auth::user();
@@ -155,7 +231,8 @@ class UserController extends Controller
 
     }
 
-    public function removeFromCart($itemId){
+    public function removeFromCart($itemId)
+    {
         ShoppingCart::find($itemId)->delete();
         return redirect()->back();
     }
