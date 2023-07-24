@@ -47,7 +47,7 @@ class StationController extends Controller
     {
         $user = Auth::user();
         $company = $user->getCompany;
-        $company->getRequestedStations()->sync([$id]);
+        $company->getRequestedStations()->attach([$id]);
         return redirect()->back();
     }
 

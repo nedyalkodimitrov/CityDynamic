@@ -5,10 +5,10 @@
 @endsection
 
 @section("content")
-
+    <hr style="color: grey">
         <!-- LOGIN AREA START -->
         <div class="ltn__login-area pb-65  m-5" >
-            <div class="container">
+            <div class="container card col-12 col-md-9 col-lg-6  mt-5">
                 <div class="row">
                     <div class="col-lg-12 mt-4">
                         <div class="section-title-area text-center m-0">

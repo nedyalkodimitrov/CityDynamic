@@ -5,10 +5,12 @@
 @endsection
 
 @section("content")
-
-    <div class="card">
+<div class="mt-5">
+    <hr>
+</div>
+    <div class="card col-9 mx-auto mt-5" >
         <div class="card-title">
-            <h3 class="p-3">
+            <h3 class="p-3 text-center">
                 {{$course->getDestination->getStartBusStation->getCity->name}} - {{$course->getDestination->getEndBusStation->getCity->name}}
 
             </h3>

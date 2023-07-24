@@ -58,7 +58,6 @@ class UserController extends Controller
 
     public function searchCourses(Request $request)
     {
-
         $destinations = Destination::join('bus_stations as startBus', 'startBus.id', '=', 'startBusStation')
             ->join('bus_stations as endBus', 'endBusStation', '=', 'endBus.id')
             ->where("startBus.city", $request->startCity)
@@ -75,6 +74,7 @@ class UserController extends Controller
 
 
         if (Auth::check()) {
+            $user = Auth::user();
             $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
 
         } else {
