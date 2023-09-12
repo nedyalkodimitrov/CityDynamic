@@ -127,4 +127,6 @@ Route::get('/courses/{id}', [\App\Http\Controllers\User\UserController::class, '
 Route::get('/course/{id}', [\App\Http\Controllers\User\UserController::class, 'showCourse'])->name('user.showCourse');
 
 Route::post('/getEndCities', [\App\Http\Controllers\User\UserController::class, 'getEndCities'])->name('user.getEndCities');
-Route::post('/formSubmit', [\App\Http\Controllers\User\UserController::class, 'searchCourses'])->name('user.searchCourses');
+Route::get('/courses', [\App\Http\Controllers\User\UserController::class, 'searchCourses'])->name('user.shoeCourseFormView');
+Route::post('/courses', [\App\Http\Controllers\User\UserController::class, 'searchCourses'])->name('user.searchCourses');
+Route::get('/companies', [\App\Http\Controllers\User\UserController::class, 'showCompanies'])->name('user.showCompanies');

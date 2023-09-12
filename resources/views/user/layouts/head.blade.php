@@ -43,6 +43,16 @@
             <a class="navbar-brand" href="{{route("root")}}">
                 <img src="{{asset("assets/images/logo.png")}}" alt="" width="200px">
             </a>
+
+            <a class="navbar-brand" href="{{route("root")}}" style="font-size: 1em; ">
+                Начало
+            </a>
+            <a class="navbar-brand" href="{{route("user.showCompanies")}}"  style="font-size: 1em; ">
+                Компании
+            </a>
+            <a class="navbar-brand" href="{{route("user.shoeCourseFormView")}}" style="font-size: 1em; ">
+                Курсове
+            </a>
             <!-- Search form -->
 
             <!-- Right links -->
@@ -102,38 +112,39 @@
                     </li>
 
                 @else
+                    <li><a class="dropdown-item" href="{{route("login")}}">Влез</a></li> /
+                    <li><a class="dropdown-item" href="{{route("register")}}">Регистритай се</a></li>
 
-                    <li class="nav-item dropdown">
 
-                        <a
-                            class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
-                            href="#"
-                            id="navbarDropdownMenuLink"
-                            role="button"
-                            data-mdb-toggle="dropdown"
-                            aria-expanded="false"
-                        >
-                            <img
-                                src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
-                                class="rounded-circle"
-                                height="45"
-                                alt=""
-                                loading="lazy"
-                            />
-                        </a>
-                        <ul
-                            class="dropdown-menu dropdown-menu-end"
-                            aria-labelledby="navbarDropdownMenuLink"
-                        >
-                            <li><a class="dropdown-item"  href="{{route("login")}}">Влез</a></li>
-                            <li><a class="dropdown-item" href="{{route("register")}}">Регистритай се</a></li>
-{{--                            <li><a class="dropdown-item" href="{{route("get.logout")}}">Излез</a></li>--}}
-                        </ul>
-                    </li>
+                    {{--                    <li class="nav-item dropdown">--}}
 
-{{--                    <li class="" style="margin-right: 2em"><a class="dropdown-item " href="{{route("login")}}">Влез</a>--}}
+{{--                        <a--}}
+{{--                            class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"--}}
+{{--                            href="#"--}}
+{{--                            id="navbarDropdownMenuLink"--}}
+{{--                            role="button"--}}
+{{--                            data-mdb-toggle="dropdown"--}}
+{{--                            aria-expanded="false"--}}
+{{--                        >--}}
+{{--                            <img--}}
+{{--                                src="{{asset("assets/images/noLoggedProfileImage.png")}}"--}}
+{{--                                class="rounded-circle"--}}
+{{--                                height="45"--}}
+{{--                                alt=""--}}
+{{--                                loading="lazy"--}}
+{{--                            />--}}
+{{--                        </a>--}}
+{{--                        <ul--}}
+{{--                            class="dropdown-menu dropdown-menu-end"--}}
+{{--                            aria-labelledby="navbarDropdownMenuLink"--}}
+{{--                        >--}}
+{{--                           --}}{{--                            <li><a class="dropdown-item" href="{{route("get.logout")}}">Излез</a></li>--}}
+{{--                        </ul>--}}
 {{--                    </li>--}}
-{{--                    <li><a class="dropdown-item ml-3" href="{{route("register")}}">Регистритай се</a></li>--}}
+
+                    {{--                    <li class="" style="margin-right: 2em"><a class="dropdown-item " href="{{route("login")}}">Влез</a>--}}
+                    {{--                    </li>--}}
+                    {{--                    <li><a class="dropdown-item ml-3" href="{{route("register")}}">Регистритай се</a></li>--}}
                 @endif
                 <!-- Icon dropdown -->
 

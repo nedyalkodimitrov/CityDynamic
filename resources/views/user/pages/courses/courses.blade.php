@@ -84,9 +84,24 @@
                 </label>
                 <select class="form-select" id="startCity" name="startCity">
                     <option value="" disabled selected>Избери град</option>
-{{--                    @foreach($cities as $city)--}}
-{{--                        <option value="{{$city->id}}">{{$city->name}}</option>--}}
-{{--                    @endforeach--}}
+                    @if($startCity != null)
+                        @foreach($cities as $city)
+                            @if($startCity == $city->id)
+                                <option selected value="{{$city->id}}">{{$city->name}}</option>
+                            @else
+
+                                <option value="{{$city->id}}">{{$city->name}}</option>
+                            @endif
+
+                        @endforeach
+                    @else
+                        @foreach($cities as $city)
+
+                            <option value="{{$city->id}}">{{$city->name}}</option>
+
+                        @endforeach
+
+                    @endif
                 </select>
                 {{--                    <input type="text" class="form-control" placeholder="Спирка">--}}
             </div>
@@ -103,7 +118,7 @@
                 <label>
                     Дата на тръгване
                 </label>
-                <input type="date" class="form-control" name="travelDate">
+                <input type="date" value="{{$date}}" class="form-control" name="travelDate">
             </div>
             <div class="col-12 col-lg-3" style="
     align-self: center;
@@ -114,52 +129,86 @@
         </form>
     </div>
     <div class="col-12 row m-0">
-        <div class="col-12">
-            <h2 class="col-12 text-center mb-2 mt-4 "> {{\Carbon\Carbon::parse($courses[0]->date)->format("d.m.Y")}} <i
-                    class="fas fa-calendar"></i></p></h2>
-        </div>
+        @if($date != null)
+            <div class="col-12">
+                <h2 class="col-12 text-center mb-2 mt-4 "> {{\Carbon\Carbon::parse($courses[0]->date)->format("d.m.Y")}}
+                    <i
+                        class="fas fa-calendar"></i></p></h2>
+            </div>
+        @endif
         <div class="col-12 ">
-            @foreach($courses as $course)
-                <div class="card col-11 mx-auto mt-3">
-                    <div class="card-body row align-center">
-                        <p class="col-6 text-start"
-                           style="font-size: 1.1em">{{$destination->getStartBusStation->getCity->name}}
-                            - {{$destination->getEndBusStation->getCity->name}}</p>
-                        <p class="col-6 col-md-6 text-end p-0 m-0" style="">
-                            <img style="width: 100%; max-width: 5em"
-                                 src="{{asset("assets/images/".$course->getDestination->getCompany->image)}}" alt="">
-                        </p>
+            @if($courses != null)
 
-                        <hr>
-                        <p class="col-12 col-md-2  p-0 pl-5 m-0" style="  ">
-                            <b>{{\Carbon\Carbon::parse($course->startTime)->format("H:i") }}
-                                - {{\Carbon\Carbon::parse($course->endTime)->format("H:i")}}</b>
+                @foreach($courses as $course)
+                    <div class="card col-11 mx-auto mt-3">
+                        <div class="card-body row align-center">
+                            <p class="col-6 text-start"
+                               style="font-size: 1.1em">{{$destination->getStartBusStation->getCity->name}}
+                                - {{$destination->getEndBusStation->getCity->name}}</p>
+                            <p class="col-6 col-md-6 text-end p-0 m-0" style="">
+                                <img style="width: 100%; max-width: 5em"
+                                     src="{{asset("assets/images/".$course->getDestination->getCompany->image)}}"
+                                     alt="">
+                            </p>
+
+                            <hr>
+                            <p class="col-12 col-md-2  p-0 pl-5 m-0" style="  ">
+                                <b>{{\Carbon\Carbon::parse($course->startTime)->format("H:i") }}
+                                    - {{\Carbon\Carbon::parse($course->endTime)->format("H:i")}}</b>
 
 
+                            </p>
+                            <p class="col-12 col-md-2 p-0 m-0" style="  ">
+                                45:00
+                                <i class="fas fa-clock"></i>
+                                {{--                            {{$course->endTime -$course->startTime }}--}}
 
-                        </p>
-                        <p class="col-12 col-md-2 p-0 m-0" style="  ">
-                            45:00
-                            <i class="fas fa-clock"></i>
-                            {{--                            {{$course->endTime -$course->startTime }}--}}
+                            </p>
+                            {{--                        <p class="col-12 col-md-2 p-0 m-0" style="align-self: center">--}}
+                            {{--                            Пристигане:<br>  <i class="fas fa-clock"></i></p>--}}
 
-                        </p>
-                        {{--                        <p class="col-12 col-md-2 p-0 m-0" style="align-self: center">--}}
-                        {{--                            Пристигане:<br>  <i class="fas fa-clock"></i></p>--}}
+                            <p class="col-12 col-md-3 p-0 m-0" style="align-self: center">
+                                {{$course->getBus->model}} {{$course->getBus->name}} ({{$course->getBus->seats}})
+                            </p>
+                            <p class="col-12 col-md-2 p-0 m-0" style="align-self: center">
+                                <b style="font-size: 1.3em">{{$course->getTicket->price}} лв.</b>
+                            </p>
+                            <a href="{{route("user.showCourse", ["id"=>$course->id])}}" style="align-self: center"
+                               class="btn btn-primary col-12 col-md-3">Резервирай</a>
+                        </div>
 
-                        <p class="col-12 col-md-3 p-0 m-0" style="align-self: center">
-                            {{$course->getBus->model}} {{$course->getBus->name}} ({{$course->getBus->seats}})
-                        </p>
-                        <p class="col-12 col-md-2 p-0 m-0" style="align-self: center">
-                            <b style="font-size: 1.3em">{{$course->getTicket->price}} лв.</b>
-                        </p>
-                        <a href="{{route("user.showCourse", ["id"=>$course->id])}}" style="align-self: center"
-                           class="btn btn-primary col-12 col-md-3">Резервирай</a>
                     </div>
+
+                @endforeach
+
+            @else
+                <div class="col-12 text-center mt-3">
+                    <h3 >Please, choose start city, end city and date </h3>
 
                 </div>
 
-            @endforeach
+            @endif
         </div>
+
+
+        <script src="{{asset("assets/js/ajax.js")}}"></script>
+        <script>
+            $('#startCity').on("change", function () {
+                var results = ajaxRequest("POST", '{{route("user.getEndCities")}}', {startCity: $(this).val()})
+                $("#endCity option").remove();
+
+                if (results.length == 0) {
+                    $("#endCity").append("<option value=''>Няма курсове</option>");
+                } else {
+                    $("#endCity").append("<option value=''>Избери град</option>");
+                }
+                for (var i = 0; i < results.length; i++) {
+                    $("#endCity").append("<option value='" + results[i]["id"] + "'>" + results[i]["name"] + " </option>");
+                }
+
+            });
+
+
+        </script>
 @endsection
 

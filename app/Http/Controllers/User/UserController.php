@@ -96,7 +96,17 @@ class UserController extends Controller
 
         }
 
-        return view('user.pages.courses.courses')->with("courses", $courses)->with("destination", $destination)->with("itemsCount", count($items));
+        $cities = City::all();
+
+
+        return view('user.pages.courses.courses')
+            ->with("courses", $courses)
+            ->with("destination", $destination)
+            ->with("itemsCount", count($items))
+            ->with("startCity", $request->startCity  )
+            ->with("endCity", $request->endCity)
+            ->with("cities", $cities)
+            ->with("date", count($items));
 
     }
 
@@ -113,8 +123,15 @@ class UserController extends Controller
         }
 
         $courses = $destination->getCourses;
-
-        return view('user.pages.courses.courses')->with("courses", $courses)->with("destination", $destination)->with("itemsCount", count($items));
+$cities = City::all();
+        return view('user.pages.courses.courses')
+            ->with("courses", $courses)
+            ->with("destination", $destination)
+            ->with("startCity", $destination->getStartBusStation->getCity->name  )
+            ->with("endCity", $destination->getEndBusStation->getCity->name)
+            ->with("cities", $cities)
+            ->with("date", count($items))
+            ->with("itemsCount", count($items));
     }
 
     public function showCourse($id)
@@ -235,6 +252,38 @@ class UserController extends Controller
     {
         ShoppingCart::find($itemId)->delete();
         return redirect()->back();
+    }
+
+
+
+    public function showCoursesFormView(Request $request){
+        $user = Auth::user();
+
+        if (Auth::check()) {
+            $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
+
+        } else {
+            $items = [];
+        }
+
+        $cities = City::all();
+        return view('user.pages.courses.courses')
+            ->with("startCity",null  )
+            ->with("endCity", null)
+            ->with("cities", $cities)
+            ->with("date", null)
+            ->with("itemsCount", count($items));
+    }
+
+
+    public function showCompanies(){
+        $companies = BusCompany::all();
+
+
+        return view('user.pages.companies.companies')
+            ->with("companies", $companies  );
+
+
     }
 
 }
