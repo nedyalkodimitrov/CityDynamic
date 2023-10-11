@@ -104,6 +104,9 @@ Route::group([
     Route::post('/courses/create', [\App\Http\Controllers\Companies\CourseController::class, 'createCourse'])->name('company.createCourse');
     Route::get('/courses/{id}', [\App\Http\Controllers\Companies\CourseController::class, 'showCourse'])->name('company.showCourse');
     Route::post('/courses/{id}/edit', [\App\Http\Controllers\Companies\CourseController::class, 'editCourse'])->name('company.editCourse');
+    Route::post('/company/connectedStation', [\App\Http\Controllers\Companies\StationController::class, 'getAllStations'])->name('company.getConnectedStations');
+
+
 });
 
 

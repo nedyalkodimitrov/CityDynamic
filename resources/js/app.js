@@ -1,3 +1,5 @@
+
+
 /*
 Template Name: Skote - Admin & Dashboard Template
 Author: Themesbrand

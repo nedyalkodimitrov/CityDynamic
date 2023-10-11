@@ -22,6 +22,9 @@ return new class extends Migration
             $table->unsignedBigInteger("endBusStation");
             $table->foreign('endBusStation')->references('id')->on('bus_stations')
                 ->onDelete('cascade');
+            $table->unsignedBigInteger("nextDestination")->nullable();
+            $table->foreign('nextDestination')->references('id')->on('destinations')
+                ->onDelete('cascade');
 
         });
     }

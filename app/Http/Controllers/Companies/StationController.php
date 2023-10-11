@@ -21,6 +21,7 @@ class StationController extends Controller
         return view('companies.pages.stations.stations')->with(["connectedStations" => $connectedStations])->with(["notConnectedStations" => $notConnectedStations]);
 //        return view('admin.pages.stations.stations');
     }
+
     public function showStation($id)
     {
         $user = Auth::user();
@@ -30,11 +31,11 @@ class StationController extends Controller
         $isApproved = false;
 
         $request = $company->getRequestedStations()->where("bus_station", $station->id)->get();
-        if(count($request) > 0 ){
+        if (count($request) > 0) {
             $isRequestToThisStation = true;
         }
 
-        if (count($company->getStations()->where("bus_station", $station->id)->get())){
+        if (count($company->getStations()->where("bus_station", $station->id)->get())) {
             $isApproved = true;
             $isRequestToThisStation = true;
         }
@@ -43,6 +44,7 @@ class StationController extends Controller
             ->with(["isRequestToThisStation" => $isRequestToThisStation])
             ->with(["isApproved" => $isApproved]);
     }
+
     public function makeStationRequest($id)
     {
         $user = Auth::user();
@@ -59,7 +61,8 @@ class StationController extends Controller
         return redirect()->route("company.showStations");
     }
 
-    public function unpairStation($id){
+    public function unpairStation($id)
+    {
         $user = Auth::user();
         $company = $user->getCompany;
         $company->getStations()->detach($id);
@@ -67,6 +70,21 @@ class StationController extends Controller
     }
 
 
+    public function getAllStations()
+    {
+        $user = Auth::user();
+
+        $stations = $user->getCompany->getStations;
+
+        $stationsData = [];
+        foreach ($stations as $station) {
+            $stationData["id"] = $station->id;
+            $stationData["name"] = $station->name;
+            array_push($stationsData, $stationData);
+        }
+
+        return json_decode();
+    }
 
 
 

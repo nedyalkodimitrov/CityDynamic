@@ -18,12 +18,3 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-
-
-Route::post('login', [App\Http\Controllers\Api\AuthController::class, 'login']);
-Route::post('operations/get', [App\Http\Controllers\Api\Read\OperationController::class, 'getOperations']);
-Route::post('operation/reportCompletedPieces', [App\Http\Controllers\Api\Write\OperationController::class, 'reportCompletedPieces']);
-Route::post('operation/start', [App\Http\Controllers\Api\Write\OperationController::class, 'startOperation']);
-Route::post('operation/finish', [App\Http\Controllers\Api\Write\OperationController::class, 'finishOperation']);
-
-

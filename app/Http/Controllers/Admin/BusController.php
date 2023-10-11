@@ -11,6 +11,13 @@ class BusController extends Controller
 {
     public function showBuses()
     {
+        $buses = Bus::all();
+        foreach ($buses as $bus) {
+            $bus->busStations;
+
+        }
+
+
         return view('admin.pages.buses.buses');
     }
 
