@@ -12,14 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
-        '/ilab-admin/changeDeliveryPrice',
-        '/ilab-admin/create/question',
-        '/controlPanel/create/product',
-        '/controlPanel/create/page',
-        '/controlPanel/pages/*',
-        '/schedulePlaning',
-        '/changeDay/*',
-        '/getJobInformation/*',
+        '/companyPanel/company/connectedStation',
     ];
 }

@@ -7,6 +7,7 @@ use App\Models\BusStation;
 use App\Models\Destination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use function PHPUnit\Framework\exactly;
 
 class DestinationController extends Controller
 {
@@ -22,15 +23,31 @@ class DestinationController extends Controller
     public function showDestination($destinationId)
     {
         $destination = Destination::find($destinationId);
+
+        $tracks = [];
+        array_push($tracks, $destination);
+
+        $nextDestination = $destination;
+        while(true){
+            if ($nextDestination->getNextDestination == null) {
+                break;
+            }
+            $nextDestination= $destination->getNextDestination;
+
+            array_push($tracks, $nextDestination);
+        }
+
         $user = Auth::user();
         $busStations = $user->getCompany->getStations;
-        return view('companies.pages.destinations.destination')->with('destination', $destination)->with('busStations', $busStations);
+        return view('companies.pages.destinations.destination')->with('tracks', $tracks)->with('destination', $destination)->with('busStations', $busStations);
     }
 
     public function showDestinationCreate()
     {
         $user = Auth::user();
         $busStations = $user->getCompany->getStations;
+
+
 
         return view('companies.pages.destinations.destinationForm')->with('busStations', $busStations);
     }
@@ -67,4 +84,8 @@ class DestinationController extends Controller
 
         return redirect()->route('showDestinations');
     }
+
+
+
+
 }
