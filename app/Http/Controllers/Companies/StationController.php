@@ -83,7 +83,7 @@ class StationController extends Controller
             array_push($stationsData, $stationData);
         }
 
-        return json_decode();
+        return json_encode($stationsData);
     }
 
 

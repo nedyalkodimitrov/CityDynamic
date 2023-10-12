@@ -23,47 +23,60 @@
         <div class="destinations mt-4">
             <div class="row">
                 <h1 class="col m-0">Дестинации</h1>
-                <span class="btn btn-success mt-2 mx-auto text-center col align-center" id="add-destination">Добави дестинация</span>
+
+                @if(count($busStations) > 2)
+                    <span class="btn btn-success mt-2 mx-auto text-center col align-center" id="add-destination">Добави дестинация</span>
+                @endif
             </div>
             <hr>
-            <div class="col-12 row mx-auto mt-3 destination" id="destination-1">
-                <div><b><p>№1</p></b></div>
-                <div class="form-group col-6">
-                    <label for="exampleInputEmail1">Начална автогара</label>
-                    <select class="form-select" name="startBusStation" id="">
-                        <option value="" disabled selected>Избери автогара</option>
-                        @forelse($busStations as $station)
-                            @if($station->id == $destination->startBusStation)
-                                <option selected value="{{$station->id}}">{{$station->name}}</option>
-                            @else
-                                <option value="{{$station->id}}">{{$station->name}}</option>
+            @foreach($tracks as $track)
+                <div class="col-12 row mx-auto mt-3 destination last" id="destination-1">
+                    <div class="row pl-0 ">
+                        <div class="">
+                            <b><p>№1</p></b>
+                        </div>
+                        <div>
+                            <span class="btn btn-danger "><i class="fa fa-times"></i></span>
 
-                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="exampleInputEmail1">Начална автогара</label>
+                        <select class="form-select" name="startBusStation" id="startBusStation">
+                            <option value="" disabled selected>Избери автогара</option>
+                            @forelse($busStations as $station)
+                                @if($station->id == $track->startBusStation)
+                                    <option selected value="{{$station->id}}">{{$station->name}}</option>
+                                @else
+                                    <option value="{{$station->id}}">{{$station->name}}</option>
 
-                        @empty
-                            <option value="" disabled>Нямате станции</option>
-                        @endforelse
-                    </select>
+                                @endif
+
+                            @empty
+                                <option value="" disabled>Нямате станции</option>
+                            @endforelse
+                        </select>
+                    </div>
+                    <div class="form-group col-6 ">
+                        <label for="exampleInputEmail1">Крайна автогара</label>
+                        <select class="form-select endBusStation" name="endBusStation" id="">
+                            <option value="" disabled>Избери автогара</option>
+                            @forelse($busStations as $station)
+                                @if($station->id == $track->endBusStation)
+                                    <option selected value="{{$station->id}}">{{$station->name}}</option>
+                                @else
+                                    <option value="{{$station->id}}">{{$station->name}}</option>
+
+                                @endif
+                            @empty
+                                <option value="" disabled>Нямате станции</option>
+                            @endforelse
+                        </select>
+                    </div>
+
                 </div>
-                <div class="form-group col-6 ">
-                    <label for="exampleInputEmail1">Крайна автогара</label>
-                    <select class="form-select" name="endBusStation" id="">
-                        <option value="" disabled selected>Избери автогара</option>
-                        @forelse($busStations as $station)
-                            @if($station->id == $destination->endBusStation)
-                                <option selected value="{{$station->id}}">{{$station->name}}</option>
-                            @else
-                                <option value="{{$station->id}}">{{$station->name}}</option>
 
-                            @endif
-                        @empty
-                            <option value="" disabled>Нямате станции</option>
-                        @endforelse
-                    </select>
-                </div>
-
-            </div>
-
+            @endforeach
         </div>
 
 
@@ -72,34 +85,53 @@
 
 
     <script>
-        var destination = 1;
-        var connectedStations = "{{route("company.getConnectedStations")}}"
-        var chooseStation = ""
+        var destination = 2;
+        var connectedStations = JSON.parse(ajaxRequest("POST", "{{route("company.getConnectedStations")}}", {}));
 
+
+        console.log(connectedStations);
         $("#add-destination").on("click", function () {
-            var connecte
+            var chooseStation = $('.last .endBusStation').val();
+            var chooseStationName = $('.last .endBusStation').find(":selected").text();
+            var startBusStation = $('#startBusStation').val();
+            console.log(chooseStation);
+            const filteredData = connectedStations.filter(item => item.id != chooseStation && item.id != startBusStation);
 
-            var html = "  <div class=\"col-12 row mx-auto mt-3 destination\">\n" +
-                "                <div><b><p>№1</p></b></div>\n" +
+
+            var upperPartHtml = "  <div class=\"col-12 row mx-auto mt-3 destination last\">\n" +
+                "                <div><b><p>№" + destination + "</p></b></div>\n" +
                 "                <div class=\"form-group col-6\">\n" +
                 "                    <label for=\"exampleInputEmail1\">Начална автогара</label>\n" +
                 "                    <select class=\"form-select\" disable name=\"startBusStation\" id=\"\">\n" +
-                "                        <option value=\"\"  selected>Избери автогара</option>\n" +
-                "                                <option selected value=\"\">София</option>\n" +
+                "                                <option selected disabled value=" + chooseStation + ">" + chooseStationName + "</option>\n" +
                 "                    </select>\n" +
                 "                </div>\n" +
                 "                <div class=\"form-group col-6 \">\n" +
                 "                    <label for=\"exampleInputEmail1\">Крайна автогара</label>\n" +
-                "                    <select class=\"form-select\" name=\"endBusStation\" id=\"\">\n" +
-                "                        <option value=\"\" disabled selected>Избери автогара</option>\n" +
+                "                    <select class=\"form-select\" name=\"endBusStation\" id=\"\">\n";
 
-                "                                <option value=\"1\">Варна</option>\n" +
-                "                                <option value=\"2\">Попово</option>\n" +
-                "                                <option value=\"3\">Бургас</option>\n" +
-                "                    </select>\n" +
+
+            var options = "";
+
+            if (filteredData.length === 0) {
+                options += "<option value=\"\" disabled selected>Нямате станции</option>";
+            } else {
+                filteredData.forEach(function (item) {
+                    options += "<option value=\"" + item.id + "\">" + item.name + "</option>";
+                });
+
+            }
+
+
+            var downPartHtml = "                    </select>\n" +
                 "                </div>\n" +
                 "\n" +
                 "            </div>\n";
+
+
+            var html = upperPartHtml + options + downPartHtml;
+
+            $(".last").removeClass("last");
 
             $('.destinations').append(html);
             destination++;

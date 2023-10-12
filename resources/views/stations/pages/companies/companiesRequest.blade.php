@@ -16,6 +16,7 @@
                         <img style="width: 100%" src="{{asset("assets/images/".$company->image)}}" alt="">
 {{--                        {{$company->name}}--}}
                     </h5>
+                    <p class="text-center">{{$company->name}}</p>
                     <a href="{{route("station.showCompanyRequest", ["id" => $company->id])}}"
                        class="btn btn-danger col-12">Виж заявката</a>
                 </div>

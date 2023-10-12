@@ -48,6 +48,16 @@
                 </div>
 
             </div>
+            <div class="mt-3">
+                <h5>Изпълняващи дестинации:</h5>
+                <div  class="col-12 pl-4" style="padding-left: 1em">
+
+                        <p class="card-text  m-0"> {{$company->getDestinations()->where("nextDestination", null)->count()}} на брои
+                        </p>
+
+                </div>
+
+            </div>
 {{--            <h5>Изпълняващи дестинации </h5>--}}
 {{--            {{$company->getDestinations->count()}} <br>--}}
 
@@ -57,7 +67,7 @@
                       class="col-6">
                     @csrf
                     <button
-                        class="btn btn-danger col-12">Decline
+                        class="btn btn-danger col-12">Отхвърли
                     </button>
 
                 </form>
@@ -65,7 +75,7 @@
                       class="col-6">
                     @csrf
                     <button
-                        class="btn btn-success col-12">Accept
+                        class="btn btn-success col-12">Приеми
                     </button>
 
                 </form>
