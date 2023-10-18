@@ -1,5 +1,3 @@
-
-
 /*
 Template Name: Skote - Admin & Dashboard Template
 Author: Themesbrand
@@ -8,18 +6,6 @@ Website: https://themesbrand.com/
 Contact: themesbrand@gmail.com
 File: Main Js File
 */
-
-" <div class=\"modal-body\">\n" +
-"                <label for=\"#edit-hour\">Изберете оперция</label>\n" +
-"                <select name=\"hour\" id=\"edit-hour\">\n" +
-"                    @foreach($operations as $operation)\n" +
-"                        <option value=\"{{$operation->id}}\">{{$operation->title}}</option>\n" +
-"                    @endforeach\n" +
-"                </select>" +
-"" +
-"\n" +
-"            </div>";
-
 (function ($) {
 
     'use strict';
@@ -64,7 +50,7 @@ File: Main Js File
                 var activeMenu = $("#sidebar-menu .mm-active .active").offset().top;
                 if (activeMenu > 300) {
                     activeMenu = activeMenu - 300;
-                    $(".vertical-menu .simplebar-content-wrapper").animate({ scrollTop: activeMenu }, "slow");
+                    $(".vertical-menu .simplebar-content-wrapper").animate({scrollTop: activeMenu}, "slow");
                 }
             }
         });
@@ -110,6 +96,7 @@ File: Main Js File
         document.addEventListener('fullscreenchange', exitHandler);
         document.addEventListener("webkitfullscreenchange", exitHandler);
         document.addEventListener("mozfullscreenchange", exitHandler);
+
         function exitHandler() {
             if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) {
                 console.log('pressed');

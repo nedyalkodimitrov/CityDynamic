@@ -10,7 +10,7 @@
         <h1 class="col-12 text-center mb-2" style="position: relative;"> Дестинации <a style="position: absolute; right: 0" class="btn btn-success"
                                                            href="{{route("company.showDestinationsForm")}}">Създай дестинация</a></h1>
     </div>
-    <div class="col-12 row">
+    <div class="col-12 row p-5">
         @forelse($destinations as $destination)
             <div class="col-3 row">
 

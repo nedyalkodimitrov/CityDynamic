@@ -12,20 +12,15 @@ class Destination extends Model
 
     public $timestamps = false;
 
-    public function getStartBusStation()
+    public function getBusStation()
     {
-        return $this->belongsTo(BusStation::class, "startBusStation", "id");
+        return $this->belongsTo(BusStation::class, "busStation", "id");
     }
 
     //todo add migrations for destination relations in courses
     public function getCourses()
     {
         return $this->hasMany(Course::class, "destination", "id");
-    }
-
-    public function getEndBusStation()
-    {
-        return $this->belongsTo(BusStation::class, "endBusStation", "id");
     }
 
     public function getCompany()
