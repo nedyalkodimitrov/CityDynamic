@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Admin\StationController;
 use App\Http\Controllers\Controller;
+use App\Http\Services\DestinationService;
 use App\Models\BusCompany;
 use App\Models\City;
 use App\Models\Course;
@@ -30,7 +31,7 @@ class UserController extends Controller
 
 
         $companies = BusCompany::all();
-        $destinations = Destination::all();
+        $destinations = Destination::whereNull("prevPoint")->get();
         return view('user.pages.index')->with("destinations", $destinations)->with("itemsCount", count($items))->with("companies", $companies)->with("cities", $cities);
     }
 
@@ -115,6 +116,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $destination = Destination::find($id);
+
         if (Auth::check()) {
             $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
 
@@ -127,8 +129,8 @@ $cities = City::all();
         return view('user.pages.courses.courses')
             ->with("courses", $courses)
             ->with("destination", $destination)
-            ->with("startCity", $destination->getStartBusStation->getCity->name  )
-            ->with("endCity", $destination->getEndBusStation->getCity->name)
+            ->with("startCity", $destination->getBusStation->getCity->name  )
+            ->with("endCity", $destination->getLastBusStation->getCity->name)
             ->with("cities", $cities)
             ->with("date", count($items))
             ->with("itemsCount", count($items));

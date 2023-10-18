@@ -11,8 +11,8 @@
     <div class="card col-11 col-md-9 col-lg-7 mx-auto mt-5">
         <div class="card-title">
             <h3 class="pt-3 text-center">
-                {{$course->getDestination->getStartBusStation->getCity->name}}
-                - {{$course->getDestination->getEndBusStation->getCity->name}}
+                {{$course->getDestination->getBusStation->getCity->name}}
+                - {{$course->getDestination->getLastBusStation->getCity->name}}
             </h3>
             <p class="col-12  p-0 m-0 text-center" style="align-self: center"><b>{{$course->date}} <i
                         class="fas fa-calendar"></i></b></p>

@@ -143,23 +143,27 @@
                     <div class="card col-11 mx-auto mt-3">
                         <div class="card-body row align-center">
                             <p class="col-6 text-start"
-                               style="font-size: 1.1em">{{$destination->getStartBusStation->getCity->name}}
-                                - {{$destination->getEndBusStation->getCity->name}}</p>
-                            <p class="col-6 col-md-6 text-end p-0 m-0" style="">
-                                <img style="width: 100%; max-width: 5em"
-                                     src="{{asset("assets/images/".$course->getDestination->getCompany->image)}}"
-                                     alt="">
-                            </p>
+                               style="font-size: 1.1em">
+
+                            @foreach(\App\Http\Services\DestinationService::getAllPoints($destination) as $point )
+                               @if($point["isStartPoint"])
+                                    {{$point["station"]->name}}
+                                  @else
+                                     -  {{$point["station"]->name}}
+                              @endif
+                            @endforeach
+
+                                    </p>
 
                             <hr>
                             <p class="col-12 col-md-2  p-0 pl-5 m-0" style="  ">
-                                <b>{{\Carbon\Carbon::parse($course->startTime)->format("H:i") }}
+                                    <b>{{\Carbon\Carbon::parse($course->startTime)->format("H:i") }}
                                     - {{\Carbon\Carbon::parse($course->endTime)->format("H:i")}}</b>
 
 
                             </p>
                             <p class="col-12 col-md-2 p-0 m-0" style="  ">
-                                45:00
+                                {{\App\Http\Services\DestinationService::getTimeFromPointTillEnd($destination)}}
                                 <i class="fas fa-clock"></i>
                                 {{--                            {{$course->endTime -$course->startTime }}--}}
 
@@ -171,7 +175,7 @@
                                 {{$course->getBus->model}} {{$course->getBus->name}} ({{$course->getBus->seats}})
                             </p>
                             <p class="col-12 col-md-2 p-0 m-0" style="align-self: center">
-                                <b style="font-size: 1.3em">{{$course->getTicket->price}} лв.</b>
+                                <b style="font-size: 1.3em">{{\App\Http\Services\DestinationService::getPriceFromPointTillEnd($destination)}} лв.</b>
                             </p>
                             <a href="{{route("user.showCourse", ["id"=>$course->id])}}" style="align-self: center"
                                class="btn btn-primary col-12 col-md-3">Резервирай</a>
