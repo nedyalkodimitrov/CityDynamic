@@ -32,18 +32,18 @@ The project aims to create a platform through which people can monitor everythin
 ## Test profile
 - **Normal User**
   - Email: normalUser@abv.bg
-  - Password: 111111
+  - Password: 123123123
 
 - **Bus Company Panel**
   - Email: 	eterBusAdmin@abv.bg
-  - Password: 111111
+  - Password: 123123123
 
 - **Bus Station Panel**
   - Email: razgradStationAdmin@abv.bg
-  - Password: 111111
+  - Password: 123123123
     
 - **Admin Panel**
   - Email: admin@abv.bg
-  - Password: 111111
+  - Password: 123123123
     
 
