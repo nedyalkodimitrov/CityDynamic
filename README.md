@@ -4,7 +4,7 @@ The project aims to create a platform through which people can monitor everythin
 
 ## Table of Contents
 - [Main Features](#main-features)
-- [Test Profiles](#test-profiles)
+
 
 
 
@@ -29,21 +29,5 @@ The project aims to create a platform through which people can monitor everythin
 - Create Bus Stations
 - Create Bus Companies 
 
-## Test profile
-- **Normal User**
-  - Email: normalUser@abv.bg
-  - Password: 123123123
 
-- **Bus Company Panel**
-  - Email: 	eterBusAdmin@abv.bg
-  - Password: 123123123
-
-- **Bus Station Panel**
-  - Email: razgradStationAdmin@abv.bg
-  - Password: 123123123
-    
-- **Admin Panel**
-  - Email: admin@abv.bg
-  - Password: 123123123
-    
 
