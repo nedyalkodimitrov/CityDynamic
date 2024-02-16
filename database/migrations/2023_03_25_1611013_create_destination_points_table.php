@@ -13,15 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bus_companies_bus_stations_request', function (Blueprint $table) {
+        Schema::create('destination_points', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("bus_company");
-            $table->foreign('bus_company')->references('id')->on('bus_companies')
+            $table->unsignedBigInteger("station");
+            $table->foreign('station')->references('id')->on('stations')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger("bus_station");
-            $table->foreign('bus_station')->references('id')->on('bus_stations')
+
+            $table->unsignedBigInteger("destination");
+            $table->foreign('destination')->references('id')->on('destinations')
                 ->onDelete('cascade');
-            $table->boolean("isApproved")->nullable()->default(null);
+            $table->integer("order");
+            $table->double("price");
+            $table->double("duration");
+            $table->double("distance");
             $table->timestamps();
         });
     }
@@ -33,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bus_companies_bus_stations_request');
+        Schema::dropIfExists('destination_points');
     }
 };

@@ -128,8 +128,8 @@
             <div class="col-12 p-0  col-md-4 col-lg-3 mt-4 mt-md-0">
                 <div class="card col-11 mx-auto">
                     <div class="card-body">
-                        <h3>За {{$destination->getBusStation->name}}</h3>
-                        <h6>От {{$destination->getLastBusStation->name}}</h6>
+                        <h3>За {{$destination->getStartBusStation->name}}</h3>
+                        <h6>От {{$destination->getEndBusStation->name}}</h6>
                         <a href="{{route("user.showCourses", ["id" => $destination->id])}}" class="btn btn-primary col-12 ">Вижте
                             курсове</a>
                     </div>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bus;
-use App\Models\BusStation;
+use App\Models\Station;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PHPUnit\Framework\Attributes\UsesClass;
@@ -40,7 +40,7 @@ class BusController extends Controller
     {
 
         $bus = Bus::find($busId);
-        $busStations = BusStation::all();
+        $busStations = Station::all();
         return view('companies.pages.buses.busEdit')->with('bus', $bus)->with('busStations', $busStations);
     }
 

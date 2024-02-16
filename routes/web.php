@@ -29,17 +29,17 @@ Route::group([
     Route::post('/users/{id}', [\App\Http\Controllers\Admin\UserController::class, 'editUser'])->name('admin.editUser');
 
 
-    Route::get('/busCompanies', [\App\Http\Controllers\Admin\CompanyController::class, 'showCompanies'])->name('admin.showCompanies');
-    Route::get('/busCompanies/create', [\App\Http\Controllers\Admin\CompanyController::class, 'showCompanyCreate'])->name('admin.showCompanyCreate');
-    Route::post('/busCompanies/create', [\App\Http\Controllers\Admin\CompanyController::class, 'createCompany'])->name('admin.createCompany');
-    Route::get('/busCompanies/{id}', [\App\Http\Controllers\Admin\CompanyController::class, 'showCompany'])->name('admin.showCompany');
-    Route::post('/busCompanies/{id}', [\App\Http\Controllers\Admin\CompanyController::class, 'editCompany'])->name('admin.editCompany');
+    Route::get('/companies', [\App\Http\Controllers\Admin\CompanyController::class, 'showCompanies'])->name('admin.showCompanies');
+    Route::get('/companies/create', [\App\Http\Controllers\Admin\CompanyController::class, 'showCompanyCreate'])->name('admin.showCompanyCreate');
+    Route::post('/companies/create', [\App\Http\Controllers\Admin\CompanyController::class, 'createCompany'])->name('admin.createCompany');
+    Route::get('/companies/{id}', [\App\Http\Controllers\Admin\CompanyController::class, 'showCompany'])->name('admin.showCompany');
+    Route::post('/companies/{id}', [\App\Http\Controllers\Admin\CompanyController::class, 'editCompany'])->name('admin.editCompany');
 
-    Route::get('/busStations', [\App\Http\Controllers\Admin\StationController::class, 'showStations'])->name('admin.showStations');
-    Route::get('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'showStationCreate'])->name('admin.showStationCreate');
-    Route::post('/busStations/create', [\App\Http\Controllers\Admin\StationController::class, 'createStation'])->name('admin.createStation');
-    Route::get('/busStations/{id}', [\App\Http\Controllers\Admin\StationController::class, 'showStation'])->name('admin.showStation');
-    Route::post('/busStations/{id}', [\App\Http\Controllers\Admin\StationController::class, 'editStation'])->name('admin.editStation');
+    Route::get('/stations', [\App\Http\Controllers\Admin\StationController::class, 'showStations'])->name('admin.showStations');
+    Route::get('/stations/create', [\App\Http\Controllers\Admin\StationController::class, 'showStationCreate'])->name('admin.showStationCreate');
+    Route::post('/stations/create', [\App\Http\Controllers\Admin\StationController::class, 'createStation'])->name('admin.createStation');
+    Route::get('/stations/{id}', [\App\Http\Controllers\Admin\StationController::class, 'showStation'])->name('admin.showStation');
+    Route::post('/stations/{id}', [\App\Http\Controllers\Admin\StationController::class, 'editStation'])->name('admin.editStation');
 
 
 

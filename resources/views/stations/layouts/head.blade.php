@@ -93,7 +93,7 @@
 <!--Main Navigation-->
 
 <!--Main layout-->
-<main style="margin-top: 58px">
+<main >
     <div class="container pt-4">
 
     </div>

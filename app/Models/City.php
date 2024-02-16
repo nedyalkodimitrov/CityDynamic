@@ -13,7 +13,7 @@ class City extends Model
     }
     public function getStations()
     {
-        return $this->hasMany(BusStation::class, "city", "id");
+        return $this->hasMany(Station::class, "city", "id");
     }
 
 }

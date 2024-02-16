@@ -13,12 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bus_companies', function (Blueprint $table) {
+        Schema::create('stations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->unsignedBigInteger("admin");
-            $table->foreign('admin')->references('id')->on('users')
+            $table->string("name");
+            $table->unsignedBigInteger("city");
+            $table->foreign('city')->references('id')->on('cities')
                 ->onDelete('cascade');
+            $table->string('profilePhoto');
+            $table->string('contactEmail');
+            $table->string('contactPhone');
+            $table->string('contactAddress');
+
             $table->timestamps();
         });
     }
@@ -30,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bus_companies_tables');
+        Schema::dropIfExists('bus_stations');
     }
 };

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bus;
-use App\Models\BusStation;
+use App\Models\Station;
 use App\Models\Course;
 use App\Models\ShoppingCart;
 use App\Models\Ticket;
@@ -17,8 +17,10 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $company = $user->getCompany;
+
         $destinationIds = $company->getDestinations()->pluck("id");
         $courses = Course::whereIn("destination", $destinationIds)->take(10)->orderBy("date", "ASC")->orderBy("startTime", 'ASC')->get();
+
 
         $destinationCount = $company->getDestinations()->count();
         $coursesCount = Course::whereIn("destination", $destinationIds)->count();

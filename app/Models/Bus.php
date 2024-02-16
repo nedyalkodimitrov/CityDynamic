@@ -11,11 +11,11 @@ class Bus extends Model
     public $timestamps = false;
     public function getCompany()
     {
-        return $this->belongsTo(BusCompany::class, "busCompany", "id");
+        return $this->belongsTo(Company::class, "busCompany", "id");
     }
 
     public function getDriver()
     {
-        return $this->belongsTo(User::class, "driver", "id");
+        return $this->belongsTo(CompanyEmployee::class, "driver", "id");
     }
 }

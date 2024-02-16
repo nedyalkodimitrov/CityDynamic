@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bus;
-use App\Models\BusStation;
+use App\Models\Station;
 use Illuminate\Http\Request;
 
 class BusController extends Controller
@@ -37,7 +37,7 @@ class BusController extends Controller
     {
 
         $bus = Bus::find($busId);
-        $busStations = BusStation::all();
+        $busStations = Station::all();
         return view('admin.pages.buses.busEdit')->with('bus', $bus)->with('busStations', $busStations);
     }
 

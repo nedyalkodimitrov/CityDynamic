@@ -13,10 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('destinations', function (Blueprint $table) {
-            $table->unsignedBigInteger("prevPoint")->nullable();
-            $table->foreign('prevPoint')->references('id')->on('destinations')
+        Schema::create('orders', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger("user");
+            $table->foreign('user')->references('id')->on('users')
                 ->onDelete('cascade');
+            $table->double("totalPrice");
+            $table->unsignedBigInteger("ticketNumbers");
+            $table->string('stripeChargeId');
+
+            $table->timestamps();
         });
     }
 
@@ -27,10 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('destinations', function (Blueprint $table) {
-            $table->dropForeign(["prevPoint"]);
-            $table->dropColumn("prevPoint");
-
-        });
+        Schema::dropIfExists('orders');
     }
 };

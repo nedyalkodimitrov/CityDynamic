@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -13,19 +12,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('buses', function (Blueprint $table) {
+        Schema::create('companies_stations_connection_requests', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string("model");
-            $table->string("seats");
             $table->unsignedBigInteger("company");
             $table->foreign('company')->references('id')->on('companies')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger("currentLocation")->nullable();
-            $table->foreign('currentLocation')->references('id')->on('stations')
+            $table->unsignedBigInteger("station");
+            $table->foreign('station')->references('id')->on('stations')
                 ->onDelete('cascade');
-
+            $table->boolean("isApproved")->nullable()->default(null);
+            $table->boolean("isFromCompany");
+            $table->timestamps();
         });
     }
 
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('machines');
+        Schema::dropIfExists('bus_companies_bus_stations_request');
     }
 };

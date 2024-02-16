@@ -5,13 +5,11 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Admin\StationController;
 use App\Http\Controllers\Controller;
 use App\Http\Services\DestinationService;
-use App\Models\BusCompany;
+use App\Models\Company;
 use App\Models\City;
 use App\Models\Course;
 use App\Models\Destination;
 use App\Models\Order;
-use App\Models\ShoppingCart;
-use Faker\Provider\ar_EG\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,19 +18,13 @@ class UserController extends Controller
     public function showHome()
     {
         $user = Auth::user();
-        if (Auth::check()) {
-            $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
-
-        } else {
-            $items = [];
-        }
 
         $cities = City::all();
 
 
-        $companies = BusCompany::all();
-        $destinations = Destination::whereNull("prevPoint")->get();
-        return view('user.pages.index')->with("destinations", $destinations)->with("itemsCount", count($items))->with("companies", $companies)->with("cities", $cities);
+        $companies = Company::all();
+        $destinations = Destination::all();
+        return view('user.pages.index')->with("destinations", $destinations)->with("itemsCount", 2)->with("companies", $companies)->with("cities", $cities);
     }
 
     public function getEndCities(Request $request)
@@ -279,7 +271,7 @@ $cities = City::all();
 
 
     public function showCompanies(){
-        $companies = BusCompany::all();
+        $companies = Company::all();
 
 
         return view('user.pages.companies.companies')

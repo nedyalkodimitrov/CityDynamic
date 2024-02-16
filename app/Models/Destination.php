@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Services\DestinationService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
@@ -13,66 +14,31 @@ class Destination extends Model
 
     public $timestamps = false;
 
-    public function getBusStation()
+    public function getStartBusStation()
     {
-        return $this->belongsTo(BusStation::class, "busStation", "id");
+        return $this->belongsTo(Station::class, "startBusStation", "id");
+    }
+    public function getEndBusStation()
+    {
+        return $this->belongsTo(Station::class, "endBusStation", "id");
+    }
+    public function getExecutiveCompany()
+    {
+        return $this->belongsTo(Company::class, "executiveCompany", "id");
     }
 
-    //todo add migrations for destination relations in courses
-    public function getCourses()
-    {
+    public function getPoints(){
+        return $this->hasMany(DestinationPoint::class, "destination", "id");
+    }
+
+    public function getTickets(){
+        return $this->hasMany(Ticket::class, "destination", "id");
+    }
+    public function getCourse(){
         return $this->hasMany(Course::class, "destination", "id");
     }
-
-    public function getCompany()
-    {
-        return $this->belongsTo(BusCompany::class, "busCompany");
-    }
-
-    public function getNextDestination()
-    {
-        return $this->belongsTo(Destination::class, "nextDestination", "id");
-    }
-
-    public function getPrevDestination()
-    {
-        return $this->belongsTo(Destination::class, "prevDestination", "id");
-    }
-
-    public function getLastBusStation()
-    {
-        $lastDestination = null;
-
-        while (true) {
-            if ($lastDestination == null) {
-                if ($this->getNextDestination == null) {
-                    return $this->getBusStation();
-                }else{
-                    $lastDestination = $this->getNextDestination;
-                }
-            } else {
-                if ($lastDestination->getNextDestination == null) {
-                    return  $lastDestination->getBusStation();
-                }else{
-                    $lastDestination = $lastDestination->getNextDestination;
-                }
-            }
-        }
-
-    }
-
-    public function scopeGetAllPoints(){
-        $points = [];
-        $destination = $this->getBusStation();
-        array_push($points, $destination);
-        while(true){
-            if ($destination->getNextDestination == null) {
-                break;
-            }
-            $destination = $destination->getNextDestination;
-            array_push($points, $destination);
-        }
-        return $points;
+    public function getSchedules(){
+        return $this->hasMany(DestinationSchedule::class, "destination", "id");
     }
 
 }

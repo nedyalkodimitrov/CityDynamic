@@ -20,7 +20,6 @@
                     </div>
                 </div>
 
-                @foreach(\App\Models\Order::) @endforeach
             </div>
 
         </div>
@@ -78,7 +77,7 @@
 
                     <div style="margin-left: 0.5em;">
                         <p style="font-size: 1.3em;margin: 0; text-align: center">   {{$userCount}} </p>
-                        <p style="font-size: 1.1em;margin: 0; text-align: center"><b> Потребители</b></p>
+                        <p style="font-size: 1.1em;margin: 0; text-align: center">Потребителя</p>
 
                     </div>
                 </div>
@@ -92,7 +91,7 @@
                 <div class="card-body">
 
                     <div style="margin-left: 0.5em;">
-                        <p style="font-size: 1.3em;margin: 0; text-align: center">   {{$soldTicketsCount}} </p>
+                        <p style="font-size: 1.3em;margin: 0; text-align: center">   15 </p>
                         <p style="font-size: 1.1em;margin: 0; text-align: center"><b>Продедени билета</b></p>
 
                     </div>

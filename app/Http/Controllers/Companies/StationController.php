@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
-use App\Models\BusStation;
+use App\Models\Station;
 use Egulias\EmailValidator\Result\Reason\AtextAfterCFWS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +17,7 @@ class StationController extends Controller
         $connectedStations = $company->getStations;
 
         $connectedStationsIds = $company->getStations()->pluck('bus_stations.id')->toArray();
-        $notConnectedStations = BusStation::whereNotIn('id', $connectedStationsIds)->get();
+        $notConnectedStations = Station::whereNotIn('id', $connectedStationsIds)->get();
         return view('companies.pages.stations.stations')->with(["connectedStations" => $connectedStations])->with(["notConnectedStations" => $notConnectedStations]);
 //        return view('admin.pages.stations.stations');
     }
@@ -25,7 +25,7 @@ class StationController extends Controller
     public function showStation($id)
     {
         $user = Auth::user();
-        $station = BusStation::find($id);
+        $station = Station::find($id);
         $company = $user->getCompany;
         $isRequestToThisStation = false;
         $isApproved = false;

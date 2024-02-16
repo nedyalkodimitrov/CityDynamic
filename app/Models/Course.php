@@ -13,17 +13,18 @@ class Course extends Model
     {
         return $this->belongsTo(Bus::class, "bus", "id");
     }
-
-    public function getDestination()
+    public function getDriver()
     {
-        return $this->belongsTo(Destination::class, "destination", "id");
+        return $this->belongsTo(CompanyEmployee::class, "driver", "id");
     }
 
-    public function getBusStation()
+    public function getLastPoint()
     {
-        return $this->belongsTo(BusStation::class, "busStation", "id");
+        return $this->belongsTo(DestinationPoint::class, "point", "id");
     }
-    public function getTicket(){
-        return $this->hasOne(Ticket::class, "course", "id");
+
+
+    public function getTickets(){
+        return $this->hasMany(Ticket::class, "course", "id");
     }
 }

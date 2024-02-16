@@ -13,8 +13,8 @@ class MediaService
     {
 
         $imageName = time().'-'.rand(1, 15000000000).'.'.$image->extension();
-//        $image->move(public_path(self::IMAGE_PATH), $imageName);
-        $this->compressImage($image, public_path(self::IMAGE_PATH).'/'.$imageName, 80);
+        $image->move(public_path(self::IMAGE_PATH), $imageName);
+//        $this->compressImage($image, public_path(self::IMAGE_PATH).'\\'.$imageName, 80);
 
         return $imageName;
     }

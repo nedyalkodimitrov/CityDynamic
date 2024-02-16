@@ -61,11 +61,11 @@ class User extends Authenticatable implements JWTSubject
 
     public function getCompany()
     {
-        return $this->hasOne(BusCompany::class, 'admin', 'id');
+        return $this->hasOne(Company::class, 'admin', 'id');
     }
     public function getStation()
     {
-        return $this->hasOne(BusStation::class, 'admin', 'id');
+        return $this->hasOne(Station::class, 'admin', 'id');
     }
 
     public function getOrders(){

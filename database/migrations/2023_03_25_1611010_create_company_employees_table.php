@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bus_companies_bus_stations_tables', function (Blueprint $table) {
+        Schema::create('company_employees', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("bus_company");
-            $table->foreign('bus_company')->references('id')->on('bus_companies')
+            $table->unsignedBigInteger("company");
+            $table->foreign('company')->references('id')->on('company')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger("bus_station");
-            $table->foreign('bus_station')->references('id')->on('bus_stations')
+            $table->unsignedBigInteger("user");
+            $table->foreign('user')->references('id')->on('user')
                 ->onDelete('cascade');
-            $table->timestamps();
 
+            $table->timestamps();
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bus_companies_bus_stations_tables');
+        Schema::dropIfExists('company_emplyees');
     }
 };

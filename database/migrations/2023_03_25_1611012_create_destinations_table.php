@@ -17,14 +17,16 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->unsignedBigInteger("startBusStation");
-            $table->foreign('startBusStation')->references('id')->on('bus_stations')
+            $table->foreign('startBusStation')->references('id')->on('stations')
                 ->onDelete('cascade');
             $table->unsignedBigInteger("endBusStation");
-            $table->foreign('endBusStation')->references('id')->on('bus_stations')
+            $table->foreign('endBusStation')->references('id')->on('stations')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger("nextDestination")->nullable();
-            $table->foreign('nextDestination')->references('id')->on('destinations')
+
+            $table->unsignedBigInteger("executiveCompany");
+            $table->foreign('executiveCompany')->references('id')->on('companies')
                 ->onDelete('cascade');
+
 
         });
     }

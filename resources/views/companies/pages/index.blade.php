@@ -75,8 +75,8 @@
                   <tr>
                       <th scope="row">1</th>
                       <td>{{$course->getDestination->name}}</td>
-                      <td>{{$course->getDestination->getStartBusStation->name}}</td>
-                      <td>{{$course->getDestination->getEndBusStation->name}}</td>
+                      <td>{{$course->getDestination->getBusStation->name}}</td>
+{{--                      <td>{{$course->getDestination->getEndBusStation->name}}</td>--}}
                       <td>{{$course->startTime}} {{$course->date}}</td>
                   </tr>
 

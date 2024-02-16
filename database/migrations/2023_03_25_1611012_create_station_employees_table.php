@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('destinations', function (Blueprint $table) {
-            $table->integer("timeTillNextPoint")->default(0);
+        Schema::create('station_employees', function (Blueprint $table) {
+            $table->id();
+
+
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('destinations', function (Blueprint $table) {
-            $table->dropColumn("timeTillNextPoint");
-        });
+        Schema::dropIfExists('station_emplyees');
     }
 };
