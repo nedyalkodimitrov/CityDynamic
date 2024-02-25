@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\BusRepository;
+use App\Http\Repositories\CompanyRepository;
+use App\Http\Repositories\StationRepository;
+use App\Http\Requests\CreateBusRequest;
+use App\Http\Requests\EditBusRequest;
 use App\Models\Bus;
 use App\Models\Station;
 use Illuminate\Http\Request;
@@ -11,23 +16,32 @@ use PHPUnit\Framework\Attributes\UsesClass;
 
 class BusController extends Controller
 {
+
+    private $user;
+
+    public function __construct($user, private CompanyRepository $companyRepository,
+                                private BusRepository $busRepository, private StationRepository $stationRepository)
+    {
+        $this->user = $user;
+    }
+
     public function showBuses()
     {
-        $user = Auth::user();
-        $company = $user->getEmployers()->first();
+        $company = $this->companyRepository->getCompanyOfUser($this->user);
         $buses = $company->getBuses;
 
-
-
-
-        return view('companies.pages.buses.buses')->with(["buses" => $buses]);
+        return view('companies.pages.buses.buses', [
+            "buses" => $buses,
+        ]);
     }
 
     public function showBus($id)
     {
-        $bus = Bus::find($id);
+        $bus = $this->busRepository->findById($id);
 
-        return view('companies.pages.buses.bus')->with('bus', $bus);
+        return view('companies.pages.buses.bus', [
+            "bus" => $bus,
+        ]);
     }
 
     public function showBusCreate()
@@ -39,35 +53,30 @@ class BusController extends Controller
     public function showBusEdit($busId)
     {
 
-        $bus = Bus::find($busId);
-        $busStations = Station::all();
-        return view('companies.pages.buses.busEdit')->with('bus', $bus)->with('busStations', $busStations);
+        $bus = $this->busRepository->findById($busId);
+        $busStations = $this->stationRepository->findAll();
+        return view('companies.pages.buses.busEdit', [
+                "bus" => $bus,
+                "busStations" => $busStations
+            ]
+        );
     }
 
 
-    public function createBus(Request $request)
+    public function createBus(CreateBusRequest $request)
     {
-        $user = auth()->user();
-        $busCompany = Auth::user()->getCompany;
-        $bus = new Bus();
-        $bus->name = $request->name;
-        $bus->model = $request->model;
-        $bus->seats = $request->seats;
-        $bus->busCompany = $busCompany->id;
-        $bus->save();
+        $request->validated();
+        $company = $this->companyRepository->getCompanyOfUser($this->user);
+        $this->busRepository->create($request->name, $request->model, $request->seats, $company->id);
 
         return redirect()->route('company.showBuses');
 
     }
 
-    public function editBus($busId, Request $request)
+    public function editBus($busId, EditBusRequest $request)
     {
-
-        $bus = Bus::find($busId);
-        $bus->name = $request->name;
-        $bus->model = $request->model;
-        $bus->seats = $request->seats;
-        $bus->save();
+        $request->validated();
+        $this->busRepository->update($busId, $request->name, $request->model, $request->seats);
 
         return redirect()->route('company.showBuses');
 

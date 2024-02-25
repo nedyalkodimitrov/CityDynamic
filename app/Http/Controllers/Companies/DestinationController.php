@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\CompanyRepository;
+use App\Http\Repositories\DestinationRepository;
+use App\Http\Repositories\StationRepository;
 use App\Models\DestinationPoint;
 use App\Models\Station;
 use App\Models\Destination;
@@ -12,17 +15,30 @@ use function PHPUnit\Framework\exactly;
 
 class DestinationController extends Controller
 {
+    private $user;
+
+    public function __construct(private CompanyRepository     $companyRepository,
+                                private DestinationRepository $destinationRepository,
+                                private StationRepository     $station)
+    {
+        $this->user = Auth::user();
+    }
+
     public function showDestinations()
     {
-        $user = Auth::user();
-        $company = $user->getEmployers()->first();
-        $destinations = $company->getDestinations;
 
-        return view('companies.pages.destinations.destinations')->with('destinations', $destinations);
+        $company = $this->companyRepository->getCompanyOfUser($this->user);
+        $destinations = $this->destinationRepository->getDestinationsByCompany($company->id);
+
+        return view('companies.pages.destinations.destinations',[
+            "destinations" => $destinations,
+        ]);
     }
 
     public function showDestination($destinationId)
     {
+
+        
         $destination = Destination::find($destinationId);
 
         $tracks = [];
@@ -86,7 +102,6 @@ class DestinationController extends Controller
             $price += 3;
             $duration += 20;
         }
-
 
 
         $destination->save();

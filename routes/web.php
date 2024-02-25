@@ -103,6 +103,12 @@ Route::group([
     Route::get('/destinations/{id}', [\App\Http\Controllers\Companies\DestinationController::class, 'showDestination'])->name('company.showDestination');
     Route::post('/destinations/{id}/edit', [\App\Http\Controllers\Companies\DestinationController::class, 'editDestination'])->name('company.editDestination');
 
+    Route::get('/destinations/{destinationId}/schedules', [\App\Http\Controllers\Companies\ScheduleController::class, 'showSchedules'])->name('company.showDestinationSchedules');
+    Route::get('/destinations/{destinationId}/schedules/{scheduleId}', [\App\Http\Controllers\Companies\ScheduleController::class, 'showSchedule'])->name('company.showDestinationSchedule');
+    Route::get('/destinations/{destinationId}/schedule', [\App\Http\Controllers\Companies\ScheduleController::class, 'showScheduleForm'])->name('company.showDestinationScheduleForm');
+    Route::post('/destinations/{destinationId}/schedule', [\App\Http\Controllers\Companies\ScheduleController::class, 'createSchedule'])->name('company.createDestinationSchedule');
+    Route::post('/destinations/{destinationId}/schedules/{scheduleId}', [\App\Http\Controllers\Companies\ScheduleController::class, 'editSchedule'])->name('company.editDestinationSchedule');
+
     Route::get('/courses', [\App\Http\Controllers\Companies\CourseController::class, 'showCourses'])->name('company.showCourses');
     Route::get('/courses/create', [\App\Http\Controllers\Companies\CourseController::class, 'showCourseCreate'])->name('company.showCoursesForm');
     Route::post('/courses/create', [\App\Http\Controllers\Companies\CourseController::class, 'createCourse'])->name('company.createCourse');

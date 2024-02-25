@@ -9,6 +9,14 @@ class Course extends Model
 {
     use HasFactory;
 
+    protected  $fillable = [
+        'destination',
+        'bus',
+        'date',
+        'startTime',
+        'endTime',
+
+    ];
     public function getBus()
     {
         return $this->belongsTo(Bus::class, "bus", "id");

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\CompanyRepository;
+use App\Http\Repositories\StationRepository;
+use App\Http\Resources\StationResource;
 use App\Models\Station;
 use Egulias\EmailValidator\Result\Reason\AtextAfterCFWS;
 use Illuminate\Http\Request;
@@ -10,35 +13,35 @@ use Illuminate\Support\Facades\Auth;
 
 class StationController extends Controller
 {
-    public function showStations()
-    {
-        $user = Auth::user();
-        $company = $user->getEmployers()->first();;
-        $connectedStations = $company->getStations;
+    private $user;
 
-        $connectedStationsIds = $company->getStations()->pluck('bus_stations.id')->toArray();
-        $notConnectedStations = Station::whereNotIn('id', $connectedStationsIds)->get();
-        return view('companies.pages.stations.stations')->with(["connectedStations" => $connectedStations])->with(["notConnectedStations" => $notConnectedStations]);
-//        return view('admin.pages.stations.stations');
+    public function __construct(Auth $user, private CompanyRepository $companyRepository, private StationRepository $stationRepository)
+    {
+        $this->user = $user;
     }
 
-    public function showStation($id)
+
+    public function showStations()
     {
-        $user = Auth::user();
-        $station = Station::find($id);
-        $company = $user->getEmployers()->first();;
-        $isRequestToThisStation = false;
-        $isApproved = false;
+        $company = $this->companyRepository->getCompanyOfUser($this->user);
+        $connectedStations = $this->companyRepository->getConnectedStations($company);
 
-        $request = $company->getRequestedStations()->where("bus_station", $station->id)->get();
-        if (count($request) > 0) {
-            $isRequestToThisStation = true;
-        }
+        $dissociateStations = $this->companyRepository->getDissociateStations($company);
+        return view('companies.pages.stations.stations', [
+                "connectedStations" => $connectedStations,
+                "notConnectedStations" => $dissociateStations
+            ]);
 
-        if (count($company->getStations()->where("bus_station", $station->id)->get())) {
-            $isApproved = true;
-            $isRequestToThisStation = true;
-        }
+    }
+
+    public function showStation($stationId)
+    {
+        $station = $this->stationRepository->findById($stationId);
+        $company = $this->companyRepository->getCompanyOfUser($this->user);
+        $isRequestToThisStation = $this->companyRepository->checkIfThereIsRequestToThisStation($company, $station);
+        $isApproved = $this->companyRepository->checkIfStationIsConnected($company, $station);
+
+
         return view('companies.pages.stations.station')
             ->with(["station" => $station])
             ->with(["isRequestToThisStation" => $isRequestToThisStation])
@@ -47,47 +50,40 @@ class StationController extends Controller
 
     public function makeStationRequest($id)
     {
-        $user = Auth::user();
-        $company = $user->getEmployers()->first();
-        $company->getRequestedStations()->attach([$id]);
+
+        $company = $this->companyRepository->getCompanyOfUser($this->user);
+        $station = $this->stationRepository->findById($id);
+        $this->companyRepository->makeRequestToStation($company, $station);
+
         return redirect()->back();
     }
 
-    public function declineStationRequest($id)
+    public function declineStationRequest($stationId)
     {
-        $user = Auth::user();
-        $company = $user->getEmployers()->first();
-        $company->getRequestedStations()->detach($id);
+
+        $company = $this->companyRepository->getCompanyOfUser($this->user);
+        $station = $this->stationRepository->findById($stationId);
+        $this->companyRepository->removeRequestToStation($company, $station);
         return redirect()->route("company.showStations");
     }
 
-    public function unpairStation($id)
+    public function unpairStation($stationId)
     {
-        $user = Auth::user();
-        $company = $user->getEmployers()->first();
-        $company->getStations()->detach($id);
+        $company = $this->companyRepository->getCompanyOfUser($this->user);
+        $station = $this->stationRepository->findById($stationId);
+        $this->companyRepository->removeStationFromConnections($company, $station);
         return redirect()->route("company.showStations");
     }
 
 
     public function getAllStations()
     {
-        $user = Auth::user();
 
-        $stations = $user->getEmployers()->first()->getStations;
+        $company = $this->companyRepository->getCompanyOfUser($this->user);
+        $stations = $this->companyRepository->getConnectedStations($company);
 
-        $stationsData = [];
-        foreach ($stations as $station) {
-            $stationData["id"] = $station->id;
-            $stationData["name"] = $station->name;
-            array_push($stationsData, $stationData);
-        }
-
-        return json_encode($stationsData);
+        return json_encode(StationResource::collection($stations));
     }
-
-
-
 
 
 }

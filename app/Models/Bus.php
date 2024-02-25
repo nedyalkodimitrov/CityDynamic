@@ -9,6 +9,13 @@ class Bus extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    protected $fillable = [
+        'name',
+        'model',
+        'seats',
+        'busCompany',
+    ];
     public function getCompany()
     {
         return $this->belongsTo(Company::class, "busCompany", "id");
