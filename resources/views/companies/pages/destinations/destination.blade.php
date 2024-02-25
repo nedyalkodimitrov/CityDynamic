@@ -15,18 +15,38 @@
         }
     </style>
     <h1 class="col-12 text-center mb-2">Дестинация</h1>
-    <div class="card col-12 ">
+
+    <div class="container p-4 mb-2 col-12 card">
+        <div class="col-12 row ">
+            <div class="col-4 text-center">
+                <p><b>10</b></p>
+                <p>Закупени билета</p>
+            </div>
+            <div class="col-4 text-center">
+                <p><b>15лв</b></p>
+                <p>Оборот</p>
+            </div>
+            <div class="col-4 text-center">
+                <p><b>100км</b></p>
+                <p>Разтояние</p>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="card col-12 mb-2 ">
         <div class="col-12 col-md-9 mx-auto col-lg-12  p-4" method="post">
-            <div class="predefined-container  mt-4">
+            <div class="predefined-container  mt-2">
                 <div class="row">
-                    <h3 class="col-12 m-0">{{$destination->getStartBusStation->name}}
+                    <h3 class="col-11 m-0">{{$destination->getStartBusStation->name}}
                         - {{$destination->getEndBusStation->name}}</h3>
+                    <i class="fas fa-arrow-down col" ></i>
                 </div>
                 <hr>
                 @php
                     $trackNumber = 1;
                 @endphp
-                <div class="destinations row" style="border-left: 4px solid green; margin-left: 1em ">
+                <div class="destinations row" style="border-left: 4px solid green; margin-left: 1em;">
                     @foreach($tracks as $track)
                         <div
                             class="col-12 row mx-auto mt-3 p-0 destination @if($trackNumber == count($tracks)) last @endif"
@@ -58,6 +78,22 @@
             </div>
         </div>
     </div>
+
+    <div class="col-12 row p-0 m-0 mb-2">
+        <div class="card col-6 mx-auto">
+            <div class="col-11 p-2">
+                <h3 class="text-center">Предписания</h3>
+                <p><a href="">10</a></p>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="col-11 p-2 mx-auto card">
+                <h3 class="text-center">Предстоящи курсове </h3>
+                <p><a href="">10</a></p>
+            </div>
+        </div>
+    </div>
+
 
     <div class="col-12 card mt-5">
 
