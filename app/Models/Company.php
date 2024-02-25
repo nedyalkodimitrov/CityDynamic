@@ -23,7 +23,7 @@ class Company extends Model
     public $timestamps = false;
     public function getBuses()
     {
-        return $this->hasMany(Bus::class, "ompany", "id");
+        return $this->hasMany(Bus::class, "company", "id");
     }
 
     public function getStations()
@@ -32,7 +32,7 @@ class Company extends Model
     }
     //todo add migrations for company relations in destinations
     public function getDestinations(){
-        return $this->hasMany(Destination::class, "busCompany", "id");
+        return $this->hasMany(Destination::class, "executiveCompany", "id");
     }
 
     public function getStationConnectionRequests()
@@ -42,7 +42,7 @@ class Company extends Model
 
 
     public function getEmployees(){
-        return $this->belongsToMany(User::class, "companies_employees", "company", "user");
+        return $this->belongsToMany(User::class, "company_employees", "company", "user");
     }
 
 

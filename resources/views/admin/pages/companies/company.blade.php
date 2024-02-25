@@ -5,33 +5,32 @@
 @endsection
 
 @section("content")
-    <h1 class="col-12 text-center mb-2">Редкатирай компания</h1>
-    <form class="col-12 col-md-9 mx-auto col-lg-9" action="{{route("admin.editCompany", ["id" => $company->id])}}"
-          method="post">
-        @csrf
+    <div class="col-12 col-md-9 mx-auto mb-4 col-lg-9 p-3 card">
+    <h1 class="col-12 text-center mb-2"></h1>
+
+        <div>
+            <img src="{{asset("images/".$company->profilePhoto)}}" alt="" style="width: 100%">
+        </div>
         <div class="form-group col-12">
-            <label for="exampleInputEmail1">Име</label>
-            <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$company->name }}">
+            <h1 class="text-center">{{$company->name}}</h1>
         </div>
 
-        <div class="form-group col-12 mt-3">
-            <label for="exampleInputPassword1">Админисратор</label>
-            <select class="form form-select" name="admin">
-                <option selected value="{{$company->getAdmin->id}}">
-                    {{$company->getAdmin->name}}
-                </option>
-
-                @foreach($users as $user)
-                    <option value="{{$user->id}}">
-                        {{$user->name}}
-                    </option>
-
-                @endforeach
-            </select>
+        <div class="form-group col-12">
+        <p><b>Founded At: </b>{{$company->foundedAt}}</p>
         </div>
-
-        <button type="submit" class="btn btn-primary col-12 mt-3">Запамети промените</button>
-    </form>
+        <div class="form-group col-12">
+            <p><b>Description:</b> {{$company->description}}</p>
+        </div>
+        <div class="form-group col-12">
+            <p><b>Contact Email:</b> {{$company->contactEmail}}</p>
+        </div>
+        <div class="form-group col-12">
+            <p><b>Contact Phone:</b> {{$company->contactPhone}}</p>
+        </div>
+        <div class="form-group col-12">
+            <p><b>Contact Address:</b>: {{$company->contactAddress}}</p>
+        </div>
+    </div>
 
 @endsection
 

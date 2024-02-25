@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
+use App\Models\DestinationPoint;
 use App\Models\Station;
 use App\Models\Destination;
 use Illuminate\Http\Request;
@@ -13,8 +14,8 @@ class DestinationController extends Controller
 {
     public function showDestinations()
     {
-         $user = Auth::user();
-        $company = $user->getCompany;
+        $user = Auth::user();
+        $company = $user->getEmployers()->first();
         $destinations = $company->getDestinations;
 
         return view('companies.pages.destinations.destinations')->with('destinations', $destinations);
@@ -25,28 +26,20 @@ class DestinationController extends Controller
         $destination = Destination::find($destinationId);
 
         $tracks = [];
-        array_push($tracks, $destination);
-
-        $nextDestination = $destination;
-        while(true){
-            if ($nextDestination->getNextDestination == null) {
-                break;
-            }
-            $nextDestination= $destination->getNextDestination;
-
-            array_push($tracks, $nextDestination);
+        $destinationPoints = $destination->getPoints()->orderBy("order", "ASC")->get();
+        foreach ($destinationPoints as $point) {
+            $station = Station::find($point->station);
+            array_push($tracks, $station);
         }
-
         $user = Auth::user();
-        $busStations = $user->getCompany->getStations;
+        $busStations = $user->getEmployers()->first()->getStations;
         return view('companies.pages.destinations.destination')->with('tracks', $tracks)->with('destination', $destination)->with('busStations', $busStations);
     }
 
     public function showDestinationCreate()
     {
         $user = Auth::user();
-        $busStations = $user->getCompany->getStations;
-
+        $busStations = $user->getEmployers()->first()->getStations;
 
 
         return view('companies.pages.destinations.destinationForm')->with('busStations', $busStations);
@@ -55,12 +48,47 @@ class DestinationController extends Controller
 
     public function createDestination(Request $request)
     {
-        $busCompany = Auth::user()->getCompany;
+        $company = Auth::user()->getEmployers()->first();
+
+        $i = 1;
+        $stationFix = "station-" . $i;
+        $stations = [];
+        while (isset($request->$stationFix)) {
+            array_push($stations, $request->$stationFix);
+            $i++;
+            $stationFix = "station- " . $i;
+        }
+
+        $firstStation = $stations[0];
+        $lastStation = $stations[count($stations) - 1];
         $destination = new Destination();
-        $destination->name = $request->name;
-        $destination->startBusStation = $request->startBusStation;
-        $destination->endBusStation = $request->endBusStation;
-        $destination->busCompany = $busCompany->id;
+        $destination->name = "тест";
+        $destination->startBusStation = $firstStation;
+        $destination->endBusStation = $lastStation;
+        $destination->executiveCompany = $company->id;
+        $destination->save();
+
+        $order = 0;
+        $duration = 5;
+        $distance = 5;
+        $price = 2;
+        foreach ($stations as $station) {
+            $destinationPoint = new DestinationPoint();
+            $destinationPoint->destination = $destination->id;
+            $destinationPoint->station = $station;
+            $destinationPoint->order = $order;
+            $destinationPoint->duration = $duration;
+            $destinationPoint->distance = $distance;
+            $destinationPoint->price = $price;
+            $destinationPoint->save();
+            $order++;
+            $duration += 5;
+            $price += 3;
+            $duration += 20;
+        }
+
+
+
         $destination->save();
 
         return redirect()->route('company.showDestinations');
@@ -84,8 +112,6 @@ class DestinationController extends Controller
 
         return redirect()->route('showDestinations');
     }
-
-
 
 
 }

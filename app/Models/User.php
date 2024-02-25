@@ -72,4 +72,8 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Order::class, "user");
     }
 
+    public function getEmployers(){
+        return $this->belongsToMany(Company::class, "company_employees", "user", "company");
+    }
+
 }

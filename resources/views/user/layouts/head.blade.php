@@ -96,12 +96,13 @@
                         >
                             @if(\Illuminate\Support\Facades\Auth::user()->getRoleNames()->first() == "Admin")
                                 <li><a class="dropdown-item" href="{{route("homeAdmin")}}">Админ Панел</a></li>
-                            @elseif(\Illuminate\Support\Facades\Auth::user()->getRoleNames()->first() == "Bus Station Admin")
-                                <li><a class="dropdown-item" href="{{route("station.home")}}">Панел за автогари</a>
+                            @elseif(\Illuminate\Support\Facades\Auth::user()->getRoleNames()->first() == "CompanyAdmin")
+
+                                <li><a class="dropdown-item" href="{{route("company.home")}}">Панел за компании</a>
                                 </li>
 
-                            @elseif(\Illuminate\Support\Facades\Auth::user()->getRoleNames()->first() == "Bus Company Admin")
-                                <li><a class="dropdown-item" href="{{route("company.home")}}">Панел за компании</a>
+                            @elseif(\Illuminate\Support\Facades\Auth::user()->getRoleNames()->first() == "StationAdmin")
+                                <li><a class="dropdown-item" href="{{route("station.home")}}">Панел за автогари</a>
                                 </li>
 
                             @endif

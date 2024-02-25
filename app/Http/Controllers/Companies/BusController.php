@@ -14,7 +14,7 @@ class BusController extends Controller
     public function showBuses()
     {
         $user = Auth::user();
-        $company = $user->getCompany;
+        $company = $user->getEmployers()->first();
         $buses = $company->getBuses;
 
 

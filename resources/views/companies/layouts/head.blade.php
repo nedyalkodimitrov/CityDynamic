@@ -16,6 +16,13 @@
                     ><span>Начало</span>
                 </a>
                 <a
+                    href="{{route('company.showEmployees')}}"
+                    class="list-group-item list-group-item-action py-2 ripple "
+                >
+                    <i class="fas fa-users fa-fw me-3"></i
+                    ><span>Работници</span>
+                </a>
+                <a
                     href="{{route('company.showBuses')}}"
                     class="list-group-item list-group-item-action py-2 ripple "
                 >

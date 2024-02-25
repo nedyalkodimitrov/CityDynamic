@@ -16,7 +16,7 @@ class HomeController extends Controller
     public function showHome()
     {
         $user = Auth::user();
-        $company = $user->getCompany;
+        $company = $user->getEmployers()->first();
 
         $destinationIds = $company->getDestinations()->pluck("id");
         $courses = Course::whereIn("destination", $destinationIds)->take(10)->orderBy("date", "ASC")->orderBy("startTime", 'ASC')->get();
@@ -27,12 +27,11 @@ class HomeController extends Controller
         //get sold tickets count
         $courseIds = Course::whereIn("destination", $destinationIds)->pluck("id");
         $ticketIds = Ticket::whereIn("course", $courseIds)->pluck("id");
-        $soldTickets = ShoppingCart::whereIn("ticket", $ticketIds)->whereNotNull("order")->count();
 
         return view('companies.pages.index')->with("courses", $courses)
             ->with("destinationCount", $destinationCount)
             ->with("courseCount", $coursesCount)
-            ->with("soldTickets", $soldTickets);
+            ->with("soldTickets", 0);
     }
 
 

@@ -47,7 +47,7 @@ Route::group([
 
 Route::group([
     'prefix' => "stationPanel",
-    "middleware" => ["auth", "roleCheck:Bus Station Admin"]
+    "middleware" => ["auth", "roleCheck:StationAdmin"]
 
 ], function () {
 
@@ -76,7 +76,7 @@ Route::group([
 
 Route::group([
     'prefix' => "companyPanel",
-    "middleware" => ["auth", "roleCheck:Bus Company Admin"]
+    "middleware" => ["auth", "roleCheck:CompanyAdmin"]
 
 ], function () {
     Route::get('/', [\App\Http\Controllers\Companies\HomeController::class, 'showHome'])->name('company.home');
@@ -86,6 +86,10 @@ Route::group([
     Route::post('/buses/create', [\App\Http\Controllers\Companies\BusController::class, 'createBus'])->name('company.createBus');
     Route::get('/buses/{id}', [\App\Http\Controllers\Companies\BusController::class, 'showBus'])->name('company.showBus');
     Route::post('/buses/{id}', [\App\Http\Controllers\Companies\BusController::class, 'editBus'])->name('company.editBus');
+
+
+    Route::get('/employees', [\App\Http\Controllers\Companies\EmployeeController::class, 'showEmployees'])->name('company.showEmployees');
+
 
     Route::get('/busStations', [\App\Http\Controllers\Companies\StationController::class, 'showStations'])->name('company.showStations');
     Route::get('/busStations/{id}', [\App\Http\Controllers\Companies\StationController::class, 'showStation'])->name('company.showStation');

@@ -13,7 +13,7 @@ class CourseController extends Controller
     public function showCourses()
     {
         $user = Auth::user();
-        $destinations = $user->getCompany->getDestinations()->pluck("id");
+        $destinations = $user->getEmployers()->first()->getDestinations()->pluck("id");
 
         $courses = Course::whereIn("destination", $destinations)->get();
 
@@ -24,8 +24,8 @@ class CourseController extends Controller
     public function showCourse($id)
     {
         $user = Auth::user();
-        $destinations = $user->getCompany->getDestinations;
-        $buses = $user->getCompany->getBuses;
+        $destinations = $user->getEmployers()->first()->getDestinations;
+        $buses = $user->getEmployers()->first()->getBuses;
         $course = Course::find($id);
         return view('companies.pages.courses.course')->with("destinations", $destinations)->with("buses", $buses)
             ->with("courseId", $id)->with("course", $course);
@@ -34,8 +34,8 @@ class CourseController extends Controller
     public function showCourseCreate()
     {
         $user = Auth::user();
-        $destinations = $user->getCompany->getDestinations;
-        $buses = $user->getCompany->getBuses;
+        $destinations = $user->getEmployers()->first()->getDestinations;
+        $buses = $user->getEmployers()->first()->getBuses;
 
         return view('companies.pages.courses.courseForm')->with("destinations", $destinations)->with("buses", $buses);
     }

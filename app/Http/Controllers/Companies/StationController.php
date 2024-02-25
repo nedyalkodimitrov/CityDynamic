@@ -13,7 +13,7 @@ class StationController extends Controller
     public function showStations()
     {
         $user = Auth::user();
-        $company = $user->getCompany;
+        $company = $user->getEmployers()->first();;
         $connectedStations = $company->getStations;
 
         $connectedStationsIds = $company->getStations()->pluck('bus_stations.id')->toArray();
@@ -26,7 +26,7 @@ class StationController extends Controller
     {
         $user = Auth::user();
         $station = Station::find($id);
-        $company = $user->getCompany;
+        $company = $user->getEmployers()->first();;
         $isRequestToThisStation = false;
         $isApproved = false;
 
@@ -48,7 +48,7 @@ class StationController extends Controller
     public function makeStationRequest($id)
     {
         $user = Auth::user();
-        $company = $user->getCompany;
+        $company = $user->getEmployers()->first();
         $company->getRequestedStations()->attach([$id]);
         return redirect()->back();
     }
@@ -56,7 +56,7 @@ class StationController extends Controller
     public function declineStationRequest($id)
     {
         $user = Auth::user();
-        $company = $user->getCompany;
+        $company = $user->getEmployers()->first();
         $company->getRequestedStations()->detach($id);
         return redirect()->route("company.showStations");
     }
@@ -64,7 +64,7 @@ class StationController extends Controller
     public function unpairStation($id)
     {
         $user = Auth::user();
-        $company = $user->getCompany;
+        $company = $user->getEmployers()->first();
         $company->getStations()->detach($id);
         return redirect()->route("company.showStations");
     }
@@ -74,7 +74,7 @@ class StationController extends Controller
     {
         $user = Auth::user();
 
-        $stations = $user->getCompany->getStations;
+        $stations = $user->getEmployers()->first()->getStations;
 
         $stationsData = [];
         foreach ($stations as $station) {

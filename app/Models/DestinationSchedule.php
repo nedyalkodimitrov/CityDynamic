@@ -18,7 +18,7 @@ class DestinationSchedule extends Model
     }
 
     public function getDriver(){
-        return $this->belongsTo(CompanyEmployee::class, "driver", "id");
+        return $this->belongsToMany(User::class, "company_employees", "company", "user");
     }
 
 
