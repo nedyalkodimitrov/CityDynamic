@@ -17,17 +17,18 @@ use PHPUnit\Framework\Attributes\UsesClass;
 class BusController extends Controller
 {
 
-    private $user;
 
-    public function __construct($user, private CompanyRepository $companyRepository,
+
+    public function __construct(private CompanyRepository $companyRepository,
                                 private BusRepository $busRepository, private StationRepository $stationRepository)
     {
-        $this->user = $user;
+
     }
 
     public function showBuses()
     {
-        $company = $this->companyRepository->getCompanyOfUser($this->user);
+        $user = Auth::user();
+        $company = $this->companyRepository->getCompanyOfUser($user);
         $buses = $company->getBuses;
 
         return view('companies.pages.buses.buses', [
@@ -66,7 +67,8 @@ class BusController extends Controller
     public function createBus(CreateBusRequest $request)
     {
         $request->validated();
-        $company = $this->companyRepository->getCompanyOfUser($this->user);
+        $user = Auth::user();
+        $company = $this->companyRepository->getCompanyOfUser($user);
         $this->busRepository->create($request->name, $request->model, $request->seats, $company->id);
 
         return redirect()->route('company.showBuses');

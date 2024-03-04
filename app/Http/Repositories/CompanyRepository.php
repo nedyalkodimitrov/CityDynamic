@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CompanyRepository
 {
-    public function getCompanyOfUser(Auth $user)
+    public function getCompanyOfUser( $user)
     {
         return $user->getEmployers()->first();
     }

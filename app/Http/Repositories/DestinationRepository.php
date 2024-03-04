@@ -3,6 +3,7 @@
 namespace App\Http\Repositories;
 
 use App\Models\Destination;
+use App\Models\Station;
 
 class DestinationRepository
 {
@@ -19,11 +20,22 @@ class DestinationRepository
 
     public function getDestinationsByCompany($companyId)
     {
-        return Destination::where('company', $companyId)->get();
+        return Destination::where('executiveCompany', $companyId)->get();
     }
     public function getDestinationIdsOfCompany($companyId)
     {
-        return Destination::where('company', $companyId)->get()->pluck('id');
+        return Destination::where('executiveCompany', $companyId)->get()->pluck('id');
+    }
+
+    public function getTracks(Destination $destination): array
+    {
+        $tracks = [];
+        $destinationPoints = $destination->getPoints()->orderBy("order", "ASC")->get();
+        foreach ($destinationPoints as $point) {
+            $station = Station::find($point->station);
+            array_push($tracks, $station);
+        }
+        return $tracks;
     }
 
 }

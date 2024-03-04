@@ -16,19 +16,19 @@ use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
-    private $user;
 
-    public function __construct(Auth                          $user, private CompanyRepository $companyRepository,
+    public function __construct(private CompanyRepository $companyRepository,
                                 private DestinationRepository $destinationRepository,
                                 private CourseRepository      $courseRepository,
                                 private BusRepository         $busRepository)
     {
-        $this->user = $user;
+
     }
 
     public function showCourses()
     {
-        $company = $this->companyRepository->getCompanyOfUser($this->user);
+        $user = Auth::user();
+        $company = $this->companyRepository->getCompanyOfUser($user);
         $destinationsIds = $this->destinationRepository->getDestinationIdsOfCompany($company->id);
 
         $courses = $this->courseRepository->getCoursesByDestinationIds($destinationsIds);
@@ -38,7 +38,8 @@ class CourseController extends Controller
 
     public function showCourse($id)
     {
-        $company = $this->companyRepository->getCompanyOfUser($this->user);
+        $user = Auth::user();
+        $company = $this->companyRepository->getCompanyOfUser($user);
         $destinations = $this->destinationRepository->getDestinationsByCompany($company->id);
         $buses = $this->busRepository->getBusesByCompany($company->id);
         $course = $this->courseRepository->findById($id);
@@ -54,7 +55,8 @@ class CourseController extends Controller
 
     public function showCourseCreate()
     {
-        $company = $this->companyRepository->getCompanyOfUser($this->user);
+        $user = Auth::user();
+        $company = $this->companyRepository->getCompanyOfUser($user);
         $destinations = $this->destinationRepository->getDestinationsByCompany($company->id);
         $buses = $this->busRepository->getBusesByCompany($company->id);
 

@@ -22,7 +22,7 @@ class BusRepository
 
     public function getBusesByCompany($companyId)
     {
-        return Bus::where('busCompany', $companyId)->get();
+        return Bus::where('company', $companyId)->get();
 
     }
 

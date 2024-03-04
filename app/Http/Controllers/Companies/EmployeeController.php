@@ -11,17 +11,15 @@ use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
-    private $user;
 
-    public function __construct(Auth $user, private CompanyRepository $companyRepository)
-    {
-        $this->user = $user;
-    }
+    public function __construct( private CompanyRepository $companyRepository)
+    {}
 
 
     public function showEmployees()
     {
-        $company = $this->companyRepository->getCompanyOfUser($this->user);
+        $user = Auth::user();
+        $company = $this->companyRepository->getCompanyOfUser($user);
         $employees = $this->companyRepository->getEmployees($company);
 
         return view('companies.pages.employees.employees', [

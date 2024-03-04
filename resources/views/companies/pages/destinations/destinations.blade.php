@@ -10,21 +10,35 @@
         <h1 class="col-12 text-center mb-2" style="position: relative;"> Дестинации <a style="position: absolute; right: 0" class="btn btn-success"
                                                            href="{{route("company.showDestinationsForm")}}">Създай дестинация</a></h1>
     </div>
-    <div class="col-12 row p-5">
-        @forelse($destinations as $destination)
-            <div class="col-3 row">
 
-                <div class="card col-11 row mx-auto" style="width: 18rem;">
-                    <div class="card-body col-12">
-                        <h5 class="card-title">{{$destination->name}}</h5>
-                        <p class="card-text">{{$destination->getStartBusStation()->first()->name}} - {{$destination->getEndBusStation()->first()->name}} <i class="fas fa-map-marker-alt"
-                                                                                                                                                            aria-hidden="true"></i></p>
-                        <a href="{{route("company.showDestination", ["id" => $destination->id])}}" class="btn btn-primary col-12">Виж още</a>
-                    </div>
-                </div>
-            </div>
-        @empty
-            <p class="text-center" style="width: 100%; font-size: 1.1em;">Нямате наличи дестинации</p>
-        @endforelse
+    <div class="col-12 card">
+
+        <table class="table ">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Име</th>
+                <th scope="col">Начална точка</th>
+                <th scope="col">Крайна точка</th>
+                <th scope="col">Деиствие</th>
+            </tr>
+            </thead>
+            <tbody>
+            @forelse($destinations as $destination)
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{$destination->name}}</td>
+                    <td>{{$destination->getStartBusStation()->first()->name}} </td>
+                    <td>{{$destination->getEndBusStation()->first()->name}} </td>
+                    <td> <a href="{{route("company.showDestination", ["id" => $destination->id])}}"><i class="fa fa-eye"></i></a></td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="4" class="text-center">Няма добавени дистанции</td>
+                </tr>
+            @endforelse
+            </tbody>
+        </table>
     </div>
+
 @endsection
