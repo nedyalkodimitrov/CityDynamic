@@ -19,12 +19,8 @@ use Illuminate\Support\Facades\Auth;
 class ScheduleController extends Controller
 {
 
-    private $user;
-
     public function __construct(Auth $user, private DestinationScheduleRepository $destinationScheduleRepository, private CompanyRepository $companyRepository)
-    {
-        $this->user = $user;
-    }
+    {}
 
     public function showSchedules($destinationId)
     {
@@ -48,7 +44,8 @@ class ScheduleController extends Controller
 
     public function showScheduleForm()
     {
-        $company = $this->companyRepository->getCompanyOfUser($this->user);
+        $user = Auth::user();
+        $company = $this->companyRepository->getCompanyOfUser($user);
         $buses = $company->getBuses;
         $drivers = $company->getEmployees;
 

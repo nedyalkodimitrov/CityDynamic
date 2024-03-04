@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\BusRepository;
 use App\Http\Repositories\CompanyRepository;
 use App\Http\Repositories\DestinationRepository;
 use App\Http\Repositories\StationRepository;
@@ -15,19 +16,17 @@ use function PHPUnit\Framework\exactly;
 
 class DestinationController extends Controller
 {
-    private $user;
-
     public function __construct(private CompanyRepository     $companyRepository,
                                 private DestinationRepository $destinationRepository,
-                                private StationRepository     $station)
+                                private BusRepository $busRepository,
+                                )
     {
-        $this->user = Auth::user();
     }
 
     public function showDestinations()
     {
-
-        $company = $this->companyRepository->getCompanyOfUser($this->user);
+        $user = Auth::user();
+        $company = $this->companyRepository->getCompanyOfUser($user);
         $destinations = $this->destinationRepository->getDestinationsByCompany($company->id);
 
         return view('companies.pages.destinations.destinations',[
@@ -37,28 +36,35 @@ class DestinationController extends Controller
 
     public function showDestination($destinationId)
     {
-
-        
-        $destination = Destination::find($destinationId);
-
-        $tracks = [];
-        $destinationPoints = $destination->getPoints()->orderBy("order", "ASC")->get();
-        foreach ($destinationPoints as $point) {
-            $station = Station::find($point->station);
-            array_push($tracks, $station);
-        }
         $user = Auth::user();
-        $busStations = $user->getEmployers()->first()->getStations;
-        return view('companies.pages.destinations.destination')->with('tracks', $tracks)->with('destination', $destination)->with('busStations', $busStations);
+        $company = $this->companyRepository->getCompanyOfUser($user);
+
+
+        $destination = $this->destinationRepository->findById($destinationId);
+        $tracks = $this->destinationRepository->getTracks($destination);
+
+        $connectedStations = $this->companyRepository->getConnectedStations($company);
+
+        return view('companies.pages.destinations.destination',
+        [
+            "destination" => $destination,
+            "tracks" => $tracks,
+            "connectedStations" => $connectedStations
+        ]);
     }
 
     public function showDestinationCreate()
     {
         $user = Auth::user();
-        $busStations = $user->getEmployers()->first()->getStations;
+        $company = $this->companyRepository->getCompanyOfUser($user);
+        $busStations = $this->companyRepository->getConnectedStations($company);
 
 
-        return view('companies.pages.destinations.destinationForm')->with('busStations', $busStations);
+        return view('companies.pages.destinations.destinationForm',
+        [
+            "busStations" => $busStations
+        ]);
+
     }
 
 

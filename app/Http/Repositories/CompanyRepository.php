@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CompanyRepository
 {
-    public function getCompanyOfUser(Auth $user)
+    public function getCompanyOfUser( $user)
     {
         return $user->getEmployers()->first();
     }
@@ -70,5 +70,15 @@ class CompanyRepository
     public function getAllConnectedStations(Company $company)
     {
         return $company->getStations;
+    }
+
+    public function findAll()
+    {
+        return Company::all();
+    }
+
+    public function findById($id)
+    {
+        return Company::find($id);
     }
 }

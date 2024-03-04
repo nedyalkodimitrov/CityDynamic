@@ -3,23 +3,29 @@
 namespace App\Http\Controllers\Stations;
 
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\StationRepository;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
+
+    public function __construct(private StationRepository $stationRepository)
+    {
+    }
+
     public function showAllCompanies()
     {
         $user = auth()->user();
-        $station = $user->getStation;
-        $companies = $station->getCompanies;
+        $station = $this->stationRepository->getStationOfUser();
+        $companies = $this->stationRepository->getCompaniesOnStation($station);
         return view('stations.pages.companies.companies')->with('companies', $companies);
     }
 
     public function showCompany($id)
     {
         $user = auth()->user();
-        $station = $user->getStation;
-        $company = $station->getCompanies()->where("bus_company", $id)->first();
+        $station = $this->stationRepository->getStationOfUser();
+        $company = $this->stationRepository->getCompanyOnStation($station, $id);
         return view('stations.pages.companies.company')->with('company', $company);
     }
 
@@ -27,10 +33,9 @@ class CompanyController extends Controller
     public function showCompanyRequests()
     {
         $user = auth()->user();
-        $station = $user->getStation;
-        $companies = $station->getCompanyRequests()->get();
+        $station = $this->stationRepository->getStationOfUser();
 
-        return view('stations.pages.companies.companiesRequest')->with('companies', $companies);
+        return view('stations.pages.companies.companiesRequest')->with('companies', $station->getCompanyRequests);
     }
 
     public function showCompanyRequest($id)
@@ -39,7 +44,7 @@ class CompanyController extends Controller
         $user = auth()->user();
         $station = $user->getStation;
 
-        $company = $station->getCompanyRequests()->where("bus_company", $id)->first();
+        $company = $this->stationRepository->getRequestFromCompany($station, $id);
 
         return view('stations.pages.companies.companyRequest')->with("company", $company);
     }
@@ -48,21 +53,17 @@ class CompanyController extends Controller
     public function acceptCompanyRequest($id)
     {
         $user = auth()->user();
-        $station = $user->getStation;
-        $company = $station->getCompanyRequests()->where("bus_company", $id)->first();
-        $station->getCompanyRequests()->detach($company->id);
-        $station->getCompanies()->attach($company->id);
+        $station = $this->stationRepository->getStationOfUser();
+        $this->stationRepository->acceptCompanyRequest($station, $id);
 
         return redirect()->route("station.showCompanyRequests");
-//        return view('stations.companies.companyRequest');
     }
 
     public function declineCompanyRequest($id)
     {
         $user = auth()->user();
-        $station = $user->getStation;
-        $company = $station->getCompanyRequests()->where("bus_company", $id)->first();
-        $station->getCompanyRequests()->detach($company->id);
+        $station = $this->stationRepository->getStationOfUser();
+        $this->stationRepository->declineCompanyRequest($station, $id);
         return redirect()->route("station.showCompanyRequests");
 //        return view('stations.companies.companyRequest');
     }

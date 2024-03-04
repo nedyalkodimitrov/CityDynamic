@@ -3,22 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\BusRepository;
 use App\Models\Bus;
 use App\Models\Station;
 use Illuminate\Http\Request;
 
 class BusController extends Controller
 {
+
+
+    public function __construct(private BusRepository  $busRepository)
+    {
+    }
+
     public function showBuses()
     {
-        $buses = Bus::all();
-        foreach ($buses as $bus) {
-            $bus->busStations;
+        $buses = $this->busRepository->findAll();
 
-        }
-
-
-        return view('admin.pages.buses.buses');
+        return view('admin.pages.buses.buses',[
+            'buses' => $buses
+        ]);
     }
 
     public function showBus($id)

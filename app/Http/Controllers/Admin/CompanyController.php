@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\CompanyRepository;
+use App\Http\Repositories\UserRepository;
 use App\Http\Services\MediaService;
 use App\Models\Company;
 use App\Models\User;
@@ -10,25 +12,37 @@ use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
+
+
+    public function __construct(private CompanyRepository $companyRepository, private UserRepository $userRepository)
+    {
+    }
+
     public function showCompanies()
     {
-        $companies = Company::all();
-        return view('admin.pages.companies.companies')->with('companies', $companies);
+        $companies = $this->companyRepository->findAll();
+        return view('admin.pages.companies.companies',[
+            'companies' => $companies
+        ]);
     }
 
     public function showCompany($companyId)
     {
-        $users = User::all();
-        $company = Company::find($companyId);
-        return view('admin.pages.companies.company')->with('users', $users)->with('company', $company);
+        $users = $this->userRepository->findAll();
+        $company = $this->companyRepository->findById($companyId);
+        return view('admin.pages.companies.company',[
+            'users' => $users,
+            'company' => $company
+        ]);
     }
 
     public function showCompanyCreate()
     {
+        $users = $this->userRepository->findAll();
 
-        $users = User::all();
-
-        return view('admin.pages.companies.companyForm')->with('users', $users);
+        return view('admin.pages.companies.companyForm',[
+            'users' => $users
+        ]);
     }
 
 
@@ -36,9 +50,14 @@ class CompanyController extends Controller
     {
         $imageName = $mediaService->saveImage($request->image);
         $company = Company::create([
-            "name" => $request->name, "contactEmail" => $request->contactEmail, "contactPhone" => $request->contactPhone,
-            "contactAddress" => $request->contactAddress, "profilePhoto" => $imageName, "description" => $request->description,
-            "foundedAt" => $request->foundedAt, "description" => $request->description
+            "name" => $request->name,
+            "contactEmail" => $request->contactEmail,
+            "contactPhone" => $request->contactPhone,
+            "contactAddress" => $request->contactAddress,
+            "profilePhoto" => $imageName,
+            "description" => $request->description,
+            "foundedAt" => $request->foundedAt,
+            "description" => $request->description
         ]);
 
         $company->getEmplayees->attach($request->admin);
