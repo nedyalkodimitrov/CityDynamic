@@ -22,6 +22,7 @@ class DestinationRepository
     {
         return Destination::where('executiveCompany', $companyId)->get();
     }
+
     public function getDestinationIdsOfCompany($companyId)
     {
         return Destination::where('executiveCompany', $companyId)->get()->pluck('id');
@@ -36,6 +37,19 @@ class DestinationRepository
             array_push($tracks, $station);
         }
         return $tracks;
+    }
+
+
+    public function create($name, $firstStation, $lastStation, $company)
+    {
+        $destination = new Destination();
+
+        $destination->name = $name;
+        $destination->startBusStation = $firstStation;
+        $destination->endBusStation = $lastStation;
+        $destination->executiveCompany = $company->id;
+        $destination->save();
+        return $destination;
     }
 
 }

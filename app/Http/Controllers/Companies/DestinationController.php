@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Companies;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\BusRepository;
 use App\Http\Repositories\CompanyRepository;
+use App\Http\Repositories\DestinationPointRepository;
 use App\Http\Repositories\DestinationRepository;
 use App\Http\Repositories\StationRepository;
 use App\Models\DestinationPoint;
@@ -16,10 +17,11 @@ use function PHPUnit\Framework\exactly;
 
 class DestinationController extends Controller
 {
-    public function __construct(private CompanyRepository     $companyRepository,
-                                private DestinationRepository $destinationRepository,
-                                private BusRepository $busRepository,
-                                )
+    public function __construct(private CompanyRepository          $companyRepository,
+                                private DestinationRepository      $destinationRepository,
+                                private BusRepository              $busRepository,
+                                private DestinationPointRepository $destinationPointRepository
+    )
     {
     }
 
@@ -29,7 +31,7 @@ class DestinationController extends Controller
         $company = $this->companyRepository->getCompanyOfUser($user);
         $destinations = $this->destinationRepository->getDestinationsByCompany($company->id);
 
-        return view('companies.pages.destinations.destinations',[
+        return view('companies.pages.destinations.destinations', [
             "destinations" => $destinations,
         ]);
     }
@@ -46,11 +48,11 @@ class DestinationController extends Controller
         $connectedStations = $this->companyRepository->getConnectedStations($company);
 
         return view('companies.pages.destinations.destination',
-        [
-            "destination" => $destination,
-            "tracks" => $tracks,
-            "connectedStations" => $connectedStations
-        ]);
+            [
+                "destination" => $destination,
+                "tracks" => $tracks,
+                "connectedStations" => $connectedStations
+            ]);
     }
 
     public function showDestinationCreate()
@@ -61,9 +63,9 @@ class DestinationController extends Controller
 
 
         return view('companies.pages.destinations.destinationForm',
-        [
-            "busStations" => $busStations
-        ]);
+            [
+                "busStations" => $busStations
+            ]);
 
     }
 
@@ -72,51 +74,24 @@ class DestinationController extends Controller
     {
         $company = Auth::user()->getEmployers()->first();
 
-        $i = 1;
-        $stationFix = "station-" . $i;
-        $stations = [];
-        while (isset($request->$stationFix)) {
-            array_push($stations, $request->$stationFix);
-            $i++;
-            $stationFix = "station- " . $i;
-        }
+        $stations = $this->extractStationsFromRequest($request);
 
         $firstStation = $stations[0];
         $lastStation = $stations[count($stations) - 1];
-        $destination = new Destination();
-        $destination->name = "тест";
-        $destination->startBusStation = $firstStation;
-        $destination->endBusStation = $lastStation;
-        $destination->executiveCompany = $company->id;
-        $destination->save();
+        $destination = $this->destinationRepository->create($request->name, $firstStation, $lastStation, $company);
 
-        $order = 0;
-        $duration = 5;
-        $distance = 5;
-        $price = 2;
+        $order = 1;
         foreach ($stations as $station) {
-            $destinationPoint = new DestinationPoint();
-            $destinationPoint->destination = $destination->id;
-            $destinationPoint->station = $station;
-            $destinationPoint->order = $order;
-            $destinationPoint->duration = $duration;
-            $destinationPoint->distance = $distance;
-            $destinationPoint->price = $price;
-            $destinationPoint->save();
+            $this->destinationPointRepository->create($destination, $station, $order);
             $order++;
-            $duration += 5;
-            $price += 3;
-            $duration += 20;
         }
-
-
-        $destination->save();
 
         return redirect()->route('company.showDestinations');
     }
 
     public function editDestination($destinationId, Request $request)
     {
+        //todo refactor this to work with destination points
         $destination = Destination::find($destinationId);
         $destination->name = $request->name;
         $destination->startBusStation = $request->startBusStation;
@@ -128,11 +103,25 @@ class DestinationController extends Controller
 
     public function deleteDestination($destinationId)
     {
+        // todo can delete it if it has no courses
         $destination = Destination::find($destinationId);
         $destination->delete();
 
         return redirect()->route('showDestinations');
     }
+
+    private function extractStationsFromRequest($request){
+        $i = 1;
+        $stationFix = "station-" . $i;
+        $stations = [];
+        while (isset($request->$stationFix)) {
+            array_push($stations, $request->$stationFix);
+            $i++;
+            $stationFix = "station-" . $i;
+        }
+
+        return $stations;
+}
 
 
 }

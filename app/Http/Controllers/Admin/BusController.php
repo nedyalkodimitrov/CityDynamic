@@ -25,6 +25,7 @@ class BusController extends Controller
         ]);
     }
 
+
     public function showBus($id)
     {
         $bus = Bus::find($id);

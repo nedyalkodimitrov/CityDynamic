@@ -33,7 +33,7 @@ class CompanyRepository
 
     public function getConnectedStationsIds(Company $company): array
     {
-        return $company->getStations()->pluck('bus_stations.id')->toArray();
+        return $company->getStations()->pluck('stations.id')->toArray();
     }
 
     public function getDissociateStations(Company $company)
