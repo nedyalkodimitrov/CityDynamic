@@ -22,7 +22,7 @@
     <!-- MDB -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js" integrity="sha512-ec1IDrAZxPSKIe2wZpNhxoFIDjmqJ+Z5SGhbuXZrw+VheJu2MqqJfnYsCD8rf71sQfKYMF4JxNSnKCjDCZ/Hlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="{{asset("assets-admin/css/header.css")}}">
-    @yield("title")
+    @yield("style")
 </head>
 <body>
     @include("companies.layouts.head")

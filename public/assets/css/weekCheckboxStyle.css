@@ -1,0 +1,26 @@
+.weekday {
+    display: inline-block;
+    margin: 10px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.weekday input[type="checkbox"] {
+    display: none;
+}
+
+.weekday span {
+    display: inline-block;
+    width: 100%;
+}
+
+.weekday input[type="checkbox"]:checked + span {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 50%;
+}
