@@ -90,7 +90,7 @@
         <div class="col-6">
             <div class="col-11 p-2 mx-auto card">
                 <h3 class="text-center">Предстоящи курсове </h3>
-                <p><a href="">10</a></p>
+                <p><a href="">{{count($destination->getCourses)}}</a></p>
             </div>
         </div>
     </div>

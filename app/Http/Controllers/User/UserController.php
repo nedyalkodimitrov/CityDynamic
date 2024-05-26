@@ -10,6 +10,7 @@ use App\Models\City;
 use App\Models\Course;
 use App\Models\Destination;
 use App\Models\Order;
+use App\Models\ShoppingCart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,10 +22,18 @@ class UserController extends Controller
 
         $cities = City::all();
 
+        if (Auth::check()) {
+            $user = Auth::user();
+            $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
+
+        } else {
+            $items = [];
+        }
+
 
         $companies = Company::all();
         $destinations = Destination::all();
-        return view('user.pages.index')->with("destinations", $destinations)->with("itemsCount", 2)->with("companies", $companies)->with("cities", $cities);
+        return view('user.pages.index')->with("destinations", $destinations)->with("itemsCount", count($items))->with("companies", $companies)->with("cities", $cities);
     }
 
     public function getEndCities(Request $request)
@@ -51,15 +60,15 @@ class UserController extends Controller
 
     public function searchCourses(Request $request)
     {
-        $destinations = Destination::join('bus_stations as startBus', 'startBus.id', '=', 'startBusStation')
-            ->join('bus_stations as endBus', 'endBusStation', '=', 'endBus.id')
+        $destinations = Destination::join('stations as startBus', 'startBus.id', '=', 'startBusStation')
+            ->join('stations as endBus', 'endBusStation', '=', 'endBus.id')
             ->where("startBus.city", $request->startCity)
             ->where("endBus.city", $request->endCity)
             ->select("destinations.*")
             ->get();
 
- $destination = Destination::join('bus_stations as startBus', 'startBus.id', '=', 'startBusStation')
-            ->join('bus_stations as endBus', 'endBusStation', '=', 'endBus.id')
+        $destination = Destination::join('stations as startBus', 'startBus.id', '=', 'startBusStation')
+            ->join('stations as endBus', 'endBusStation', '=', 'endBus.id')
             ->where("startBus.city", $request->startCity)
             ->where("endBus.city", $request->endCity)
             ->select("destinations.*")
@@ -86,7 +95,6 @@ class UserController extends Controller
             }
 
 
-
         }
 
         $cities = City::all();
@@ -96,7 +104,7 @@ class UserController extends Controller
             ->with("courses", $courses)
             ->with("destination", $destination)
             ->with("itemsCount", count($items))
-            ->with("startCity", $request->startCity  )
+            ->with("startCity", $request->startCity)
             ->with("endCity", $request->endCity)
             ->with("cities", $cities)
             ->with("date", count($items));
@@ -117,12 +125,12 @@ class UserController extends Controller
         }
 
         $courses = $destination->getCourses;
-$cities = City::all();
+        $cities = City::all();
         return view('user.pages.courses.courses')
             ->with("courses", $courses)
             ->with("destination", $destination)
-            ->with("startCity", $destination->getBusStation->getCity->name  )
-            ->with("endCity", $destination->getLastBusStation->getCity->name)
+            ->with("startCity", $destination->getStartBusStation->getCity->name)
+            ->with("endCity", $destination->getEndBusStation->getCity->name)
             ->with("cities", $cities)
             ->with("date", count($items))
             ->with("itemsCount", count($items));
@@ -249,8 +257,8 @@ $cities = City::all();
     }
 
 
-
-    public function showCoursesFormView(Request $request){
+    public function showCoursesFormView(Request $request)
+    {
         $user = Auth::user();
 
         if (Auth::check()) {
@@ -262,7 +270,7 @@ $cities = City::all();
 
         $cities = City::all();
         return view('user.pages.courses.courses')
-            ->with("startCity",null  )
+            ->with("startCity", null)
             ->with("endCity", null)
             ->with("cities", $cities)
             ->with("date", null)
@@ -270,12 +278,21 @@ $cities = City::all();
     }
 
 
-    public function showCompanies(){
+    public function showCompanies()
+    {
         $companies = Company::all();
 
+        if (Auth::check()) {
+            $user = Auth::user();
+            $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
+
+        } else {
+            $items = [];
+        }
 
         return view('user.pages.companies.companies')
-            ->with("companies", $companies  );
+            ->with("companies", $companies)
+            ->with("itemsCount", count($items));
 
 
     }

@@ -32,7 +32,12 @@ class Course extends Model
     }
 
 
-    public function getTickets(){
-        return $this->hasMany(Ticket::class, "course", "id");
+    public function getTicket(){
+        return $this->hasOne(Ticket::class, "course", "id");
+    }
+
+    public function getDestination()
+    {
+        return $this->belongsTo(Destination::class, "destination", "id");
     }
 }

@@ -139,3 +139,7 @@ Route::post('/getEndCities', [\App\Http\Controllers\User\UserController::class, 
 Route::get('/courses', [\App\Http\Controllers\User\UserController::class, 'searchCourses'])->name('user.shoeCourseFormView');
 Route::post('/courses', [\App\Http\Controllers\User\UserController::class, 'searchCourses'])->name('user.searchCourses');
 Route::get('/companies', [\App\Http\Controllers\User\UserController::class, 'showCompanies'])->name('user.showCompanies');
+
+Route::post('/setSeatStatus/{busId}', [\App\Http\Controllers\Controller::class, 'setSeatsStatus']);
+
+

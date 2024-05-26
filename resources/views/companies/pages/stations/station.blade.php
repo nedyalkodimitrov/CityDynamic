@@ -66,7 +66,7 @@
         @foreach($station->getCompanies as $company)
             <div class="col-12 col-md-4 col-lg-3 ">
                 <div class="card col-11 mx-auto" style="height: 100%">
-                    <img style="width: 100%; height: 100%; object-fit:contain" src="{{asset("assets/images/".$company->image)}}" alt="">
+                    <img style="width: 100%; height: 100%; object-fit:contain" src="{{asset("assets/images/".$company->profilePhoto)}}" alt="">
                     <p class="text-center" style="font-size: 1em">{{$company->name}}</p>
                 </div>
             </div>

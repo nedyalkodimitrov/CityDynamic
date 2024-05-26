@@ -47,4 +47,7 @@ class CourseRepository
         return Course::whereIn('destination', $destinationIds)->get();
     }
 
+
+
+
 }

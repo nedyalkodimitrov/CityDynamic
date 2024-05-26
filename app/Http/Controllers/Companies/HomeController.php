@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\CompanyRepository;
+use App\Http\Repositories\CourseRepository;
 use App\Http\Repositories\DestinationRepository;
 use Illuminate\Support\Facades\Auth;
+use function PHPUnit\Framework\exactly;
 
 class HomeController extends Controller
 {
 
-    public function __construct(private CompanyRepository $companyRepository, private DestinationRepository $destinationRepository)
+    public function __construct(private CompanyRepository $companyRepository, private DestinationRepository $destinationRepository, private CourseRepository $courseRepository)
     {
     }
 
@@ -19,19 +21,17 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $company = $this->companyRepository->getCompanyOfUser($user);
-        $destinationIds = $this->destinationRepository->getDestinationIdsOfCompany($company);
+        $destinationIds = $this->destinationRepository->getDestinationIdsOfCompany($company->id);
 
         $destinationCount = count($destinationIds);
-//        $coursesCount = Course::whereIn("destination", $destinationIds)->count();
-        //get sold tickets count
-//        $courseIds = Course::whereIn("destination", $destinationIds)->pluck("id");
-//        $ticketIds = Ticket::whereIn("course", $courseIds)->pluck("id");
+
+        $courses = $this->courseRepository->getCoursesByDestinationIds($destinationIds);
 
         return view('companies.pages.index', [
             "destinationCount" => $destinationCount,
-            "courseCount" => 0,
+            "courseCount" => count($courses ),
             "soldTickets" => 0,
-            "courses" => []
+            "courses" => $courses
         ]);
     }
 

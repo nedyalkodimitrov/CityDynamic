@@ -63,20 +63,21 @@
           <table class="table">
               <thead>
               <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Име</th>
+                  <th scope="col"></th>
+                  <th scope="col">По тестинация</th>
                   <th scope="col">Начална точка</th>
                   <th scope="col">Крайна точка</th>
                   <th scope="col">Заминаване</th>
               </tr>
               </thead>
               <tbody>
+
               @foreach($courses as $course)
                   <tr>
-                      <th scope="row">1</th>
+                      <th scope="row"></th>
                       <td>{{$course->getDestination->name}}</td>
-                      <td>{{$course->getDestination->getBusStation->name}}</td>
-{{--                      <td>{{$course->getDestination->getEndBusStation->name}}</td>--}}
+                      <td>{{$course->getDestination->getStartBusStation->name}}</td>
+                      <td>{{$course->getDestination->getEndBusStation->name}}</td>
                       <td>{{$course->startTime}} {{$course->date}}</td>
                   </tr>
 

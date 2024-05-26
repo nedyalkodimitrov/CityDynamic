@@ -145,12 +145,8 @@
                             <p class="col-6 text-start"
                                style="font-size: 1.1em">
 
-                            @foreach(\App\Http\Services\DestinationService::getAllPoints($destination) as $point )
-                               @if($point["isStartPoint"])
-                                    {{$point["station"]->name}}
-                                  @else
-                                     -  {{$point["station"]->name}}
-                              @endif
+                            @foreach($course->getDestination->getPoints as $point )
+                                    {{$point->getStation->name}} |
                             @endforeach
 
                                     </p>
@@ -160,14 +156,14 @@
                                     <b>{{\Carbon\Carbon::parse($course->startTime)->format("H:i") }}
                                     - {{\Carbon\Carbon::parse($course->endTime)->format("H:i")}}</b>
 
-
-                            </p>
-                            <p class="col-12 col-md-2 p-0 m-0" style="  ">
-                                {{\App\Http\Services\DestinationService::getTimeFromPointTillEnd($destination)}}
                                 <i class="fas fa-clock"></i>
-                                {{--                            {{$course->endTime -$course->startTime }}--}}
-
                             </p>
+{{--                            <p class="col-12 col-md-2 p-0 m-0" style="  ">--}}
+{{--                                {{\App\Http\Services\DestinationService::getTimeFromPointTillEnd($destination)}}--}}
+{{--                               --}}
+{{--                                --}}{{--                            {{$course->endTime -$course->startTime }}--}}
+
+{{--                            </p>--}}
                             {{--                        <p class="col-12 col-md-2 p-0 m-0" style="align-self: center">--}}
                             {{--                            Пристигане:<br>  <i class="fas fa-clock"></i></p>--}}
 
@@ -175,7 +171,7 @@
                                 {{$course->getBus->model}} {{$course->getBus->name}} ({{$course->getBus->seats}})
                             </p>
                             <p class="col-12 col-md-2 p-0 m-0" style="align-self: center">
-                                <b style="font-size: 1.3em">{{\App\Http\Services\DestinationService::getPriceFromPointTillEnd($destination)}} лв.</b>
+                                <b style="font-size: 1.3em">{{$course->getTicket->price}} лв.</b>
                             </p>
                             <a href="{{route("user.showCourse", ["id"=>$course->id])}}" style="align-self: center"
                                class="btn btn-primary col-12 col-md-3">Резервирай</a>

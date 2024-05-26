@@ -11,8 +11,8 @@
     <div class="card col-11 col-md-9 col-lg-7 mx-auto mt-5">
         <div class="card-title">
             <h3 class="pt-3 text-center">
-                {{$course->getDestination->getBusStation->getCity->name}}
-                - {{$course->getDestination->getLastBusStation->getCity->name}}
+                {{$course->getDestination->getStartBusStation->getCity->name}}
+                - {{$course->getDestination->getEndBusStation->getCity->name}}
             </h3>
             <p class="col-12  p-0 m-0 text-center" style="align-self: center"><b>{{$course->date}} <i
                         class="fas fa-calendar"></i></b></p>
@@ -26,7 +26,7 @@
             <p class="col-12    p-0 m-0 " style="align-self: center"><b>Превозващ автобус:</b> {{$course->getBus->name}}
                 ({{$course->getBus->model}}) - {{$course->getBus->seats}} места </p>
             <p class="col-12  p-0 m-0" style="align-self: center">
-                <b>Компания:</b> {{$course->getDestination->getCompany->name}} </p>
+                <b>Компания:</b> {{$course->getDestination->getExecutiveCompany->name}} </p>
             <p class="col-12  p-0 m-0" style="align-self: center"><b>Цена:</b> {{$course->getTicket->price}} лв.</p>
 
             <div class="mt-1 row justify-content-center col-12">

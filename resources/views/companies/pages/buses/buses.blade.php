@@ -14,7 +14,7 @@
         <table class="table ">
             <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col"></th>
                 <th scope="col">Име</th>
                 <th scope="col">Модел</th>
                 <th scope="col">Места</th>
@@ -24,7 +24,7 @@
             <tbody>
             @forelse($buses as $bus)
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row"></th>
                     <td>{{$bus->name}}</td>
                     <td>{{$bus->model}}</td>
                     <td>{{$bus->seats}}</td>

@@ -10,7 +10,7 @@
         <div class="card-body ">
             <div class="card-title row justify-content-between">
                 <div class="mx-auto row">
-                    <img style="width: 200px; " class="mx-auto" src="{{asset("assets/images/".$company->image)}}"
+                    <img style="width: 200px; " class="mx-auto" src="{{asset("assets/images/".$company->profilePhoto)}}"
                          alt="">
                 </div>
                 <h4 class="col text-center">{{$company->name}} </h4>

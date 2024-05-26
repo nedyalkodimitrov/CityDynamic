@@ -37,7 +37,7 @@ class Company extends Model
 
     public function getStationConnectionRequests()
     {
-        return $this->belongsToMany(Station::class, "companies_stations_connection_request", "company", "station");
+        return $this->belongsToMany(Station::class, "companies_stations_connection_requests", "company", "station");
     }
 
 

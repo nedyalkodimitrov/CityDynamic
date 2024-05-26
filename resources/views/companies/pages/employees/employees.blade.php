@@ -21,7 +21,7 @@
         <table class="table ">
             <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col"></th>
                 <th scope="col">Име</th>
                 <th scope="col">Роля</th>
                 <th scope="col">Действие</th>
@@ -30,7 +30,7 @@
             <tbody>
             @forelse($employees as $employee)
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row"></th>
                     <td>{{$employee->name}}</td>
                     <td>{{$employee->getRoleNames()[0]}}</td>
                     <td><i class="fa fa-pen"></i></td>

@@ -40,6 +40,7 @@ class DestinationService
 
             array_push($points, ["station" => $nextDestination->getBusStation, "isStartPoint" => false, "isEndPoint" => false]);
         }
+
         return $points;
     }
     public static function getPriceFromPointTillEnd($destination){

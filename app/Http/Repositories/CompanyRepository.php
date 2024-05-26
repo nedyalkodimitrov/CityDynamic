@@ -44,12 +44,12 @@ class CompanyRepository
 
     public function checkIfThereIsRequestToThisStation(Company $company, Station $station): bool
     {
-        return count($company->getRequestedStations()->where('bus_station', $station->id)->get()) > 0;
+        return count($company->getStationConnectionRequests()->where('station', $station->id)->get()) > 0;
     }
 
     public function checkIfStationIsConnected(Company $company, Station $station): bool
     {
-        return count($company->getStations()->where('bus_station', $station->id)->get()) > 0;
+        return count($company->getStations()->where('station', $station->id)->get()) > 0;
     }
 
     public function makeRequestToStation(Company $company, Station $station)

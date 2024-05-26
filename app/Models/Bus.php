@@ -14,7 +14,9 @@ class Bus extends Model
         'name',
         'model',
         'seats',
-        'busCompany',
+        'seatsPerRow',
+        'seatsStatus',
+        'company',
     ];
     public function getCompany()
     {

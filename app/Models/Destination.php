@@ -34,7 +34,7 @@ class Destination extends Model
     public function getTickets(){
         return $this->hasMany(Ticket::class, "destination", "id");
     }
-    public function getCourse(){
+    public function getCourses(){
         return $this->hasMany(Course::class, "destination", "id");
     }
     public function getSchedules(){

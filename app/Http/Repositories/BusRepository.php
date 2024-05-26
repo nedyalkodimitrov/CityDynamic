@@ -26,13 +26,16 @@ class BusRepository
 
     }
 
-    public function create($name, $model, $seats, $busCompany)
+    public function create($name, $model, $seats,$seatsPerRow, $busCompany)
     {
+
         return Bus::create([
             'name' => $name,
             'model' => $model,
             'seats' => $seats,
-            'busCompany' => $busCompany
+            'seatsPerRow' => $seatsPerRow,
+            'seatsStatus' => json_encode(array_fill(0, $seats, 0)),
+            'company' => $busCompany
         ]);
     }
 

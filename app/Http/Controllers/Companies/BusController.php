@@ -66,7 +66,7 @@ class BusController extends Controller
         $request->validated();
         $user = Auth::user();
         $company = $this->companyRepository->getCompanyOfUser($user);
-        $this->busRepository->create($request->name, $request->model, $request->seats, $company->id);
+        $this->busRepository->create($request->name, $request->model, $request->seats,$request->seatsPerRow, $company->id);
 
         return redirect()->route('company.showBuses');
 

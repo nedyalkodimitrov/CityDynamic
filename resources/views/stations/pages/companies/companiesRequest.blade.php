@@ -13,7 +13,7 @@
             <div class="card col-12 row" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <img style="width: 100%" src="{{asset("assets/images/".$company->image)}}" alt="">
+                        <img style="width: 100%" src="{{asset("assets/images/".$company->profilePhoto)}}" alt="">
 {{--                        {{$company->name}}--}}
                     </h5>
                     <p class="text-center">{{$company->name}}</p>

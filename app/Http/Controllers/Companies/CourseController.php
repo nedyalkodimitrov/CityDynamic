@@ -71,7 +71,7 @@ class CourseController extends Controller
     {
         $request->validated();
 
-        $this->courseRepository->create($request->destination, $request->bus, $request->date, $request->startTime, $request->endTime);
+        $course = $this->courseRepository->create($request->destination, $request->bus, $request->date, $request->startTime, $request->endTime);
 
 
         $ticket = new Ticket();
@@ -89,7 +89,7 @@ class CourseController extends Controller
             $request->date, $request->startTime, $request->endTime);
 
 
-        $ticket = $course->getTicket;
+        $ticket = Course::find($courseId)->getTicket;
         $ticket->price = $request->price;
         $ticket->save();
         return redirect()->back();

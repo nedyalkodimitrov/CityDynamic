@@ -16,7 +16,7 @@
         <table class="table ">
             <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col"></th>
                 <th scope="col">Име</th>
                 <th scope="col">Начална точка</th>
                 <th scope="col">Крайна точка</th>
@@ -26,7 +26,7 @@
             <tbody>
             @forelse($destinations as $destination)
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row"></th>
                     <td>{{$destination->name}}</td>
                     <td>{{$destination->getStartBusStation()->first()->name}} </td>
                     <td>{{$destination->getEndBusStation()->first()->name}} </td>
