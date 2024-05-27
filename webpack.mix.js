@@ -63,7 +63,6 @@ const folder = {
             {"name": "leaflet", "assets": ["./node_modules/leaflet/dist/leaflet.js", "./node_modules/leaflet/dist/leaflet.css"]},
             {"name": "bootstrap-filestyle2", "assets": ["./node_modules/bootstrap-filestyle2/src/bootstrap-filestyle.min.js"]},
             {"name": "echarts", "assets": ["./node_modules/echarts/dist/echarts.min.js"]},
-            {"name": "owl.carousel", "assets": ["./node_modules/owl.carousel/dist/owl.carousel.min.js", "./node_modules/owl.carousel/dist/assets-admin/owl.carousel.min.css","./node_modules/owl.carousel/dist/assets-admin/owl.theme.default.min.css"]},
             {"name": "toastr", "assets": ["./node_modules/toastr/build/toastr.min.js", "./node_modules/toastr/build/toastr.min.css"]},
             {"name": "rwd-table", "assets": ["./node_modules/admin-resources/rwd-table/rwd-table.min.js", "./node_modules/admin-resources/rwd-table/rwd-table.min.css"]},
             {"name": "bootstrap-editable", "assets": ["./node_modules/bootstrap-editable/js/index.js", "./node_modules/bootstrap-editable/css/bootstrap-editable.css"]},
@@ -170,61 +169,7 @@ const folder = {
     //copying demo pages related assets-admin
     var app_pages_assets = {
         js: [
-            folder.src + "js/pages/apexcharts.init.js",
-            folder.src + "js/pages/auth-2-carousel.init.js",
-            folder.src + "js/pages/calendars-full.init.js",
-            folder.src + "js/pages/calendar.init.js",
-            folder.src + "js/pages/chartjs.init.js",
-            folder.src + "js/pages/coming-soon.init.js",
-            folder.src + "js/pages/crypto-dashboard.init.js",
-            folder.src + "js/pages/crypto-exchange.init.js",
-            folder.src + "js/pages/crypto-kyc-app.init.js",
-            folder.src + "js/pages/crypto-orders.init.js",
-            folder.src + "js/pages/crypto-wallet.init.js",
-            folder.src + "js/pages/dashboard.init.js",
-            folder.src + "js/pages/dashboard-blog.init.js",
-            folder.src + "js/pages/datatables.init.js",
-            folder.src + "js/pages/echarts.init.js",
-            folder.src + "js/pages/ecommerce-cart.init.js",
-            folder.src + "js/pages/ecommerce-select2.init.js",
-            folder.src + "js/pages/email-editor.init.js",
-            folder.src + "js/pages/file-manager.init.js",
-            folder.src + "js/pages/flot.init.js",
-            folder.src + "js/pages/fontawesome.init.js",
-            folder.src + "js/pages/form-advanced.init.js",
-            folder.src + "js/pages/form-editor.init.js",
-            folder.src + "js/pages/form-mask.init.js",
-            folder.src + "js/pages/form-repeater.int.js",
-            folder.src + "js/pages/form-validation.init.js",
-            folder.src + "js/pages/form-wizard.init.js",
-            folder.src + "js/pages/form-xeditable.init.js",
-            folder.src + "js/pages/gmaps.init.js",
-            folder.src + "js/pages/ico-landing.init.js",
-            folder.src + "js/pages/jquery-knob.init.js",
-            folder.src + "js/pages/leaflet-map.init.js",
-            folder.src + "js/pages/lightbox.init.js",
-            folder.src + "js/pages/materialdesign.init.js",
-            folder.src + "js/pages/product-filter-range.init.js",
-            folder.src + "js/pages/profile.init.js",
-            folder.src + "js/pages/project-overview.init.js",
-            folder.src + "js/pages/range-sliders.init.js",
-            folder.src + "js/pages/rating-init.js",
-            folder.src + "js/pages/saas-dashboard.init.js",
-            folder.src + "js/pages/session-timeout.init.js",
-            folder.src + "js/pages/sparklines.init.js",
-            folder.src + "js/pages/sweet-alerts.init.js",
-            folder.src + "js/pages/table-editable.int.js",
-            folder.src + "js/pages/table-responsive.init.js",
-            folder.src + "js/pages/task-create.init.js",
-            folder.src + "js/pages/task-form.init.js",
-            folder.src + "js/pages/task-kanban.init.js",
-            folder.src + "js/pages/tasklist.init.js",
-            folder.src + "js/pages/timeline.init.js",
-            folder.src + "js/pages/toastr.init.js",
-            folder.src + "js/pages/tui-charts.init.js",
-            folder.src + "js/pages/two-step-verification.init.js",
-            folder.src + "js/pages/validation.init.js",
-            folder.src + "js/pages/vector-maps.init.js"
+
         ]
     };
 
@@ -238,6 +183,3 @@ const folder = {
     mix.combine('resources/css/main.css', folder.dist_assets + "css/main.css");
     mix.combine('resources/js/main.js', folder.dist_assets + "js/main.js");
     mix.combine('resources/js/app.js', folder.dist_assets + "js/app.min.js");
-    mix.combine('resources/js/pages/calendars.js', folder.dist_assets + "js/pages/calendars.js");
-    mix.combine('resources/js/pages/schedules.js', folder.dist_assets + "js/pages/schedules.js");
-    mix.combine('resources/js/pages/leaflet-us-states.js', folder.dist_assets + "js/pages/leaflet-us-states.js");
