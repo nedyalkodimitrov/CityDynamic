@@ -16,10 +16,10 @@
         "laravel/ui": "^3.3",
         "livewire/livewire": "^2.12",
         "picqer/php-barcode-generator": "^2.2",
+        "pusher/pusher-php-server": "^7.2",
         "spatie/laravel-permission": "^5.9",
         "stripe/stripe-php": "^7.114",
-        "tymon/jwt-auth": "^2.0",
-        "ext-http": "*"
+        "tymon/jwt-auth": "^2.0"
     },
     "require-dev": {
         "beyondcode/laravel-er-diagram-generator": "^2.0",
