@@ -1,50 +1,30 @@
 function generateSeats(totalSeats, seatsPerRow) {
-    var container = document.getElementById('bus-seats');
-    var rows = Math.ceil(totalSeats / seatsPerRow);
+    let container = document.getElementById('bus-seats');
+    let rows = Math.ceil(totalSeats / seatsPerRow);
 
-    // Create a flex container to hold the driver's seat and the seats
-    var flexContainer = document.createElement('div');
-    flexContainer.style.display = 'flex';
-    flexContainer.style.flexDirection = 'column-reverse';
-    flexContainer.style.border = '1px solid black';
+    let flexContainer = createFlexContainer();
     container.innerHTML = '';
     container.appendChild(flexContainer);
 
-    // // Create a driver seat at the beginning
-    // var driverSeat = document.createElement('div');
-    // driverSeat.style.width = '20px';
-    // driverSeat.style.height = '20px';
-    // driverSeat.style.margin = '2px';
-    // driverSeat.style.backgroundColor = 'red'; // Driver seat color
-    // flexContainer.appendChild(driverSeat);
-
-    // Create a flex container to hold the rows (now acting as columns)
-    var seatsContainer = document.createElement('div');
+    let seatsContainer = document.createElement('div');
     seatsContainer.style.display = 'flex';
     flexContainer.appendChild(seatsContainer);
 
-    var seatNumber = 1;
+    let seatNumber = 1;
 
-    for (var i = 0; i < rows; i++) {
-        var column = document.createElement('div');
+    for (let i = 0; i < rows; i++) {
+        let column = document.createElement('div');
         column.style.display = 'flex';
         column.style.flexDirection = 'column';
 
-        var seatsInThisRow = Math.min(seatsPerRow, totalSeats - i * seatsPerRow);
+        let seatsInThisRow = Math.min(seatsPerRow, totalSeats - i * seatsPerRow);
 
-        for (var j = 0; j < seatsInThisRow; j++) {
-            var seat = document.createElement('div');
-            seat.style.width = '30px';
-            seat.style.height = '30px';
-            seat.style.margin = '2px';
-
-            seat.style.border = '1px solid black';
-            seat.style.textAlign = 'center';
-            seat.style.verticalAlign = 'center';
+        for (let j = 0; j < seatsInThisRow; j++) {
+            let seat = createSeat();
 
 
             // Add seat number
-            var seatText = document.createTextNode(seatNumber.toString());
+            let seatText = document.createTextNode(seatNumber.toString());
             seat.appendChild(seatText);
 
             column.appendChild(seat);
@@ -52,15 +32,84 @@ function generateSeats(totalSeats, seatsPerRow) {
 
             // Add a corridor after half the seats in a row
             if (j === Math.floor(seatsPerRow / 2) - 1) {
-                var corridor = document.createElement('div');
-                corridor.style.width = '20px';
-                corridor.style.height = '20px';
-                corridor.style.margin = '2px';
-                corridor.style.backgroundColor = 'white'; // Corridor color
-                column.appendChild(corridor);
+
+                column.appendChild(createCorridor());
             }
         }
 
         seatsContainer.appendChild(column);
     }
+}
+
+function generateBusSeatsWithStatuses(totalSeats, seatsPerRow, seatStatuses) {
+    let container = document.getElementById('bus-seats');
+    let rows = Math.ceil(totalSeats / seatsPerRow);
+
+    let flexContainer = createFlexContainer();
+    container.innerHTML = '';
+    container.appendChild(flexContainer);
+
+    let seatsContainer = document.createElement('div');
+    seatsContainer.style.display = 'flex';
+    flexContainer.appendChild(seatsContainer);
+
+    let seatNumber = 1;
+
+    for (let i = 0; i < rows; i++) {
+        let column = document.createElement('div');
+        column.style.display = 'flex';
+        column.style.flexDirection = 'column';
+
+        let seatsInThisRow = Math.min(seatsPerRow, totalSeats - i * seatsPerRow);
+
+        for (let j = 0; j < seatsInThisRow; j++) {
+            let seat = createSeat();
+
+            // Check the seat status and change the background color accordingly
+            if (seatStatuses[seatNumber - 1] === 1) {
+                seat.style.backgroundColor = 'red';
+            }
+
+            let seatText = document.createTextNode(seatNumber.toString());
+            seat.appendChild(seatText);
+
+            column.appendChild(seat);
+            seatNumber++;
+
+            if (j === Math.floor(seatsPerRow / 2) - 1) {
+                column.appendChild(createCorridor());
+            }
+        }
+
+        seatsContainer.appendChild(column);
+    }
+}
+
+
+function createCorridor() {
+    let corridor = document.createElement('div');
+    corridor.style.width = '20px';
+    corridor.style.height = '20px';
+    corridor.style.margin = '2px';
+    corridor.style.backgroundColor = 'white';
+    return corridor;
+}
+
+function createSeat() {
+    let seat = document.createElement('div');
+    seat.style.width = '30px';
+    seat.style.height = '30px';
+    seat.style.margin = '2px';
+    seat.style.border = '1px solid black';
+    seat.style.textAlign = 'center';
+    seat.style.verticalAlign = 'center';
+    return seat;
+}
+
+function createFlexContainer() {
+    let flexContainer = document.createElement('div');
+    flexContainer.style.display = 'flex';
+    flexContainer.style.flexDirection = 'column-reverse';
+    flexContainer.style.border = '1px solid black';
+    return flexContainer;
 }
