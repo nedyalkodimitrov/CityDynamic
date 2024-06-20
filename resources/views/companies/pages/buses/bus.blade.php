@@ -54,5 +54,17 @@
             generateSeats(seats.value, seatsPerRow.value);
         });
     </script>
+
+
+
+
+    <script>
+
+
+        Echo.private('bus.4')
+            .listen('SeatsStatusEvent', (e) => {
+                alert(e.message);
+            });
+    </script>
 @endsection
 
