@@ -28,7 +28,7 @@ class TicketController extends Controller
         return view('admin.pages.ticket.ticketEdit');
     }
 
-    public function createTicket(){
+    public function createTicket(Request $request){
         $ticket = new \App\Models\Ticket();
         $ticket->course = $request->course;
         $ticket->price = $request->price;

@@ -55,7 +55,6 @@ class CompanyController extends Controller
             "contactPhone" => $request->contactPhone,
             "contactAddress" => $request->contactAddress,
             "profilePhoto" => $imageName,
-            "description" => $request->description,
             "foundedAt" => $request->foundedAt,
             "description" => $request->description
         ]);
