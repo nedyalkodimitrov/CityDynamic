@@ -9,7 +9,7 @@ class Course extends Model
 {
     use HasFactory;
 
-    protected  $fillable = [
+    protected $fillable = [
         'destination',
         'bus',
         'date',
@@ -17,27 +17,29 @@ class Course extends Model
         'endTime',
 
     ];
+
     public function getBus()
     {
-        return $this->belongsTo(Bus::class, "bus", "id");
+        return $this->belongsTo(Bus::class, 'bus', 'id');
     }
+
     public function getDriver()
     {
-        return $this->belongsTo(CompanyEmployee::class, "driver", "id");
+        return $this->belongsTo(CompanyEmployee::class, 'driver', 'id');
     }
 
     public function getLastPoint()
     {
-        return $this->belongsTo(DestinationPoint::class, "point", "id");
+        return $this->belongsTo(DestinationPoint::class, 'point', 'id');
     }
 
-
-    public function getTicket(){
-        return $this->hasOne(Ticket::class, "course", "id");
+    public function getTicket()
+    {
+        return $this->hasOne(Ticket::class, 'course', 'id');
     }
 
     public function getDestination()
     {
-        return $this->belongsTo(Destination::class, "destination", "id");
+        return $this->belongsTo(Destination::class, 'destination', 'id');
     }
 }

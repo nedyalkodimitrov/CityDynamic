@@ -29,7 +29,7 @@ class CreateCourseRequest extends FormRequest
             'date' => 'required',
             'startTime' => 'required',
             'endTime' => 'required',
-            'price' => 'required'
+            'price' => 'required',
         ];
     }
 }

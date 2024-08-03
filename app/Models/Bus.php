@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bus extends Model
 {
     use HasFactory;
+
     public $timestamps = false;
 
     protected $fillable = [
@@ -18,13 +19,14 @@ class Bus extends Model
         'seatsStatus',
         'company',
     ];
+
     public function getCompany()
     {
-        return $this->belongsTo(Company::class, "busCompany", "id");
+        return $this->belongsTo(Company::class, 'busCompany', 'id');
     }
 
     public function getDriver()
     {
-        return $this->belongsTo(CompanyEmployee::class, "driver", "id");
+        return $this->belongsTo(CompanyEmployee::class, 'driver', 'id');
     }
 }

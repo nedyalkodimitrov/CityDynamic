@@ -11,6 +11,6 @@ class CompanyEmployee extends Model
 
     public function getCompany()
     {
-        return $this->belongsTo(Company::class, "company", "id");
+        return $this->belongsTo(Company::class, 'company', 'id');
     }
 }

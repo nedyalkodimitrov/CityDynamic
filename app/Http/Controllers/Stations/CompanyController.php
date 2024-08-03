@@ -4,20 +4,17 @@ namespace App\Http\Controllers\Stations;
 
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\StationRepository;
-use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
-
-    public function __construct(private StationRepository $stationRepository)
-    {
-    }
+    public function __construct(private StationRepository $stationRepository) {}
 
     public function showAllCompanies()
     {
         $user = auth()->user();
         $station = $this->stationRepository->getStationOfUser();
         $companies = $this->stationRepository->getCompaniesOnStation($station);
+
         return view('stations.pages.companies.companies')->with('companies', $companies);
     }
 
@@ -26,9 +23,9 @@ class CompanyController extends Controller
         $user = auth()->user();
         $station = $this->stationRepository->getStationOfUser();
         $company = $this->stationRepository->getCompanyOnStation($station, $id);
+
         return view('stations.pages.companies.company')->with('company', $company);
     }
-
 
     public function showCompanyRequests()
     {
@@ -46,9 +43,8 @@ class CompanyController extends Controller
 
         $company = $this->stationRepository->getRequestFromCompany($station, $id);
 
-        return view('stations.pages.companies.companyRequest')->with("company", $company);
+        return view('stations.pages.companies.companyRequest')->with('company', $company);
     }
-
 
     public function acceptCompanyRequest($id)
     {
@@ -56,7 +52,7 @@ class CompanyController extends Controller
         $station = $this->stationRepository->getStationOfUser();
         $this->stationRepository->acceptCompanyRequest($station, $id);
 
-        return redirect()->route("station.showCompanyRequests");
+        return redirect()->route('station.showCompanyRequests');
     }
 
     public function declineCompanyRequest($id)
@@ -64,7 +60,8 @@ class CompanyController extends Controller
         $user = auth()->user();
         $station = $this->stationRepository->getStationOfUser();
         $this->stationRepository->declineCompanyRequest($station, $id);
-        return redirect()->route("station.showCompanyRequests");
-//        return view('stations.companies.companyRequest');
+
+        return redirect()->route('station.showCompanyRequests');
+        //        return view('stations.companies.companyRequest');
     }
 }

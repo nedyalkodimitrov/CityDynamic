@@ -8,19 +8,12 @@ use App\Http\Repositories\CompanyRepository;
 use App\Http\Repositories\StationRepository;
 use App\Http\Requests\CreateBusRequest;
 use App\Http\Requests\EditBusRequest;
-use App\Models\Bus;
-use App\Models\Station;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PHPUnit\Framework\Attributes\UsesClass;
 
 class BusController extends Controller
 {
     public function __construct(private CompanyRepository $companyRepository,
-                                private BusRepository $busRepository, private StationRepository $stationRepository)
-    {
-
-    }
+        private BusRepository $busRepository, private StationRepository $stationRepository) {}
 
     public function showBuses()
     {
@@ -29,7 +22,7 @@ class BusController extends Controller
         $buses = $company->getBuses;
 
         return view('companies.pages.buses.buses', [
-            "buses" => $buses,
+            'buses' => $buses,
         ]);
     }
 
@@ -38,7 +31,7 @@ class BusController extends Controller
         $bus = $this->busRepository->findById($id);
 
         return view('companies.pages.buses.bus', [
-            "bus" => $bus,
+            'bus' => $bus,
         ]);
     }
 
@@ -53,20 +46,20 @@ class BusController extends Controller
 
         $bus = $this->busRepository->findById($busId);
         $busStations = $this->stationRepository->findAll();
+
         return view('companies.pages.buses.busEdit', [
-                "bus" => $bus,
-                "busStations" => $busStations
-            ]
+            'bus' => $bus,
+            'busStations' => $busStations,
+        ]
         );
     }
-
 
     public function createBus(CreateBusRequest $request)
     {
         $request->validated();
         $user = Auth::user();
         $company = $this->companyRepository->getCompanyOfUser($user);
-        $this->busRepository->create($request->name, $request->model, $request->seats,$request->seatsPerRow, $company->id);
+        $this->busRepository->create($request->name, $request->model, $request->seats, $request->seatsPerRow, $company->id);
 
         return redirect()->route('company.showBuses');
 

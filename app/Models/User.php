@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,7 +10,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -22,8 +21,8 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
-//        'dob',
-//        'avatar',
+        //        'dob',
+        //        'avatar',
     ];
 
     /**
@@ -45,7 +44,6 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-
     public function getJWTIdentifier()
     {
         // TODO: Implement getJWTIdentifier() method.
@@ -58,22 +56,23 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-
     public function getCompany()
     {
         return $this->hasOne(Company::class, 'admin', 'id');
     }
+
     public function getStation()
     {
         return $this->hasOne(Station::class, 'admin', 'id');
     }
 
-    public function getOrders(){
-        return $this->hasMany(Order::class, "user");
+    public function getOrders()
+    {
+        return $this->hasMany(Order::class, 'user');
     }
 
-    public function getEmployers(){
-        return $this->belongsToMany(Company::class, "company_employees", "user", "company");
+    public function getEmployers()
+    {
+        return $this->belongsToMany(Company::class, 'company_employees', 'user', 'company');
     }
-
 }

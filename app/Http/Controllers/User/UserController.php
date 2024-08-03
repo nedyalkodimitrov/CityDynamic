@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Admin\StationController;
 use App\Http\Controllers\Controller;
-use App\Http\Services\DestinationService;
-use App\Models\Company;
 use App\Models\City;
+use App\Models\Company;
 use App\Models\Course;
 use App\Models\Destination;
 use App\Models\Order;
@@ -24,16 +22,16 @@ class UserController extends Controller
 
         if (Auth::check()) {
             $user = Auth::user();
-            $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
+            $items = ShoppingCart::where('user', $user->id)->whereNull('order')->get();
 
         } else {
             $items = [];
         }
 
-
         $companies = Company::all();
         $destinations = Destination::all();
-        return view('user.pages.index')->with("destinations", $destinations)->with("itemsCount", count($items))->with("companies", $companies)->with("cities", $cities);
+
+        return view('user.pages.index')->with('destinations', $destinations)->with('itemsCount', count($items))->with('companies', $companies)->with('cities', $cities);
     }
 
     public function getEndCities(Request $request)
@@ -49,6 +47,7 @@ class UserController extends Controller
                     array_push($endCities, $city);
                 }
             }
+
             return $endCities;
 
         } catch (\Throwable $throwable) {
@@ -57,27 +56,25 @@ class UserController extends Controller
         }
     }
 
-
     public function searchCourses(Request $request)
     {
         $destinations = Destination::join('stations as startBus', 'startBus.id', '=', 'startBusStation')
             ->join('stations as endBus', 'endBusStation', '=', 'endBus.id')
-            ->where("startBus.city", $request->startCity)
-            ->where("endBus.city", $request->endCity)
-            ->select("destinations.*")
+            ->where('startBus.city', $request->startCity)
+            ->where('endBus.city', $request->endCity)
+            ->select('destinations.*')
             ->get();
 
         $destination = Destination::join('stations as startBus', 'startBus.id', '=', 'startBusStation')
             ->join('stations as endBus', 'endBusStation', '=', 'endBus.id')
-            ->where("startBus.city", $request->startCity)
-            ->where("endBus.city", $request->endCity)
-            ->select("destinations.*")
+            ->where('startBus.city', $request->startCity)
+            ->where('endBus.city', $request->endCity)
+            ->select('destinations.*')
             ->first();
-
 
         if (Auth::check()) {
             $user = Auth::user();
-            $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
+            $items = ShoppingCart::where('user', $user->id)->whereNull('order')->get();
 
         } else {
             $items = [];
@@ -88,29 +85,25 @@ class UserController extends Controller
 
             $destinationCourses = $destination->getCourses;
 
-
             foreach ($destinationCourses as $course) {
-                ;
+
                 array_push($courses, $course);
             }
-
 
         }
 
         $cities = City::all();
 
-
         return view('user.pages.courses.courses')
-            ->with("courses", $courses)
-            ->with("destination", $destination)
-            ->with("itemsCount", count($items))
-            ->with("startCity", $request->startCity)
-            ->with("endCity", $request->endCity)
-            ->with("cities", $cities)
-            ->with("date", count($items));
+            ->with('courses', $courses)
+            ->with('destination', $destination)
+            ->with('itemsCount', count($items))
+            ->with('startCity', $request->startCity)
+            ->with('endCity', $request->endCity)
+            ->with('cities', $cities)
+            ->with('date', count($items));
 
     }
-
 
     public function showCourses($id)
     {
@@ -118,7 +111,7 @@ class UserController extends Controller
         $destination = Destination::find($id);
 
         if (Auth::check()) {
-            $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
+            $items = ShoppingCart::where('user', $user->id)->whereNull('order')->get();
 
         } else {
             $items = [];
@@ -126,40 +119,41 @@ class UserController extends Controller
 
         $courses = $destination->getCourses;
         $cities = City::all();
+
         return view('user.pages.courses.courses')
-            ->with("courses", $courses)
-            ->with("destination", $destination)
-            ->with("startCity", $destination->getStartBusStation->getCity->name)
-            ->with("endCity", $destination->getEndBusStation->getCity->name)
-            ->with("cities", $cities)
-            ->with("date", count($items))
-            ->with("itemsCount", count($items));
+            ->with('courses', $courses)
+            ->with('destination', $destination)
+            ->with('startCity', $destination->getStartBusStation->getCity->name)
+            ->with('endCity', $destination->getEndBusStation->getCity->name)
+            ->with('cities', $cities)
+            ->with('date', count($items))
+            ->with('itemsCount', count($items));
     }
 
     public function showCourse($id)
     {
         $user = Auth::user();
         if (Auth::check()) {
-            $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
+            $items = ShoppingCart::where('user', $user->id)->whereNull('order')->get();
 
         } else {
             $items = [];
         }
 
         $course = Course::find($id);
-        $boughtCourseTicketNumbers = ShoppingCart::where("ticket", $course->getTicket->id)->count();
-        return view('user.pages.courses.course')->with("course", $course)->with("itemsCount", count($items))->with("boughtCourseTicketNumbers", $boughtCourseTicketNumbers);
-    }
+        $boughtCourseTicketNumbers = ShoppingCart::where('ticket', $course->getTicket->id)->count();
 
+        return view('user.pages.courses.course')->with('course', $course)->with('itemsCount', count($items))->with('boughtCourseTicketNumbers', $boughtCourseTicketNumbers);
+    }
 
     public function putInTheCart($courseId)
     {
         $user = Auth::user();
         $course = Course::find($courseId);
 
-        $boughtCourseTicketNumbers = ShoppingCart::where("ticket", $course->getTicket->id)->count();
+        $boughtCourseTicketNumbers = ShoppingCart::where('ticket', $course->getTicket->id)->count();
         if ($boughtCourseTicketNumbers < $course->getBus->seats) {
-            $cart = new ShoppingCart();
+            $cart = new ShoppingCart;
             $cart->user = $user->id;
             $cart->ticket = $course->getTicket->id;
             $cart->save();
@@ -172,22 +166,22 @@ class UserController extends Controller
     public function showCart()
     {
         $user = Auth::user();
-        $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
+        $items = ShoppingCart::where('user', $user->id)->whereNull('order')->get();
 
-        return view("user.pages.cart.cart")->with("items", $items)->with("itemsCount", count($items));
+        return view('user.pages.cart.cart')->with('items', $items)->with('itemsCount', count($items));
 
     }
 
     public function buy()
     {
         $user = Auth::user();
-        $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
+        $items = ShoppingCart::where('user', $user->id)->whereNull('order')->get();
         $totalPrice = 0;
         foreach ($items as $item) {
             $totalPrice += $item->getTicket->price;
         }
 
-        $order = new Order();
+        $order = new Order;
         $order->ticketNumbers = count($items);
         $order->totalPrice = $totalPrice;
         $order->user = $user->id;
@@ -198,8 +192,7 @@ class UserController extends Controller
             $item->save();
         }
 
-        return redirect()->route("root");
-
+        return redirect()->route('root');
 
     }
 
@@ -207,14 +200,13 @@ class UserController extends Controller
     {
         $user = Auth::user();
         if (Auth::check()) {
-            $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
+            $items = ShoppingCart::where('user', $user->id)->whereNull('order')->get();
 
         } else {
             $items = [];
         }
 
-        return view("user.pages.profile.profile")->with("itemsCount", count($items));
-
+        return view('user.pages.profile.profile')->with('itemsCount', count($items));
 
     }
 
@@ -222,15 +214,14 @@ class UserController extends Controller
     {
         $user = Auth::user();
         if (Auth::check()) {
-            $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
+            $items = ShoppingCart::where('user', $user->id)->whereNull('order')->get();
 
         } else {
             $items = [];
         }
         $orders = $user->getOrders;
 
-        return view("user.pages.profile.purchases")->with("itemsCount", count($items))->with("orders", $orders);
-
+        return view('user.pages.profile.purchases')->with('itemsCount', count($items))->with('orders', $orders);
 
     }
 
@@ -238,45 +229,44 @@ class UserController extends Controller
     {
         $user = Auth::user();
         if (Auth::check()) {
-            $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
+            $items = ShoppingCart::where('user', $user->id)->whereNull('order')->get();
 
         } else {
             $items = [];
         }
-        $order = $user->getOrders()->where("id", $orderId)->first();
+        $order = $user->getOrders()->where('id', $orderId)->first();
 
-        return view("user.pages.profile.purchase")->with("itemsCount", count($items))->with("order", $order);
-
+        return view('user.pages.profile.purchase')->with('itemsCount', count($items))->with('order', $order);
 
     }
 
     public function removeFromCart($itemId)
     {
         ShoppingCart::find($itemId)->delete();
+
         return redirect()->back();
     }
-
 
     public function showCoursesFormView(Request $request)
     {
         $user = Auth::user();
 
         if (Auth::check()) {
-            $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
+            $items = ShoppingCart::where('user', $user->id)->whereNull('order')->get();
 
         } else {
             $items = [];
         }
 
         $cities = City::all();
-        return view('user.pages.courses.courses')
-            ->with("startCity", null)
-            ->with("endCity", null)
-            ->with("cities", $cities)
-            ->with("date", null)
-            ->with("itemsCount", count($items));
-    }
 
+        return view('user.pages.courses.courses')
+            ->with('startCity', null)
+            ->with('endCity', null)
+            ->with('cities', $cities)
+            ->with('date', null)
+            ->with('itemsCount', count($items));
+    }
 
     public function showCompanies()
     {
@@ -284,17 +274,15 @@ class UserController extends Controller
 
         if (Auth::check()) {
             $user = Auth::user();
-            $items = ShoppingCart::where("user", $user->id)->whereNull("order")->get();
+            $items = ShoppingCart::where('user', $user->id)->whereNull('order')->get();
 
         } else {
             $items = [];
         }
 
         return view('user.pages.companies.companies')
-            ->with("companies", $companies)
-            ->with("itemsCount", count($items));
-
+            ->with('companies', $companies)
+            ->with('itemsCount', count($items));
 
     }
-
 }

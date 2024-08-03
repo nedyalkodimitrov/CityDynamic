@@ -3,13 +3,9 @@
 namespace App\Http\Repositories;
 
 use App\Models\Course;
-use App\Models\Destination;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class CourseRepository
 {
-
     public function findAll()
     {
         return Course::all();
@@ -46,8 +42,4 @@ class CourseRepository
     {
         return Course::whereIn('destination', $destinationIds)->get();
     }
-
-
-
-
 }

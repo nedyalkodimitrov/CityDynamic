@@ -7,38 +7,30 @@ use App\Http\Repositories\CompanyRepository;
 use App\Http\Repositories\DestinationScheduleRepository;
 use App\Http\Requests\CreateDestinactionScheduleRequest;
 use App\Http\Requests\EditDestinactionScheduleRequest;
-use App\Models\Course;
-use App\Models\Destination;
-use App\Models\DestinationPoint;
-use App\Models\DestinationSchedule;
-use App\Models\Ticket;
-use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller
 {
-
-    public function __construct(Auth $user, private DestinationScheduleRepository $destinationScheduleRepository, private CompanyRepository $companyRepository)
-    {}
+    public function __construct(Auth $user, private DestinationScheduleRepository $destinationScheduleRepository, private CompanyRepository $companyRepository) {}
 
     public function showSchedules($destinationId)
     {
         $schedules = $this->destinationScheduleRepository->findSchedulesByDestination($destinationId);
 
         return view('companies.pages.schedules.schedules',
-        [
-            "schedules" => $schedules,
-            "destinationId" => $destinationId
-        ]);
+            [
+                'schedules' => $schedules,
+                'destinationId' => $destinationId,
+            ]);
     }
 
     public function showSchedule($destinationId, $scheduleId)
     {
 
         $schedule = $this->destinationScheduleRepository->findById($scheduleId);
+
         return view('companies.pages.schedules.schedule', [
-            "schedule" => $schedule,
+            'schedule' => $schedule,
         ]);
     }
 
@@ -50,12 +42,11 @@ class ScheduleController extends Controller
         $drivers = $company->getEmployees;
 
         return view('companies.pages.schedules.scheduleForm', [
-                "buses" => $buses,
-                "drivers" => $drivers
-            ]
+            'buses' => $buses,
+            'drivers' => $drivers,
+        ]
         );
     }
-
 
     public function createSchedule(CreateDestinactionScheduleRequest $request, DestinationScheduleRepository $destinationScheduleRepository)
     {
@@ -75,6 +66,4 @@ class ScheduleController extends Controller
 
         return redirect()->back();
     }
-
-
 }

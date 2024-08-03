@@ -7,23 +7,17 @@ use App\Http\Repositories\BusRepository;
 use App\Http\Repositories\CompanyRepository;
 use App\Http\Repositories\DestinationPointRepository;
 use App\Http\Repositories\DestinationRepository;
-use App\Http\Repositories\StationRepository;
-use App\Models\DestinationPoint;
-use App\Models\Station;
 use App\Models\Destination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use function PHPUnit\Framework\exactly;
 
 class DestinationController extends Controller
 {
-    public function __construct(private CompanyRepository          $companyRepository,
-                                private DestinationRepository      $destinationRepository,
-                                private BusRepository              $busRepository,
-                                private DestinationPointRepository $destinationPointRepository
-    )
-    {
-    }
+    public function __construct(private CompanyRepository $companyRepository,
+        private DestinationRepository $destinationRepository,
+        private BusRepository $busRepository,
+        private DestinationPointRepository $destinationPointRepository
+    ) {}
 
     public function showDestinations()
     {
@@ -32,7 +26,7 @@ class DestinationController extends Controller
         $destinations = $this->destinationRepository->getDestinationsByCompany($company->id);
 
         return view('companies.pages.destinations.destinations', [
-            "destinations" => $destinations,
+            'destinations' => $destinations,
         ]);
     }
 
@@ -41,7 +35,6 @@ class DestinationController extends Controller
         $user = Auth::user();
         $company = $this->companyRepository->getCompanyOfUser($user);
 
-
         $destination = $this->destinationRepository->findById($destinationId);
         $tracks = $this->destinationRepository->getTracks($destination);
 
@@ -49,9 +42,9 @@ class DestinationController extends Controller
 
         return view('companies.pages.destinations.destination',
             [
-                "destination" => $destination,
-                "tracks" => $tracks,
-                "connectedStations" => $connectedStations
+                'destination' => $destination,
+                'tracks' => $tracks,
+                'connectedStations' => $connectedStations,
             ]);
     }
 
@@ -61,14 +54,12 @@ class DestinationController extends Controller
         $company = $this->companyRepository->getCompanyOfUser($user);
         $busStations = $this->companyRepository->getConnectedStations($company);
 
-
         return view('companies.pages.destinations.destinationForm',
             [
-                "busStations" => $busStations
+                'busStations' => $busStations,
             ]);
 
     }
-
 
     public function createDestination(Request $request)
     {
@@ -110,18 +101,17 @@ class DestinationController extends Controller
         return redirect()->route('showDestinations');
     }
 
-    private function extractStationsFromRequest($request){
+    private function extractStationsFromRequest($request)
+    {
         $i = 1;
-        $stationFix = "station-" . $i;
+        $stationFix = 'station-'.$i;
         $stations = [];
         while (isset($request->$stationFix)) {
             array_push($stations, $request->$stationFix);
             $i++;
-            $stationFix = "station-" . $i;
+            $stationFix = 'station-'.$i;
         }
 
         return $stations;
-}
-
-
+    }
 }

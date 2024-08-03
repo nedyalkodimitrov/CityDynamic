@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('station_employees', function (Blueprint $table) {
             $table->id();
 
-
             $table->timestamps();
         });
     }

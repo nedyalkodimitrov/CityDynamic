@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::group([
-    'prefix' => "adminPanel",
-    "middleware" => ["auth", "roleCheck:Admin"]
+    'prefix' => 'adminPanel',
+    'middleware' => ['auth', 'roleCheck:Admin'],
 ], function () {
 
     Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('homeAdmin');
@@ -27,7 +27,6 @@ Route::group([
     Route::post('/users/create', [\App\Http\Controllers\Admin\UserController::class, 'createUser'])->name('admin.createUser');
     Route::get('/users/{id}', [\App\Http\Controllers\Admin\UserController::class, 'showUser'])->name('admin.showUser');
     Route::post('/users/{id}', [\App\Http\Controllers\Admin\UserController::class, 'editUser'])->name('admin.editUser');
-
 
     Route::get('/companies', [\App\Http\Controllers\Admin\CompanyController::class, 'showCompanies'])->name('admin.showCompanies');
     Route::get('/companies/create', [\App\Http\Controllers\Admin\CompanyController::class, 'showCompanyCreate'])->name('admin.showCompanyCreate');
@@ -41,13 +40,11 @@ Route::group([
     Route::get('/stations/{id}', [\App\Http\Controllers\Admin\StationController::class, 'showStation'])->name('admin.showStation');
     Route::post('/stations/{id}', [\App\Http\Controllers\Admin\StationController::class, 'editStation'])->name('admin.editStation');
 
-
-
 });
 
 Route::group([
-    'prefix' => "stationPanel",
-    "middleware" => ["auth", "roleCheck:StationAdmin"]
+    'prefix' => 'stationPanel',
+    'middleware' => ['auth', 'roleCheck:StationAdmin'],
 
 ], function () {
 
@@ -71,8 +68,8 @@ Route::group([
 });
 
 Route::group([
-    'prefix' => "companyPanel",
-    "middleware" => ["auth", "roleCheck:CompanyAdmin"]
+    'prefix' => 'companyPanel',
+    'middleware' => ['auth', 'roleCheck:CompanyAdmin'],
 
 ], function () {
     Route::get('/', [\App\Http\Controllers\Companies\HomeController::class, 'showHome'])->name('company.home');
@@ -83,9 +80,7 @@ Route::group([
     Route::get('/buses/{id}', [\App\Http\Controllers\Companies\BusController::class, 'showBus'])->name('company.showBus');
     Route::post('/buses/{id}', [\App\Http\Controllers\Companies\BusController::class, 'editBus'])->name('company.editBus');
 
-
     Route::get('/employees', [\App\Http\Controllers\Companies\EmployeeController::class, 'showEmployees'])->name('company.showEmployees');
-
 
     Route::get('/busStations', [\App\Http\Controllers\Companies\StationController::class, 'showStations'])->name('company.showStations');
     Route::get('/busStations/{id}', [\App\Http\Controllers\Companies\StationController::class, 'showStation'])->name('company.showStation');
@@ -112,12 +107,10 @@ Route::group([
     Route::post('/courses/{id}/edit', [\App\Http\Controllers\Companies\CourseController::class, 'editCourse'])->name('company.editCourse');
     Route::post('/company/connectedStation', [\App\Http\Controllers\Companies\StationController::class, 'getAllStations'])->name('company.getConnectedStations');
 
-
 });
 
-
 Route::group([
-    "middleware" => ["auth"]
+    'middleware' => ['auth'],
 
 ], function () {
     Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('get.logout');
@@ -141,5 +134,3 @@ Route::post('/courses', [\App\Http\Controllers\User\UserController::class, 'sear
 Route::get('/companies', [\App\Http\Controllers\User\UserController::class, 'showCompanies'])->name('user.showCompanies');
 
 Route::post('/setSeatStatus/{busId}', [\App\Http\Controllers\Controller::class, 'setSeatsStatus']);
-
-

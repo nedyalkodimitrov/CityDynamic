@@ -28,10 +28,7 @@ class import_file extends Command
     public function handle()
     {
 
-
-
-//        var_dump($productsOptionsQuantity);
-
+        //        var_dump($productsOptionsQuantity);
 
         return Command::SUCCESS;
     }

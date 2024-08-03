@@ -15,17 +15,17 @@ return new class extends Migration
     {
         Schema::create('destination_points', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("station");
+            $table->unsignedBigInteger('station');
             $table->foreign('station')->references('id')->on('stations')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger("destination");
+            $table->unsignedBigInteger('destination');
             $table->foreign('destination')->references('id')->on('destinations')
                 ->onDelete('cascade');
-            $table->integer("order");
-            $table->double("price");
-            $table->double("duration");
-            $table->double("distance");
+            $table->integer('order');
+            $table->double('price');
+            $table->double('duration');
+            $table->double('distance');
             $table->timestamps();
         });
     }

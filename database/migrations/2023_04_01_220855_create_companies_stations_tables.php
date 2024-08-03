@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('companies_stations_tables', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("company");
+            $table->unsignedBigInteger('company');
             $table->foreign('company')->references('id')->on('companies')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger("station");
+            $table->unsignedBigInteger('station');
             $table->foreign('station')->references('id')->on('stations')
                 ->onDelete('cascade');
             $table->timestamps();

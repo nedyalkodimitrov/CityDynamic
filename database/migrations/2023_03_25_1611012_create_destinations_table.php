@@ -15,18 +15,17 @@ return new class extends Migration
     {
         Schema::create('destinations', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->unsignedBigInteger("startBusStation");
+            $table->string('name');
+            $table->unsignedBigInteger('startBusStation');
             $table->foreign('startBusStation')->references('id')->on('stations')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger("endBusStation");
+            $table->unsignedBigInteger('endBusStation');
             $table->foreign('endBusStation')->references('id')->on('stations')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger("executiveCompany");
+            $table->unsignedBigInteger('executiveCompany');
             $table->foreign('executiveCompany')->references('id')->on('companies')
                 ->onDelete('cascade');
-
 
         });
     }

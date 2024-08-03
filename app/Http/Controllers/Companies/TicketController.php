@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use PHPUnit\Framework\Attributes\Ticket;
 
 class TicketController extends Controller
 {
@@ -28,13 +27,16 @@ class TicketController extends Controller
         return view('admin.pages.ticket.ticketEdit');
     }
 
-    public function createTicket(Request $request){
-        $ticket = new \App\Models\Ticket();
+    public function createTicket(Request $request)
+    {
+        $ticket = new \App\Models\Ticket;
         $ticket->course = $request->course;
         $ticket->price = $request->price;
         $ticket->save();
     }
-    public function editTicket($ticketId, Request $request){
+
+    public function editTicket($ticketId, Request $request)
+    {
         $ticket = \App\Models\Ticket::find($ticketId);
         $ticket->course = $request->course;
         $ticket->price = $request->price;

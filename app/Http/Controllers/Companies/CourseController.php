@@ -11,19 +11,14 @@ use App\Http\Requests\CreateCourseRequest;
 use App\Http\Requests\EditCourseRequest;
 use App\Models\Course;
 use App\Models\Ticket;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
-
     public function __construct(private CompanyRepository $companyRepository,
-                                private DestinationRepository $destinationRepository,
-                                private CourseRepository      $courseRepository,
-                                private BusRepository         $busRepository)
-    {
-
-    }
+        private DestinationRepository $destinationRepository,
+        private CourseRepository $courseRepository,
+        private BusRepository $busRepository) {}
 
     public function showCourses()
     {
@@ -33,7 +28,7 @@ class CourseController extends Controller
 
         $courses = $this->courseRepository->getCoursesByDestinationIds($destinationsIds);
 
-        return view('companies.pages.courses.courses')->with("courses", $courses);
+        return view('companies.pages.courses.courses')->with('courses', $courses);
     }
 
     public function showCourse($id)
@@ -46,10 +41,10 @@ class CourseController extends Controller
 
         return view('companies.pages.courses.course',
             [
-                "destinations" => $destinations,
-                "buses" => $buses,
-                "courseId" => $id,
-                "course" => $course
+                'destinations' => $destinations,
+                'buses' => $buses,
+                'courseId' => $id,
+                'course' => $course,
             ]);
     }
 
@@ -61,11 +56,10 @@ class CourseController extends Controller
         $buses = $this->busRepository->getBusesByCompany($company->id);
 
         return view('companies.pages.courses.courseForm', [
-            "destinations" => $destinations,
-            "buses" => $buses
+            'destinations' => $destinations,
+            'buses' => $buses,
         ]);
     }
-
 
     public function createCourse(CreateCourseRequest $request)
     {
@@ -73,11 +67,11 @@ class CourseController extends Controller
 
         $course = $this->courseRepository->create($request->destination, $request->bus, $request->date, $request->startTime, $request->endTime);
 
-
-        $ticket = new Ticket();
+        $ticket = new Ticket;
         $ticket->course = $course->id;
         $ticket->price = $request->price;
         $ticket->save();
+
         return redirect()->back();
 
     }
@@ -88,12 +82,10 @@ class CourseController extends Controller
         $course = $this->courseRepository->update($courseId, $request->destination, $request->bus,
             $request->date, $request->startTime, $request->endTime);
 
-
         $ticket = Course::find($courseId)->getTicket;
         $ticket->price = $request->price;
         $ticket->save();
+
         return redirect()->back();
     }
-
-
 }

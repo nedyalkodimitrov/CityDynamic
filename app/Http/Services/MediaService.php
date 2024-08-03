@@ -2,12 +2,11 @@
 
 namespace App\Http\Services;
 
-use http\Env\Request;
 use Illuminate\Http\UploadedFile;
 
 class MediaService
 {
-    const IMAGE_PATH = "images";
+    const IMAGE_PATH = 'images';
 
     public function saveImage(UploadedFile $image)
     {
@@ -15,17 +14,17 @@ class MediaService
         $imageName = time().'-'.rand(1, 15000000000).'.'.$image->extension();
         $image->move(public_path(self::IMAGE_PATH), $imageName);
 
-
         return $imageName;
     }
 
-    function compressImage($source, $destination, $quality) {
+    public function compressImage($source, $destination, $quality)
+    {
         // Get image info
         $imgInfo = getimagesize($source);
         $mime = $imgInfo['mime'];
 
         // Create a new image from file
-        switch($mime){
+        switch ($mime) {
             case 'image/jpeg':
                 $image = imagecreatefromjpeg($source);
                 break;

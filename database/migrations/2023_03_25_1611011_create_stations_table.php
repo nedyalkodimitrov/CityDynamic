@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('stations', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->unsignedBigInteger("city");
+            $table->string('name');
+            $table->unsignedBigInteger('city');
             $table->foreign('city')->references('id')->on('cities')
                 ->onDelete('cascade');
             $table->string('profilePhoto');

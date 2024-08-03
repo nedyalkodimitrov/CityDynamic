@@ -11,11 +11,11 @@ class DestinationPoint extends Model
 
     public function getDestination()
     {
-        return $this->belongsTo(Destination::class, "destination", "id");
+        return $this->belongsTo(Destination::class, 'destination', 'id');
     }
 
     public function getStation()
     {
-        return $this->belongsTo(Station::class, "station", "id");
+        return $this->belongsTo(Station::class, 'station', 'id');
     }
 }

@@ -17,7 +17,7 @@ class DestinationService
                 }
             } else {
                 if ($lastDestination->getNextDestination == null) {
-                    return  $lastDestination->getBusStation;
+                    return $lastDestination->getBusStation;
                 } else {
                     $lastDestination = $lastDestination->getNextDestination;
                 }
@@ -25,25 +25,27 @@ class DestinationService
         }
     }
 
-
-    public static function getAllPoints($destination){
+    public static function getAllPoints($destination)
+    {
         $points = [];
-        array_push($points, ["station" => $destination->getBusStation, "isStartPoint" => true, "isEndPoint" => false]);
+        array_push($points, ['station' => $destination->getBusStation, 'isStartPoint' => true, 'isEndPoint' => false]);
         $nextDestination = $destination;
         while (true) {
             if ($nextDestination->getNextDestination == null) {
-                $points[count($points) - 1]["isEndPoint"] = true;
+                $points[count($points) - 1]['isEndPoint'] = true;
                 break;
 
             }
-            $nextDestination= $nextDestination->getNextDestination;
+            $nextDestination = $nextDestination->getNextDestination;
 
-            array_push($points, ["station" => $nextDestination->getBusStation, "isStartPoint" => false, "isEndPoint" => false]);
+            array_push($points, ['station' => $nextDestination->getBusStation, 'isStartPoint' => false, 'isEndPoint' => false]);
         }
 
         return $points;
     }
-    public static function getPriceFromPointTillEnd($destination){
+
+    public static function getPriceFromPointTillEnd($destination)
+    {
         $price = $destination->price;
         $nextDestination = $destination;
         while (true) {
@@ -54,10 +56,12 @@ class DestinationService
             $nextDestination = $nextDestination->getNextDestination;
             $price += $nextDestination->price;
         }
+
         return $price;
     }
 
-    public static function getTimeFromPointTillEnd($destination){
+    public static function getTimeFromPointTillEnd($destination)
+    {
         $travelTime = $destination->timeTillNextPoint;
         $nextDestination = $destination;
         while (true) {
@@ -67,8 +71,7 @@ class DestinationService
             $nextDestination = $nextDestination->getNextDestination;
             $travelTime += $nextDestination->timeTillNextPoint;
         }
+
         return $travelTime;
     }
-
-
 }

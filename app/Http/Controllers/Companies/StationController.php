@@ -6,19 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Repositories\CompanyRepository;
 use App\Http\Repositories\StationRepository;
 use App\Http\Resources\StationResource;
-use App\Models\Station;
-use Egulias\EmailValidator\Result\Reason\AtextAfterCFWS;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class StationController extends Controller
 {
-
-
-    public function __construct( private CompanyRepository $companyRepository, private StationRepository $stationRepository)
-    {
-    }
-
+    public function __construct(private CompanyRepository $companyRepository, private StationRepository $stationRepository) {}
 
     public function showStations()
     {
@@ -27,10 +19,11 @@ class StationController extends Controller
         $connectedStations = $this->companyRepository->getConnectedStations($company);
 
         $dissociateStations = $this->companyRepository->getDissociateStations($company);
+
         return view('companies.pages.stations.stations', [
-                "connectedStations" => $connectedStations,
-                "notConnectedStations" => $dissociateStations
-            ]);
+            'connectedStations' => $connectedStations,
+            'notConnectedStations' => $dissociateStations,
+        ]);
 
     }
 
@@ -42,11 +35,10 @@ class StationController extends Controller
         $isRequestToThisStation = $this->companyRepository->checkIfThereIsRequestToThisStation($company, $station);
         $isApproved = $this->companyRepository->checkIfStationIsConnected($company, $station);
 
-
         return view('companies.pages.stations.station')
-            ->with(["station" => $station])
-            ->with(["isRequestToThisStation" => $isRequestToThisStation])
-            ->with(["isApproved" => $isApproved]);
+            ->with(['station' => $station])
+            ->with(['isRequestToThisStation' => $isRequestToThisStation])
+            ->with(['isApproved' => $isApproved]);
     }
 
     public function makeStationRequest($id)
@@ -65,7 +57,8 @@ class StationController extends Controller
         $company = $this->companyRepository->getCompanyOfUser($user);
         $station = $this->stationRepository->findById($stationId);
         $this->companyRepository->removeRequestToStation($company, $station);
-        return redirect()->route("company.showStations");
+
+        return redirect()->route('company.showStations');
     }
 
     public function unpairStation($stationId)
@@ -74,9 +67,9 @@ class StationController extends Controller
         $company = $this->companyRepository->getCompanyOfUser($user);
         $station = $this->stationRepository->findById($stationId);
         $this->companyRepository->removeStationFromConnections($company, $station);
-        return redirect()->route("company.showStations");
-    }
 
+        return redirect()->route('company.showStations');
+    }
 
     public function getAllStations()
     {
@@ -86,6 +79,4 @@ class StationController extends Controller
 
         return json_encode(StationResource::collection($stations));
     }
-
-
 }

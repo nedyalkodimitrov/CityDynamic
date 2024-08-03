@@ -11,18 +11,17 @@ return new class extends Migration
      *
      * @return void
      */
-
     public function up()
     {
         Schema::create('shopping_carts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("user");
+            $table->unsignedBigInteger('user');
             $table->foreign('user')->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger("ticket");
+            $table->unsignedBigInteger('ticket');
             $table->foreign('ticket')->references('id')->on('tickets')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger("order")->nullable();
+            $table->unsignedBigInteger('order')->nullable();
             $table->foreign('order')->references('id')->on('orders')
                 ->onDelete('cascade');
             $table->timestamps();

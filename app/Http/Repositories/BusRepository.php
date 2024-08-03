@@ -3,13 +3,9 @@
 namespace App\Http\Repositories;
 
 use App\Models\Bus;
-use App\Models\Destination;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class BusRepository
 {
-
     public function findAll()
     {
         return Bus::all();
@@ -26,7 +22,7 @@ class BusRepository
 
     }
 
-    public function create($name, $model, $seats,$seatsPerRow, $busCompany)
+    public function create($name, $model, $seats, $seatsPerRow, $busCompany)
     {
 
         return Bus::create([
@@ -35,10 +31,9 @@ class BusRepository
             'seats' => $seats,
             'seatsPerRow' => $seatsPerRow,
             'seatsStatus' => json_encode(array_fill(0, $seats, 0)),
-            'company' => $busCompany
+            'company' => $busCompany,
         ]);
     }
-
 
     public function update($busId, $name, $model, $seats)
     {

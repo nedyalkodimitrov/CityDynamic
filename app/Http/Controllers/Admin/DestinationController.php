@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Station;
 use App\Models\Destination;
-use Illuminate\Http\Request;
+use App\Models\Station;
 
 class DestinationController extends Controller
 {
@@ -19,18 +18,21 @@ class DestinationController extends Controller
     public function showDestination($destinationId)
     {
         $destination = Destination::find($destinationId);
+
         return view('admin.pages.destination.destination')->with('destination', $destination);
     }
 
     public function showDestinationCreate()
     {
         $busStations = Station::all();
+
         return view('admin.pages.destination.destinationCreate')->with('busStations', $busStations);
     }
 
     public function showDestinationEdit()
     {
         $busStations = Station::all();
+
         return view('admin.pages.destination.destinationEdit')->with('busStations', $busStations);
     }
 }

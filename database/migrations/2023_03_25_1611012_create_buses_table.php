@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('buses', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string("model");
-            $table->string("seats");
-            $table->unsignedBigInteger("company");
+            $table->string('name');
+            $table->string('model');
+            $table->string('seats');
+            $table->unsignedBigInteger('company');
             $table->foreign('company')->references('id')->on('companies')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger("currentLocation")->nullable();
+            $table->unsignedBigInteger('currentLocation')->nullable();
             $table->foreign('currentLocation')->references('id')->on('stations')
                 ->onDelete('cascade');
 

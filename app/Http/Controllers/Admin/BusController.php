@@ -10,21 +10,16 @@ use Illuminate\Http\Request;
 
 class BusController extends Controller
 {
-
-
-    public function __construct(private BusRepository  $busRepository)
-    {
-    }
+    public function __construct(private BusRepository $busRepository) {}
 
     public function showBuses()
     {
         $buses = $this->busRepository->findAll();
 
-        return view('admin.pages.buses.buses',[
-            'buses' => $buses
+        return view('admin.pages.buses.buses', [
+            'buses' => $buses,
         ]);
     }
-
 
     public function showBus($id)
     {
@@ -43,34 +38,33 @@ class BusController extends Controller
 
         $bus = Bus::find($busId);
         $busStations = Station::all();
+
         return view('admin.pages.buses.busEdit')->with('bus', $bus)->with('busStations', $busStations);
     }
 
+    public function createBus(Request $request)
+    {
 
-    public function createBus(Request $request){
+        $bus = new Bus;
+        $bus->name = $request->name;
+        $bus->model = $request->model;
+        $bus->seats = $request->name;
+        $bus->save();
 
-            $bus = new Bus();
-            $bus->name = $request->name;
-            $bus->model = $request->model;
-            $bus->seats = $request->name;
-            $bus->save();
-
-            return redirect()->route('showBuses');
-
-    }
-
-    public function editBus($busId, Request $request){
-
-            $bus = Bus::find($busId);
-            $bus->name = $request->name;
-            $bus->model = $request->model;
-            $bus->seats = $request->name;
-            $bus->save();
-
-            return redirect()->route('showBuses');
+        return redirect()->route('showBuses');
 
     }
 
+    public function editBus($busId, Request $request)
+    {
 
+        $bus = Bus::find($busId);
+        $bus->name = $request->name;
+        $bus->model = $request->model;
+        $bus->seats = $request->name;
+        $bus->save();
 
+        return redirect()->route('showBuses');
+
+    }
 }

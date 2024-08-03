@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Company;
-use App\Models\Station;
 use App\Models\City;
+use App\Models\Station;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,6 +13,7 @@ class StationController extends Controller
     public function showStations()
     {
         $busStations = Station::all();
+
         return view('admin.pages.stations.stations')->with('stations', $busStations);
     }
 
@@ -22,7 +22,6 @@ class StationController extends Controller
         $busStation = Station::find($busStationId);
         $cities = City::all();
         $users = User::all();
-
 
         return view('admin.pages.stations.station')->with('station', $busStation)->with('cities', $cities)->with('users', $users);
     }
@@ -36,10 +35,9 @@ class StationController extends Controller
         return view('admin.pages.stations.stationForm')->with('cities', $cities)->with('users', $users);
     }
 
-
     public function createStation(Request $request)
     {
-        $busStation = new Station();
+        $busStation = new Station;
         $busStation->name = $request->name;
         $busStation->admin = $request->admin;
         $busStation->city = $request->city;
@@ -58,5 +56,4 @@ class StationController extends Controller
 
         return redirect()->route('admin.showStations');
     }
-
 }

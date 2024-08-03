@@ -4,15 +4,10 @@ namespace App\Http\Controllers\Stations;
 
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\StationRepository;
-use Illuminate\Http\Request;
 
 class DestinationController extends Controller
 {
-
-
-    public function __construct(private StationRepository $stationRepository)
-    {
-    }
+    public function __construct(private StationRepository $stationRepository) {}
 
     public function showDestinations()
     {
@@ -20,7 +15,7 @@ class DestinationController extends Controller
         $station = $this->stationRepository->getStationOfUser($user);
 
         return view('stations.pages.destinations.destinations', [
-            'destinations' => $station->getDestinations
+            'destinations' => $station->getDestinations,
         ]);
 
     }
@@ -31,7 +26,7 @@ class DestinationController extends Controller
         $station = $this->stationRepository->getStationOfUser($user);
 
         return view('stations.pages.destinations.destination', [
-            'destination' => $this->stationRepository->getDestination($station, $id)
+            'destination' => $this->stationRepository->getDestination($station, $id),
         ]);
 
     }

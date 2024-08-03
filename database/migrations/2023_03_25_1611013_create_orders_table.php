@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("user");
+            $table->unsignedBigInteger('user');
             $table->foreign('user')->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->double("totalPrice");
-            $table->unsignedBigInteger("ticketNumbers");
+            $table->double('totalPrice');
+            $table->unsignedBigInteger('ticketNumbers');
             $table->string('stripeChargeId');
 
             $table->timestamps();

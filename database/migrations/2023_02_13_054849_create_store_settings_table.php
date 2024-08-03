@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('store_settings', function (Blueprint $table) {
             $table->id();
-            $table->string("workTime");
-            $table->string("storeName");
-            $table->string("storeOwner");
-            $table->string("address");
-            $table->string("email");
-            $table->string("phone");
+            $table->string('workTime');
+            $table->string('storeName');
+            $table->string('storeOwner');
+            $table->string('address');
+            $table->string('email');
+            $table->string('phone');
             $table->timestamps();
         });
 

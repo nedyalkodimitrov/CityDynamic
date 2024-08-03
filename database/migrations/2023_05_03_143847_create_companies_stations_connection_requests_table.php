@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -14,14 +15,14 @@ return new class extends Migration {
     {
         Schema::create('companies_stations_connection_requests', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("company");
+            $table->unsignedBigInteger('company');
             $table->foreign('company')->references('id')->on('companies')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger("station");
+            $table->unsignedBigInteger('station');
             $table->foreign('station')->references('id')->on('stations')
                 ->onDelete('cascade');
-            $table->boolean("isApproved")->nullable()->default(null);
-            $table->boolean("isFromCompany");
+            $table->boolean('isApproved')->nullable()->default(null);
+            $table->boolean('isFromCompany');
             $table->timestamps();
         });
     }

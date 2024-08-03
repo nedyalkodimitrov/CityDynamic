@@ -4,14 +4,11 @@ namespace App\Http\Repositories;
 
 use App\Models\Bus;
 use App\Models\Company;
-use App\Models\Destination;
 use App\Models\Station;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class CompanyRepository
 {
-    public function getCompanyOfUser( $user)
+    public function getCompanyOfUser($user)
     {
         return $user->getEmployers()->first();
     }
@@ -39,6 +36,7 @@ class CompanyRepository
     public function getDissociateStations(Company $company)
     {
         $connectedStationsIds = $this->getConnectedStationsIds($company);
+
         return Station::whereNotIn('id', $connectedStationsIds)->get();
     }
 
