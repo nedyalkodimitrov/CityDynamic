@@ -4,7 +4,7 @@ namespace App\Http\Constants;
 
 enum SeatStatusConstant
 {
-    const AVAILABLE = "available";
+    const AVAILABLE = "availabletest";
     const BOOKED = "booked";
     const RESERVED = "reserved";
 
