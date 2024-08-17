@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('company_employees', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('company');
-            $table->foreign('company')->references('id')->on('company')
+            $table->foreign('company')->references('id')->on('companies')
                 ->onDelete('cascade');
             $table->unsignedBigInteger('user');
-            $table->foreign('user')->references('id')->on('user')
+            $table->foreign('user')->references('id')->on('users')
                 ->onDelete('cascade');
 
             $table->timestamps();
