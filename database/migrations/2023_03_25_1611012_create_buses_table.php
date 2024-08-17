@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('model');
             $table->string('seats');
+            $table->integer('seatsAtRow');
+            $table->json('seatsStatus');
             $table->unsignedBigInteger('company');
             $table->foreign('company')->references('id')->on('companies')
                 ->onDelete('cascade');
