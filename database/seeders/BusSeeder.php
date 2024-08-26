@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Bus;
-use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
 
 class BusSeeder extends Seeder
 {
@@ -20,7 +20,7 @@ class BusSeeder extends Seeder
         //Create busses for each company
         foreach (range(1, 10) as $index) {
             foreach (range(1, 10) as $busIndex) {
-                 Bus::create([
+                Bus::create([
                     'company' => $index,
                     'name' => $faker->name,
                     'model' => $faker->name,

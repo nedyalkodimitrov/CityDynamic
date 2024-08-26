@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Company;
 use App\Models\Station;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class StationSeeder extends Seeder
