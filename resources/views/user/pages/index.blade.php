@@ -5,83 +5,11 @@
 @endsection
 
 @section('stylesheet')
-    <link rel="stylesheet" href="{{asset("assets/js/ajax.js")}}">
+    <link rel="stylesheet" href="{{asset("assets/css/searchBar.css")}}"
 @endsection
 
 @section("content")
     <div class="col-12 row m-0 ">
-        {{--        <div class="col-12">--}}
-        {{--            <h1 class="col-12 text-center mb-4">Избери начална точка</h1>--}}
-        {{--        </div>--}}
-
-        <style>
-            .searchBar {
-                margin-bottom: 2em;
-                box-shadow: 4px 4px 15px 4px rgb(33, 33, 33);
-                padding: 1em;
-                border-radius: 5px;
-            }
-
-            .searchBar label {
-                font-size: 0.9em;
-                font-weight: 800;
-            }
-
-            .image {
-                width: 100%;
-                height: 20em;
-                object-fit: cover;
-            }
-
-            .searchBar-container {
-                position: relative;
-                margin: 0;
-                padding: 0;
-            }
-
-            .searchBar {
-                position: absolute;
-                top: 0;
-                background: white;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            .searchBar-container h1 {
-                position: absolute;
-                top: 10%;
-                color: white;
-                font-family: 800;
-                left: 50%;
-
-                transform: translate(-50%, -10%);
-            }
-
-            .searchBar-container::before {
-                content: "";
-                background: black;
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                opacity: 0.3;
-            }
-
-            @media screen and (max-width: 992px) {
-                .searchBar div {
-                    margin-top: 1em;
-                }
-
-                .searchBar-container h1 {
-                    display: none;
-                }
-
-            }
-
-
-        </style>
         <div class="col-12 mx-auto searchBar-container">
             <img src="{{asset("assets/images/road.jpg")}}" alt="" class="image">
             <h1 class="title">Пътуваите из цялата страна</h1>
@@ -97,7 +25,6 @@
                             <option value="{{$city->id}}">{{$city->name}}</option>
                         @endforeach
                     </select>
-                    {{--                    <input type="text" class="form-control" placeholder="Спирка">--}}
                 </div>
                 <div class="col-6 col-lg-3">
                     <label>
@@ -133,10 +60,8 @@
                         <a href="{{route("user.showCourses", ["id" => $destination->id])}}" class="btn btn-primary col-12 ">Вижте
                             курсове</a>
                     </div>
-
                 </div>
             </div>
-
         @endforeach
     </div>
     <div class="col-11 mx-auto row mt-5">
@@ -167,8 +92,6 @@
             }
 
         });
-
-
     </script>
 @endsection
 
