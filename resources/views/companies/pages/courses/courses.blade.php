@@ -7,8 +7,10 @@
 @section("content")
 
     <div class="col-12">
-        <h1 class="col-12 text-center mb-2" style="position: relative"> Курсове <a style="position: absolute; right: 0" class="btn btn-success"
-                                                        href="{{route("company.showCoursesForm")}}"> Създай курс </a></h1>
+        <h1 class="col-12 text-center mb-2" style="position: relative"> Курсове <a style="position: absolute; right: 0"
+                                                                                   class="btn btn-success"
+                                                                                   href="{{route("company.showCoursesForm")}}">
+                Създай курс </a></h1>
     </div>
     <div class="col-12 row">
         @forelse($courses as $course)
@@ -18,11 +20,13 @@
                     <div class="card-body col-12">
                         <h5 class="card-title">{{$course->getDestination->name}}</h5>
                         <p class="card-text">{{$course->getDestination->getStartBusStation()->first()->name}}
-                            <br> {{$course->getDestination->getEndBusStation()->first()->name}} <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            <br> {{$course->getDestination->endBusStation()->first()->name}} <i
+                                    class="fas fa-map-marker-alt" aria-hidden="true"></i>
 
                             <br>
                             {{$course->date}} <i class="fas fa-calendar" aria-hidden="true"></i><br>
-                            {{$course->startTime}} <i class="fas fa-clock" aria-hidden="true"></i> - {{$course->endTime}} <i class="fas fa-clock" aria-hidden="true"></i> <br>
+                            {{$course->startTime}} <i class="fas fa-clock" aria-hidden="true"></i>
+                            - {{$course->endTime}} <i class="fas fa-clock" aria-hidden="true"></i> <br>
                             {{$course->getTicket->price}} лв.
                         </p>
                         <a href="{{route("company.showCourse", ["id" => $course->id])}}"

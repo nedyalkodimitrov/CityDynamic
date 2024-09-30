@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class City extends Model
 {
-    public function getCountry()
+    public function country()
     {
         return $this->belongsTo(Country::class, 'country', 'id');
     }
 
-    public function getStations()
+    public function stations()
     {
         return $this->hasMany(Station::class, 'city', 'id');
     }

@@ -9,7 +9,7 @@ class CompanyEmployee extends Model
 {
     use HasFactory;
 
-    public function getCompany()
+    public function company()
     {
         return $this->belongsTo(Company::class, 'company', 'id');
     }

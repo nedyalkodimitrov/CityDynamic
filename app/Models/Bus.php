@@ -20,12 +20,12 @@ class Bus extends Model
         'company',
     ];
 
-    public function getCompany()
+    public function company()
     {
         return $this->belongsTo(Company::class, 'busCompany', 'id');
     }
 
-    public function getDriver()
+    public function driver()
     {
         return $this->belongsTo(CompanyEmployee::class, 'driver', 'id');
     }

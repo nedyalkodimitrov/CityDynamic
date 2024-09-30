@@ -11,37 +11,37 @@ class Destination extends Model
 
     public $timestamps = false;
 
-    public function getStartBusStation()
+    public function startBusStation()
     {
         return $this->belongsTo(Station::class, 'startBusStation', 'id');
     }
 
-    public function getEndBusStation()
+    public function endBusStation()
     {
         return $this->belongsTo(Station::class, 'endBusStation', 'id');
     }
 
-    public function getExecutiveCompany()
+    public function executiveCompany()
     {
         return $this->belongsTo(Company::class, 'executiveCompany', 'id');
     }
 
-    public function getPoints()
+    public function points()
     {
         return $this->hasMany(DestinationPoint::class, 'destination', 'id');
     }
 
-    public function getTickets()
+    public function tickets()
     {
         return $this->hasMany(Ticket::class, 'destination', 'id');
     }
 
-    public function getCourses()
+    public function courses()
     {
         return $this->hasMany(Course::class, 'destination', 'id');
     }
 
-    public function getSchedules()
+    public function schedules()
     {
         return $this->hasMany(DestinationSchedule::class, 'destination', 'id');
     }

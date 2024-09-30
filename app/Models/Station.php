@@ -9,26 +9,22 @@ class Station extends Model
 {
     use HasFactory;
 
-    public function getCity()
+    public function city()
     {
         return $this->belongsTo(City::class, 'city', 'id');
     }
 
-    public function getCompanies()
+    public function companies()
     {
         return $this->belongsToMany(Company::class, 'companies_stations_tables', 'station', 'company');
     }
 
-    public function getCompanyConnectionRequests()
+    public function companyConnectionRequests()
     {
         return $this->belongsToMany(Company::class, 'companies_stations_request', 'station', 'company');
     }
-    //    public function getBuses()
-    //    {
-    //        return $this->hasMany(Bus::class, "busStation", "id");
-    //    }
 
-    public function getDestinations()
+    public function destinations()
     {
         return $this->hasMany(Destination::class, 'startBusStation', 'id');
     }

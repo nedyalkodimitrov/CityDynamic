@@ -30,7 +30,7 @@ class CompanyRepository
 
     public function getConnectedStationsIds(Company $company): array
     {
-        return $company->getStations()->pluck('stations.id')->toArray();
+        return $company->stations()->pluck('stations.id')->toArray();
     }
 
     public function getDissociateStations(Company $company)
@@ -42,12 +42,12 @@ class CompanyRepository
 
     public function checkIfThereIsRequestToThisStation(Company $company, Station $station): bool
     {
-        return count($company->getStationConnectionRequests()->where('station', $station->id)->get()) > 0;
+        return count($company->stationConnectionRequests()->where('station', $station->id)->get()) > 0;
     }
 
     public function checkIfStationIsConnected(Company $company, Station $station): bool
     {
-        return count($company->getStations()->where('station', $station->id)->get()) > 0;
+        return count($company->stations()->where('station', $station->id)->get()) > 0;
     }
 
     public function makeRequestToStation(Company $company, Station $station)
@@ -62,7 +62,7 @@ class CompanyRepository
 
     public function removeStationFromConnections(Company $company, Station $station)
     {
-        $company->getStations()->detach([$station->id]);
+        $company->stations()->detach([$station->id]);
     }
 
     public function getAllConnectedStations(Company $company)

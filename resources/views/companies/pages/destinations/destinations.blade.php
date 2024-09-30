@@ -7,8 +7,9 @@
 @section("content")
 
     <div class="col-12">
-        <h1 class="col-12 text-center mb-2" style="position: relative;"> Дестинации <a style="position: absolute; right: 0" class="btn btn-success"
-                                                           href="{{route("company.showDestinationsForm")}}">Създай дестинация</a></h1>
+        <h1 class="col-12 text-center mb-2" style="position: relative;"> Дестинации <a
+                    style="position: absolute; right: 0" class="btn btn-success"
+                    href="{{route("company.showDestinationsForm")}}">Създай дестинация</a></h1>
     </div>
 
     <div class="col-12 card">
@@ -29,8 +30,9 @@
                     <th scope="row"></th>
                     <td>{{$destination->name}}</td>
                     <td>{{$destination->getStartBusStation()->first()->name}} </td>
-                    <td>{{$destination->getEndBusStation()->first()->name}} </td>
-                    <td> <a href="{{route("company.showDestination", ["id" => $destination->id])}}"><i class="fa fa-eye"></i></a></td>
+                    <td>{{$destination->endBusStation()->first()->name}} </td>
+                    <td><a href="{{route("company.showDestination", ["id" => $destination->id])}}"><i
+                                    class="fa fa-eye"></i></a></td>
                 </tr>
             @empty
                 <tr>

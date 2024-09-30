@@ -9,17 +9,17 @@ class ShoppingCart extends Model
 {
     use HasFactory;
 
-    public function getOrder()
+    public function order()
     {
         return $this->belongsTo(Order::class, 'order', 'id');
     }
 
-    public function getUser()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user', 'id');
     }
 
-    public function getTicket()
+    public function ticket()
     {
         return $this->belongsTo(Ticket::class, 'ticket', 'id');
     }

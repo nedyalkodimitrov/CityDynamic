@@ -9,12 +9,12 @@ class DestinationPoint extends Model
 {
     use HasFactory;
 
-    public function getDestination()
+    public function destination()
     {
         return $this->belongsTo(Destination::class, 'destination', 'id');
     }
 
-    public function getStation()
+    public function station()
     {
         return $this->belongsTo(Station::class, 'station', 'id');
     }

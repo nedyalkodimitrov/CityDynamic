@@ -16,18 +16,18 @@ class DestinationSchedule extends Model
         'weekDays',
     ];
 
-    public function getDestionation()
+    public function destionation()
     {
         return $this->belongsTo(Destination::class, 'destination', 'id');
     }
 
-    public function getBus()
+    public function bus()
     {
         return $this->belongsTo(Bus::class, 'bus', 'id');
 
     }
 
-    public function getDriver()
+    public function driver()
     {
         return $this->belongsToMany(User::class, 'company_employees', 'company', 'user');
     }

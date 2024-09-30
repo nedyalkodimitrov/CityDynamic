@@ -234,7 +234,7 @@ class UserController extends Controller
         } else {
             $items = [];
         }
-        $order = $user->getOrders()->where('id', $orderId)->first();
+        $order = $user->orders()->where('id', $orderId)->first();
 
         return view('user.pages.profile.purchase')->with('itemsCount', count($items))->with('order', $order);
 

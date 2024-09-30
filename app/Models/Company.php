@@ -22,28 +22,28 @@ class Company extends Model
 
     public $timestamps = false;
 
-    public function getBuses()
+    public function buses()
     {
         return $this->hasMany(Bus::class, 'company', 'id');
     }
 
-    public function getStations()
+    public function stations()
     {
         return $this->belongsToMany(Station::class, 'companies_stations_tables', 'company', 'station');
     }
 
     //todo add migrations for company relations in destinations
-    public function getDestinations()
+    public function destinations()
     {
         return $this->hasMany(Destination::class, 'executiveCompany', 'id');
     }
 
-    public function getStationConnectionRequests()
+    public function stationConnectionRequests()
     {
         return $this->belongsToMany(Station::class, 'companies_stations_connection_requests', 'company', 'station');
     }
 
-    public function getEmployees()
+    public function employees()
     {
         return $this->belongsToMany(User::class, 'company_employees', 'company', 'user');
     }

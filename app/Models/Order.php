@@ -9,12 +9,12 @@ class Order extends Model
 {
     use HasFactory;
 
-    public function getShoppingCarts()
+    public function shoppingCarts()
     {
         return $this->hasMany(ShoppingCart::class, 'order', 'id');
     }
 
-    public function getUser()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user', 'id');
     }

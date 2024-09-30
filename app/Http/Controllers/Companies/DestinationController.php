@@ -63,7 +63,7 @@ class DestinationController extends Controller
 
     public function createDestination(Request $request)
     {
-        $company = Auth::user()->getEmployers()->first();
+        $company = Auth::user()->employers()->first();
 
         $stations = $this->extractStationsFromRequest($request);
 

@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable
 {
     use HasFactory, HasRoles, Notifiable;
 
@@ -44,34 +44,22 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-    public function getJWTIdentifier()
-    {
-        // TODO: Implement getJWTIdentifier() method.
-        return $this->getKey();
-    }
-
-    public function getJWTCustomClaims()
-    {
-        // TODO: Implement getJWTCustomClaims() method.
-        return [];
-    }
-
-    public function getCompany()
+    public function company()
     {
         return $this->hasOne(Company::class, 'admin', 'id');
     }
 
-    public function getStation()
+    public function station()
     {
         return $this->hasOne(Station::class, 'admin', 'id');
     }
 
-    public function getOrders()
+    public function orders()
     {
         return $this->hasMany(Order::class, 'user');
     }
 
-    public function getEmployers()
+    public function employers()
     {
         return $this->belongsToMany(Company::class, 'company_employees', 'user', 'company');
     }
