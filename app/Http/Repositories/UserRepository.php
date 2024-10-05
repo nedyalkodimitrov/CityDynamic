@@ -9,7 +9,6 @@ class UserRepository
     public function findAll()
     {
         return User::all();
-
     }
 
     public function findById($userId)

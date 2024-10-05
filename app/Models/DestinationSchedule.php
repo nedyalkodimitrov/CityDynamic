@@ -11,9 +11,9 @@ class DestinationSchedule extends Model
         'bus',
         'hour',
         'driver',
-        'isRepeatable',
+        'is_repeatable',
         'days',
-        'weekDays',
+        'week_days',
     ];
 
     public function destionation()

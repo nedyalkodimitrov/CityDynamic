@@ -16,7 +16,7 @@ class StationController extends Controller
     {
         $user = Auth::user();
         $company = $this->companyRepository->getCompanyOfUser($user);
-        $connectedStations = $this->companyRepository->getConnectedStations($company);
+        $connectedStations = $company->stations;
 
         $dissociateStations = $this->companyRepository->getDissociateStations($company);
 
@@ -75,7 +75,7 @@ class StationController extends Controller
     {
         $user = Auth::user();
         $company = $this->companyRepository->getCompanyOfUser($user);
-        $stations = $this->companyRepository->getConnectedStations($company);
+        $stations = $company->stations;
 
         return json_encode(StationResource::collection($stations));
     }

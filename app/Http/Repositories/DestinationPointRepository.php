@@ -8,15 +8,13 @@ class DestinationPointRepository
 {
     public function create($destination, $station, $order)
     {
-        $destinationPoint = new DestinationPoint;
-
-        $destinationPoint->destination = $destination->id;
-        $destinationPoint->station = $station;
-        $destinationPoint->order = $order;
-        $destinationPoint->duration = 0;
-        $destinationPoint->distance = 0;
-        $destinationPoint->price = 0;
-        $destinationPoint->save();
-
+        return DestinationPoint::create([
+            'destination' => $destination,
+            'station' => $station,
+            'order' => $order,
+            'duration' => 0,
+            'distance' => 0,
+            'price' => 0,
+        ]);
     }
 }

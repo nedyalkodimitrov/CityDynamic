@@ -11,6 +11,15 @@ class Destination extends Model
 
     public $timestamps = false;
 
+    protected $fillable = [
+        'name',
+        'start_bus_station',
+        'end_bus_station',
+        'executive_company',
+        'duration',
+        'distance',
+        'price',
+    ];
     public function startBusStation()
     {
         return $this->belongsTo(Station::class, 'startBusStation', 'id');

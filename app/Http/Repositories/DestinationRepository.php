@@ -33,7 +33,7 @@ class DestinationRepository
         $destinationPoints = $destination->getPoints()->orderBy('order', 'ASC')->get();
         foreach ($destinationPoints as $point) {
             $station = Station::find($point->station);
-            array_push($tracks, $station);
+            $tracks[] = $station;
         }
 
         return $tracks;
@@ -41,14 +41,11 @@ class DestinationRepository
 
     public function create($name, $firstStation, $lastStation, $company)
     {
-        $destination = new Destination;
-
-        $destination->name = $name;
-        $destination->startBusStation = $firstStation;
-        $destination->endBusStation = $lastStation;
-        $destination->executiveCompany = $company->id;
-        $destination->save();
-
-        return $destination;
+        return Destination::create([
+           'name' => $name,
+            'start_bus_station' => $firstStation,
+            'end_bus_station' => $lastStation,
+            'executive_company' => $company->id,
+        ]);
     }
 }

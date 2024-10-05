@@ -29,8 +29,8 @@ class BusRepository
             'name' => $name,
             'model' => $model,
             'seats' => $seats,
-            'seatsPerRow' => $seatsPerRow,
-            'seatsStatus' => json_encode(array_fill(0, $seats, 0)),
+            'seats_per_row' => $seatsPerRow,
+            'seats_status' => json_encode(array_fill(0, $seats, 0)),
             'company' => $busCompany,
         ]);
     }

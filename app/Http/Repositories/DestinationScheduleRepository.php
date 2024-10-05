@@ -21,16 +21,16 @@ class DestinationScheduleRepository
         return DestinationSchedule::where('destination', $destinationId)->get();
     }
 
-    public function create($desination, $bus, $hour, $driver, $isRepeatable, $days, $weekDays)
+    public function create($destination, $bus, $hour, $driver, $isRepeatable, $days, $weekDays)
     {
         DestinationSchedule::create([
-            'destination' => $desination,
+            'destination' => $destination,
             'bus' => $bus,
             'hour' => $hour,
             'driver' => $driver,
-            'isRepeatable' => $isRepeatable,
+            'is_repeatable' => $isRepeatable,
             'days' => $days,
-            'weekDays' => $weekDays,
+            'week_days' => $weekDays,
         ]);
     }
 
@@ -40,10 +40,9 @@ class DestinationScheduleRepository
             'bus' => $bus,
             'hour' => $hour,
             'driver' => $driver,
-            'isRepeatable' => $isRepeatable,
+            'is_repeatable' => $isRepeatable,
             'days' => $days,
-            'weekDays' => $weekDays,
+            'week_days' => $weekDays,
         ]);
-
     }
 }

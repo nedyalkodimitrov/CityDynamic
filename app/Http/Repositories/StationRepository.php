@@ -9,7 +9,6 @@ class StationRepository
     public function getDestination($station, $destinationId)
     {
         return $station->getDestinations()->where('id', $destinationId)->first();
-
     }
 
     public function acceptCompanyRequest($station, $companyId)
@@ -23,7 +22,6 @@ class StationRepository
     {
         $company = $station->getCompanyRequests()->where('bus_company', $companyId)->first();
         $station->getCompanyRequests()->detach($company->id);
-
     }
 
     public function getRequestFromCompany($station, $companyId)

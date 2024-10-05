@@ -38,7 +38,7 @@ class DestinationController extends Controller
         $destination = $this->destinationRepository->findById($destinationId);
         $tracks = $this->destinationRepository->getTracks($destination);
 
-        $connectedStations = $this->companyRepository->getConnectedStations($company);
+        $connectedStations = $company->stations;
 
         return view('companies.pages.destinations.destination',
             [
@@ -52,7 +52,7 @@ class DestinationController extends Controller
     {
         $user = Auth::user();
         $company = $this->companyRepository->getCompanyOfUser($user);
-        $busStations = $this->companyRepository->getConnectedStations($company);
+        $busStations = $company->stations;
 
         return view('companies.pages.destinations.destinationForm',
             [

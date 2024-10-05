@@ -22,8 +22,8 @@ class CourseRepository
             'destination' => $destination,
             'bus' => $bus,
             'date' => $date,
-            'startTime' => $startTime,
-            'endTIme' => $endTime,
+            'start_time' => $startTime,
+            'end_time' => $endTime,
         ]);
     }
 
@@ -33,8 +33,8 @@ class CourseRepository
             'destination' => $destination,
             'bus' => $bus,
             'date' => $date,
-            'startTime' => $startTime,
-            'endTIme' => $endTime,
+            'start_time' => $startTime,
+            'end_time' => $endTime,
         ]);
     }
 
