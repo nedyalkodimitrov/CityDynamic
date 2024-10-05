@@ -18,9 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('user');
             $table->foreign('user')->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->double('totalPrice');
-            $table->unsignedBigInteger('ticketNumbers');
-            $table->string('stripeChargeId');
+            $table->double('total_price');
+            $table->unsignedBigInteger('ticket_numbers');
+            $table->string('stripe_charge_id');
 
             $table->timestamps();
         });

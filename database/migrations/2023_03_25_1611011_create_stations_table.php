@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('stations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('city');
+            $table->unsignedBigInteger('city_id');
             $table->foreign('city')->references('id')->on('cities')
                 ->onDelete('cascade');
-            $table->string('profilePhoto');
-            $table->string('contactEmail');
-            $table->string('contactPhone');
-            $table->string('contactAddress');
+            $table->string('profile_photo');
+            $table->string('contact_email');
+            $table->string('contact_phone');
+            $table->string('contact_address');
 
             $table->timestamps();
         });

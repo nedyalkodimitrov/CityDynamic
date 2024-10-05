@@ -15,8 +15,12 @@ return new class extends Migration
     {
         Schema::create('station_employees', function (Blueprint $table) {
             $table->id();
-
-            $table->timestamps();
+            $table->unsignedBigInteger('station_id');
+            $table->foreign('station_id')->on('stations')->references('id')
+                ->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('users_id')->on('users')->references('id')
+                ->onDelete('cascade');
         });
     }
 

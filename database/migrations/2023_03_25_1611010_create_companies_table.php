@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('profilePhoto');
-            $table->dateTime('foundedAt');
+            $table->string('profile_photo');
+            $table->dateTime('founded_at');
             $table->string('description');
-            $table->string('contactEmail');
-            $table->string('contactPhone');
-            $table->string('contactAddress');
+            $table->string('contact_email');
+            $table->string('contact_phone');
+            $table->string('contact_address');
             $table->timestamps();
         });
     }

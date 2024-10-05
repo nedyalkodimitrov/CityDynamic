@@ -15,12 +15,11 @@ return new class extends Migration
     {
         Schema::create('destination_points', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('station');
-            $table->foreign('station')->references('id')->on('stations')
+            $table->unsignedBigInteger('station_id');
+            $table->foreign('station_id')->references('id')->on('stations')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger('destination');
-            $table->foreign('destination')->references('id')->on('destinations')
+            $table->unsignedBigInteger('destination_id');
+            $table->foreign('destination_id')->references('id')->on('destinations')
                 ->onDelete('cascade');
             $table->integer('order');
             $table->double('price');

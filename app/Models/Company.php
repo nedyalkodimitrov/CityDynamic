@@ -11,12 +11,12 @@ class Company extends Model
 
     protected $fillable = [
         'name',
-        'contactEmail',
-        'contactPhone',
-        'contactAddress',
-        'profilePhoto',
+        'contact_email',
+        'contact_phone',
+        'contact_address',
+        'profile_photo',
         'description',
-        'foundedAt',
+        'founded_at',
         'description',
     ];
 
@@ -24,18 +24,18 @@ class Company extends Model
 
     public function buses()
     {
-        return $this->hasMany(Bus::class, 'company', 'id');
+        return $this->hasMany(Bus::class);
     }
 
     public function stations()
     {
-        return $this->belongsToMany(Station::class, 'companies_stations_tables', 'company', 'station');
+        return $this->belongsToMany(Station::class, 'companies_stations', 'company', 'station');
     }
 
     //todo add migrations for company relations in destinations
     public function destinations()
     {
-        return $this->hasMany(Destination::class, 'executiveCompany', 'id');
+        return $this->hasMany(Destination::class);
     }
 
     public function stationConnectionRequests()

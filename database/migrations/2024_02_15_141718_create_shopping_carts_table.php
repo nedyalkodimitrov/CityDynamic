@@ -15,14 +15,11 @@ return new class extends Migration
     {
         Schema::create('shopping_carts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user');
-            $table->foreign('user')->references('id')->on('users')
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger('ticket');
-            $table->foreign('ticket')->references('id')->on('tickets')
-                ->onDelete('cascade');
-            $table->unsignedBigInteger('order')->nullable();
-            $table->foreign('order')->references('id')->on('orders')
+            $table->unsignedBigInteger('ticket_id');
+            $table->foreign('ticket_id')->references('id')->on('tickets')
                 ->onDelete('cascade');
             $table->timestamps();
         });

@@ -15,31 +15,27 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user');
-            $table->foreign('user')->references('id')->on('users')
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('course');
-            $table->foreign('course')->references('id')->on('courses')
+            $table->unsignedBigInteger('course_id');
+            $table->foreign('course_id')->references('id')->on('courses')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('startPoint');
-            $table->foreign('startPoint')->references('id')->on('destination_points')
+            $table->unsignedBigInteger('start_point_io');
+            $table->foreign('start_point_io')->references('id')->on('destination_points')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('endPoint');
-            $table->foreign('endPoint')->references('id')->on('destination_points')
+            $table->unsignedBigInteger('end_point_id');
+            $table->foreign('end_point_id')->references('id')->on('destination_points')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('order')->nullable();
-            $table->foreign('order')->references('id')->on('orders')
+            $table->unsignedBigInteger('order_id')->nullable();
+            $table->foreign('order_id')->references('id')->on('orders')
                 ->onDelete('cascade');
-
-            $table->boolean('isPaid')->default(false);
-            $table->boolean('isInCart')->default(true);
 
             $table->double('price');
-
             $table->timestamps();
         });
     }

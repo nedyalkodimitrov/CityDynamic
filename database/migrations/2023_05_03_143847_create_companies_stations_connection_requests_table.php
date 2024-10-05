@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('companies_stations_connection_requests', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('company');
-            $table->foreign('company')->references('id')->on('companies')
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('company_id')->references('id')->on('companies')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger('station');
-            $table->foreign('station')->references('id')->on('stations')
+            $table->unsignedBigInteger('station_id');
+            $table->foreign('station_id')->references('id')->on('stations')
                 ->onDelete('cascade');
-            $table->boolean('isApproved')->nullable()->default(null);
-            $table->boolean('isFromCompany');
+            $table->enum('status', ['seen', 'approved'])->nullable()->default(null);
+            $table->enum('type', ['from_company', 'from_station']);
             $table->timestamps();
         });
     }

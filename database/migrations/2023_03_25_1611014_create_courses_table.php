@@ -15,31 +15,27 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-
-            $table->unsignedBigInteger('destination');
+            $table->unsignedBigInteger('destination_id');
             $table->foreign('destination')->references('id')->on('destinations')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger('bus')->nullable();
-            $table->foreign('bus')->references('id')->on('buses')
+            $table->unsignedBigInteger('bus_id')->nullable();
+            $table->foreign('bus_id')->references('id')->on('buses')
+                ->onDelete('cascade');
+            $table->unsignedBigInteger('driver_id');
+            $table->foreign('driver_id')->references('id')->on('users')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('driver');
-            $table->foreign('driver')->references('id')->on('users')
+            $table->unsignedBigInteger('last_point_id');
+            $table->foreign('last_point_id')->references('id')->on('destination_points')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('lastPoint');
-            $table->foreign('lastPoint')->references('id')->on('destination_points')
-                ->onDelete('cascade');
-
-            $table->decimal('currentLatitude');
-            $table->decimal('currentLongitude');
+            $table->decimal('current_latitude');
+            $table->decimal('current_longitude');
 
             $table->date('date');
-            $table->time('startTime');
+            $table->time('start_time');
 
             $table->timestamps();
-
         });
     }
 

@@ -15,14 +15,14 @@ class Bus extends Model
         'name',
         'model',
         'seats',
-        'seatsPerRow',
-        'seatsStatus',
-        'company',
+        'seats_per_row',
+        'seats_status',
+        'company_id',
     ];
 
     public function company()
     {
-        return $this->belongsTo(Company::class, 'busCompany', 'id');
+        return $this->belongsTo(Company::class);
     }
 
     public function driver()

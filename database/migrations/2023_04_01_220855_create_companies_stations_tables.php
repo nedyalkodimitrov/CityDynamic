@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('companies_stations_tables', function (Blueprint $table) {
+        Schema::create('companies_stations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('company');
-            $table->foreign('company')->references('id')->on('companies')
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('company_id')->references('id')->on('companies')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger('station');
-            $table->foreign('station')->references('id')->on('stations')
+            $table->unsignedBigInteger('station_id');
+            $table->foreign('station_id')->references('id')->on('stations')
                 ->onDelete('cascade');
             $table->timestamps();
 

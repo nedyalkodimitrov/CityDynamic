@@ -16,17 +16,15 @@ return new class extends Migration
         Schema::create('destinations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('startBusStation');
-            $table->foreign('startBusStation')->references('id')->on('stations')
+            $table->unsignedBigInteger('start_station_id');
+            $table->foreign('start_station_id')->references('id')->on('stations')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger('endBusStation');
-            $table->foreign('endBusStation')->references('id')->on('stations')
+            $table->unsignedBigInteger('end_station_id');
+            $table->foreign('end_station_id')->references('id')->on('stations')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger('executiveCompany');
-            $table->foreign('executiveCompany')->references('id')->on('companies')
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('company_id')->references('id')->on('companies')
                 ->onDelete('cascade');
-
         });
     }
 

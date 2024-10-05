@@ -18,14 +18,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('model');
             $table->string('seats');
-            $table->integer('seatsAtRow');
-            $table->json('seatsStatus');
+            $table->integer('seats_at_row');
+            $table->json('seats_status');
             $table->unsignedBigInteger('company');
             $table->foreign('company')->references('id')->on('companies')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger('currentLocation')->nullable();
-            $table->foreign('currentLocation')->references('id')->on('stations')
+            $table->unsignedBigInteger('current_location')->nullable();
+            $table->foreign('current_location')->references('id')->on('stations')
                 ->onDelete('cascade');
 
         });

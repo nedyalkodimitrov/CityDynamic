@@ -15,20 +15,20 @@ return new class extends Migration
     {
         Schema::create('destination_schedules', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('destination');
-            $table->foreign('destination')->references('id')->on('destinations')
+            $table->unsignedBigInteger('destination_id');
+            $table->foreign('destination_id')->references('id')->on('destinations')
                 ->onDelete('cascade');
             $table->double('price');
             $table->time('hour');
-            $table->unsignedBigInteger('bus');
-            $table->foreign('bus')->references('id')->on('buses')
+            $table->unsignedBigInteger('bus_id');
+            $table->foreign('bus_id')->references('id')->on('buses')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger('driver');
-            $table->foreign('driver')->references('id')->on('company_employees')
+            $table->unsignedBigInteger('driver_id');
+            $table->foreign('driver_id')->references('id')->on('company_employees')
                 ->onDelete('cascade');
-            $table->boolean('isRepeatable');
+            $table->boolean('is_repeatable');
             $table->json('days');
-            $table->json('weekDays');
+            $table->json('week_days');
             $table->timestamps();
         });
     }
