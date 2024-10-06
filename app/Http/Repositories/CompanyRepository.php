@@ -4,10 +4,11 @@ namespace App\Http\Repositories;
 
 use App\Models\Company;
 use App\Models\Station;
+use App\Models\User;
 
 class CompanyRepository
 {
-    public function getCompanyOfUser($user)
+    public function getUserCompany(User $user)
     {
         return $user->employers()->first();
     }

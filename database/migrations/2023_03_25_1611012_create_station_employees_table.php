@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('station_id')->on('stations')->references('id')
                 ->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('users_id')->on('users')->references('id')
+            $table->foreign('user_id')->on('users')->references('id')
                 ->onDelete('cascade');
         });
     }

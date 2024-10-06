@@ -23,7 +23,7 @@ class CourseController extends Controller
     public function showCourses()
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getCompanyOfUser($user);
+        $company = $this->companyRepository->getUserCompany($user);
         $destinationsIds = $this->destinationRepository->getDestinationIdsOfCompany($company->id);
 
         $courses = $this->courseRepository->getCoursesByDestinationIds($destinationsIds);
@@ -34,7 +34,7 @@ class CourseController extends Controller
     public function showCourse($id)
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getCompanyOfUser($user);
+        $company = $this->companyRepository->getUserCompany($user);
         $destinations = $this->destinationRepository->getDestinationsByCompany($company->id);
         $buses = $this->busRepository->getBusesByCompany($company->id);
         $course = $this->courseRepository->findById($id);
@@ -51,7 +51,7 @@ class CourseController extends Controller
     public function showCourseCreate()
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getCompanyOfUser($user);
+        $company = $this->companyRepository->getUserCompany($user);
         $destinations = $this->destinationRepository->getDestinationsByCompany($company->id);
         $buses = $this->busRepository->getBusesByCompany($company->id);
 

@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function showHome()
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getCompanyOfUser($user);
+        $company = $this->companyRepository->getUserCompany($user);
         $destinationIds = $this->destinationRepository->getDestinationIdsOfCompany($company->id);
 
         $destinationCount = count($destinationIds);

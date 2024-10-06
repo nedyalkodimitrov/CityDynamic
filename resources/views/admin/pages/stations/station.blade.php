@@ -32,9 +32,6 @@
         <div class="form-group col-12 mt-3">
             <label for="exampleInputPassword1">Админ</label>
             <select class="form form-select" name="admin">
-                <option selected value="{{$station->getAdmin->id}}">
-                    {{$station->getAdmin->name}}
-                </option>
                 @foreach($users as $user)
                     <option value="{{$user->id}}">
                         {{$user->name}}

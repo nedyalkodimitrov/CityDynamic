@@ -22,7 +22,7 @@ class DestinationController extends Controller
     public function showDestinations()
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getCompanyOfUser($user);
+        $company = $this->companyRepository->getUserCompany($user);
         $destinations = $this->destinationRepository->getDestinationsByCompany($company->id);
 
         return view('companies.pages.destinations.destinations', [
@@ -33,7 +33,7 @@ class DestinationController extends Controller
     public function showDestination($destinationId)
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getCompanyOfUser($user);
+        $company = $this->companyRepository->getUserCompany($user);
 
         $destination = $this->destinationRepository->findById($destinationId);
         $tracks = $this->destinationRepository->getTracks($destination);
@@ -51,7 +51,7 @@ class DestinationController extends Controller
     public function showDestinationCreate()
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getCompanyOfUser($user);
+        $company = $this->companyRepository->getUserCompany($user);
         $busStations = $company->stations;
 
         return view('companies.pages.destinations.destinationForm',

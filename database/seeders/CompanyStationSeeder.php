@@ -21,7 +21,7 @@ class CompanyStationSeeder extends Seeder
             $station = Station::find($index);
 
             foreach (range(1, 3) as $secondIndex) {
-                $station->getCompanies()->attach($faker->numberBetween(1, 10));
+                $station->companies()->attach($faker->numberBetween(1, 10));
             }
         }
     }

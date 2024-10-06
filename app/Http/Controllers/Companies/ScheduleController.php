@@ -37,7 +37,7 @@ class ScheduleController extends Controller
     public function showScheduleForm()
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getCompanyOfUser($user);
+        $company = $this->companyRepository->getUserCompany($user);
         $buses = $company->getBuses;
         $drivers = $company->getEmployees;
 

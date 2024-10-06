@@ -13,7 +13,7 @@ class EmployeeController extends Controller
     public function showEmployees()
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getCompanyOfUser($user);
+        $company = $this->companyRepository->getUserCompany($user);
         $employees = $company->employees;
 
         return view('companies.pages.employees.employees', [

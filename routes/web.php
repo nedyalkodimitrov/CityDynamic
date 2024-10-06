@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::group([
     'prefix' => 'adminPanel',
-    'middleware' => ['auth', 'roleCheck:Admin'],
+    'middleware' => ['auth', 'roleCheck:System Admin'],
 ], function () {
 
     Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('homeAdmin');
@@ -69,8 +69,7 @@ Route::group([
 
 Route::group([
     'prefix' => 'companyPanel',
-    'middleware' => ['auth', 'roleCheck:CompanyAdmin'],
-
+    'middleware' => ['auth', 'roleCheck:Company Admin'],
 ], function () {
     Route::get('/', [\App\Http\Controllers\Companies\HomeController::class, 'showHome'])->name('company.home');
 

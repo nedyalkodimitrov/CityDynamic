@@ -18,11 +18,11 @@ class StationFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'city' => $this->faker->numberBetween(1, 10),
-            'profilePhoto' => $this->faker->imageUrl(),
-            'contactEmail' => $this->faker->safeEmail(),
-            'contactPhone' => $this->faker->phoneNumber(),
-            'contactAddress' => $this->faker->address(),
+            'city_id' => $this->faker->numberBetween(1, 10),
+            'profile_photo' => $this->faker->imageUrl(),
+            'contact_email' => $this->faker->safeEmail(),
+            'contact_phone' => $this->faker->phoneNumber(),
+            'contact_address' => $this->faker->address(),
         ];
     }
 }

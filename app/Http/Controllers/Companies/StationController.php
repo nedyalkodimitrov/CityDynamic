@@ -15,7 +15,7 @@ class StationController extends Controller
     public function showStations()
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getCompanyOfUser($user);
+        $company = $this->companyRepository->getUserCompany($user);
         $connectedStations = $company->stations;
 
         $dissociateStations = $this->companyRepository->getDissociateStations($company);
@@ -31,7 +31,7 @@ class StationController extends Controller
     {
         $user = Auth::user();
         $station = $this->stationRepository->findById($stationId);
-        $company = $this->companyRepository->getCompanyOfUser($user);
+        $company = $this->companyRepository->getUserCompany($user);
         $isRequestToThisStation = $this->companyRepository->checkIfThereIsRequestToThisStation($company, $station);
         $isApproved = $this->companyRepository->checkIfStationIsConnected($company, $station);
 
@@ -44,7 +44,7 @@ class StationController extends Controller
     public function makeStationRequest($id)
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getCompanyOfUser($user);
+        $company = $this->companyRepository->getUserCompany($user);
         $station = $this->stationRepository->findById($id);
         $this->companyRepository->makeRequestToStation($company, $station);
 
@@ -54,7 +54,7 @@ class StationController extends Controller
     public function declineStationRequest($stationId)
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getCompanyOfUser($user);
+        $company = $this->companyRepository->getUserCompany($user);
         $station = $this->stationRepository->findById($stationId);
         $this->companyRepository->removeRequestToStation($company, $station);
 
@@ -64,7 +64,7 @@ class StationController extends Controller
     public function unpairStation($stationId)
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getCompanyOfUser($user);
+        $company = $this->companyRepository->getUserCompany($user);
         $station = $this->stationRepository->findById($stationId);
         $this->companyRepository->removeStationFromConnections($company, $station);
 
@@ -74,7 +74,7 @@ class StationController extends Controller
     public function getAllStations()
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getCompanyOfUser($user);
+        $company = $this->companyRepository->getUserCompany($user);
         $stations = $company->stations;
 
         return json_encode(StationResource::collection($stations));

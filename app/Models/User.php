@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable
 {
@@ -44,23 +43,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function company()
-    {
-        return $this->hasOne(Company::class, 'admin', 'id');
-    }
-
-    public function station()
-    {
-        return $this->hasOne(Station::class, 'admin', 'id');
-    }
-
     public function orders()
     {
         return $this->hasMany(Order::class, 'user');
     }
 
-    public function employers()
+    public function companyEmployers()
     {
         return $this->belongsToMany(Company::class, 'company_employees', 'user', 'company');
+    }
+
+    public function stationEmployers()
+    {
+        return $this->belongsToMany(Station::class, 'station_employees', 'user', 'station');
     }
 }

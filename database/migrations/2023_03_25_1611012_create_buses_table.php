@@ -20,13 +20,13 @@ return new class extends Migration
             $table->string('seats');
             $table->integer('seats_at_row');
             $table->json('seats_status');
-            $table->unsignedBigInteger('company');
-            $table->foreign('company')->references('id')->on('companies')
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('company_id')->references('id')->on('companies')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger('current_location')->nullable();
-            $table->foreign('current_location')->references('id')->on('stations')
+            $table->unsignedBigInteger('current_station_id')->nullable();
+            $table->foreign('current_station_id')->references('id')->on('stations')
                 ->onDelete('cascade');
-
+            $table->string('location', 200);
         });
     }
 

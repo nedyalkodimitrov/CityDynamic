@@ -18,8 +18,8 @@ class BusController extends Controller
     public function showBuses()
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getCompanyOfUser($user);
-        $buses = $company->getBuses;
+        $company = $this->companyRepository->getUserCompany($user);
+        $buses = $company->buses;
 
         return view('companies.pages.buses.buses', [
             'buses' => $buses,
@@ -37,32 +37,28 @@ class BusController extends Controller
 
     public function showBusCreate()
     {
-
         return view('companies.pages.buses.busForm');
     }
 
     public function showBusEdit($busId)
     {
-
         $bus = $this->busRepository->findById($busId);
         $busStations = $this->stationRepository->findAll();
 
         return view('companies.pages.buses.busEdit', [
             'bus' => $bus,
             'busStations' => $busStations,
-        ]
-        );
+        ]);
     }
 
     public function createBus(CreateBusRequest $request)
     {
         $request->validated();
         $user = Auth::user();
-        $company = $this->companyRepository->getCompanyOfUser($user);
+        $company = $this->companyRepository->getUserCompany($user);
         $this->busRepository->create($request->name, $request->model, $request->seats, $request->seatsPerRow, $company->id);
 
         return redirect()->route('company.showBuses');
-
     }
 
     public function editBus($busId, EditBusRequest $request)
@@ -71,6 +67,5 @@ class BusController extends Controller
         $this->busRepository->update($busId, $request->name, $request->model, $request->seats);
 
         return redirect()->route('company.showBuses');
-
     }
 }

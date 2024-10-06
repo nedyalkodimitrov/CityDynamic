@@ -30,8 +30,8 @@ class UserSeeder extends Seeder
         $admin->assignRole($adminRoleId);
 
         //Create company admin accounts
+        $companyRoleId = Role::where('name', 'Company Admin')->value('id');
         foreach (range(1, 10) as $index) {
-            $companyRoleId = Role::where('name', 'Company Admin')->value('id');
 
             $companyUser = User::create([
                 'name' => $faker->name,
@@ -41,12 +41,12 @@ class UserSeeder extends Seeder
             ]);
 
             $companyUser->assignRole($companyRoleId);
-            $companyUser->getCompanyEmployers()->attach($index);
+            $companyUser->companyEmployers()->attach($index);
         }
 
         //Create station admin accounts
+        $stationRoleId = Role::where('name', 'Station Admin')->value('id');
         foreach (range(1, 10) as $index) {
-            $stationRoleId = Role::where('name', 'Station Admin')->value('id');
 
             $companyUser = User::create([
                 'name' => $faker->name,

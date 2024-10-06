@@ -21,12 +21,12 @@ class BusSeeder extends Seeder
         foreach (range(1, 10) as $index) {
             foreach (range(1, 10) as $busIndex) {
                 Bus::create([
-                    'company' => $index,
+                    'company_id' => $index,
                     'name' => $faker->name,
                     'model' => $faker->name,
                     'seats' => $faker->numberBetween(10, 50),
-                    'seatsAtRow' => $faker->numberBetween(2, 5),
-                    'seatsStatus' => json_encode([]),
+                    'seats_at_row' => $faker->numberBetween(2, 5),
+                    'seats_status' => json_encode([]),
                 ]);
             }
         }

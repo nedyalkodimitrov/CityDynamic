@@ -23,8 +23,8 @@ return new class extends Migration
             $table->foreign('course_id')->references('id')->on('courses')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('start_point_io');
-            $table->foreign('start_point_io')->references('id')->on('destination_points')
+            $table->unsignedBigInteger('start_point_id');
+            $table->foreign('start_point_id')->references('id')->on('destination_points')
                 ->onDelete('cascade');
 
             $table->unsignedBigInteger('end_point_id');
