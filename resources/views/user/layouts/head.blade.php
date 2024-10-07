@@ -1,7 +1,5 @@
 <!--Main Navigation-->
 <style>
-    /*shopping-cart-red: #DF0000;*/
-
     .fa-stack[data-count]:after {
         position: absolute;
         right: 0%;
@@ -30,20 +28,12 @@
     }
 </style>
 <header>
-
-    <nav
-        id="main-navbar"
-        class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
-    >
-        <!-- Container wrapper -->
+    <nav id="main-navbar"
+        class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
         <div class="container-fluid">
-            <!-- Toggle button -->
-
-            <!-- Brand -->
             <a class="navbar-brand" href="{{route("root")}}">
                 <img src="{{asset("assets/images/logo.png")}}" alt="" width="200px">
             </a>
-
             <a class="navbar-brand" href="{{route("root")}}" style="font-size: 1em; ">
                 Начало
             </a>
@@ -53,13 +43,7 @@
             <a class="navbar-brand" href="{{route("user.shoeCourseFormView")}}" style="font-size: 1em; ">
                 Курсове
             </a>
-            <!-- Search form -->
-
-            <!-- Right links -->
             <ul class="navbar-nav ms-auto d-flex flex-row">
-                <!-- Notification dropdown -->
-
-
                 @if(\Illuminate\Support\Facades\Auth::check())
                     <div style="
     display: flex;
@@ -94,71 +78,25 @@
                             class="dropdown-menu dropdown-menu-end"
                             aria-labelledby="navbarDropdownMenuLink"
                         >
-                            @if(\Illuminate\Support\Facades\Auth::user()->getRoleNames()->first() == "Admin")
+                            @if(\Illuminate\Support\Facades\Auth::user()->getRoleNames()->first() == \App\Http\Constants\RoleConstant::SYSTEM_ADMIN)
                                 <li><a class="dropdown-item" href="{{route("homeAdmin")}}">Админ Панел</a></li>
-                            @elseif(\Illuminate\Support\Facades\Auth::user()->getRoleNames()->first() == "CompanyAdmin")
-
+                            @elseif(\Illuminate\Support\Facades\Auth::user()->getRoleNames()->first() == \App\Http\Constants\RoleConstant::COMPANY_ADMIN)
                                 <li><a class="dropdown-item" href="{{route("company.home")}}">Панел за компании</a>
                                 </li>
-
-                            @elseif(\Illuminate\Support\Facades\Auth::user()->getRoleNames()->first() == "StationAdmin")
+                            @elseif(\Illuminate\Support\Facades\Auth::user()->getRoleNames()->first() == \App\Http\Constants\RoleConstant::STATION_ADMIN)
                                 <li><a class="dropdown-item" href="{{route("station.home")}}">Панел за автогари</a>
                                 </li>
-
                             @endif
                             <li><a class="dropdown-item" href="{{route("user.showProfile")}}">Профил</a></li>
                             <li><a class="dropdown-item" href="{{route("user.showPurchases")}}">Покупки</a></li>
                             <li><a class="dropdown-item" href="{{route("get.logout")}}">Излез</a></li>
                         </ul>
                     </li>
-
                 @else
                     <li><a class="dropdown-item" href="{{route("login")}}">Влез</a></li> /
                     <li><a class="dropdown-item" href="{{route("register")}}">Регистритай се</a></li>
-
-
-                    {{--                    <li class="nav-item dropdown">--}}
-
-{{--                        <a--}}
-{{--                            class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"--}}
-{{--                            href="#"--}}
-{{--                            id="navbarDropdownMenuLink"--}}
-{{--                            role="button"--}}
-{{--                            data-mdb-toggle="dropdown"--}}
-{{--                            aria-expanded="false"--}}
-{{--                        >--}}
-{{--                            <img--}}
-{{--                                src="{{asset("assets/images/noLoggedProfileImage.png")}}"--}}
-{{--                                class="rounded-circle"--}}
-{{--                                height="45"--}}
-{{--                                alt=""--}}
-{{--                                loading="lazy"--}}
-{{--                            />--}}
-{{--                        </a>--}}
-{{--                        <ul--}}
-{{--                            class="dropdown-menu dropdown-menu-end"--}}
-{{--                            aria-labelledby="navbarDropdownMenuLink"--}}
-{{--                        >--}}
-{{--                           --}}{{--                            <li><a class="dropdown-item" href="{{route("get.logout")}}">Излез</a></li>--}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
-
-                    {{--                    <li class="" style="margin-right: 2em"><a class="dropdown-item " href="{{route("login")}}">Влез</a>--}}
-                    {{--                    </li>--}}
-                    {{--                    <li><a class="dropdown-item ml-3" href="{{route("register")}}">Регистритай се</a></li>--}}
                 @endif
-                <!-- Icon dropdown -->
-
-                <!-- Avatar -->
-
             </ul>
         </div>
-        <!-- Container wrapper -->
     </nav>
-    <!-- Navbar -->
 </header>
-<!--Main Navigation-->
-
-<!--Main layout-->
-
-<!--Main layout-->

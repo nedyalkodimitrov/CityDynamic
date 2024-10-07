@@ -26,7 +26,6 @@ class ScheduleController extends Controller
 
     public function showSchedule($destinationId, $scheduleId)
     {
-
         $schedule = $this->destinationScheduleRepository->findById($scheduleId);
 
         return view('companies.pages.schedules.schedule', [
@@ -37,9 +36,9 @@ class ScheduleController extends Controller
     public function showScheduleForm()
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getUserCompany($user);
-        $buses = $company->getBuses;
-        $drivers = $company->getEmployees;
+        $company = $user->getCompany();
+        $buses = $company->buses;
+        $drivers = [];
 
         return view('companies.pages.schedules.scheduleForm', [
             'buses' => $buses,

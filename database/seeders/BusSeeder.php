@@ -27,6 +27,7 @@ class BusSeeder extends Seeder
                     'seats' => $faker->numberBetween(10, 50),
                     'seats_at_row' => $faker->numberBetween(2, 5),
                     'seats_status' => json_encode([]),
+                    'location' => $faker->address,
                 ]);
             }
         }

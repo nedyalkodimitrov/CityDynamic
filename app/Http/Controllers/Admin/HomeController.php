@@ -13,17 +13,18 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $destinationCount = Destination::all();
-        $stationCount = Station::all();
-        $companyCount = Company::all();
-        $coursesCount = Course::all();
-        $usersCount = User::all();
+        $destinationCount = Destination::count();
+        $stationCount = Station::count();
+        $companyCount = Company::count();
+        $coursesCount = Course::count();
+        $usersCount = User::count();
 
-        return view('admin.pages.index')
-            ->with('destinationCount', count($destinationCount))
-            ->with('stationCount', count($stationCount))
-            ->with('userCount', count($usersCount))
-            ->with('coursesCount', count($coursesCount))
-            ->with('companyCount', count($companyCount));
+        return view('admin.pages.index', [
+            'destinationCount' => $destinationCount,
+            'stationCount' => $stationCount,
+            'companyCount' => $companyCount,
+            'coursesCount' => $coursesCount,
+            'userCount' => $usersCount,
+        ]);
     }
 }

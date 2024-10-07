@@ -22,7 +22,7 @@ class UserController extends Controller
 
         if (Auth::check()) {
             $user = Auth::user();
-            $items = ShoppingCart::where('user', $user->id)->whereNull('order')->get();
+            $items = ShoppingCart::where('user_id', $user->id)->get();
 
         } else {
             $items = [];

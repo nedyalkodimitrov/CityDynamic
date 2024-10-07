@@ -10,8 +10,8 @@ class DestinationPoint extends Model
     use HasFactory;
 
     protected $fillable = [
-        'destination',
-        'station',
+        'destination_id',
+        'station_id',
         'order',
         'duration',
         'distance',

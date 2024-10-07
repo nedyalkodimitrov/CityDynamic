@@ -19,20 +19,20 @@ class DestinationRepository
 
     public function getDestinationsByCompany($companyId)
     {
-        return Destination::where('executiveCompany', $companyId)->get();
+        return Destination::where('company_id', $companyId)->get();
     }
 
     public function getDestinationIdsOfCompany($companyId)
     {
-        return Destination::where('executiveCompany', $companyId)->get()->pluck('id');
+        return Destination::where('company_id', $companyId)->get()->pluck('id');
     }
 
     public function getTracks(Destination $destination): array
     {
         $tracks = [];
-        $destinationPoints = $destination->getPoints()->orderBy('order', 'ASC')->get();
+        $destinationPoints = $destination->points()->orderBy('order', 'ASC')->get();
         foreach ($destinationPoints as $point) {
-            $station = Station::find($point->station);
+            $station = Station::find($point->station_id);
             $tracks[] = $station;
         }
 
@@ -43,9 +43,9 @@ class DestinationRepository
     {
         return Destination::create([
            'name' => $name,
-            'start_bus_station' => $firstStation,
-            'end_bus_station' => $lastStation,
-            'executive_company' => $company->id,
+            'start_station_id' => $firstStation,
+            'end_station_id' => $lastStation,
+            'company_id' => $company->id,
         ]);
     }
 }

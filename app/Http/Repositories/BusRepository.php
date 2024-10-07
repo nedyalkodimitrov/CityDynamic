@@ -18,26 +18,19 @@ class BusRepository
 
     public function getBusesByCompany($companyId)
     {
-        return Bus::where('company', $companyId)->get();
-
+        return Bus::where('company_id', $companyId)->get();
     }
 
-    public function create($name, $model, $seats, $seatsPerRow, $busCompany)
+    public function create($param)
     {
-
         return Bus::create([
-            'name' => $name,
-            'model' => $model,
-            'seats' => $seats,
-            'seats_per_row' => $seatsPerRow,
-            'seats_status' => json_encode(array_fill(0, $seats, 0)),
-            'company' => $busCompany,
+
         ]);
     }
 
-    public function update($busId, $name, $model, $seats)
+    public function update($bus, $params)
     {
-        return Bus::find($busId)->update([
+        return $bus->update([
             'name' => $name,
             'model' => $model,
             'seats' => $seats,

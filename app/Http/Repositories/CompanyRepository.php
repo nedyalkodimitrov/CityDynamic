@@ -27,22 +27,22 @@ class CompanyRepository
 
     public function checkIfThereIsRequestToThisStation(Company $company, Station $station): bool
     {
-        return $company->stationConnectionRequests()->where('station', $station->id)->count() > 0;
+        return $company->connectionRequests()->where('station_id', $station->id)->count() > 0;
     }
 
     public function checkIfStationIsConnected(Company $company, Station $station): bool
     {
-        return $company->stations()->where('station', $station->id)->count() > 0;
+        return $company->stations()->where('station_id', $station->id)->count() > 0;
     }
 
     public function makeRequestToStation(Company $company, Station $station)
     {
-        $company->getRequestedStations()->attach([$station->id]);
+        $company->connectionRequests()->attach([$station->id]);
     }
 
     public function removeRequestToStation(Company $company, Station $station)
     {
-        $company->getRequestedStations()->detach([$station->id]);
+        $company->connectionRequests()->detach([$station->id]);
     }
 
     public function removeStationFromConnections(Company $company, Station $station)
@@ -58,5 +58,19 @@ class CompanyRepository
     public function findById($id)
     {
         return Company::find($id);
+    }
+
+    public function create($params)
+    {
+        return Company::create($params);
+    }
+
+    public function update() {}
+
+    public function getEmployees(Company $company)
+    {
+        return User::join('user_workspaces', 'users.id', '=', 'user_workspaces.user_id')
+            ->where('user_workspaces.company_id', $company->id)
+            ->get();
     }
 }

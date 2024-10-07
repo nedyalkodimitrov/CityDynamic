@@ -13,14 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('company_employees', function (Blueprint $table) {
+        Schema::create('user_workspaces', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('company_id');
-            $table->foreign('company_id')->references('id')->on('companies')
-                ->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')
+            $table->foreign('user_id')->on('users')->references('id')
                 ->onDelete('cascade');
+            $table->unsignedBigInteger('station_id')->nullable();
+            $table->foreign('station_id')->on('stations')->references('id')
+                ->onDelete('cascade');
+            $table->unsignedBigInteger('company_id')->nullable();
+            $table->foreign('company_id')->on('stations')->references('id')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -32,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_emplyees');
+        Schema::dropIfExists('user_workspaces');
     }
 };

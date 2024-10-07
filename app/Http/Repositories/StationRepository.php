@@ -15,7 +15,7 @@ class StationRepository
     {
         $company = $station->getCompanyRequests()->where('bus_company', $companyId)->first();
         $station->getCompanyRequests()->detach($company->id);
-        $station->getCompanies()->attach($company->id);
+        $station->companies()->attach($company->id);
     }
 
     public function declineCompanyRequest($station, $companyId)
@@ -31,7 +31,7 @@ class StationRepository
 
     public function getCompanyOnStation($station, $companyId)
     {
-        return $station->getCompanies()->where('bus_company', $companyId)->first();
+        return $station->companies()->where('bus_company', $companyId)->first();
     }
 
     public function getCompaniesOnStation(Station $station)
@@ -54,5 +54,15 @@ class StationRepository
     public function findById($id)
     {
         return Station::findOrFail($id);
+    }
+
+    public function create($params)
+    {
+        return Station::create($params);
+    }
+
+    public function update($station, $params)
+    {
+        $station->update($params);
     }
 }

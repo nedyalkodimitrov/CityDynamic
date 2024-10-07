@@ -34,9 +34,9 @@
                 <div class="card col-11 mx-auto row" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">{{$station->name}}</h5>
-                        <p class="card-text"> | {{count($station->getCompanies)}} <i
-                                class="fas fa-users"></i>|{{$station->getCity->name}}
-                            , {{$station->getCity->getCountry->name}} <i class="fas fa-map-marker-alt"
+                        <p class="card-text"> | {{$station->companies()->count()}} <i
+                                class="fas fa-users"></i>|{{$station->city->name}}
+                            , {{$station->city->country->name}} <i class="fas fa-map-marker-alt"
                                                                          aria-hidden="true"></i></p>
                         <a href="{{route("company.showStation", ["id" => $station->id])}}"
                            class="btn btn-primary col-12">Виж още</a>

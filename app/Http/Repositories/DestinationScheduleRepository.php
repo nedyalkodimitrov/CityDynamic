@@ -18,13 +18,13 @@ class DestinationScheduleRepository
 
     public function findSchedulesByDestination($destinationId)
     {
-        return DestinationSchedule::where('destination', $destinationId)->get();
+        return DestinationSchedule::where('destination_id', $destinationId)->get();
     }
 
     public function create($destination, $bus, $hour, $driver, $isRepeatable, $days, $weekDays)
     {
         DestinationSchedule::create([
-            'destination' => $destination,
+            'destination_id' => $destination,
             'bus' => $bus,
             'hour' => $hour,
             'driver' => $driver,

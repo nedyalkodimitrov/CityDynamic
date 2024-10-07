@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Http\Constants\RoleConstant;
 use App\Models\User;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
@@ -20,7 +21,7 @@ class UserSeeder extends Seeder
         $faker = Faker::create();
 
         //Create admin account
-        $adminRoleId = Role::where('name', 'System Admin')->value('id');
+        $adminRoleId = Role::where('name', RoleConstant::SYSTEM_ADMIN)->value('id');
         $admin = User::create([
             'name' => 'Admin User',
             'email' => 'admin@dynamic-city.com',
@@ -30,7 +31,7 @@ class UserSeeder extends Seeder
         $admin->assignRole($adminRoleId);
 
         //Create company admin accounts
-        $companyRoleId = Role::where('name', 'Company Admin')->value('id');
+        $companyRoleId = Role::where('name', RoleConstant::COMPANY_ADMIN)->value('id');
         foreach (range(1, 10) as $index) {
 
             $companyUser = User::create([
@@ -41,11 +42,13 @@ class UserSeeder extends Seeder
             ]);
 
             $companyUser->assignRole($companyRoleId);
-            $companyUser->companyEmployers()->attach($index);
+            $companyUser->userWorkspace()->create([
+                'company_id' => $index
+            ]);
         }
 
         //Create station admin accounts
-        $stationRoleId = Role::where('name', 'Station Admin')->value('id');
+        $stationRoleId = Role::where('name', RoleConstant::STATION_ADMIN)->value('id');
         foreach (range(1, 10) as $index) {
 
             $companyUser = User::create([
@@ -56,6 +59,10 @@ class UserSeeder extends Seeder
             ]);
 
             $companyUser->assignRole($stationRoleId);
+
+            $companyUser->userWorkspace()->create([
+                'station_id' => $index
+            ]);
         }
     }
 }

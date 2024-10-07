@@ -40,6 +40,6 @@ class CourseRepository
 
     public function getCoursesByDestinationIds($destinationIds)
     {
-        return Course::whereIn('destination', $destinationIds)->get();
+        return Course::whereIn('destination_id', $destinationIds)->get();
     }
 }

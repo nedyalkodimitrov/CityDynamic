@@ -13,45 +13,45 @@ class Destination extends Model
 
     protected $fillable = [
         'name',
-        'start_bus_station',
-        'end_bus_station',
-        'executive_company',
+        'start_station_id',
+        'end_station_id',
+        'company_id',
         'duration',
         'distance',
         'price',
     ];
-    public function startBusStation()
+    public function startStation()
     {
-        return $this->belongsTo(Station::class, 'startBusStation', 'id');
+        return $this->belongsTo(Station::class, 'start_station_id', 'id');
     }
 
-    public function endBusStation()
+    public function endStation()
     {
-        return $this->belongsTo(Station::class, 'endBusStation', 'id');
+        return $this->belongsTo(Station::class, 'end_station_id', 'id');
     }
 
-    public function executiveCompany()
+    public function company()
     {
-        return $this->belongsTo(Company::class, 'executiveCompany', 'id');
+        return $this->belongsTo(Company::class, 'company_id', 'id');
     }
 
     public function points()
     {
-        return $this->hasMany(DestinationPoint::class, 'destination', 'id');
+        return $this->hasMany(DestinationPoint::class, 'destination_id', 'id');
     }
 
     public function tickets()
     {
-        return $this->hasMany(Ticket::class, 'destination', 'id');
+        return $this->hasMany(Ticket::class, 'destination_id', 'id');
     }
 
     public function courses()
     {
-        return $this->hasMany(Course::class, 'destination', 'id');
+        return $this->hasMany(Course::class, 'destination_id', 'id');
     }
 
     public function schedules()
     {
-        return $this->hasMany(DestinationSchedule::class, 'destination', 'id');
+        return $this->hasMany(DestinationSchedule::class, 'destination_id', 'id');
     }
 }

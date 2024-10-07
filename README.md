@@ -28,4 +28,3 @@ The project aims to create a platform through which people can monitor everythin
 - Create Bus Companies 
 
 
-

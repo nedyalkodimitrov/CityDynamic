@@ -18,8 +18,7 @@ class BusController extends Controller
     public function showBuses()
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getUserCompany($user);
-        $buses = $company->buses;
+        $buses = $user->getCompany()?->buses;
 
         return view('companies.pages.buses.buses', [
             'buses' => $buses,
@@ -35,7 +34,7 @@ class BusController extends Controller
         ]);
     }
 
-    public function showBusCreate()
+    public function showBusForm()
     {
         return view('companies.pages.buses.busForm');
     }
@@ -55,8 +54,15 @@ class BusController extends Controller
     {
         $request->validated();
         $user = Auth::user();
-        $company = $this->companyRepository->getUserCompany($user);
-        $this->busRepository->create($request->name, $request->model, $request->seats, $request->seatsPerRow, $company->id);
+        $company = $user->getCompany();
+        $this->busRepository->create([
+            'name' => $request->name,
+            'model' => $request->model,
+            'seats' => $request->seats,
+            'seats_per_row' => $request->seatsPerRow,
+            'seats_status' => json_encode(array_fill(0, $request->seats, 0)),
+            'company' => $company->id,
+        ]);
 
         return redirect()->route('company.showBuses');
     }
@@ -64,7 +70,12 @@ class BusController extends Controller
     public function editBus($busId, EditBusRequest $request)
     {
         $request->validated();
-        $this->busRepository->update($busId, $request->name, $request->model, $request->seats);
+        $bus = $this->busRepository->findById($busId);
+        $this->busRepository->update($bus, [
+            'name' => $request->name,
+            'model' => $request->model,
+            'seats' => $request->seats,
+        ]);
 
         return redirect()->route('company.showBuses');
     }

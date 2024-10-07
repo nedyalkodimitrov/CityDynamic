@@ -26,7 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('current_station_id')->nullable();
             $table->foreign('current_station_id')->references('id')->on('stations')
                 ->onDelete('cascade');
-            $table->string('location', 200);
+            $table->string('location', 200)->nullable();
         });
     }
 

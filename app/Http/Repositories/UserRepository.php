@@ -15,4 +15,19 @@ class UserRepository
     {
         return User::find($userId);
     }
+
+    public function getAllUsersWithOutWorkspace()
+    {
+        return User::doesntHave('workspaces')->get();
+    }
+
+    public function create($params)
+    {
+        User::create($params);
+    }
+
+    public function update($user, $params)
+    {
+        $user->update($params);
+    }
 }

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreign('bus_id')->references('id')->on('buses')
                 ->onDelete('cascade');
             $table->unsignedBigInteger('driver_id');
-            $table->foreign('driver_id')->references('id')->on('company_employees')
+            $table->foreign('driver_id')->references('id')->on('users')
                 ->onDelete('cascade');
             $table->boolean('is_repeatable');
             $table->json('days');

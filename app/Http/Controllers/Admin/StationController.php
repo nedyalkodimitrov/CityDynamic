@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\StationRepository;
 use App\Models\City;
 use App\Models\Station;
 use App\Models\User;
@@ -14,45 +15,56 @@ class StationController extends Controller
     {
         $busStations = Station::all();
 
-        return view('admin.pages.stations.stations')->with('stations', $busStations);
+        return view('admin.pages.stations.stations', [
+            'stations' => $busStations,
+        ]);
     }
 
-    public function showStation($busStationId)
+    public function showStation(Station $id)
     {
-        $busStation = Station::find($busStationId);
         $cities = City::all();
         $users = User::all();
 
-        return view('admin.pages.stations.station')->with('station', $busStation)->with('cities', $cities)->with('users', $users);
+        return view('admin.pages.stations.station', [
+            'station' => $id,
+            'cities' => $cities,
+            'users' => $users,
+        ]);
     }
 
     public function showStationCreate()
     {
-
         $cities = City::all();
         $users = User::all();
 
-        return view('admin.pages.stations.stationForm')->with('cities', $cities)->with('users', $users);
+        return view('admin.pages.stations.stationForm', [
+            'cities' => $cities,
+            'users' => $users,
+        ]);
     }
 
-    public function createStation(Request $request)
+    public function createStation(Request $request, StationRepository $stationRepository)
     {
-        $busStation = new Station;
-        $busStation->name = $request->name;
-        $busStation->admin = $request->admin;
-        $busStation->city = $request->city;
-        $busStation->save();
+        $stationRepository->create([
+            'name' => $request->name,
+            'city_id' => $request->city,
+            'contact_email' => $request->contact_email,
+            'contact_phone' => $request->contact_phone,
+            'contact_address' => $request->contact_address,
+        ]);
 
         return redirect()->route('admin.showStations');
     }
 
-    public function editStation($busStationId, Request $request)
+    public function editStation(Station $stationId, Request $request, StationRepository $stationRepository)
     {
-        $busStation = Station::find($busStationId);
-        $busStation->name = $request->name;
-        $busStation->admin = $request->admin;
-        $busStation->city = $request->city;
-        $busStation->save();
+        $stationRepository->update($stationId, [
+            'name' => $request->name,
+            'city_id' => $request->city,
+            'contact_email' => $request->contact_email,
+            'contact_phone' => $request->contact_phone,
+            'contact_address' => $request->contact_address,
+        ]);
 
         return redirect()->route('admin.showStations');
     }

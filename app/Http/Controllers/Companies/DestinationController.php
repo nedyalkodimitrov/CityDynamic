@@ -22,7 +22,7 @@ class DestinationController extends Controller
     public function showDestinations()
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getUserCompany($user);
+        $company = $user->getCompany();
         $destinations = $this->destinationRepository->getDestinationsByCompany($company->id);
 
         return view('companies.pages.destinations.destinations', [
@@ -33,7 +33,7 @@ class DestinationController extends Controller
     public function showDestination($destinationId)
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getUserCompany($user);
+        $company = $user->getCompany();
 
         $destination = $this->destinationRepository->findById($destinationId);
         $tracks = $this->destinationRepository->getTracks($destination);
@@ -51,7 +51,7 @@ class DestinationController extends Controller
     public function showDestinationCreate()
     {
         $user = Auth::user();
-        $company = $this->companyRepository->getUserCompany($user);
+        $company = $user->getCompany();
         $busStations = $company->stations;
 
         return view('companies.pages.destinations.destinationForm',
@@ -63,7 +63,8 @@ class DestinationController extends Controller
 
     public function createDestination(Request $request)
     {
-        $company = Auth::user()->employers()->first();
+        $user = Auth::user();
+        $company = $user->getCompany();
 
         $stations = $this->extractStationsFromRequest($request);
 
@@ -73,7 +74,7 @@ class DestinationController extends Controller
 
         $order = 1;
         foreach ($stations as $station) {
-            $this->destinationPointRepository->create($destination, $station, $order);
+            $this->destinationPointRepository->create($destination->id, $station, $order);
             $order++;
         }
 

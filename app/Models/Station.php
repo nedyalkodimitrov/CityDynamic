@@ -9,19 +9,28 @@ class Station extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'city_id',
+        'profile_photo',
+        'contact_email',
+        'contact_phone',
+        'contact_address',
+    ];
+
     public function city()
     {
-        return $this->belongsTo(City::class, 'city', 'id');
+        return $this->belongsTo(City::class, 'city_id', 'id');
     }
 
     public function companies()
     {
-        return $this->belongsToMany(Company::class, 'companies_stations_tables', 'station', 'company');
+        return $this->belongsToMany(Company::class, 'companies_stations', 'station_id', 'company_id');
     }
 
     public function companyConnectionRequests()
     {
-        return $this->belongsToMany(Company::class, 'companies_stations_request', 'station', 'company');
+        return $this->belongsToMany(Company::class, 'companies_stations_request', 'station_id', 'company_id');
     }
 
     public function destinations()

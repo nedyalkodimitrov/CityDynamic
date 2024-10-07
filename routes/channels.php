@@ -18,5 +18,5 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 });
 
 Broadcast::channel('bus.{busId}', function ($user, $busId, \App\Http\Repositories\CompanyRepository $companyRepo) {
-    return $companyRepo->getUserCompany($user)->id == \App\Models\Bus::find($busId)->company;
+    return $user->getCompany()->id == \App\Models\Bus::find($busId)->company;
 });

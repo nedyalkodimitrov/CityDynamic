@@ -29,7 +29,7 @@ class Company extends Model
 
     public function stations()
     {
-        return $this->belongsToMany(Station::class, 'companies_stations', 'company', 'station');
+        return $this->belongsToMany(Station::class, 'companies_stations', 'company_id', 'station_id');
     }
 
     //todo add migrations for company relations in destinations
@@ -38,13 +38,13 @@ class Company extends Model
         return $this->hasMany(Destination::class);
     }
 
-    public function stationConnectionRequests()
+    public function connectionRequests()
     {
-        return $this->belongsToMany(Station::class, 'companies_stations_connection_requests', 'company', 'station');
+        return $this->belongsToMany(Station::class, 'companies_stations_connection_requests', 'company_id', 'station_id');
     }
 
-    public function employees()
+    public function userWorkspaces()
     {
-        return $this->belongsToMany(User::class, 'company_employees', 'company', 'user');
+        return $this->hasMany(UserWorkspace::class, 'company_id');
     }
 }

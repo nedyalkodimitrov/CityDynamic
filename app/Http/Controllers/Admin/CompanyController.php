@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Constants\RoleConstant;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\CompanyRepository;
 use App\Http\Repositories\UserRepository;
 use App\Http\Services\MediaService;
 use App\Models\Company;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -35,7 +37,7 @@ class CompanyController extends Controller
 
     public function showCompanyCreate()
     {
-        $users = $this->userRepository->findAll();
+        $users = $this->userRepository->getAllUsersWithOutWorkspace();
 
         return view('admin.pages.companies.companyForm', [
             'users' => $users,
@@ -45,28 +47,35 @@ class CompanyController extends Controller
     public function createCompany(Request $request, MediaService $mediaService)
     {
         $imageName = $mediaService->saveImage($request->image);
-        $company = Company::create([
+
+        $company = $this->companyRepository->create([
             'name' => $request->name,
-            'contactEmail' => $request->contactEmail,
-            'contactPhone' => $request->contactPhone,
-            'contactAddress' => $request->contactAddress,
-            'profilePhoto' => $imageName,
-            'foundedAt' => $request->foundedAt,
+            'contact_email' => $request->contactEmail,
+            'contact_phone' => $request->contactPhone,
+            'contact_address' => $request->contactAddress,
+            'profile_photo' => $imageName,
+            'founded_at' => $request->foundedAt,
             'description' => $request->description,
         ]);
 
-        $company->getEmplayees->attach($request->admin);
+        $user = $this->userRepository->findById($request->admin);
+        $user->workspace()->create([
+            'company_id' => $company->id,
+        ]);
+
+        $user->assignRole(RoleConstant::COMPANY_ADMIN);
 
         return redirect()->route('admin.showCompanies');
     }
 
-    public function editCompany($companyId, Request $request)
+    public function editCompany(Company $companyId, Request $request)
     {
-        $company = Company::find($companyId);
-        $company->name = $request->name;
-        $company->admin = $request->admin;
-        $company->save();
+        $companyId->update([
+            'name' => $request->name,
+        ]);
 
         return redirect()->back();
     }
+
+
 }

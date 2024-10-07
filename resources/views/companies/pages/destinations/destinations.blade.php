@@ -29,8 +29,8 @@
                 <tr>
                     <th scope="row"></th>
                     <td>{{$destination->name}}</td>
-                    <td>{{$destination->getStartBusStation()->first()->name}} </td>
-                    <td>{{$destination->endBusStation()->first()->name}} </td>
+                    <td>{{$destination->startStation->name}} </td>
+                    <td>{{$destination->endStation->name}} </td>
                     <td><a href="{{route("company.showDestination", ["id" => $destination->id])}}"><i
                                     class="fa fa-eye"></i></a></td>
                 </tr>

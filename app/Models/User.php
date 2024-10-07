@@ -20,8 +20,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        //        'dob',
-        //        'avatar',
     ];
 
     /**
@@ -48,13 +46,51 @@ class User extends Authenticatable
         return $this->hasMany(Order::class, 'user');
     }
 
-    public function companyEmployers()
+    public function userWorkspace()
     {
-        return $this->belongsToMany(Company::class, 'company_employees', 'user', 'company');
+        return $this->hasOne(UserWorkspace::class, 'user_id');
     }
 
-    public function stationEmployers()
+    public function getWorkspace(): Company|Station|null
     {
-        return $this->belongsToMany(Station::class, 'station_employees', 'user', 'station');
+        if (!$this->userWorkspace) {
+            return null;
+        }
+
+        if ($this->userWorkspace->company_id) {
+            return $this->userWorkspace->company;
+        }
+
+        if ($this->userWorkspace->station_id) {
+            return $this->userWorkspace->station;
+        }
+
+        return null;
+    }
+
+    public function getCompany(): Company|null
+    {
+
+        if (!$this->userWorkspace) {
+            return null;
+        }
+
+        if ($this->userWorkspace->company_id) {
+            return $this->userWorkspace->company;
+        }
+        return null;
+    }
+
+    public function getStation(): Station|null
+    {
+        if (!$this->userWorkspace) {
+            return null;
+        }
+
+        if ($this->userWorkspace->station_id) {
+            return $this->userWorkspace->station;
+        }
+
+        return null;
     }
 }
