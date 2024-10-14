@@ -4,9 +4,9 @@ namespace App\Http\Services;
 
 class DistanceComputeService
 {
-    private $earthRadius = 6371; // Radius of the Earth in kilometers
+    const EARTH_RADIUS = 6371; // Radius of the Earth in kilometers
 
-    public function calculateTheDistanceBetwennTwoPoints($lat1, $lon1, $lat2, $lon2)
+    public static function calculateTheDistanceBetwennTwoPoints($lat1, $lon1, $lat2, $lon2)
     {
         // Convert degrees to radians
         $lat1_rad = deg2rad($lat1);
@@ -25,7 +25,7 @@ class DistanceComputeService
         $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
 
         // Calculate the distance
-        $distance = $this->earthRadius * $c;
+        $distance = self::EARTH_RADIUS * $c;
 
         return $distance;
     }

@@ -4,19 +4,15 @@ namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\BusRepository;
-use App\Http\Repositories\CompanyRepository;
 use App\Http\Repositories\CourseRepository;
 use App\Http\Repositories\DestinationRepository;
 use App\Http\Requests\CreateCourseRequest;
 use App\Http\Requests\EditCourseRequest;
-use App\Models\Course;
-use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
-    public function __construct(private CompanyRepository $companyRepository,
-        private DestinationRepository $destinationRepository,
+    public function __construct(private DestinationRepository $destinationRepository,
         private CourseRepository $courseRepository,
         private BusRepository $busRepository) {}
 
@@ -39,16 +35,15 @@ class CourseController extends Controller
         $buses = $this->busRepository->getBusesByCompany($company->id);
         $course = $this->courseRepository->findById($id);
 
-        return view('companies.pages.courses.course',
-            [
-                'destinations' => $destinations,
-                'buses' => $buses,
-                'courseId' => $id,
-                'course' => $course,
-            ]);
+        return view('companies.pages.courses.course', [
+            'destinations' => $destinations,
+            'buses' => $buses,
+            'courseId' => $id,
+            'course' => $course,
+        ]);
     }
 
-    public function showCourseCreate()
+    public function showCourseForm()
     {
         $user = Auth::user();
         $company = $user->getCompany();
@@ -64,27 +59,16 @@ class CourseController extends Controller
     public function createCourse(CreateCourseRequest $request)
     {
         $request->validated();
-
-        $course = $this->courseRepository->create($request->destination, $request->bus, $request->date, $request->startTime, $request->endTime);
-
-        $ticket = new Ticket;
-        $ticket->course = $course->id;
-        $ticket->price = $request->price;
-        $ticket->save();
+        $this->courseRepository->create($request->all());
 
         return redirect()->back();
-
     }
 
     public function editCourse($courseId, EditCourseRequest $request)
     {
         $request->validated();
-        $course = $this->courseRepository->update($courseId, $request->destination, $request->bus,
-            $request->date, $request->startTime, $request->endTime);
 
-        $ticket = Course::find($courseId)->getTicket;
-        $ticket->price = $request->price;
-        $ticket->save();
+        $this->courseRepository->update($courseId, $request->all());
 
         return redirect()->back();
     }

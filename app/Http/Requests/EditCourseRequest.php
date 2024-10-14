@@ -28,8 +28,8 @@ class EditCourseRequest extends FormRequest
             'bus' => 'required',
             'date' => 'required',
             'startTime' => 'required',
-            'endTime' => 'required',
-
+//            'endTime' => 'required',
+            'price' => 'required'
         ];
     }
 }

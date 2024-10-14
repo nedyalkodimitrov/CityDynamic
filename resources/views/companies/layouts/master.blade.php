@@ -23,11 +23,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js" integrity="sha512-ec1IDrAZxPSKIe2wZpNhxoFIDjmqJ+Z5SGhbuXZrw+VheJu2MqqJfnYsCD8rf71sQfKYMF4JxNSnKCjDCZ/Hlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="{{asset("assets-admin/css/header.css")}}">
     @yield("style")
+    @livewireStyles
 </head>
 <body>
     @include("companies.layouts.head")
     <!--Main layout-->
-    <main style="margin-top: 1em">
+    <main style="margin-top: 2em">
         <div class="container pt-4">
         @yield('content')
         </div>
@@ -35,5 +36,6 @@
     @include("companies.layouts.footer")
 
     @yield("scripts")
+@livewireScripts
 </body>
 </html>

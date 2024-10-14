@@ -16,30 +16,34 @@ class CourseRepository
         return Course::findOrFail($id);
     }
 
-    public function create($destination, $bus, $date, $startTime, $endTime)
+    public function create($params)
     {
         return Course::create([
-            'destination' => $destination,
-            'bus' => $bus,
-            'date' => $date,
-            'start_time' => $startTime,
-            'end_time' => $endTime,
+            'destination_id' => $params['destination'],
+            'bus_id' => $params['bus'],
+            'driver_id' => 3,
+            'date' => $params['date'],
+            'start_time' => $params['startTime'],
+//            'end_time' => $params['endTime'],
+            'price' => $params['price'],
         ]);
     }
 
-    public function update($courseId, $destination, $bus, $date, $startTime, $endTime)
+    public function update($courseId, $params)
     {
         return Course::find($courseId)->update([
-            'destination' => $destination,
-            'bus' => $bus,
-            'date' => $date,
-            'start_time' => $startTime,
-            'end_time' => $endTime,
+            'destination' => $params['destination'],
+            'bus_id' => $params['bus'],
+            'driver_id' => 3,
+            'date' => $params['date'],
+            'start_time' => $params['startTime'],
+//            'end_time' => $params['endTime'],
+            'price' => $params['price'],
         ]);
     }
 
     public function getCoursesByDestinationIds($destinationIds)
     {
-        return Course::whereIn('destination_id', $destinationIds)->get();
+        return Course::whereIn('destination_id', $destinationIds)->with('destination')->get();
     }
 }

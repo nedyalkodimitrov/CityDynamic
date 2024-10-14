@@ -42,7 +42,7 @@ class DestinationRepository
     public function create($name, $firstStation, $lastStation, $company)
     {
         return Destination::create([
-           'name' => $name,
+            'name' => $name,
             'start_station_id' => $firstStation,
             'end_station_id' => $lastStation,
             'company_id' => $company->id,

@@ -43,7 +43,7 @@ class UserController extends Controller
             $endCities = [];
             foreach ($startCity->getStations as $station) {
                 foreach ($station->getDestinations as $destination) {
-                    $city = $destination->getEndBusStation->getCity;
+                    $city = $destination->endBusStation->getCity;
                     array_push($endCities, $city);
                 }
             }
@@ -123,8 +123,8 @@ class UserController extends Controller
         return view('user.pages.courses.courses')
             ->with('courses', $courses)
             ->with('destination', $destination)
-            ->with('startCity', $destination->getStartBusStation->getCity->name)
-            ->with('endCity', $destination->getEndBusStation->getCity->name)
+            ->with('startCity', $destination->startBusStation->city->name)
+            ->with('endCity', $destination->endBusStation->city->name)
             ->with('cities', $cities)
             ->with('date', count($items))
             ->with('itemsCount', count($items));

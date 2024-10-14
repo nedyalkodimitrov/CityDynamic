@@ -12,7 +12,7 @@
 
             </div>
             <h5>Курсове:</h5>
-            @forelse($destination->getCourses()->where("date", ">=", date("Y-m-d")) as $course)
+            @forelse($destination->courses()->where("date", ">=", date("Y-m-d")) as $course)
 
                 <p class="card-text"><i class="fas fa-bus" aria-hidden="true"></i>  {{$course->getBus->name}} ({{$course->getBus->model}})
                     <br>

@@ -15,19 +15,16 @@
     <div class="col-12 row">
         @forelse($courses as $course)
             <div class="col-4">
-
                 <div class="card col-11 row mx-auto">
                     <div class="card-body col-12">
-                        <h5 class="card-title">{{$course->getDestination->name}}</h5>
-                        <p class="card-text">{{$course->getDestination->getStartBusStation()->first()->name}}
-                            <br> {{$course->getDestination->endBusStation()->first()->name}} <i
+                        <h5 class="card-title">{{$course->destination->name}}</h5>
+                        <p class="card-text">{{$course->destination->startStation->name}}
+                            <br> {{$course->destination->endStation->name}} <i
                                     class="fas fa-map-marker-alt" aria-hidden="true"></i>
-
                             <br>
                             {{$course->date}} <i class="fas fa-calendar" aria-hidden="true"></i><br>
                             {{$course->startTime}} <i class="fas fa-clock" aria-hidden="true"></i>
-                            - {{$course->endTime}} <i class="fas fa-clock" aria-hidden="true"></i> <br>
-                            {{$course->getTicket->price}} лв.
+                            - {{$course->endTime}} <i class="fas fa-clock" aria-hidden="true"></i>
                         </p>
                         <a href="{{route("company.showCourse", ["id" => $course->id])}}"
                            class="btn btn-primary col-12">Виж още</a>

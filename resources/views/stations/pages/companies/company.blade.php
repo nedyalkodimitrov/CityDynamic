@@ -37,7 +37,7 @@
             @foreach($company->getDestinations as $destination)
 
                 <p>{{$destination->name}} <br>
-                    {{$destination->getStartBusStation->name}} - {{$destination->getEndBusStation->name}}</p>
+                    {{$destination->startBusStation->name}} - {{$destination->getEndBusStation->name}}</p>
             @endforeach
 
 

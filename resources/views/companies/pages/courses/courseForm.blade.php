@@ -13,7 +13,6 @@
                 <option value="" disabled selected>Избери дестинация</option>
                 @forelse($destinations as $destination)
                     <option value="{{$destination->id}}">{{$destination->name}}</option>
-
                 @empty
                     <option value="" disabled>Нямате дестинации</option>
                 @endforelse
@@ -21,7 +20,7 @@
 
         </div>
         <div class="form-group col-12 mt-3">
-            <label for="exampleInputEmail1">Автобус </label>
+            <label for="exampleInputEmail1">Автобус</label>
             <select class="form-select" name="bus" id="">
                 <option value="" disabled selected>Избери автобус</option>
                 @forelse($buses as $bus)
@@ -50,9 +49,7 @@
                    placeholder="Каква е цената на билетите">
         </div>
 
-
         <button type="submit" class="btn btn-primary col-12 mt-3">Създай курс</button>
     </form>
-
 @endsection
 
