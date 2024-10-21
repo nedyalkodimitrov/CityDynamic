@@ -69,6 +69,7 @@ Route::group([
     'middleware' => ['auth', 'roleCheck:'.\App\Http\Constants\RoleConstant::COMPANY_ADMIN],
 ], function () {
     Route::get('/', [\App\Http\Controllers\Companies\HomeController::class, 'showHome'])->name('company.home');
+    Route::post('/stripe', [\App\Http\Controllers\Companies\HomeController::class, 'createStripeSession'])->name('stripe');
 
     Route::get('/buses', [\App\Http\Controllers\Companies\BusController::class, 'showBuses'])->name('company.showBuses');
     Route::get('/buses/create', [\App\Http\Controllers\Companies\BusController::class, 'showBusForm'])->name('company.showBusCreateForm');
@@ -108,14 +109,13 @@ Route::group([
     'middleware' => ['auth'],
 ], function () {
     Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('get.logout');
-    Route::post('/putInCart/{id}', [\App\Http\Controllers\User\UserController::class, 'putInTheCart'])->name('user.putInCart');
-    Route::get('/cart', [\App\Http\Controllers\User\UserController::class, 'showCart'])->name('user.showCart');
-    Route::post('/buy', [\App\Http\Controllers\User\UserController::class, 'buy'])->name('user.buy');
-    Route::get('/profile', [\App\Http\Controllers\User\UserController::class, 'showProfile'])->name('user.showProfile');
-    Route::get('/purchases', [\App\Http\Controllers\User\UserController::class, 'showPurchases'])->name('user.showPurchases');
-    Route::get('/purchase/{id}', [\App\Http\Controllers\User\UserController::class, 'showPurchase'])->name('user.showPurchase');
-    Route::post('/removeFromCart/{id}', [\App\Http\Controllers\User\UserController::class, 'removeFromCart'])->name('user.removeFromCart');
-
+    Route::get('/cart', [\App\Http\Controllers\User\ShopController::class, 'showCart'])->name('user.showCart');
+    Route::post('/putInCart/{id}', [\App\Http\Controllers\User\ShopController::class, 'putInTheCart'])->name('user.putInCart');
+    Route::post('/removeFromCart/{id}', [\App\Http\Controllers\User\ShopController::class, 'removeFromCart'])->name('user.removeFromCart');
+    Route::post('/buy', [\App\Http\Controllers\User\ShopController::class, 'buy'])->name('user.buy');
+    Route::get('/profile', [\App\Http\Controllers\User\ProfileController::class, 'showProfile'])->name('user.showProfile');
+    Route::get('/purchases', [\App\Http\Controllers\User\PurchaseController::class, 'showPurchases'])->name('user.showPurchases');
+    Route::get('/purchase/{id}', [\App\Http\Controllers\User\PurchaseController::class, 'showPurchase'])->name('user.showPurchase');
 });
 
 Route::get('/', [\App\Http\Controllers\User\UserController::class, 'showHome'])->name('root');
