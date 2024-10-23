@@ -13,8 +13,7 @@
             </h3>
         </div>
         <div class="card-body">
-            @if(count($items) > 0)
-
+            @if($itemsCount > 0)
                 <table class="table">
                     <thead>
                     <tr>
@@ -28,40 +27,28 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @php
-                        $i = 1;
-                        $totalPrice = 0
-                    @endphp
-                    @foreach($items as $item)
+                    @foreach($cart as $ticket)
                         <tr>
-                            <th scope="row">{{$i}}</th>
-                            <td>{{$item->getTicket->getCourse->getDestination->name}}</td>
-                            <td>{{$item->getTicket->getCourse->getDestination->getStartBusStation->name}}</td>
-                            <td> {{$item->getTicket->getCourse->getDestination->getStartBusStation->name}}</td>
-                            <td> {{$item->getTicket->getCourse->date}} {{$item->getTicket->getCourse->startTime}}</td>
-                            <td> {{$item->getTicket->price}} лв.</td>
-                            <td> <form action="{{route("user.removeFromCart", ["id" => $item->id])}}" method="post" class="col-12 m-0">
+                            <th scope="row">{{$loop->iteration}}</th>
+                            <td>{{$ticket?->course->destination->name}}</td>
+                            <td>{{$ticket?->startPoint->station?->name}}</td>
+                            <td> {{$ticket?->endPoint->station?->name}}</td>
+                            <td> {{$ticket?->course->date}} {{$ticket?->course->startTime}}</td>
+                            <td> {{$ticket?->price}} лв.</td>
+                            <td> <form action="{{route("user.removeFromCart", ["id" => $ticket?->id])}}" method="post" class="col-12 m-0">
                                     @csrf
                                     <button class="btn btn-danger col-12"><i class="fa fa-minus"></i></button>
                                 </form></td>
-
                         </tr>
-                        @php
-                            $i++;
-                            $totalPrice += $item->getTicket->price;
-                        @endphp
-
                     @endforeach
-
                     <tr>
                         <th scope="row"></th>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td>Общо</td>
-                        <td> {{$totalPrice}} лв.</td>
+                        <td> {{\App\Http\Utils\Cart::getInstance(Auth::user())->getTotal()}} лв.</td>
                         <td> </td>
-
                     </tr>
                     </tbody>
                 </table>
@@ -71,13 +58,9 @@
                         <button class="btn btn-success col-12">Завърши поръчката</button>
                     </form>
                 </div>
-
             @else
                 <p class="col-12 text-center">Количката е празна</p>
             @endif
-
         </div>
-
     </div>
-
 @endsection

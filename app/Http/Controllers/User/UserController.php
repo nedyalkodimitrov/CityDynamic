@@ -9,21 +9,11 @@ use App\Models\Course;
 use App\Models\Destination;
 use App\Models\ShoppingCart;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function showHome()
     {
-        $fiber = new \Fiber(function () {
-           $value = \Fiber::suspend('peshkata');
-              echo $value;
-        });
-
-        $value = $fiber->start();
-        echo $value;
-        $fiber->resume('test');
-        exit;
         $cities = City::all();
 
         $companies = Company::all();
@@ -98,14 +88,14 @@ class UserController extends Controller
     {
         $destination = Destination::find($id);
 
-        $courses = $destination->getCourses;
+        $courses = $destination->courses;
         $cities = City::all();
 
         return view('user.pages.courses.courses', [
             'courses' => $courses,
             'destination' => $destination,
-            'startCity' => $destination->startBusStation->city->name,
-            'endCity' => $destination->endBusStation->city->name,
+            'startCity' => $destination->startStation->city->name,
+            'endCity' => $destination->endStation->city->name,
             'cities' => $cities,
             'date' => null,
         ]);
@@ -114,11 +104,11 @@ class UserController extends Controller
     public function showCourse($id)
     {
         $course = Course::find($id);
-        $boughtCourseTicketNumbers = ShoppingCart::where('ticket', $course->getTicket->id)->count();
+        //        $boughtCourseTicketNumbers = ShoppingCart::where('ticket', $course->getTicket->id)->count();
 
         return view('user.pages.courses.course', [
             'course' => $course,
-            'boughtCourseTicketNumbers' => $boughtCourseTicketNumbers,
+            'boughtCourseTicketNumbers' => 0,
         ]);
     }
 

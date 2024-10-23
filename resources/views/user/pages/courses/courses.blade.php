@@ -145,8 +145,8 @@
                             <p class="col-6 text-start"
                                style="font-size: 1.1em">
 
-                            @foreach($course->getDestination->getPoints as $point )
-                                    {{$point->getStation->name}} |
+                            @foreach($course->destination->points as $point )
+                                    {{$point->station->name}} |
                             @endforeach
 
                                     </p>
@@ -155,41 +155,26 @@
                             <p class="col-12 col-md-2  p-0 pl-5 m-0" style="  ">
                                     <b>{{\Carbon\Carbon::parse($course->startTime)->format("H:i") }}
                                     - {{\Carbon\Carbon::parse($course->endTime)->format("H:i")}}</b>
-
                                 <i class="fas fa-clock"></i>
                             </p>
-{{--                            <p class="col-12 col-md-2 p-0 m-0" style="  ">--}}
-{{--                                {{\App\Http\Services\DestinationService::getTimeFromPointTillEnd($destination)}}--}}
-{{--                               --}}
-{{--                                --}}{{--                            {{$course->endTime -$course->startTime }}--}}
-
-{{--                            </p>--}}
-                            {{--                        <p class="col-12 col-md-2 p-0 m-0" style="align-self: center">--}}
-                            {{--                            Пристигане:<br>  <i class="fas fa-clock"></i></p>--}}
-
                             <p class="col-12 col-md-3 p-0 m-0" style="align-self: center">
-                                {{$course->getBus->model}} {{$course->getBus->name}} ({{$course->getBus->seats}})
+                                {{$course->bus->model}} {{$course->bus->name}} ({{$course->bus->seats}})
                             </p>
                             <p class="col-12 col-md-2 p-0 m-0" style="align-self: center">
-                                <b style="font-size: 1.3em">{{$course->getTicket->price}} лв.</b>
+                                <b style="font-size: 1.3em">{{$course->price}} лв.</b>
                             </p>
                             <a href="{{route("user.showCourse", ["id"=>$course->id])}}" style="align-self: center"
                                class="btn btn-primary col-12 col-md-3">Резервирай</a>
                         </div>
-
                     </div>
-
                 @endforeach
 
             @else
                 <div class="col-12 text-center mt-3">
                     <h3 >Please, choose start city, end city and date </h3>
-
                 </div>
-
             @endif
         </div>
-
 
         <script src="{{asset("assets/js/ajax.js")}}"></script>
         <script>
@@ -207,8 +192,6 @@
                 }
 
             });
-
-
         </script>
 @endsection
 

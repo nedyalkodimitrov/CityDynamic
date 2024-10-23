@@ -110,7 +110,7 @@ Route::group([
 ], function () {
     Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('get.logout');
     Route::get('/cart', [\App\Http\Controllers\User\ShopController::class, 'showCart'])->name('user.showCart');
-    Route::post('/putInCart/{id}', [\App\Http\Controllers\User\ShopController::class, 'putInTheCart'])->name('user.putInCart');
+    Route::post('/addToCart/{id}/{startPointId}/{endPointId}', [\App\Http\Controllers\User\ShopController::class, 'addToCart'])->name('user.putInCart');
     Route::post('/removeFromCart/{id}', [\App\Http\Controllers\User\ShopController::class, 'removeFromCart'])->name('user.removeFromCart');
     Route::post('/buy', [\App\Http\Controllers\User\ShopController::class, 'buy'])->name('user.buy');
     Route::get('/profile', [\App\Http\Controllers\User\ProfileController::class, 'showProfile'])->name('user.showProfile');

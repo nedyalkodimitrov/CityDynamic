@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Utils\Cart;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,9 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //        view()->composer('components.language_switcher', function ($view) {
-        //            $view->with('current_locale', app()->getLocale());
-        //            $view->with('available_locales', config('app.available_locales'));
-        //        });
+        view()->composer('*', function ($view) {
+            $view->with('cart', Cart::getInstance(\Auth::user())->getItems());
+            $view->with('itemsCount', Cart::getInstance(\Auth::user())->getTotalItems());
+        });
     }
 }

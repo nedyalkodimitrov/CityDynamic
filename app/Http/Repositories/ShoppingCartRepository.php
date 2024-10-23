@@ -7,6 +7,6 @@ use App\Models\ShoppingCart;
 class ShoppingCartRepository {
     public static function getShoppingCart($user)
     {
-        return ShoppingCart::where('user', $user->id)->whereNull('order')->get()->with('ticket');
+        return ShoppingCart::where('user_id', $user->id)->get();
     }
 }

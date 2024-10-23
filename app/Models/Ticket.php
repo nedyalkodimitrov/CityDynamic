@@ -2,35 +2,40 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'user_id',
+        'course_id',
+        'start_point_id',
+        'end_point_id',
+        'price',
+    ];
 
     public function course()
     {
-        return $this->belongsTo(Course::class, 'course', 'id');
+        return $this->belongsTo(Course::class);
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user', 'id');
+        return $this->belongsTo(User::class);
     }
 
     public function startPoint()
     {
-        return $this->belongsTo(DestinationPoint::class, 'startPoint', 'id');
+        return $this->belongsTo(DestinationPoint::class);
     }
 
     public function endPoint()
     {
-        return $this->belongsTo(DestinationPoint::class, 'endPoint', 'id');
+        return $this->belongsTo(DestinationPoint::class);
     }
 
     public function order()
     {
-        return $this->belongsTo(Order::class, 'order', 'id');
+        return $this->belongsTo(Order::class);
     }
 }
