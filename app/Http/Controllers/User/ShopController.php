@@ -4,19 +4,18 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\ShoppingCartRepository;
+use App\Http\Utils\Cart;
 use App\Models\Course;
 use App\Models\Order;
 use App\Models\ShoppingCart;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
     public function showCart()
     {
-        $user = Auth::user();
-        $items = ShoppingCart::where('user', $user->id)->whereNull('order')->get();
-
-        return view('user.pages.cart.cart')->with('items', $items)->with('itemsCount', count($items));
+        return view('user.pages.cart.cart');
     }
 
     public function buy()
@@ -54,18 +53,18 @@ class ShopController extends Controller
         return redirect()->back();
     }
 
-    public function addToCart($courseId)
+    public function addToCart($courseId, $startPointId, $endPointId, Cart $cart)
     {
         $user = Auth::user();
         $course = Course::find($courseId);
 
-        $boughtCourseTicketNumbers = ShoppingCart::where('ticket', $course->ticket->id)->count();
-        if ($boughtCourseTicketNumbers < $course->getBus->seats) {
-            $cart = new ShoppingCart;
-            $cart->user = $user->id;
-            $cart->ticket = $course->ticket->id;
-            $cart->save();
-        }
+        $ticket = Ticket::create([
+            'user_id' => $user->id,
+            'course_id' => $course->id,
+            'start_point_id' => $startPointId,
+            'end_point_id' => $endPointId,
+            'price' => $course->price,
+        ]);
 
         return redirect()->back();
     }
