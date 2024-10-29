@@ -16,10 +16,10 @@ class Cart
 
     private $totalItems = 0;
 
-    public function __construct(User $user)
+    public function __construct(User $user = null)
     {
         if (session('cart') === null) {
-            Ticket::where('user_id', $user->id)->get()->each(function ($ticket) {
+            Ticket::where('user_id', $user?->id)->get()->each(function ($ticket) {
                 $this->items[$ticket->id] = $ticket;
                 $this->total += $ticket->price;
                 $this->totalItems++;
@@ -34,7 +34,7 @@ class Cart
 
         }
     }
-    public static function getInstance(User $user)
+    public static function getInstance(User $user = null)
     {
         if (self::$instance === null) {
             self::$instance = new self($user);

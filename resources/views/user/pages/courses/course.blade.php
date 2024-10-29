@@ -34,7 +34,7 @@
                     @if($boughtCourseTicketNumbers >= $course->bus->seats)
                         <button class="btn btn-danger">Изчерпана наличност</button>
                     @else
-                        <form action="{{route("user.putInCart", ["id"=>$course->id, "startPointId" => $course->destination->points->first()->id,"endPointId" => $course->destination->points->last()->id])}}" method="post">
+                        <form action="{{route("user.putInCart", ["id" => $course->id, "startPointId" => $course->destination->points->first()->id,"endPointId" => $course->destination->points->last()->id])}}" method="post">
                             @csrf
                             <button class="btn btn-success">Сложи в количката</button>
                         </form>

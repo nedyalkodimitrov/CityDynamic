@@ -6,7 +6,7 @@
 
 @section("content")
 
-    <div class="card">
+    <div class="card col-9 mt-5 mx-auto">
         <div class="card-title">
             <h3 class="p-3 pb-0 text-center">
                 Количка
