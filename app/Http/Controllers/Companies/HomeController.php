@@ -16,10 +16,6 @@ class HomeController extends Controller
 
     public function showHome()
     {
-        $stripeAccount = new AccountService();
-        $account = $stripeAccount->createAccount();
-        $stripeLink = $stripeAccount->createAccountLink($account->id);
-
         $user = Auth::user();
         $company = $user->getCompany();
         $destinationIds = $this->destinationRepository->getDestinationIdsOfCompany($company->id);

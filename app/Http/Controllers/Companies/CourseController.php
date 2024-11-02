@@ -24,7 +24,9 @@ class CourseController extends Controller
 
         $courses = $this->courseRepository->getCoursesByDestinationIds($destinationsIds);
 
-        return view('companies.pages.courses.courses')->with('courses', $courses);
+        return view('companies.pages.courses.courses', [
+            'courses' => $courses,
+        ]);
     }
 
     public function showCourse($id)
