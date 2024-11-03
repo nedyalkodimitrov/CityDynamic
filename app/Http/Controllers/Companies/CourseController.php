@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Repositories\BusRepository;
 use App\Http\Repositories\CourseRepository;
 use App\Http\Repositories\DestinationRepository;
-use App\Http\Requests\CreateCourseRequest;
-use App\Http\Requests\EditCourseRequest;
+use App\Http\Requests\Company\Course\CreateCourseRequest;
+use App\Http\Requests\Company\Course\EditCourseRequest;
 use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller

@@ -81,12 +81,12 @@ Route::group([
 
     Route::get('/busStations', [\App\Http\Controllers\Companies\StationController::class, 'showStations'])->name('company.showStations');
     Route::get('/busStations/{id}', [\App\Http\Controllers\Companies\StationController::class, 'showStation'])->name('company.showStation');
-    Route::post('/busStations/makeRequest/{id}', [\App\Http\Controllers\Companies\StationController::class, 'makeStationRequest'])->name('company.makeStationRequest');
-    Route::post('/busStations/decline/{id}', [\App\Http\Controllers\Companies\StationController::class, 'declineStationRequest'])->name('company.declineStationRequest');
-    Route::post('/busStations/unpair/{id}', [\App\Http\Controllers\Companies\StationController::class, 'unpairStation'])->name('company.unpairStation');
+    Route::post('/busStations/makeRequest/{id}', [\App\Http\Controllers\Companies\StationController::class, 'sendStationRequest'])->name('company.makeStationRequest');
+    Route::post('/busStations/decline/{id}', [\App\Http\Controllers\Companies\StationController::class, 'rejectStationRequest'])->name('company.declineStationRequest');
+    Route::post('/busStations/unpair/{id}', [\App\Http\Controllers\Companies\StationController::class, 'removeStation'])->name('company.unpairStation');
 
     Route::get('/destinations', [\App\Http\Controllers\Companies\DestinationController::class, 'showDestinations'])->name('company.showDestinations');
-    Route::get('/destinations/create', [\App\Http\Controllers\Companies\DestinationController::class, 'showDestinationCreate'])->name('company.showDestinationsForm');
+    Route::get('/destinations/form/{destinationId?}', [\App\Http\Controllers\Companies\DestinationController::class, 'showDestinationCreate'])->name('company.showDestinationsForm');
     Route::post('/destinations/create', [\App\Http\Controllers\Companies\DestinationController::class, 'createDestination'])->name('company.createDestination');
     Route::get('/destinations/{id}', [\App\Http\Controllers\Companies\DestinationController::class, 'showDestination'])->name('company.showDestination');
     Route::post('/destinations/{id}/edit', [\App\Http\Controllers\Companies\DestinationController::class, 'editDestination'])->name('company.editDestination');

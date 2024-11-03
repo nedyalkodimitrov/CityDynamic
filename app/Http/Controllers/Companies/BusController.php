@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Repositories\BusRepository;
 use App\Http\Repositories\CompanyRepository;
 use App\Http\Repositories\StationRepository;
-use App\Http\Requests\CreateBusRequest;
-use App\Http\Requests\EditBusRequest;
+use App\Http\Requests\Company\Bus\CreateBusRequest;
+use App\Http\Requests\Company\Bus\EditBusRequest;
+use App\Models\Bus;
 use Illuminate\Support\Facades\Auth;
 
 class BusController extends Controller
 {
-    public function __construct(private CompanyRepository $companyRepository,
-        private BusRepository $busRepository, private StationRepository $stationRepository) {}
+    public function __construct(private BusRepository $busRepository) {}
 
     public function showBuses()
     {
@@ -39,22 +39,12 @@ class BusController extends Controller
         return view('companies.pages.buses.busForm');
     }
 
-    public function showBusEdit($busId)
-    {
-        $bus = $this->busRepository->findById($busId);
-        $busStations = $this->stationRepository->findAll();
-
-        return view('companies.pages.buses.busEdit', [
-            'bus' => $bus,
-            'busStations' => $busStations,
-        ]);
-    }
-
     public function createBus(CreateBusRequest $request)
     {
         $request->validated();
         $user = Auth::user();
         $company = $user->getCompany();
+
         $this->busRepository->create([
             'name' => $request->name,
             'model' => $request->model,
@@ -67,15 +57,11 @@ class BusController extends Controller
         return redirect()->route('company.showBuses');
     }
 
-    public function editBus($busId, EditBusRequest $request)
+    public function editBus(Bus $busId, EditBusRequest $request)
     {
         $request->validated();
-        $bus = $this->busRepository->findById($busId);
-        $this->busRepository->update($bus, [
-            'name' => $request->name,
-            'model' => $request->model,
-            'seats' => $request->seats,
-        ]);
+
+        $this->busRepository->update($busId, $request->only(['name', 'model', 'seats']));
 
         return redirect()->route('company.showBuses');
     }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Company\Destination;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditBusRequest extends FormRequest
+class CreateDestinactionScheduleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,13 @@ class EditBusRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'model' => 'required|string',
-            'seats' => 'required|numeric',
+            'destination' => 'required',
+            'bus' => 'required',
+            'hour' => 'required',
+            'driver' => 'required',
+            'isRepeatable' => 'required',
+            'days' => 'required',
+            'weekDays' => 'required',
         ];
     }
 }

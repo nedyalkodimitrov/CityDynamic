@@ -3,20 +3,18 @@
 namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
-use App\Http\Repositories\BusRepository;
-use App\Http\Repositories\CompanyRepository;
-use App\Http\Repositories\DestinationPointRepository;
 use App\Http\Repositories\DestinationRepository;
+use App\Http\Requests\Company\Destination\CreateDestinationRequest;
+use App\Http\Services\DestinationService;
 use App\Models\Destination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DestinationController extends Controller
 {
-    public function __construct(private CompanyRepository $companyRepository,
+    public function __construct(
+        private DestinationService $destinationService,
         private DestinationRepository $destinationRepository,
-        private BusRepository $busRepository,
-        private DestinationPointRepository $destinationPointRepository
     ) {}
 
     public function showDestinations()
@@ -48,7 +46,7 @@ class DestinationController extends Controller
             ]);
     }
 
-    public function showDestinationCreate()
+    public function showDestinationCreate(?Destination $destinationId)
     {
         $user = Auth::user();
         $company = $user->getCompany();
@@ -57,62 +55,36 @@ class DestinationController extends Controller
         return view('companies.pages.destinations.destinationForm',
             [
                 'busStations' => $busStations,
+                'destination' => $destinationId,
             ]);
-
     }
 
-    public function createDestination(Request $request)
+    public function createDestination(CreateDestinationRequest $request)
     {
-        $user = Auth::user();
-        $company = $user->getCompany();
+        $company = Auth::user()->getCompany();
 
-        $stations = $this->extractStationsFromRequest($request);
-
-        $firstStation = $stations[0];
-        $lastStation = $stations[count($stations) - 1];
-        $destination = $this->destinationRepository->create($request->name, $firstStation, $lastStation, $company);
-
-        $order = 1;
-        foreach ($stations as $station) {
-            $this->destinationPointRepository->create($destination->id, $station, $order);
-            $order++;
-        }
+        $this->destinationService->createDestination($request->validated(), $company);
 
         return redirect()->route('company.showDestinations');
     }
 
-    public function editDestination($destinationId, Request $request)
+    public function editDestination(Destination $destinationId, Request $request)
     {
-        //todo refactor this to work with destination points
-        $destination = Destination::find($destinationId);
-        $destination->name = $request->name;
-        $destination->startBusStation = $request->startBusStation;
-        $destination->endBusStation = $request->endBusStation;
-        $destination->save();
+        $this->destinationService->editDestination($destinationId, $request->all());
 
         return redirect()->route('company.showDestinations');
     }
 
     public function deleteDestination($destinationId)
     {
-        // todo can delete it if it has no courses
-        $destination = Destination::find($destinationId);
+        $destination = Destination::with('courses')->find($destinationId);
+
+        if ($destination->courses->count() > 0) {
+            return redirect()->back()->withErrors(['destination' => 'Destination has courses']);
+        }
+
         $destination->delete();
 
         return redirect()->route('showDestinations');
-    }
-
-    private function extractStationsFromRequest($request)
-    {
-        $i = 1;
-        $stationFix = 'station-'.$i;
-        $stations = [];
-        while (isset($request->$stationFix)) {
-            array_push($stations, $request->$stationFix);
-            $i++;
-            $stationFix = 'station-'.$i;
-        }
-
-        return $stations;
     }
 }

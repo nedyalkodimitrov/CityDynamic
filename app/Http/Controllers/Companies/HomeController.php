@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
-use App\Http\Repositories\CompanyRepository;
 use App\Http\Repositories\CourseRepository;
 use App\Http\Repositories\DestinationRepository;
-use App\Http\Services\Stripe\AccountService;
 use App\Http\Services\Stripe\SessionService;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function __construct(private CompanyRepository $companyRepository, private DestinationRepository $destinationRepository, private CourseRepository $courseRepository) {}
+    public function __construct(
+        private DestinationRepository $destinationRepository,
+        private CourseRepository $courseRepository
+    ) {}
 
     public function showHome()
     {
@@ -34,7 +35,8 @@ class HomeController extends Controller
 
     public function createStripeSession()
     {
-        $stripeSession = new SessionService();
+        $stripeSession = new SessionService;
+
         return response()->json(['clientSecret' => $stripeSession->createSession()->client_secret]);
     }
 }

@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Companies;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\CompanyRepository;
 use App\Http\Repositories\DestinationScheduleRepository;
-use App\Http\Requests\CreateDestinactionScheduleRequest;
-use App\Http\Requests\EditDestinactionScheduleRequest;
+use App\Http\Requests\Company\Destination\CreateDestinactionScheduleRequest;
+use App\Http\Requests\Company\Destination\EditDestinactionScheduleRequest;
 use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller

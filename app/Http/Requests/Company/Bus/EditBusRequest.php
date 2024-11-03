@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Company\Bus;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditCourseRequest extends FormRequest
+class EditBusRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,9 @@ class EditCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'destination' => 'required',
-            'bus' => 'required',
-            'date' => 'required',
-            'startTime' => 'required',
-//            'endTime' => 'required',
-            'price' => 'required'
+            'name' => 'required|string',
+            'model' => 'required|string',
+            'seats' => 'required|numeric',
         ];
     }
 }

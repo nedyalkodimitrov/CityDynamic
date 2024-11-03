@@ -44,6 +44,8 @@ class CourseRepository
 
     public function getCoursesByDestinationIds($destinationIds)
     {
-        return Course::whereIn('destination_id', $destinationIds)->with('destination')->get();
+        return Course::whereIn('destination_id', $destinationIds)
+            ->with('destination','destination.startStation','destination.endStation' )
+            ->get();
     }
 }

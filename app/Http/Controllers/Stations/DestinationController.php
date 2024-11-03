@@ -11,23 +11,22 @@ class DestinationController extends Controller
 
     public function showDestinations()
     {
-        $user = auth()->user();
-        $station = $this->stationRepository->getStationOfUser($user);
+        $user = \Auth::user();
+        $station = $user->getStation();
 
         return view('stations.pages.destinations.destinations', [
-            'destinations' => $station->getDestinations,
+            'destinations' => $station->destinations,
         ]);
 
     }
 
     public function showDestination($id)
     {
-        $user = auth()->user();
-        $station = $this->stationRepository->getStationOfUser($user);
+        $user = \Auth::user();
+        $station = $user->getStation();
 
         return view('stations.pages.destinations.destination', [
             'destination' => $this->stationRepository->getDestination($station, $id),
         ]);
-
     }
 }

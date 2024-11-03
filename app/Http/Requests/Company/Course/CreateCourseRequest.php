@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Company\Course;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateDestinactionScheduleRequest extends FormRequest
+class CreateCourseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,11 +26,10 @@ class CreateDestinactionScheduleRequest extends FormRequest
         return [
             'destination' => 'required',
             'bus' => 'required',
-            'hour' => 'required',
-            'driver' => 'required',
-            'isRepeatable' => 'required',
-            'days' => 'required',
-            'weekDays' => 'required',
+            'date' => 'required',
+            'startTime' => 'required',
+            'endTime' => 'required',
+            'price' => 'required',
         ];
     }
 }

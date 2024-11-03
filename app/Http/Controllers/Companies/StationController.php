@@ -6,11 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Repositories\CompanyRepository;
 use App\Http\Repositories\StationRepository;
 use App\Http\Resources\StationResource;
+use App\Models\Station;
 use Illuminate\Support\Facades\Auth;
 
 class StationController extends Controller
 {
-    public function __construct(private CompanyRepository $companyRepository, private StationRepository $stationRepository) {}
+    public function __construct(
+        private CompanyRepository $companyRepository,
+        private StationRepository $stationRepository
+    ) {}
 
     public function showStations()
     {
@@ -27,46 +31,45 @@ class StationController extends Controller
 
     }
 
-    public function showStation($stationId)
+    public function showStation(Station $stationId)
     {
         $user = Auth::user();
-        $station = $this->stationRepository->findById($stationId);
         $company = $user->getCompany();
-        $isRequestToThisStation = $this->companyRepository->checkIfThereIsRequestToThisStation($company, $station);
-        $isApproved = $this->companyRepository->checkIfStationIsConnected($company, $station);
+
+        $isRequestToThisStation = $this->companyRepository->checkIfThereIsRequestToThisStation($company, $stationId);
+        $isApproved = $this->companyRepository->checkIfStationIsConnected($company, $stationId);
 
         return view('companies.pages.stations.station')
-            ->with(['station' => $station])
+            ->with(['station' => $stationId])
             ->with(['isRequestToThisStation' => $isRequestToThisStation])
             ->with(['isApproved' => $isApproved]);
     }
 
-    public function makeStationRequest($id)
+    public function sendStationRequest(Station $id)
     {
         $user = Auth::user();
         $company = $user->getCompany();
-        $station = $this->stationRepository->findById($id);
-        $this->companyRepository->makeRequestToStation($company, $station);
+
+        $this->companyRepository->makeRequestToStation($company, $id);
 
         return redirect()->back();
     }
 
-    public function declineStationRequest($stationId)
+    public function rejectStationRequest(Station $stationId)
     {
         $user = Auth::user();
         $company = $user->getCompany();
-        $station = $this->stationRepository->findById($stationId);
-        $this->companyRepository->removeRequestToStation($company, $station);
+
+        $this->companyRepository->removeRequestToStation($company, $stationId);
 
         return redirect()->route('company.showStations');
     }
 
-    public function unpairStation($stationId)
+    public function removeStation(Station $stationId)
     {
         $user = Auth::user();
         $company = $user->getCompany();
-        $station = $this->stationRepository->findById($stationId);
-        $this->companyRepository->removeStationFromConnections($company, $station);
+        $this->companyRepository->removeStationFromConnections($company, $stationId);
 
         return redirect()->route('company.showStations');
     }

@@ -2,8 +2,37 @@
 
 namespace App\Http\Services;
 
+use App\Http\Repositories\DestinationRepository;
+
 class DestinationService
 {
+    private $destinationRepository;
+
+    private $destinationPointRepository;
+
+    public function __construct(DestinationRepository $destinationRepository, DestinationPointRepository $destinationPointRepository)
+    {
+        $this->destinationRepository = $destinationRepository;
+        $this->destinationPointRepository = $destinationPointRepository;
+    }
+
+    public function createDestination($createData, $company): void
+    {
+        $destination = $this->destinationRepository->create($createData, $company);
+
+        $this->createDestinationPoint($destination, $createData['stations']);
+    }
+
+    public function editDestination($destination, $editData): void
+    {
+        $destination->update([
+            'name' => $editData['name'],
+        ]);
+
+        $destination->points()->delete();
+        $this->createDestinationPoint($destination, $editData['stations']);
+    }
+
     public static function getLastBusStation($destination)
     {
         $lastDestination = null;
@@ -73,5 +102,12 @@ class DestinationService
         }
 
         return $travelTime;
+    }
+
+    private function createDestinationPoint($destination, $stations)
+    {
+        foreach ($stations as $index => $station) {
+            $this->destinationPointRepository->create($destination->id, $station, $index);
+        }
     }
 }

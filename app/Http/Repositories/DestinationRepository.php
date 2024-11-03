@@ -19,7 +19,9 @@ class DestinationRepository
 
     public function getDestinationsByCompany($companyId)
     {
-        return Destination::where('company_id', $companyId)->get();
+        return Destination::where('company_id', $companyId)
+            ->with('startStation', 'endStation')
+            ->get();
     }
 
     public function getDestinationIdsOfCompany($companyId)
@@ -39,12 +41,12 @@ class DestinationRepository
         return $tracks;
     }
 
-    public function create($name, $firstStation, $lastStation, $company)
+    public function create($createData, $company)
     {
         return Destination::create([
-            'name' => $name,
-            'start_station_id' => $firstStation,
-            'end_station_id' => $lastStation,
+            'name' => $createData['name'],
+            'start_station_id' => $createData['stations'][0],
+            'end_station_id' => $createData['stations'][count($createData['stations']) - 1],
             'company_id' => $company->id,
         ]);
     }

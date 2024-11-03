@@ -9,12 +9,12 @@
         }
     </style>
 
-    <form class="col-12 col-md-9 mx-auto col-lg-9 " action="{{route("company.createDestination")}}" method="post">
+    <form class="col-12 col-md-9 mx-auto col-lg-9 " action="{{is_null($destination)?route("company.createDestination"): route("company.editDestination", ['id' => $destination->id])}}" method="post">
         @csrf
         <div class="form-group col-12">
             <label for="exampleInputEmail1">Име </label>
             <input type="text" class="form-control" name="name" id="exampleInputEmail1"
-                   placeholder="Въведете име на компанията">
+                   placeholder="Въведете име на дестинацията" value="{{$destination?->name}}">
         </div>
         <div class="col-12 mb-2 m-0 p-0">
             <div class="col-12 col-md-9 mx-auto col-lg-12 mt-3 p-0">

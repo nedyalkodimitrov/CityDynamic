@@ -13,4 +13,8 @@ class ProfileController extends Controller
         return view('user.pages.profile.profile');
     }
 
+    public function editProfile()
+    {
+     //todo
+    }
 }
