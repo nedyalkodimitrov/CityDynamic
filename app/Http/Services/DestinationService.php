@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Http\Repositories\DestinationPointRepository;
 use App\Http\Repositories\DestinationRepository;
 
 class DestinationService

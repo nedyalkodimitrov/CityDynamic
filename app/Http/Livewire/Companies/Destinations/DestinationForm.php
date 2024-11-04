@@ -11,7 +11,6 @@ class DestinationForm extends Component
 {
     public $destinationPoints = [];
     public $stations = [];
-    public $totalDistance = 0;
     public $destination = null;
 
     public function mount($stations, $destination)

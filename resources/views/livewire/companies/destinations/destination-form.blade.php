@@ -20,7 +20,6 @@
             <div class="col-12 col-md-9 mx-auto col-lg-12 mt-3 p-0">
                 <div class="m-0 p-0 ">
                     <div class="destinations row" style="border-left: 4px solid green; margin-left: 1em;">
-                        {{$totalDistance}}
                         @foreach($destinationPoints as $point)
                             <div class="col-12 row mx-auto mt-3 p-0 destination"
                                  id="point-{{$loop->iteration}}">
@@ -37,7 +36,7 @@
                                     @endif
                                 </div>
                                 <div class="pl-2 form-group col-12" style="padding-left: 1.5em;">
-                                    <select wire:key="{{$loop->iteration}}" class="form-select" name="station[{{$loop->iteration}}]" id="select-{{$loop->index}}" wire:model="destinationPoints.{{$loop->index}}.station_id" wire:change="calculateDistance">
+                                    <select wire:key="{{$loop->iteration}}" class="form-select" name="stations[{{$loop->iteration}}]" id="select-{{$loop->index}}" wire:model="destinationPoints.{{$loop->index}}.station_id">
                                         <option value="" disabled selected>Избери автогара</option>
                                         @forelse($busStations as $station)
                                             <option value="{{$station->id}}">{{$station->name}}</option>

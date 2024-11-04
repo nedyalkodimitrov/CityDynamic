@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Companies;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\DestinationRepository;
 use App\Http\Requests\Company\Destination\CreateDestinationRequest;
+use App\Http\Requests\Company\Destination\EditDestinationRequest;
 use App\Http\Services\DestinationService;
 use App\Models\Destination;
 use Illuminate\Http\Request;
@@ -61,16 +62,18 @@ class DestinationController extends Controller
 
     public function createDestination(CreateDestinationRequest $request)
     {
+        $request->validated();
         $company = Auth::user()->getCompany();
 
-        $this->destinationService->createDestination($request->validated(), $company);
+        $this->destinationService->createDestination($request->only('name', 'stations'), $company);
 
         return redirect()->route('company.showDestinations');
     }
 
-    public function editDestination(Destination $destinationId, Request $request)
+    public function editDestination(Destination $id, EditDestinationRequest $request)
     {
-        $this->destinationService->editDestination($destinationId, $request->all());
+        $request->validated();
+        $this->destinationService->editDestination($id, $request->only('name', 'stations'));
 
         return redirect()->route('company.showDestinations');
     }
