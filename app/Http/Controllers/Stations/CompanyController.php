@@ -11,8 +11,8 @@ class CompanyController extends Controller
 
     public function showAllCompanies()
     {
-        $user = auth()->user();
-        $station = $this->stationRepository->getStationOfUser();
+        $user = \Auth::user();
+        $station = $user->getStation();
         $companies = $this->stationRepository->getCompaniesOnStation($station);
 
         return view('stations.pages.companies.companies', [

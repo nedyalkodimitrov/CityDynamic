@@ -6,10 +6,10 @@ use App\Http\Constants\RoleConstant;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\CompanyRepository;
 use App\Http\Repositories\UserRepository;
+use App\Http\Requests\Admin\Company\CreateCompanyRequest;
+use App\Http\Requests\Admin\Company\EditCompanyRequest;
 use App\Http\Services\MediaService;
 use App\Models\Company;
-use http\Client\Curl\User;
-use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
@@ -44,8 +44,10 @@ class CompanyController extends Controller
         ]);
     }
 
-    public function createCompany(Request $request, MediaService $mediaService)
+    public function createCompany(CreateCompanyRequest $request, MediaService $mediaService)
     {
+        $request->validated();
+
         $imageName = $mediaService->saveImage($request->image);
 
         $company = $this->companyRepository->create([
@@ -68,8 +70,10 @@ class CompanyController extends Controller
         return redirect()->route('admin.showCompanies');
     }
 
-    public function editCompany(Company $companyId, Request $request)
+    public function editCompany(Company $companyId, EditCompanyRequest $request)
     {
+        $request->validated();
+
         $companyId->update([
             'name' => $request->name,
         ]);

@@ -40,12 +40,6 @@ class StationRepository
         return [];
     }
 
-    public function getStationOfUser()
-    {
-        //todo
-        return new Station;
-    }
-
     public function findAll()
     {
         return Station::all();

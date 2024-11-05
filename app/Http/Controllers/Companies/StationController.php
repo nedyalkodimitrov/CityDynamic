@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\CompanyRepository;
-use App\Http\Repositories\StationRepository;
 use App\Http\Resources\StationResource;
 use App\Models\Station;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +12,6 @@ class StationController extends Controller
 {
     public function __construct(
         private CompanyRepository $companyRepository,
-        private StationRepository $stationRepository
     ) {}
 
     public function showStations()
@@ -28,7 +26,6 @@ class StationController extends Controller
             'connectedStations' => $connectedStations,
             'notConnectedStations' => $dissociateStations,
         ]);
-
     }
 
     public function showStation(Station $stationId)
@@ -39,10 +36,11 @@ class StationController extends Controller
         $isRequestToThisStation = $this->companyRepository->checkIfThereIsRequestToThisStation($company, $stationId);
         $isApproved = $this->companyRepository->checkIfStationIsConnected($company, $stationId);
 
-        return view('companies.pages.stations.station')
-            ->with(['station' => $stationId])
-            ->with(['isRequestToThisStation' => $isRequestToThisStation])
-            ->with(['isApproved' => $isApproved]);
+        return view('companies.pages.stations.station', [
+            'station' => $stationId,
+            'isRequestToThisStation' => $isRequestToThisStation,
+            'isApproved' => $isApproved,
+        ]);
     }
 
     public function sendStationRequest(Station $id)

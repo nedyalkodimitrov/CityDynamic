@@ -24,7 +24,7 @@ class ScheduleController extends Controller
             ]);
     }
 
-    public function showSchedule($destinationId, $scheduleId)
+    public function showSchedule($scheduleId)
     {
         $schedule = $this->destinationScheduleRepository->findById($scheduleId);
 

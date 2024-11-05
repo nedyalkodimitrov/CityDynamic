@@ -13,12 +13,14 @@ class UserController extends Controller
     {
         $users = \App\Models\User::all();
 
-        return view('admin.pages.users.users')->with(['users' => $users]);
+        return view('admin.pages.users.users', [
+            'users' => $users,
+        ]);
     }
 
     public function showUser(User $id)
     {
-        return view('admin.pages.users.user')->with('user', $id);
+        return view('admin.pages.users.user', [])->with('user', $id);
     }
 
     public function showUserCreate()

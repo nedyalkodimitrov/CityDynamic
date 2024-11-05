@@ -29,18 +29,6 @@ class DestinationRepository
         return Destination::where('company_id', $companyId)->get()->pluck('id');
     }
 
-    public function getTracks(Destination $destination): array
-    {
-        $tracks = [];
-        $destinationPoints = $destination->points()->orderBy('order', 'ASC')->get();
-        foreach ($destinationPoints as $point) {
-            $station = Station::find($point->station_id);
-            $tracks[] = $station;
-        }
-
-        return $tracks;
-    }
-
     public function create($createData, $company)
     {
         return Destination::create([

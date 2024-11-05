@@ -8,7 +8,6 @@ use App\Http\Requests\Company\Destination\CreateDestinationRequest;
 use App\Http\Requests\Company\Destination\EditDestinationRequest;
 use App\Http\Services\DestinationService;
 use App\Models\Destination;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DestinationController extends Controller
@@ -32,32 +31,29 @@ class DestinationController extends Controller
     public function showDestination($destinationId)
     {
         $user = Auth::user();
-        $company = $user->getCompany();
 
-        $destination = $this->destinationRepository->findById($destinationId);
-        $tracks = $this->destinationRepository->getTracks($destination);
+        $destination = Destination::with('points', 'points.station', 'startStation', 'endStation', 'courses', 'schedules')->where('id', $destinationId)
+            ->first();
 
-        $connectedStations = $company->stations;
+        if ($destination->company = $user->getCompany()) {
+            return redirect()->route('company.showDestinations');
+        }
 
-        return view('companies.pages.destinations.destination',
-            [
-                'destination' => $destination,
-                'tracks' => $tracks,
-                'connectedStations' => $connectedStations,
-            ]);
+        return view('companies.pages.destinations.destination', [
+            'destination' => $destination,
+        ]);
     }
 
-    public function showDestinationCreate(?Destination $destinationId)
+    public function showDestinationForm(?Destination $destinationId)
     {
         $user = Auth::user();
         $company = $user->getCompany();
         $busStations = $company->stations;
 
-        return view('companies.pages.destinations.destinationForm',
-            [
-                'busStations' => $busStations,
-                'destination' => $destinationId,
-            ]);
+        return view('companies.pages.destinations.destinationForm', [
+            'busStations' => $busStations,
+            'destination' => $destinationId,
+        ]);
     }
 
     public function createDestination(CreateDestinationRequest $request)

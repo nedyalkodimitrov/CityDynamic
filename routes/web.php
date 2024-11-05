@@ -86,7 +86,7 @@ Route::group([
     Route::post('/busStations/unpair/{id}', [\App\Http\Controllers\Companies\StationController::class, 'removeStation'])->name('company.unpairStation');
 
     Route::get('/destinations', [\App\Http\Controllers\Companies\DestinationController::class, 'showDestinations'])->name('company.showDestinations');
-    Route::get('/destinations/form/{destinationId?}', [\App\Http\Controllers\Companies\DestinationController::class, 'showDestinationCreate'])->name('company.showDestinationsForm');
+    Route::get('/destinations/form/{destinationId?}', [\App\Http\Controllers\Companies\DestinationController::class, 'showDestinationForm'])->name('company.showDestinationsForm');
     Route::post('/destinations/create', [\App\Http\Controllers\Companies\DestinationController::class, 'createDestination'])->name('company.createDestination');
     Route::get('/destinations/{id}', [\App\Http\Controllers\Companies\DestinationController::class, 'showDestination'])->name('company.showDestination');
     Route::post('/destinations/{id}/edit', [\App\Http\Controllers\Companies\DestinationController::class, 'editDestination'])->name('company.editDestination');
