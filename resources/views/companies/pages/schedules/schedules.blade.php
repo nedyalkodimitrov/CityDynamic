@@ -16,10 +16,12 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Цена</th>
+                <th scope="col">Диапазон</th>
+                <th scope="col">Дни от седмицата</th>
                 <th scope="col">Час</th>
                 <th scope="col">Автобус</th>
                 <th scope="col">Шофьор</th>
+                <th scope="col">Цена</th>
                 <th scope="col">Действие</th>
             </tr>
             </thead>
@@ -27,12 +29,16 @@
             @forelse($schedules as $schedule)
                 <tr>
                     <th scope="row">1</th>
-                    <td>{{$schedule->price}}</td>
+                    <td>{{$schedule->start_date}} - {{$schedule->end_date}}</td>
+                    <td>{{is_null($schedule->week_days)? 'Всички' :  implode(', ',json_decode($schedule->week_days))}}</td>
                     <td>{{$schedule->hour}}</td>
-                    <td>{{$schedule->getBus->name}}</td>
-                    <td>{{$schedule->getDriver[0]->name}}</td>
+                    <td>{{$schedule->bus?->name}}</td>
+                    <td>{{$schedule->driver?->name ?? 'Няма'}}</td>
+                    <td>{{$schedule->price}}</td>
                     <td>
-                        <i class="fa fa-pen"></i>
+                        <a href="{{route("company.editDestinationSchedule", ["destinationId" => $destinationId, "scheduleId" => $schedule->id])}}" class="btn btn-primary">
+                            <i class="fa fa-pen"></i>
+                        </a>
                     </td>
                 </tr>
             @empty

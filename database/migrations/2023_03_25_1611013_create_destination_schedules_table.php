@@ -26,8 +26,8 @@ return new class extends Migration
             $table->unsignedBigInteger('driver_id');
             $table->foreign('driver_id')->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->boolean('is_repeatable');
-            $table->json('days');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->json('week_days');
             $table->timestamps();
         });

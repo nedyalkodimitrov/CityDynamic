@@ -7,28 +7,28 @@ use Illuminate\Database\Eloquent\Model;
 class DestinationSchedule extends Model
 {
     public $fillable = [
-        'destination',
-        'bus',
+        'destination_id',
+        'bus_id',
         'hour',
-        'driver',
-        'is_repeatable',
-        'days',
+        'driver_id',
         'week_days',
+        'price',
+        'start_date',
+        'end_date',
     ];
 
     public function destionation()
     {
-        return $this->belongsTo(Destination::class, 'destination', 'id');
+        return $this->belongsTo(Destination::class, 'destination_id', 'id');
     }
 
     public function bus()
     {
-        return $this->belongsTo(Bus::class, 'bus', 'id');
-
+        return $this->belongsTo(Bus::class, 'bus_id', 'id');
     }
 
     public function driver()
     {
-        return $this->belongsToMany(User::class, 'company_employees', 'company', 'user');
+        return $this->belongsTo(User::class, 'driver_id');
     }
 }

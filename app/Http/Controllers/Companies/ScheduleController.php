@@ -17,23 +17,29 @@ class ScheduleController extends Controller
     {
         $schedules = $this->destinationScheduleRepository->findSchedulesByDestination($destinationId);
 
-        return view('companies.pages.schedules.schedules',
-            [
-                'schedules' => $schedules,
-                'destinationId' => $destinationId,
-            ]);
+        return view('companies.pages.schedules.schedules', [
+            'schedules' => $schedules,
+            'destinationId' => $destinationId,
+        ]);
     }
 
-    public function showSchedule($scheduleId)
+    public function showSchedule($destinationId, $scheduleId)
     {
+        $user = Auth::user();
+        $company = $user->getCompany();
+        $buses = $company->buses;
+        $drivers = [];
         $schedule = $this->destinationScheduleRepository->findById($scheduleId);
 
         return view('companies.pages.schedules.schedule', [
             'schedule' => $schedule,
+            'destinationId' => $destinationId,
+            'buses' => $buses,
+            'drivers' => $drivers,
         ]);
     }
 
-    public function showScheduleForm()
+    public function showScheduleForm($destinationId)
     {
         $user = Auth::user();
         $company = $user->getCompany();
@@ -43,26 +49,30 @@ class ScheduleController extends Controller
         return view('companies.pages.schedules.scheduleForm', [
             'buses' => $buses,
             'drivers' => $drivers,
-        ]
-        );
+            'destinationId' => $destinationId,
+        ]);
     }
 
-    public function createSchedule(CreateDestinactionScheduleRequest $request, DestinationScheduleRepository $destinationScheduleRepository)
+    public function createSchedule($destinationId, CreateDestinactionScheduleRequest $request, DestinationScheduleRepository $destinationScheduleRepository)
     {
         $request->validated();
-        $destinationScheduleRepository->create($request->destination, $request->bus, $request->hour, $request->driver, $request->isRepeatable,
-            $request->days, $request->weekDays);
+        $destinationScheduleRepository->create($destinationId, $request->all());
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Успешно създадено разписание');
     }
 
-    public function editSchedule($scheduleId, EditDestinactionScheduleRequest $request, DestinationScheduleRepository $destinationScheduleRepository)
+    public function editSchedule($destinationId, $scheduleId, EditDestinactionScheduleRequest $request, DestinationScheduleRepository $destinationScheduleRepository)
     {
         $request->validated();
 
-        $destinationScheduleRepository->update($scheduleId, $request->bus, $request->hour, $request->driver, $request->isRepeatable,
-            $request->days, $request->weekDays);
+        $destinationScheduleRepository->update($scheduleId, $request->all());
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Успешно редактирано разписание');
+    }
+
+    public function deleteSchedule($destinationId, $scheduleId)
+    {
+        $this->destinationScheduleRepository->delete($scheduleId);
+        return redirect()->route('company.showDestinationSchedules', ['destinationId'=>$destinationId])->with('success', 'Успешно изтрито разписание');
     }
 }

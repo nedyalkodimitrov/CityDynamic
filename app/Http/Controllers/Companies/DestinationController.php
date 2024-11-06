@@ -35,7 +35,7 @@ class DestinationController extends Controller
         $destination = Destination::with('points', 'points.station', 'startStation', 'endStation', 'courses', 'schedules')->where('id', $destinationId)
             ->first();
 
-        if ($destination->company = $user->getCompany()) {
+        if ($destination->company_id != $user->getCompany()->id) {
             return redirect()->route('company.showDestinations');
         }
 

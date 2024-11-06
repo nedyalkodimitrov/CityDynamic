@@ -24,12 +24,12 @@ class EditDestinactionScheduleRequest extends FormRequest
     public function rules()
     {
         return [
-            'bus' => 'required',
+            'bus' => 'required|exists:buses,id',
             'hour' => 'required',
-            'driver' => 'required',
-            'isRepeatable' => 'required',
-            'days' => 'required',
-            'weekDays' => 'required',
+//            'driver' => 'required',
+            'days' => 'array',
+            'startDate' => 'required|date',
+            'endDate' => 'required|date',
         ];
     }
 }
