@@ -7,7 +7,6 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         rel="stylesheet"
     />
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
@@ -27,6 +26,7 @@
 
     @yield("title")
     @yield("stylesheet")
+    @livewireStyles
 </head>
 <body>
     @include("user.layouts.head")
@@ -37,5 +37,6 @@
     @include("user.layouts.footer")
 
     @yield("scripts")
+@livewireScripts
 </body>
 </html>

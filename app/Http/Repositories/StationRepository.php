@@ -2,6 +2,7 @@
 
 namespace App\Http\Repositories;
 
+use App\Models\City;
 use App\Models\Station;
 
 class StationRepository
@@ -9,6 +10,14 @@ class StationRepository
     public function getDestination($station, $destinationId)
     {
         return $station->getDestinations()->where('id', $destinationId)->first();
+    }
+
+    public static function getStationsByCity(City $city)
+    {
+        return Station::where('city_id', $city->id)
+            ->select('id')
+            ->get()
+            ->toArray();
     }
 
     public function acceptCompanyRequest($station, $companyId)
