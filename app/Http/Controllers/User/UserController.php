@@ -26,26 +26,6 @@ class UserController extends Controller
         ]);
     }
 
-    public function getEndCities(Request $request)
-    {
-        try {
-            $startCity = City::find($request->startCity);
-
-            $endCities = [];
-            foreach ($startCity->getStations as $station) {
-                foreach ($station->getDestinations as $destination) {
-                    $city = $destination->endBusStation->getCity;
-                    array_push($endCities, $city);
-                }
-            }
-
-            return $endCities;
-
-        } catch (\Throwable $throwable) {
-            return $throwable->getMessage();
-        }
-    }
-
     public function searchCourses(Request $request)
     {
         $destinations = Destination::join('stations as startBus', 'startBus.id', '=', 'startBusStation')
