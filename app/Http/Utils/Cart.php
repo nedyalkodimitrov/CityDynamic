@@ -82,4 +82,23 @@ class Cart
         session(['total' => 0]);
         session(['totalItems' => 0]);
     }
+
+    public function convertToStripeData()
+    {
+        $lineItems = [];
+        foreach ($this->items as $item) {
+            $lineItems[] = [
+                'price_data' => [
+                    'currency' => config('stripe.currency'),
+                    'unit_amount' => $item->price * 100,
+                    'product_data' => [
+                        'name' => $item->startPoint->station->city->name . ' - ' . $item->endPoint->station->city->name,
+                        'description' => 'Тръва '. $item->course->start_time. ' часа',
+                        ],
+                ],
+                'quantity' => 1,
+            ];
+        }
+        return $lineItems;
+    }
 }
