@@ -11,8 +11,8 @@
     <div class="card col-11 col-md-9 col-lg-7 mx-auto mt-5">
         <div class="card-title">
             <h3 class="pt-3 text-center">
-                {{$course->destination->startStation->city?->name}}
-                - {{$course->destination->endStation->city?->name}}
+                {{$startCity?->name}}
+                - {{$endCity?->name}}
             </h3>
             <p class="col-12  p-0 m-0 text-center" style="align-self: center"><b>{{$course->date}} <i
                         class="fas fa-calendar"></i></b></p>
@@ -34,7 +34,7 @@
                     @if($boughtCourseTicketNumbers >= $course->bus->seats)
                         <button class="btn btn-danger">Изчерпана наличност</button>
                     @else
-                        <form action="{{route("user.putInCart", ["id" => $course->id, "startPointId" => $course->destination->points->first()->id,"endPointId" => $course->destination->points->last()->id])}}" method="post">
+                        <form action="{{route("user.putInCart", ["id" => $course->id, "startPointId" => $startPoint->id,"endPointId" => $endPoint->id])}}" method="post">
                             @csrf
                             <button class="btn btn-success">Сложи в количката</button>
                         </form>

@@ -121,11 +121,11 @@ Route::group([
 
 Route::get('/', [\App\Http\Controllers\User\UserController::class, 'showHome'])->name('root');
 Route::get('/courses/{id}', [\App\Http\Controllers\User\UserController::class, 'showCourses'])->name('user.showCourses');
-Route::get('/course/{id}', [\App\Http\Controllers\User\UserController::class, 'showCourse'])->name('user.showCourse');
+Route::get('/course/{id}/{startCity?}/{endCity?}', [\App\Http\Controllers\User\UserController::class, 'showCourse'])->name('user.showCourse');
 
 Route::post('/getEndCities', [\App\Http\Controllers\User\UserController::class, 'getEndCities'])->name('user.getEndCities');
-Route::get('/courses', [\App\Http\Controllers\User\UserController::class, 'searchCourses'])->name('user.shoeCourseFormView');
-Route::post('/courses', [\App\Http\Controllers\User\UserController::class, 'searchCourses'])->name('user.searchCourses');
+Route::get('/courses', [\App\Http\Controllers\User\CourseController::class, 'showCourses'])->name('user.shoeCourseFormView');
+Route::post('/courses', [\App\Http\Controllers\User\CourseController::class, 'showCourses'])->name('user.searchCourses');
 Route::get('/companies', [\App\Http\Controllers\User\UserController::class, 'showCompanies'])->name('user.showCompanies');
 
 Route::post('/setSeatStatus/{busId}', [\App\Http\Controllers\Controller::class, 'setSeatsStatus']);

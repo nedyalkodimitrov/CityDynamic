@@ -15,6 +15,8 @@ class DestinationSearch extends Component
 
     public $endCities = [];
 
+    public $endCity;
+
     public function render()
     {
         if ($this->startCity) {
@@ -30,7 +32,7 @@ class DestinationSearch extends Component
 
     public function searchForEndCity()
     {
-        $stations = StationRepository::getStationsByCity($this->startCity);
+        $stations = StationRepository::getStationsByCityId($this->startCity);
 
         $startPoints = DestinationPointRepository::getPointsByStations($stations);
         foreach ($startPoints as $point) {

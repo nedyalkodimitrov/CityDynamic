@@ -12,9 +12,9 @@ class StationRepository
         return $station->getDestinations()->where('id', $destinationId)->first();
     }
 
-    public static function getStationsByCity(City $city)
+    public static function getStationsByCityId($cityId)
     {
-        return Station::where('city_id', $city->id)
+        return Station::where('city_id', $cityId)
             ->select('id')
             ->get()
             ->toArray();

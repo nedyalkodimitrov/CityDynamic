@@ -28,16 +28,16 @@ class StationController extends Controller
         ]);
     }
 
-    public function showStation(Station $stationId)
+    public function showStation(Station $id)
     {
         $user = Auth::user();
         $company = $user->getCompany();
 
-        $isRequestToThisStation = $this->companyRepository->checkIfThereIsRequestToThisStation($company, $stationId);
-        $isApproved = $this->companyRepository->checkIfStationIsConnected($company, $stationId);
+        $isRequestToThisStation = $this->companyRepository->checkIfThereIsRequestToThisStation($company, $id);
+        $isApproved = $this->companyRepository->checkIfStationIsConnected($company, $id);
 
         return view('companies.pages.stations.station', [
-            'station' => $stationId,
+            'station' => $id,
             'isRequestToThisStation' => $isRequestToThisStation,
             'isApproved' => $isApproved,
         ]);

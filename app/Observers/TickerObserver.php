@@ -7,7 +7,7 @@ use App\Models\Ticket;
 
 class TickerObserver
 {
-    public function creating(Ticket $ticket)
+    public function created(Ticket $ticket)
     {
         if ($ticket->user_id == \Auth::user()->id) {
             Cart::getInstance(\Auth::user())->add($ticket);

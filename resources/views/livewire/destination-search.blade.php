@@ -20,10 +20,10 @@
                 <label>
                     Пристигане
                 </label>
-                <select class="form-select" id="endCity" name="endCity">
+                <select class="form-select" id="endCity" name="endCity" wire:model="endCity">
                     <option value="" disabled selected>Избери начален град</option>
                     @foreach($endPoints as $endPoint)
-                        <option value="">{{$endPoint->name}}</option>
+                        <option value="{{$endPoint->id}}">{{$endPoint->name}}</option>
                     @endforeach
                 </select>
             </div>

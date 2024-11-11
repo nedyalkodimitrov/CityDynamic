@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\ShoppingCartRepository;
+use App\Http\Services\PriceCalculatorService;
 use App\Http\Utils\Cart;
 use App\Models\Course;
 use App\Models\Order;
@@ -53,17 +54,18 @@ class ShopController extends Controller
         return redirect()->back();
     }
 
-    public function addToCart($courseId, $startPointId, $endPointId, Cart $cart)
+    public function addToCart($courseId, $startPointId, $endPointId, PriceCalculatorService $priceCalculatorService)
     {
         $user = Auth::user();
         $course = Course::find($courseId);
 
-        $ticket = Ticket::create([
+        $price = $priceCalculatorService->calculatePrice($course, $startPointId, $endPointId);
+        Ticket::create([
             'user_id' => $user->id,
             'course_id' => $course->id,
             'start_point_id' => $startPointId,
             'end_point_id' => $endPointId,
-            'price' => $course->price,
+            'price' => $price,
         ]);
 
         return redirect()->back();

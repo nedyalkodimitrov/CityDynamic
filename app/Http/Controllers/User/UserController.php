@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Company;
 use App\Models\Course;
 use App\Models\Destination;
+use App\Models\DestinationPoint;
 use App\Models\ShoppingCart;
 use Illuminate\Http\Request;
 
@@ -26,43 +27,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function searchCourses(Request $request)
-    {
-        $destinations = Destination::join('stations as startBus', 'startBus.id', '=', 'startBusStation')
-            ->join('stations as endBus', 'endBusStation', '=', 'endBus.id')
-            ->where('startBus.city', $request->startCity)
-            ->where('endBus.city', $request->endCity)
-            ->select('destinations.*')
-            ->get();
 
-        $destination = Destination::join('stations as startBus', 'startBus.id', '=', 'startBusStation')
-            ->join('stations as endBus', 'endBusStation', '=', 'endBus.id')
-            ->where('startBus.city', $request->startCity)
-            ->where('endBus.city', $request->endCity)
-            ->select('destinations.*')
-            ->first();
-
-        $courses = [];
-        foreach ($destinations as $destination) {
-            $destinationCourses = $destination->getCourses;
-
-            foreach ($destinationCourses as $course) {
-
-                array_push($courses, $course);
-            }
-        }
-
-        $cities = City::all();
-
-        return view('user.pages.courses.courses', [
-            'courses' => $courses,
-            'destination' => $destination,
-            'startCity' => $request->startCity,
-            'endCity' => $request->endCity,
-            'cities' => $cities,
-            'date' => null,
-        ]);
-    }
 
     public function showCourses($id)
     {
@@ -81,13 +46,28 @@ class UserController extends Controller
         ]);
     }
 
-    public function showCourse($id)
+    public function showCourse($id, ?City $startCity, ?City $endCity)
     {
-        $course = Course::find($id);
-        //        $boughtCourseTicketNumbers = ShoppingCart::where('ticket', $course->getTicket->id)->count();
+        $course = Course::with('destination','destination.points')->find($id);
+
+        $startPoint = DestinationPoint::join('stations', 'destination_points.station_id', '=', 'stations.id')
+            ->where('stations.city_id', $startCity->id)
+            ->where('destination_points.destination_id', $course->destination_id)
+            ->select('destination_points.*')
+            ->first();
+
+        $endPoint = DestinationPoint::join('stations', 'destination_points.station_id', '=', 'stations.id')
+            ->where('stations.city_id', $endCity->id)
+            ->where('destination_points.destination_id', $course->destination_id)
+            ->select('destination_points.*')
+            ->first();
 
         return view('user.pages.courses.course', [
             'course' => $course,
+            'startCity' => $startCity,
+            'endCity' => $endCity,
+            'startPoint' => $startPoint,
+            'endPoint' => $endPoint,
             'boughtCourseTicketNumbers' => 0,
         ]);
     }
