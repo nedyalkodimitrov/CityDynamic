@@ -2,37 +2,21 @@
 
 namespace App\Http\Services\Stripe;
 
-class SessionService
+class SessionService extends Stripe
 {
-    private $stripe;
-
     public function __construct()
     {
-        $this->stripe = new \Stripe\StripeClient(config('stripe.stripe.secret'));
+        parent::__construct();
     }
 
-    public function createSession($amount, $merchantId)
+    public function createSession($lineItems)
     {
         return $this->stripe->checkout->sessions->create([
             'mode' => 'payment',
-            'line_items' => [
-                [
-                    'price_data' => [
-                        'currency' => 'bgn',
-                        'unit_amount' => $amount * 100,
-                        'product_data' => [
-                            'name' => 'name of the product',
-                        ],
-                    ],
-                    'quantity' => 1,
-                ],
-            ],
-            'payment_intent_data' => [
-                'application_fee_amount' => config('stripe.fee.application_fee'),
-                'transfer_data' => ['destination' => $merchantId],
-            ],
+            'line_items' => $lineItems,
+            'payment_intent_data' => ['transfer_group' => 'ORDER100'],
             'ui_mode' => 'embedded',
-            'return_url' => 'https://127.0.0.1:8000?session={CHECKOUT_SESSION_ID}',
+            'return_url' => route('checkout.proceed').'?session={CHECKOUT_SESSION_ID}',
         ]);
     }
 }

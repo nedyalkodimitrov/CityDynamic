@@ -2,15 +2,12 @@
 
 namespace App\Http\Services\Stripe;
 
-class AccountService
+class AccountService extends Stripe
 {
-    private $stripe;
-
     public function __construct()
     {
-        $this->stripe = new \Stripe\StripeClient(config('stripe.stripe.secret'));
+        parent::__construct();
     }
-
     public function createAccount()
     {
         return $this->stripe->accounts->create([
