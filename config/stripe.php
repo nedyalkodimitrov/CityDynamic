@@ -21,5 +21,7 @@ return [
 
     'fee' => [
         'application_fee' => 100 //1lev,
-    ]
+    ],
+
+    'currency' => env('CURRENCY', 'bgn'),
 ];
