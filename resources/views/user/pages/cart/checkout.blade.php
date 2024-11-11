@@ -7,7 +7,7 @@
 </div>
 <script>
     // Initialize Stripe.js
-    const stripe = Stripe({{config('services.stripe.key')}});
+    const stripe = Stripe("{{config('stripe.stripe.key')}}");
 
     initialize();
 
@@ -15,6 +15,10 @@
         const fetchClientSecret = async () => {
             const response = await fetch("{{route('stripe')}}", {
                 method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{csrf_token()}}"
+                },
             });
             const { clientSecret } = await response.json();
             return clientSecret;

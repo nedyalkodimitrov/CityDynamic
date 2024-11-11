@@ -5,11 +5,13 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\ShoppingCartRepository;
 use App\Http\Services\PriceCalculatorService;
+use App\Http\Services\Stripe\SessionService;
 use App\Http\Utils\Cart;
 use App\Models\Course;
 use App\Models\Order;
 use App\Models\ShoppingCart;
 use App\Models\Ticket;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
@@ -42,11 +44,6 @@ class ShopController extends Controller
         return redirect()->route('root');
     }
 
-    public function showCheckout()
-    {
-        return view('user.pages.cart.checkout');
-    }
-
     public function removeFromCart($itemId)
     {
         ShoppingCart::find($itemId)->delete();
@@ -70,4 +67,21 @@ class ShopController extends Controller
 
         return redirect()->back();
     }
+
+    public function showCheckout()
+    {
+        return view('user.pages.cart.checkout');
+    }
+
+    public function createStripeSession(SessionService $stripeSession)
+    {
+        return response()->json(['clientSecret' => $stripeSession->createSession(Cart::getInstance()->convertToStripeData())->client_secret]);
+    }
+
+    public function checkout(Request $request)
+    {
+        dd($request->all());
+    }
+
 }
+

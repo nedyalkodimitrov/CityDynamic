@@ -69,7 +69,7 @@ Route::group([
     'middleware' => ['auth', 'roleCheck:'.\App\Http\Constants\RoleConstant::COMPANY_ADMIN],
 ], function () {
     Route::get('/', [\App\Http\Controllers\Companies\HomeController::class, 'showHome'])->name('company.home');
-    Route::post('/stripe', [\App\Http\Controllers\Companies\HomeController::class, 'createStripeSession'])->name('stripe');
+
 
     Route::get('/buses', [\App\Http\Controllers\Companies\BusController::class, 'showBuses'])->name('company.showBuses');
     Route::get('/buses/create', [\App\Http\Controllers\Companies\BusController::class, 'showBusForm'])->name('company.showBusCreateForm');
@@ -117,6 +117,9 @@ Route::group([
     Route::get('/profile', [\App\Http\Controllers\User\ProfileController::class, 'showProfile'])->name('user.showProfile');
     Route::get('/purchases', [\App\Http\Controllers\User\PurchaseController::class, 'showPurchases'])->name('user.showPurchases');
     Route::get('/purchase/{id}', [\App\Http\Controllers\User\PurchaseController::class, 'showPurchase'])->name('user.showPurchase');
+    Route::get('/checkout', [\App\Http\Controllers\User\ShopController::class, 'showCheckout'])->name('checkout');
+    Route::any('/checkout/proceed', [\App\Http\Controllers\User\ShopController::class, 'checkout'])->name('checkout.proceed');
+    Route::post('/stripe', [\App\Http\Controllers\User\ShopController::class, 'createStripeSession'])->name('stripe');
 });
 
 Route::get('/', [\App\Http\Controllers\User\UserController::class, 'showHome'])->name('root');

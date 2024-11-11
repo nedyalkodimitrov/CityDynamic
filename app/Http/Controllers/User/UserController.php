@@ -26,9 +26,6 @@ class UserController extends Controller
             'destinations' => $destinations,
         ]);
     }
-
-
-
     public function showCourses($id)
     {
         $destination = Destination::find($id);

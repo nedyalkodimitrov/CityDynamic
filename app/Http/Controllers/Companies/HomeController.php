@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Repositories\CourseRepository;
 use App\Http\Repositories\DestinationRepository;
 use App\Http\Services\Stripe\SessionService;
+use App\Http\Utils\Cart;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -31,12 +32,5 @@ class HomeController extends Controller
             'soldTickets' => 0,
             'courses' => $courses,
         ]);
-    }
-
-    public function createStripeSession()
-    {
-        $stripeSession = new SessionService;
-
-        return response()->json(['clientSecret' => $stripeSession->createSession()->client_secret]);
     }
 }
