@@ -113,6 +113,13 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+        'elasticsearch' => [
+            'driver' => 'monolog',
+            'handler' => \Monolog\Handler\ElasticsearchHandler::class,
+            'with' => [
+                'hosts' => ['http://elasticsearch:9200'],
+            ],
+        ],
     ],
 
 ];

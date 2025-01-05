@@ -19,4 +19,14 @@ class SessionService extends Stripe
             'return_url' => route('checkout.proceed').'?session={CHECKOUT_SESSION_ID}',
         ]);
     }
+
+    public function retrieveSession($sessionId)
+    {
+        return $this->stripe->checkout->sessions->retrieve($sessionId, []);
+    }
+
+    public function retrieveSessionLineItems($sessionId)
+    {
+        return $this->stripe->checkout->sessions->allLineItems($sessionId, []);
+    }
 }

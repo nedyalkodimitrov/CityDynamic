@@ -17,7 +17,7 @@ class DestinationSchedule extends Model
         'end_date',
     ];
 
-    public function destionation()
+    public function destination()
     {
         return $this->belongsTo(Destination::class, 'destination_id', 'id');
     }

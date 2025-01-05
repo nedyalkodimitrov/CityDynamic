@@ -35,10 +35,13 @@
                             <td> {{$ticket?->endPoint->station?->name}}</td>
                             <td> {{$ticket?->course->date}} {{$ticket?->course->startTime}}</td>
                             <td> {{$ticket?->price}} лв.</td>
-                            <td> <form action="{{route("user.removeFromCart", ["id" => $ticket?->id])}}" method="post" class="col-12 m-0">
+                            <td>
+                                <form action="{{route("user.removeFromCart", ["id" => $ticket?->id])}}" method="post"
+                                      class="col-12 m-0">
                                     @csrf
-                                    <button class="btn btn-danger col-12"><i class="fa fa-minus"></i></button>
-                                </form></td>
+                                    <button class="btn btn-danger col-12"><i class="fa fa-times"></i></button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                     <tr>
@@ -48,12 +51,12 @@
                         <td></td>
                         <td>Общо</td>
                         <td> {{\App\Http\Utils\Cart::getInstance(Auth::user())->getTotal()}} лв.</td>
-                        <td> </td>
+                        <td></td>
                     </tr>
                     </tbody>
                 </table>
                 <div>
-                    <form action="{{route("user.buy")}}" method="post" class="col-12">
+                    <form action="{{route("checkout")}}" class="col-12">
                         @csrf
                         <button class="btn btn-success col-12">Завърши поръчката</button>
                     </form>

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('contact_email');
             $table->string('contact_phone');
             $table->string('contact_address');
+            $table->string('stripe_account_id');
             $table->timestamps();
         });
     }

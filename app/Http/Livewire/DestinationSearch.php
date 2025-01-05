@@ -10,13 +10,11 @@ use Livewire\Component;
 class DestinationSearch extends Component
 {
     public $cities;
-
     public $startCity;
-
     public $endCities = [];
-
     public $endCity;
 
+    public $queryString = ['startCity', 'endCity'];
     public function render()
     {
         if ($this->startCity) {

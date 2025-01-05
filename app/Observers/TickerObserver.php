@@ -14,8 +14,9 @@ class TickerObserver
         }
     }
 
-    public function deleting(Ticket $ticket)
+    public function deleted(Ticket $ticket)
     {
+        dd($ticket);
         if ($ticket->user_id == \Auth::user()->id) {
             Cart::getInstance(\Auth::user())->remove($ticket);
         }

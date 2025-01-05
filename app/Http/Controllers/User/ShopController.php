@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Constants\StripeEventConstant;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\ShoppingCartRepository;
 use App\Http\Services\PriceCalculatorService;
+use App\Http\Services\Stripe\PaymentService;
+use App\Http\Services\Stripe\ProductService;
 use App\Http\Services\Stripe\SessionService;
+use App\Http\Services\Stripe\TransferService;
 use App\Http\Utils\Cart;
 use App\Models\Course;
 use App\Models\Order;
@@ -20,33 +24,9 @@ class ShopController extends Controller
     {
         return view('user.pages.cart.cart');
     }
-
-    public function buy()
+    public function removeFromCart(Ticket $ticket)
     {
-        $user = Auth::user();
-        $items = ShoppingCartRepository::getShoppingCart($user);
-        $totalPrice = 0;
-        foreach ($items as $item) {
-            $totalPrice += $item->ticket->price;
-        }
-
-        $order = new Order;
-        $order->ticketNumbers = count($items);
-        $order->totalPrice = $totalPrice;
-        $order->user = $user->id;
-        $order->save();
-
-        foreach ($items as $item) {
-            $item->order = $order->id;
-            $item->save();
-        }
-
-        return redirect()->route('root');
-    }
-
-    public function removeFromCart($itemId)
-    {
-        ShoppingCart::find($itemId)->delete();
+        $ticket->delete();
 
         return redirect()->back();
     }
@@ -75,13 +55,49 @@ class ShopController extends Controller
 
     public function createStripeSession(SessionService $stripeSession)
     {
-        return response()->json(['clientSecret' => $stripeSession->createSession(Cart::getInstance()->convertToStripeData())->client_secret]);
+        $stripeData = Cart::getInstance()->convertToStripeData();
+        return response()->json(['clientSecret' => $stripeSession->createSession($stripeData)->client_secret]);
     }
 
-    public function checkout(Request $request)
+    public function checkout(Request $request, SessionService $stripeSession, ProductService $productService, TransferService $transferService)
     {
-        dd($request->all());
+        $session = $stripeSession->retrieveSession($request->session);
+        $sessionLineItems = $stripeSession->retrieveSessionLineItems($request->session);
+        $order = Order::create([
+            'user_id' => Auth::user()->id,
+            'stripe_charge_id' => $session->payment_intent,
+            'ticket_numbers' => count($sessionLineItems->data),
+            'total_price' => $session->amount_total / 100,
+        ]);
+
+        foreach ($sessionLineItems->data as $lineItem) {
+            $product = $productService->retrieveProduct($lineItem->price->product);
+            $ticketId = $product->metadata->ticket_id;
+            $ticket = Ticket::find($ticketId);
+            $ticket->order_id = $order->id;
+            $ticket->save();
+
+            $stripeAccountId = $ticket->course->destination->company->stripe_account_id;
+            $transferService->createTransfer($lineItem->amount_total, $stripeAccountId,'ORDER100');
+        }
+
+        return redirect()->route('user.showPurchases');
     }
 
-}
+    public function stripeWebhook(PaymentService $paymentService)
+    {
+        $payload = @file_get_contents('php://input');
+        $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
 
+        $event = \Stripe\Webhook::constructEvent(
+            $payload, $sig_header, config('stripe.webhook.secret')
+        );
+        $eventObject = $event->data->object;
+
+        if ($event->type == StripeEventConstant::CHECKOUT_SESSION_COMPLETED) {
+            $paymentService->retrievePaymentIntent($eventObject->payment_intent);
+        }
+
+        exit();
+    }
+}

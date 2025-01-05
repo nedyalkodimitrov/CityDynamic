@@ -27,8 +27,7 @@
 </head>
 <body>
     @include("companies.layouts.head")
-    <!--Main layout-->
-    <main style="margin-top: 2em">
+    <main style="margin-top: 4em">
         <div class="container pt-4">
         @yield('content')
         </div>

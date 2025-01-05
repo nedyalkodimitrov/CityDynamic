@@ -68,4 +68,9 @@ class StationRepository
     {
         $station->update($params);
     }
+
+    public static function getStationIdsByCity($cityId)
+    {
+        return Station::where('city_id', $cityId)->select('id')->get()->toArray();
+    }
 }

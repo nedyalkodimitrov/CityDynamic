@@ -35,7 +35,14 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            //
+//            $message = \Http::post('http://127.0.0.1:8000/api/receive-error', [
+//                'token' => 'PgFXnrP11AmKAyxoiFtPMZ7rYJaAB4XxC7cSMvAJj2T3GNY4jo0CIrkXyKP1',
+//                'message' => $e->getMessage(),
+//                'trace' => $e->getTraceAsString(),
+//                'statusCode' => $e->getCode(),
+//                'from_url' => request()->url(),
+//            ]);
+//            dd($message->json());
         });
     }
 }

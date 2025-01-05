@@ -38,4 +38,14 @@ class DestinationRepository
             'company_id' => $company->id,
         ]);
     }
+
+    public static function getDestinationWithInPoints($startStations, $endStations)
+    {
+        return Destination::whereHas('points', function ($query) use ($startStations) {
+            $query->whereIn('station_id', $startStations);
+        })->whereHas('points', function ($query) use ($endStations) {
+            $query->whereIn('station_id', $endStations);
+        })->with('courses','courses.destination','courses.destination.startStation','courses.destination.startStation.city',
+        'courses.destination.endStation','courses.destination.endStation.city')->get();
+    }
 }

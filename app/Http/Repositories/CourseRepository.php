@@ -3,6 +3,7 @@
 namespace App\Http\Repositories;
 
 use App\Models\Course;
+use App\Models\Station;
 
 class CourseRepository
 {
@@ -24,7 +25,7 @@ class CourseRepository
             'driver_id' => 3,
             'date' => $params['date'],
             'start_time' => $params['startTime'],
-//            'end_time' => $params['endTime'],
+            //            'end_time' => $params['endTime'],
             'price' => $params['price'],
         ]);
     }
@@ -37,7 +38,7 @@ class CourseRepository
             'driver_id' => 3,
             'date' => $params['date'],
             'start_time' => $params['startTime'],
-//            'end_time' => $params['endTime'],
+            //            'end_time' => $params['endTime'],
             'price' => $params['price'],
         ]);
     }
@@ -45,7 +46,7 @@ class CourseRepository
     public function getCoursesByDestinationIds($destinationIds)
     {
         return Course::whereIn('destination_id', $destinationIds)
-            ->with('destination','destination.startStation','destination.endStation' )
+            ->with('destination', 'destination.startStation', 'destination.endStation')
             ->get();
     }
 }

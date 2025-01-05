@@ -40,9 +40,7 @@
             <a class="navbar-brand" href="{{route("user.showCompanies")}}"  style="font-size: 1em; ">
                 Компании
             </a>
-            <a class="navbar-brand" href="{{route("user.shoeCourseFormView")}}" style="font-size: 1em; ">
-                Курсове
-            </a>
+
             <ul class="navbar-nav ms-auto d-flex flex-row">
                 @if(\Illuminate\Support\Facades\Auth::check())
                     <div style="

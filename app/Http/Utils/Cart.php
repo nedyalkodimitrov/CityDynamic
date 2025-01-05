@@ -2,23 +2,19 @@
 
 namespace App\Http\Utils;
 
-use App\Models\ShoppingCart;
 use App\Models\Ticket;
 use App\Models\User;
-use Illuminate\Container\Container;
 
 class Cart
 {
     private static $instance = null;
     private $items = [];
-
     private $total = 0;
-
     private $totalItems = 0;
 
-    public function __construct(User $user = null)
+    public function __construct(?User $user = null)
     {
-        if (session('cart') === null) {
+        if (session('cart') === []) {
             Ticket::where('user_id', $user?->id)->get()->each(function ($ticket) {
                 $this->items[$ticket->id] = $ticket;
                 $this->total += $ticket->price;
@@ -27,20 +23,22 @@ class Cart
             session(['cart' => $this->items]);
             session(['total' => $this->total]);
             session(['totalItems' => $this->totalItems]);
-        }else{
+        } else {
             $this->items = session('cart', []);
             $this->total = session('total', 0);
             $this->totalItems = session('totalItems', 0);
-
         }
     }
-    public static function getInstance(User $user = null)
+
+    public static function getInstance(?User $user = null)
     {
         if (self::$instance === null) {
             self::$instance = new self($user);
         }
+
         return self::$instance;
     }
+
     public function add(Ticket $item)
     {
         $this->items[$item->id] = $item;
@@ -92,13 +90,17 @@ class Cart
                     'currency' => config('stripe.currency'),
                     'unit_amount' => $item->price * 100,
                     'product_data' => [
-                        'name' => $item->startPoint->station->city->name . ' - ' . $item->endPoint->station->city->name,
-                        'description' => 'Тръва '. $item->course->start_time. ' часа',
+                        'name' => $item->startPoint->station->city->name.' - '.$item->endPoint->station->city->name,
+                        'description' => 'Тръва '.$item->course->start_time.' часа',
+                        'metadata' => [
+                            'ticket_id' => $item->id,
                         ],
+                    ],
                 ],
                 'quantity' => 1,
             ];
         }
+
         return $lineItems;
     }
 }

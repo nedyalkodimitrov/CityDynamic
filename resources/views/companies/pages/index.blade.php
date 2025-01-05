@@ -1,41 +1,42 @@
 @extends('companies.layouts.master')
 
 @section('title')
-    Company Panel
+    Панел за компания
 @endsection
 
 @section("content")
-    <div class="col-12 " style="margin-top: -2em;margin-left: 1em;margin-bottom: 2em;">
+    <div class="col-12">
         <h2>Начало</h2>
     </div>
     <div class="col-12 row mb-3">
         <div class="col-4">
             <div class="card col-11 mx-auto">
                 <div class="card-body">
-
                     <div style="margin-left: 0.5em;">
                         <p style="font-size: 1.3em;margin: 0; text-align: center">{{$destinationCount}} </p>
-                        <p style="font-size: 1.1em;margin: 0; text-align: center"><b> Дестинации</b></p>
+                        <p style="font-size: 1.1em;margin: 0; text-align: center"><b>Дестинации</b></p>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="col-4">
             <div class="card col-11 mx-auto">
                 <div class="card-body">
                     <div style="margin-left: 0.5em;">
                         <p style="font-size: 1.3em;margin: 0; text-align: center">{{$courseCount}} </p>
-                        <p style="font-size: 1.1em;margin: 0; text-align: center"><b> Курса</b></p>
+                        <p style="font-size: 1.1em;margin: 0; text-align: center"><b>Курса</b></p>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="col-4">
             <div class="card col-11 mx-auto">
                 <div class="card-body">
                     <div style="margin-left: 0.5em;">
                         <p style="font-size: 1.3em;margin: 0; text-align: center">{{$soldTickets}} </p>
-                        <p style="font-size: 1.1em;margin: 0; text-align: center"><b> Продадени билета</b></p>
+                        <p style="font-size: 1.1em;margin: 0; text-align: center"><b>Продадени билета</b></p>
                     </div>
                 </div>
             </div>

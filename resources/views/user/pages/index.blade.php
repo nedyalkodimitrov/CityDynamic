@@ -19,8 +19,8 @@
                     <div class="card-body">
                         <h3>За {{$destination->startStation->name}}</h3>
                         <h6>От {{$destination->endStation->name}}</h6>
-                        <a href="{{route("user.showCourses", ["id" => $destination->id])}}" class="btn btn-primary col-12 ">Вижте
-                            курсове</a>
+{{--                        <a href="{{route("user.showCourses", ["id" => $destination->id])}}" class="btn btn-primary col-12 ">Вижте--}}
+{{--                            курсове</a>--}}
                     </div>
                 </div>
             </div>

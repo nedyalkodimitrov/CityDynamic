@@ -11,7 +11,7 @@ class PurchaseController extends Controller
 {
     public function showPurchases()
     {
-        $user = Auth::user()->with('orders');
+        $user = Auth::user();
         $orders = $user->orders;
 
         return view('user.pages.profile.purchases', [
@@ -19,16 +19,10 @@ class PurchaseController extends Controller
         ]);
     }
 
-    public function showPurchase(Order $orderId)
+    public function showPurchase(Order $id)
     {
-        $user = Auth::user();
-
-        if ($orderId->user_id !== $user->id) {
-            return redirect()->route('user.profile.purchases');
-        }
-
         return view('user.pages.profile.purchase', [
-            'order' => $orderId,
+            'order' => $id,
         ]);
     }
 }
