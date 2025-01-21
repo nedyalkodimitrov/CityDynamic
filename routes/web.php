@@ -35,6 +35,7 @@ Route::get('/', [\App\Http\Controllers\User\UserController::class, 'showHome'])-
 
 Route::get('/course/{id}/{startCity?}/{endCity?}', [\App\Http\Controllers\User\CourseController::class, 'showCourse'])->name('user.showCourse');
 Route::any('/courses', [\App\Http\Controllers\User\CourseController::class, 'showCourses'])->name('user.searchCourses');
-Route::get('/companies', [\App\Http\Controllers\User\UserController::class, 'showCompanies'])->name('user.showCompanies');
+Route::get('/companies', [\App\Http\Controllers\User\CompanyController::class, 'showAllCompanies'])->name('user.showCompanies');
+Route::get('/companies/{id}', [\App\Http\Controllers\User\CompanyController::class, 'showCompany'])->name('user.showCompany');
 
 Route::post('/setSeatStatus/{busId}', [\App\Http\Controllers\Controller::class, 'setSeatsStatus']);

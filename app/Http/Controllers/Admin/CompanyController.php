@@ -44,11 +44,9 @@ class CompanyController extends Controller
         ]);
     }
 
-    public function createCompany(CreateCompanyRequest $request, MediaService $mediaService)
+    public function createCompany(CreateCompanyRequest $request)
     {
-        $request->validated();
-
-        $imageName = $mediaService->saveImage($request->image);
+        $imageName = MediaService::saveImage($request->image);
 
         $company = $this->companyRepository->create([
             'name' => $request->name,
@@ -61,9 +59,7 @@ class CompanyController extends Controller
         ]);
 
         $user = $this->userRepository->findById($request->admin);
-        $user->workspace()->create([
-            'company_id' => $company->id,
-        ]);
+        $this->userRepository->addWorkCompanyToUser($user, $company);
 
         $user->assignRole(RoleConstant::COMPANY_ADMIN);
 

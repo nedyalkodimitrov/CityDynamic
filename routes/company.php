@@ -54,4 +54,7 @@ Route::group([
     Route::get('/courses/{id}', [\App\Http\Controllers\Companies\CourseController::class, 'showCourse'])->name('company.showCourse');
     Route::post('/courses/{id}/edit', [\App\Http\Controllers\Companies\CourseController::class, 'editCourse'])->name('company.editCourse');
     Route::post('/company/connectedStation', [\App\Http\Controllers\Companies\StationController::class, 'getAllStations'])->name('company.getConnectedStations');
+
+    Route::get('/information', [\App\Http\Controllers\Companies\InformationController::class, 'showInformation'])->name('company.showInformation');
+    Route::post('/information', [\App\Http\Controllers\Companies\InformationController::class, 'saveInformation'])->name('company.saveInformation');
 });

@@ -77,12 +77,12 @@
                             aria-labelledby="navbarDropdownMenuLink"
                         >
                             @if(\Illuminate\Support\Facades\Auth::user()->getRoleNames()->first() == \App\Http\Constants\RoleConstant::SYSTEM_ADMIN)
-                                <li><a class="dropdown-item" href="{{route("homeAdmin")}}">Админ Панел</a></li>
+                                <li><a class="dropdown-item" target="_blank" href="{{route("homeAdmin")}}">Админ Панел</a></li>
                             @elseif(\Illuminate\Support\Facades\Auth::user()->getRoleNames()->first() == \App\Http\Constants\RoleConstant::COMPANY_ADMIN)
-                                <li><a class="dropdown-item" href="{{route("company.home")}}">Панел за компании</a>
+                                <li><a class="dropdown-item" target="_blank" href="{{route("company.home")}}">Панел за компании</a>
                                 </li>
                             @elseif(\Illuminate\Support\Facades\Auth::user()->getRoleNames()->first() == \App\Http\Constants\RoleConstant::STATION_ADMIN)
-                                <li><a class="dropdown-item" href="{{route("station.home")}}">Панел за автогари</a>
+                                <li><a class="dropdown-item" target="_blank" href="{{route("station.home")}}">Панел за автогари</a>
                                 </li>
                             @endif
                             <li><a class="dropdown-item" href="{{route("user.showProfile")}}">Профил</a></li>

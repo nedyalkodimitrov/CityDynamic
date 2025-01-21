@@ -6,21 +6,23 @@
 
 @section("content")
     <h1 class="col-12 text-center mb-2">Създай компания</h1>
-    <form class="col-12 col-md-9 mx-auto col-lg-9" action="{{route("admin.createCompany")}}" method="post" enctype="multipart/form-data">
+    <form class="col-12 col-md-9 mx-auto col-lg-9" action="{{route("admin.createCompany")}}" method="post"
+          enctype="multipart/form-data">
         @csrf
         <div>
             <labe for="image">Профилина снимка</labe>
             <input id="image" type="file" name="image" class="form-control">
         </div>
         <div class="form-group col-12">
-            <label for="exampleInputEmail1">Име</label>
+            <label >Име</label>
             <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="">
         </div>
 
-        <div class="form-group col-12 mt-3">
-            <label for="exampleInputPassword1">Кой ще администрира компанията</label>
+        <div class="form-group col-12 ">
+            <label>Кой ще администрира компанията</label>
             <select class="form form-select" name="admin">
                 @foreach($users as $user)
+                    <option>Избери потребител</option>
                     <option value="{{$user->id}}">
                         {{$user->name}}
                     </option>
@@ -47,8 +49,14 @@
             <label for="contactAddress">Седалище на фирмата</label>
             <input type="text" name="contactAddress" class="form-control" id="contactAddress">
         </div>
+        @if($errors->any())
+            <div class="alert alert-danger mt-2">
+                @foreach($errors->all() as $error)
+                    <p class="m-0 p-0">{{$error}}</p>
+                @endforeach
+            </div>
+        @endif
         <button type="submit" class="btn btn-primary col-12 mt-3">Създай компания</button>
     </form>
-
 @endsection
 

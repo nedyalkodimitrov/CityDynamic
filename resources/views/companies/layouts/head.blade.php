@@ -53,7 +53,7 @@
             <ul class="navbar-nav ms-auto d-flex flex-row">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
-                       href="#"
+                       href="{{route('company.showInformation')}}"
                        id="navbarDropdownMenuLink">
                         <img
                             src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"

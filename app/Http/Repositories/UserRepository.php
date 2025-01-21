@@ -2,6 +2,7 @@
 
 namespace App\Http\Repositories;
 
+use App\Models\Company;
 use App\Models\User;
 
 class UserRepository
@@ -18,7 +19,7 @@ class UserRepository
 
     public function getAllUsersWithOutWorkspace()
     {
-        return User::doesntHave('workspaces')->get();
+        return User::doesntHave('userWorkspace')->get();
     }
 
     public function create($params)
@@ -29,5 +30,12 @@ class UserRepository
     public function update($user, $params)
     {
         $user->update($params);
+    }
+
+    public function addWorkCompanyToUser(User $user, Company $company)
+    {
+        $user->userWorkspace()->create([
+            'company_id' => $company->id,
+        ]);
     }
 }

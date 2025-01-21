@@ -31,10 +31,7 @@ class UserController extends Controller
 
     public function showCompanies()
     {
-        $companies = Company::all();
 
-        return view('user.pages.companies.companies')
-            ->with('companies', $companies);
 
     }
 }
