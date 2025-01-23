@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Company extends Model
 {
@@ -46,5 +47,10 @@ class Company extends Model
     public function userWorkspaces()
     {
         return $this->hasMany(UserWorkspace::class, 'company_id');
+    }
+
+    public function stripeAccount(): HasOne
+    {
+        return $this->hasOne(CompanyStripeAccount::class);
     }
 }

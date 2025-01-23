@@ -5,8 +5,16 @@
 @endsection
 
 @section("content")
-    <div class="col-12">
-        <h2>Начало</h2>
+    @if(!$company->stripeAccount?->stripe_account_id)
+        <div class="col-12 alert alert-danger">Вашата компания няма настроен stripe акаунт!
+            <a href="{{route('company.stripeAccount')}}">Създай stripe</a></div>
+    @elseif(!$company->stripeAccount->is_charges_enabled)
+        <div class="col-12 alert alert-danger">Вашата компания няма настроен stripe акаунт!
+            <a href="{{route('company.stripeAccount')}}">Довършете настройването на stripe</a></div>
+    @endif
+    <div class="col-12 row mb-3 px-4">
+        <h2 class="col-10 m-0 p-0 ">Начало</h2>
+        <a class="btn btn-primary col-2" target="_blank" href="{{route('company.openStripeDashboard')}}">Отвори Stripe табло</a>
     </div>
     <div class="col-12 row mb-3">
         <div class="col-4">

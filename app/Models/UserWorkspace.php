@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserWorkspace extends Model
 {
+    protected $fillable = [
+        'user_id',
+        'company_id',
+        'station_id',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

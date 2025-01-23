@@ -57,4 +57,8 @@ Route::group([
 
     Route::get('/information', [\App\Http\Controllers\Companies\InformationController::class, 'showInformation'])->name('company.showInformation');
     Route::post('/information', [\App\Http\Controllers\Companies\InformationController::class, 'saveInformation'])->name('company.saveInformation');
+
+    Route::get('/stripe/account', [\App\Http\Controllers\Companies\StripeController::class, 'createAccount'])->name('company.stripeAccount');
+    Route::get('/stripe/account/handle', [\App\Http\Controllers\Companies\StripeController::class, 'handleAfterAccountCreation'])->name('company.handleStripeAccount');
+    Route::get('/stripe/dashboard/open', [\App\Http\Controllers\Companies\StripeController::class, 'openStripeDashboard'])->name('company.openStripeDashboard');
 });

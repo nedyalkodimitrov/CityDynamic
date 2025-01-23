@@ -31,6 +31,7 @@ class HomeController extends Controller
             'courseCount' => count($courses),
             'soldTickets' => 0,
             'courses' => $courses,
+            'company' => $company,
         ]);
     }
 }

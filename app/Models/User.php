@@ -70,7 +70,6 @@ class User extends Authenticatable
 
     public function getCompany(): Company|null
     {
-
         if (!$this->userWorkspace) {
             return null;
         }

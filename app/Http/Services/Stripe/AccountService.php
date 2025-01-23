@@ -23,9 +23,19 @@ class AccountService extends Stripe
     {
         return $this->stripe->accountLinks->create([
             'account' => $accountId,
-            'refresh_url' => 'https://example.com/reauth',
-            'return_url' => 'https://example.com/return',
+            'refresh_url' => route('company.home'),
+            'return_url' => route('company.handleStripeAccount'),
             'type' => 'account_onboarding',
         ]);
+    }
+
+    public function retrieveAccountLink($accountLinkId)
+    {
+        return $this->stripe->accounts->retrieve($accountLinkId, []);
+    }
+
+    public function createLoginLink($accountId)
+    {
+        return $this->stripe->accounts->createLoginLink($accountId, []);
     }
 }
