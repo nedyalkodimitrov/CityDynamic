@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\ShoppingCart;
-use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -15,6 +13,6 @@ class ProfileController extends Controller
 
     public function editProfile()
     {
-     //todo
+        //todo
     }
 }

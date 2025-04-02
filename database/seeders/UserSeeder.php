@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
 
             $companyUser->assignRole($companyRoleId);
             $companyUser->userWorkspace()->create([
-                'company_id' => $index
+                'company_id' => $index,
             ]);
         }
 
@@ -61,7 +61,7 @@ class UserSeeder extends Seeder
             $companyUser->assignRole($stationRoleId);
 
             $companyUser->userWorkspace()->create([
-                'station_id' => $index
+                'station_id' => $index,
             ]);
         }
     }

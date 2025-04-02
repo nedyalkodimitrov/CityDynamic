@@ -25,14 +25,6 @@
                 @foreach($courses as $course)
                     <div class="card col-11 mx-auto mt-3">
                         <div class="card-body row align-center">
-                            <p class="col-6 text-start"
-                               style="font-size: 1.1em">
-                                По направление:
-                                {{$course['startCity']}}
-                                - {{$course['endCity']}}
-                            </p>
-
-                            <hr>
                             <p class="col-12 col-md-2  p-0 pl-5 m-0">
                                 <i class="fas fa-calendar"></i>
                                 <b>{{$course['datetime']}}</b>

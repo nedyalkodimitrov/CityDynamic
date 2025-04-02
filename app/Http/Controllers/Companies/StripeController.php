@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\Stripe\AccountService;
-use Illuminate\Http\Request;
 
 class StripeController extends Controller
 {
@@ -42,6 +41,7 @@ class StripeController extends Controller
     public function openStripeDashboard(AccountService $accountService)
     {
         $stripeDashboardLink = $accountService->createLoginLink(\Auth::user()->getCompany()->stripeAccount->stripe_account_id);
+
         return redirect($stripeDashboardLink->url);
     }
 }

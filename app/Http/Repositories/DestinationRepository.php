@@ -3,7 +3,6 @@
 namespace App\Http\Repositories;
 
 use App\Models\Destination;
-use App\Models\Station;
 
 class DestinationRepository
 {
@@ -33,7 +32,7 @@ class DestinationRepository
     {
         return Destination::create([
             'name' => $createData['name'],
-            'start_station_id' => $createData['stations'][0],
+            'start_station_id' => reset($createData['stations']),
             'end_station_id' => $createData['stations'][count($createData['stations']) - 1],
             'company_id' => $company->id,
         ]);
@@ -45,7 +44,7 @@ class DestinationRepository
             $query->whereIn('station_id', $startStations);
         })->whereHas('points', function ($query) use ($endStations) {
             $query->whereIn('station_id', $endStations);
-        })->with('courses','courses.destination','courses.destination.startStation','courses.destination.startStation.city',
-        'courses.destination.endStation','courses.destination.endStation.city')->get();
+        })->with('courses', 'courses.destination', 'courses.destination.startStation', 'courses.destination.startStation.city',
+            'courses.destination.endStation', 'courses.destination.endStation.city')->get();
     }
 }

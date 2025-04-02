@@ -8,8 +8,11 @@ use App\Models\User;
 class Cart
 {
     private static $instance = null;
+
     private $items = [];
+
     private $total = 0;
+
     private $totalItems = 0;
 
     public function __construct(?User $user = null)

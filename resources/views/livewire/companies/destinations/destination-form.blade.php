@@ -8,8 +8,7 @@
             border-left: 20px solid green;
         }
     </style>
-
-    <form class="col-12 col-md-9 mx-auto col-lg-9 " action="{{is_null($destination)?route("company.createDestination"): route("company.editDestination", ['id' => $destination->id])}}" method="post">
+    <form class="col-12 col-md-9 mx-auto col-lg-9 " action="{{is_null($destination) || !$destination->exists ?route("company.createDestination"): route("company.editDestination", ['id' => $destination->id])}}" method="post">
         @csrf
         <div class="form-group col-12">
             <label for="exampleInputEmail1">Име </label>

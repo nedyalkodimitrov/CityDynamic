@@ -20,6 +20,7 @@ class Destination extends Model
         'distance',
         'price',
     ];
+
     public function startStation()
     {
         return $this->belongsTo(Station::class, 'start_station_id', 'id');

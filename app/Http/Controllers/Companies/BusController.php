@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\BusRepository;
-use App\Http\Repositories\CompanyRepository;
-use App\Http\Repositories\StationRepository;
 use App\Http\Requests\Company\Bus\CreateBusRequest;
 use App\Http\Requests\Company\Bus\EditBusRequest;
 use App\Models\Bus;

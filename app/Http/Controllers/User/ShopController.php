@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Constants\StripeEventConstant;
 use App\Http\Controllers\Controller;
-use App\Http\Repositories\ShoppingCartRepository;
 use App\Http\Services\PriceCalculatorService;
 use App\Http\Services\Stripe\PaymentService;
 use App\Http\Services\Stripe\ProductService;
@@ -13,7 +12,6 @@ use App\Http\Services\Stripe\TransferService;
 use App\Http\Utils\Cart;
 use App\Models\Course;
 use App\Models\Order;
-use App\Models\ShoppingCart;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +22,7 @@ class ShopController extends Controller
     {
         return view('user.pages.cart.cart');
     }
+
     public function removeFromCart(Ticket $ticket)
     {
         $ticket->delete();
@@ -56,6 +55,7 @@ class ShopController extends Controller
     public function createStripeSession(SessionService $stripeSession)
     {
         $stripeData = Cart::getInstance()->convertToStripeData();
+
         return response()->json(['clientSecret' => $stripeSession->createSession($stripeData)->client_secret]);
     }
 
@@ -78,7 +78,7 @@ class ShopController extends Controller
             $ticket->save();
 
             $stripeAccountId = $ticket->course->destination->company->stripe_account_id;
-            $transferService->createTransfer($lineItem->amount_total, $stripeAccountId,'ORDER100');
+            $transferService->createTransfer($lineItem->amount_total, $stripeAccountId, 'ORDER100');
         }
 
         return redirect()->route('user.showPurchases');

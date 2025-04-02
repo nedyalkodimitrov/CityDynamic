@@ -3,7 +3,6 @@
 namespace App\Http\Repositories;
 
 use App\Models\Course;
-use App\Models\Station;
 
 class CourseRepository
 {

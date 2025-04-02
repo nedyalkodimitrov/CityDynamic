@@ -2,7 +2,8 @@
 
 namespace App\Http\Services\Stripe;
 
-class Stripe {
+class Stripe
+{
     protected $stripe;
 
     public function __construct()

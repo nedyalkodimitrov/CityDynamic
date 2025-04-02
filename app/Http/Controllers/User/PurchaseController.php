@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use App\Models\ShoppingCart;
 use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller

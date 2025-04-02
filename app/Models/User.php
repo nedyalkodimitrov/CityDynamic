@@ -53,7 +53,7 @@ class User extends Authenticatable
 
     public function getWorkspace(): Company|Station|null
     {
-        if (!$this->userWorkspace) {
+        if (! $this->userWorkspace) {
             return null;
         }
 
@@ -68,21 +68,22 @@ class User extends Authenticatable
         return null;
     }
 
-    public function getCompany(): Company|null
+    public function getCompany(): ?Company
     {
-        if (!$this->userWorkspace) {
+        if (! $this->userWorkspace) {
             return null;
         }
 
         if ($this->userWorkspace->company_id) {
             return $this->userWorkspace->company;
         }
+
         return null;
     }
 
-    public function getStation(): Station|null
+    public function getStation(): ?Station
     {
-        if (!$this->userWorkspace) {
+        if (! $this->userWorkspace) {
             return null;
         }
 

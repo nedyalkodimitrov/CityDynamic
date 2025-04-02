@@ -8,6 +8,7 @@ class ProductService extends Stripe
     {
         parent::__construct();
     }
+
     public function retrieveProduct($productId)
     {
         return $this->stripe->products->retrieve($productId);

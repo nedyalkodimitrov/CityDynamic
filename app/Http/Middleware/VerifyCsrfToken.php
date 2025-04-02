@@ -14,6 +14,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         '/companyPanel/company/connectedStation',
         '/setSeatStatus/*',
-        '/companyPanel/stripe'
+        '/companyPanel/stripe',
     ];
 }

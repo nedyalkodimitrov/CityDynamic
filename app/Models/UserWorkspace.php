@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserWorkspace extends Model
 {
@@ -18,6 +16,7 @@ class UserWorkspace extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
     public function company()
     {
         return $this->belongsTo(Company::class, 'company_id');
@@ -28,4 +27,3 @@ class UserWorkspace extends Model
         return $this->belongsTo(Station::class, 'station_id');
     }
 }
-

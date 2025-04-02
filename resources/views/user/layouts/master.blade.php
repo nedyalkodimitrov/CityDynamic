@@ -24,7 +24,6 @@
     <link rel="icon" type="image/x-icon" href="{{asset("assets/favicon2.ico")}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    @yield("title")
     @yield("stylesheet")
     @livewireStyles
 </head>

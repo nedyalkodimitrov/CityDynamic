@@ -8,6 +8,7 @@ class TransferService extends Stripe
     {
         parent::__construct();
     }
+
     public function createTransfer($amount, $merchantId, $transferGroup)
     {
         return $this->stripe->transfers->create([

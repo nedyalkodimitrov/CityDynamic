@@ -7,13 +7,15 @@ use App\Models\Company;
 
 class CompanyController extends Controller
 {
-    public function showAllCompanies() {
+    public function showAllCompanies()
+    {
         $companies = Company::all();
 
         return view('user.pages.companies.companies', ['companies' => $companies]);
     }
 
-    public function showCompany(Company $id) {
+    public function showCompany(Company $id)
+    {
         return view('user.pages.companies.company', ['company' => $id]);
     }
 }

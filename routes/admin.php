@@ -19,7 +19,7 @@ Route::group([
     'prefix' => 'adminPanel',
     'middleware' => ['auth', 'roleCheck:'.\App\Http\Constants\RoleConstant::SYSTEM_ADMIN],
 ], function () {
-        Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('homeAdmin');
+    Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('homeAdmin');
 
     Route::get('/users', [\App\Http\Controllers\Admin\UserController::class, 'showUsers'])->name('admin.showUsers');
     Route::get('/users/create', [\App\Http\Controllers\Admin\UserController::class, 'showUserCreate'])->name('admin.showUserCreate');

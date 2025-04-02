@@ -26,7 +26,7 @@ class EditDestinactionScheduleRequest extends FormRequest
         return [
             'bus' => 'required|exists:buses,id',
             'hour' => 'required',
-//            'driver' => 'required',
+            //            'driver' => 'required',
             'days' => 'array',
             'startDate' => 'required|date',
             'endDate' => 'required|date',

@@ -2,15 +2,14 @@
 
 namespace App\Http\Livewire\Companies\Destinations;
 
-use App\Http\Services\DestinationService;
-use App\Http\Services\DistanceComputeService;
-use App\Models\Station;
 use Livewire\Component;
 
 class DestinationForm extends Component
 {
     public $destinationPoints = [];
+
     public $stations = [];
+
     public $destination = null;
 
     public function mount($stations, $destination)

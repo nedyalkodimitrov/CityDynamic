@@ -47,6 +47,7 @@ class DestinationScheduleRepository
             'price' => $editData['price'],
         ]);
     }
+
     public function delete($id)
     {
         DestinationSchedule::find($id)->delete();

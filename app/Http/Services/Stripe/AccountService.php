@@ -8,6 +8,7 @@ class AccountService extends Stripe
     {
         parent::__construct();
     }
+
     public function createAccount()
     {
         return $this->stripe->accounts->create([

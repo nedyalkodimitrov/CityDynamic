@@ -73,6 +73,7 @@ class ScheduleController extends Controller
     public function deleteSchedule($destinationId, $scheduleId)
     {
         $this->destinationScheduleRepository->delete($scheduleId);
-        return redirect()->route('company.showDestinationSchedules', ['destinationId'=>$destinationId])->with('success', 'Успешно изтрито разписание');
+
+        return redirect()->route('company.showDestinationSchedules', ['destinationId' => $destinationId])->with('success', 'Успешно изтрито разписание');
     }
 }

@@ -8,6 +8,7 @@ class PaymentService extends Stripe
     {
         parent::__construct();
     }
+
     public function retrievePaymentIntent($paymentIntentId)
     {
         return $this->stripe->paymentIntents->retrieve($paymentIntentId, []);

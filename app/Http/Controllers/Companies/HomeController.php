@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Companies;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\CourseRepository;
 use App\Http\Repositories\DestinationRepository;
-use App\Http\Services\Stripe\SessionService;
-use App\Http\Utils\Cart;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller

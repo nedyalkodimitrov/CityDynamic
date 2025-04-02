@@ -2,7 +2,6 @@
 
 namespace App\Http\Repositories;
 
-use App\Models\City;
 use App\Models\Station;
 
 class StationRepository

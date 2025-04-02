@@ -26,10 +26,10 @@ class CreateDestinactionScheduleRequest extends FormRequest
         return [
             'bus' => 'required|exists:buses,id',
             'hour' => 'required|date_format:H:i',
-//            'driver' => 'required',
+            //            'driver' => 'required',
             'startDate' => 'required|date',
             'endDate' => 'required|date',
-//            'day' => 'array',
+            //            'day' => 'array',
         ];
     }
 }
