@@ -2,6 +2,8 @@
 
 namespace App\Http\Repositories;
 
+use App\Models\City;
+use App\Models\Destination;
 use App\Models\DestinationPoint;
 
 class DestinationPointRepository
@@ -29,5 +31,14 @@ class DestinationPointRepository
             'distance' => 0,
             'price' => 0,
         ]);
+    }
+
+    public static function getDestinatioPointByCity(City $startCity, Destination $destination)
+    {
+       return DestinationPoint::join('stations', 'destination_points.station_id', '=', 'stations.id')
+            ->where('stations.city_id', $startCity->id)
+            ->where('destination_points.destination_id', $destination->id)
+            ->select('destination_points.*')
+            ->first();
     }
 }

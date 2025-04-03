@@ -15,8 +15,9 @@ class DestinationSearch extends Component
     public $endCities = [];
 
     public $endCity;
+    public $date;
 
-    public $queryString = ['startCity', 'endCity'];
+    public $queryString = ['startCity', 'endCity', 'date'];
 
     public function render()
     {

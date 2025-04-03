@@ -2,18 +2,19 @@
 
 namespace App\Http\Services;
 
+use App\Models\Destination;
+
 class PriceCalculatorService
 {
-    public function calculatePrice($course, $startPointId, $endPointId)
+    public function calculatePrice($destinationPrice, Destination $destination, $startPointId, $endPointId)
     {
-        $price = $course->price;
-
-        $destination = $course->destination;
         $points = $destination->points()->select('id')->get()->pluck('id')->toArray();
         $pointsCount = count($points);
         $count = $this->countElementsBeforeAndAfter($points, $startPointId, $endPointId);
-        $pricePerPoint = $price / $pointsCount;
-        $pointsBetween = $pointsCount - $count['before'] - $count['after'];
+        $pricePerPoint = $destinationPrice / $pointsCount;
+        $sub = $count['before'] - $count['after'];
+        $distance = $sub < 0 ? $sub * -1 : $sub;
+        $pointsBetween = $pointsCount - $distance;
 
         return $pricePerPoint * $pointsBetween;
     }

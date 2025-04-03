@@ -31,7 +31,7 @@
                 <label>
                     Дата на тръгване
                 </label>
-                <input type="date" class="form-control" name="travelDate">
+                <input type="date" class="form-control" name="date" wire:model="date" id="date">
             </div>
             <div class="col-12 col-lg-2 p-0 m-0" style="
     align-self: center;

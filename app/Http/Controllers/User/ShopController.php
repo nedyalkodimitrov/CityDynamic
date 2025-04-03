@@ -35,7 +35,7 @@ class ShopController extends Controller
         $user = Auth::user();
         $course = Course::find($courseId);
 
-        $price = $priceCalculatorService->calculatePrice($course, $startPointId, $endPointId);
+        $price = $priceCalculatorService->calculatePrice($course->price,$course->destination, $startPointId, $endPointId);
         Ticket::create([
             'user_id' => $user->id,
             'course_id' => $course->id,

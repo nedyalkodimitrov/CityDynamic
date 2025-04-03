@@ -10,11 +10,11 @@
 
 @section("content")
 
-    <livewire:destination-search :cities="$cities" :startCity="$startCity" :endCity="$endCity"/>
+    <livewire:destination-search :cities="$cities" :startCity="$startCity" :endCity="$endCity" :date="$date"/>
     <div class="col-12 row m-0">
         @if($date != null)
             <div class="col-12">
-                <h2 class="col-12 text-center mb-2 mt-4 "> {{\Carbon\Carbon::parse($courses[0]->date)->format("d.m.Y")}}
+                <h2 class="col-12 text-center mb-2 mt-4 "> {{\Carbon\Carbon::parse($date)->format("d.m.Y")}}
                     <i
                         class="fas fa-calendar"></i></p></h2>
             </div>
@@ -26,11 +26,11 @@
                     <div class="card col-11 mx-auto mt-3">
                         <div class="card-body row align-center">
                             <p class="col-12 col-md-2  p-0 pl-5 m-0">
-                                <i class="fas fa-calendar"></i>
-                                <b>{{$course['datetime']}}</b>
+                                <i class="fas fa-clock"></i>
+                                <b>{{\Carbon\Carbon::parse($course['datetime'])->format('H:i') }}</b>
                             </p>
                             <p class="col-12 col-md-3 p-0 m-0" style="align-self: center">
-                                {{$course['bus']}}
+                                <i class="fas fa-bus"></i>{{$course['bus']}}
                             </p>
                             <p class="col-12 col-md-2 p-0 m-0" style="align-self: center">
                                 <b style="font-size: 1.3em">{{$course['price']}} лв.</b>
