@@ -27,7 +27,7 @@
                         <div class="card-body row align-center">
                             <p class="col-12 col-md-2  p-0 pl-5 m-0">
                                 <i class="fas fa-clock"></i>
-                                <b>{{\Carbon\Carbon::parse($course['datetime'])->format('H:i') }}</b>
+                                <b>{{isset($course['datetime'])? \Carbon\Carbon::parse($course['datetime'])->format('H:i'): "N/A" }}</b>
                             </p>
                             <p class="col-12 col-md-3 p-0 m-0" style="align-self: center">
                                 <i class="fas fa-bus"></i>{{$course['bus']}}

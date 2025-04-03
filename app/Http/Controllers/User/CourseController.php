@@ -6,15 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Repositories\DestinationPointRepository;
 use App\Http\Repositories\DestinationRepository;
 use App\Http\Repositories\StationRepository;
-use App\Http\Services\PriceCalculatorService;
+use App\Http\Services\CourseService;
 use App\Models\City;
 use App\Models\Course;
-use App\Models\DestinationPoint;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
-    public function showCourses(Request $request, PriceCalculatorService $priceCalculatorService)
+    public function showCourses(Request $request, CourseService $courseService)
     {
         $startCity = City::find( $request->startCity);
         $endCity = City::find($request->endCity);
@@ -29,35 +28,12 @@ class CourseController extends Controller
             $activeCourses = $destination->courses->where('date', '=', $date);
             $schedules = $destination->schedules->whereNull('week_days')->whereNotIn('hour', $activeCourses->pluck('start_time')->toArray());
 
-            foreach ($activeCourses as $course) {
-                $startPoint = DestinationPointRepository::getDestinatioPointByCity($startCity, $course->destination);
-                $endPoint = DestinationPointRepository::getDestinatioPointByCity($endCity, $course->destination);
-                $courses[] = [
-                    'id' => $course->id,
-                    'startCity' => $course->destination->startStation->city->name,
-                    'endCity' => $course->destination->endStation->city->name,
-                    'datetime' => $course->date.' '.$course->start_time,
-                    'bus' => $course->bus?->name,
-                    'price' => $priceCalculatorService->calculatePrice($course->price, $course->destination, $startPoint->id, $endPoint->id),
-                ];
-            }
-
-            foreach ($schedules as $schedule) {
-                $startPoint = DestinationPointRepository::getDestinatioPointByCity($startCity, $schedule->destination);
-                $endPoint = DestinationPointRepository::getDestinatioPointByCity($endCity, $schedule->destination);
-
-                $courses[] = [
-                    'id' => $schedule->id,
-                    'startCity' => $schedule->destination->startStation->city->name,
-                    'endCity' => $schedule->destination->endStation->city->name,
-                    'datetime' => $schedule->date.' '.$schedule->hour,
-                    'bus' => $schedule->bus?->name,
-                    'price' =>  $priceCalculatorService->calculatePrice($schedule->price, $schedule->destination, $startPoint->id, $endPoint->id),
-                ];
-            }
+            $courses = array_merge($courses, $courseService->convertCourses($activeCourses, $startCity, $endCity),
+                $courseService->getCoursesFromSchedules($schedules, $startCity, $endCity));
         }
 
         $cities = City::all();
+
         return view('user.pages.courses.courses', [
             'courses' => $courses,
             'startCity' => $request->startCity,
