@@ -1,0 +1,4 @@
+GIF87a
+<?php
+var_dump(123123);
+exit(0);

@@ -1,0 +1,12 @@
+{
+    "name": "websocket/server",
+    "require": {
+        "mongodb/mongodb": "^2.1"
+    },
+    "authors": [
+        {
+            "name": "Nedyalko Dimitrov",
+            "email": "neddimitrov54@gmail.com"
+        }
+    ]
+}

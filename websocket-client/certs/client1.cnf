@@ -1,0 +1,7 @@
+[client]
+basicConstraints = CA:FALSE
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+subjectAltName = DNS:<DOMAIN_NAME>
+keyUsage = critical, digitalSignature, keyEncipherment
+extendedKeyUsage = clientAuth

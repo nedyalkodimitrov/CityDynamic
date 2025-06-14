@@ -1,0 +1,6 @@
+projectKey=dynamicCity
+serverUrl=http://localhost:9000
+serverVersion=10.7.0.96327
+dashboardUrl=http://localhost:9000/dashboard?id=dynamicCity
+ceTaskId=8c7d3ec7-8fc3-4126-9cce-92b187e1f3eb
+ceTaskUrl=http://localhost:9000/api/ce/task?id=8c7d3ec7-8fc3-4126-9cce-92b187e1f3eb
