@@ -15,7 +15,12 @@ services:
       - kafka
     networks:
       - app-net
-    command: sh -c "php artisan migrate --seed && php artisan serve --host=0.0.0.0 --port=8000"
+    command: sh -c "php artisan migrate:fresh --seed && php artisan serve --host=0.0.0.0 --port=8000"
+    environment:
+      DB_HOST: mysql
+      DB_DATABASE: dynamic_city
+      DB_USERNAME: root
+      DB_PASSWORD: admin
 
   websocket-server:
     build:
@@ -84,7 +89,7 @@ services:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: dynamic_city
     ports:
-      - "3307:3307"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
@@ -92,7 +97,6 @@ services:
 
   mongo:
     image: mongo
-    restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
@@ -101,7 +105,6 @@ services:
 
   mongo-express:
     image: mongo-express
-    restart: always
     ports:
       - 8082:8081
     environment:
@@ -111,8 +114,6 @@ services:
       ME_CONFIG_BASICAUTH: false
     networks:
       - app-net
-
-
 
 networks:
   app-net:

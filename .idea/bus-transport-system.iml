@@ -156,6 +156,9 @@
       <excludeFolder url="file://$MODULE_DIR$/web-server/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/web-server/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/web-server/vendor/_laravel_idea" />
+      <excludeFolder url="file://$MODULE_DIR$/web-server/storage/app" />
+      <excludeFolder url="file://$MODULE_DIR$/web-server/storage/debugbar" />
+      <excludeFolder url="file://$MODULE_DIR$/web-server/storage/framework" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

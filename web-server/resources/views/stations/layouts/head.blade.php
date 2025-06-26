@@ -19,8 +19,6 @@
                     class="list-group-item list-group-item-action py-2 ripple"
                 ><i class="fas fa-clock fa-fw me-3"></i><span>Заявки от компаниите</span></a
                 >
-
-
             </div>
         </div>
     </nav>
@@ -71,7 +69,7 @@
                         <img
                             src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
                             class="rounded-circle"
-                            height="22"
+                            height="42"
                             alt=""
                             loading="lazy"
                         />

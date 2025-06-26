@@ -8,13 +8,16 @@ use App\Http\Repositories\CourseRepository;
 use App\Http\Repositories\DestinationRepository;
 use App\Http\Requests\Company\Course\CreateCourseRequest;
 use App\Http\Requests\Company\Course\EditCourseRequest;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
     public function __construct(private DestinationRepository $destinationRepository,
-        private CourseRepository $courseRepository,
-        private BusRepository $busRepository) {}
+                                private CourseRepository      $courseRepository,
+                                private BusRepository         $busRepository)
+    {
+    }
 
     public function showCourses()
     {
@@ -37,11 +40,23 @@ class CourseController extends Controller
         $buses = $this->busRepository->getBusesByCompany($company->id);
         $course = $this->courseRepository->findById($id);
 
+        $isLocked = false;
+        $isActive = false;
+        if (Carbon::parse($course->date)->isToday() &&
+            Carbon::parse($course->start_time)->isPast() && Carbon::parse($course->end_time)->isFuture()) {
+            $isLocked = true;
+            $isActive = true;
+        } else if (Carbon::parse($course->date)->isBefore(Carbon::now()) ||
+            Carbon::parse($course->date)->isToday() && Carbon::parse($course->start_time)->isPast()) {
+            $isLocked = true;
+        }
         return view('companies.pages.courses.course', [
             'destinations' => $destinations,
             'buses' => $buses,
             'courseId' => $id,
             'course' => $course,
+            'isActive' => $isActive,
+            'isLocked' => $isLocked,
         ]);
     }
 

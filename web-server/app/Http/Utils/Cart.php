@@ -18,7 +18,7 @@ class Cart
     public function __construct(?User $user = null)
     {
         if (session('cart') === []) {
-            Ticket::where('user_id', $user?->id)->get()->each(function ($ticket) {
+            Ticket::where('user_id', $user?->id)->whereNull('order_id')->get()->each(function ($ticket) {
                 $this->items[$ticket->id] = $ticket;
                 $this->total += $ticket->price;
                 $this->totalItems++;
@@ -82,6 +82,9 @@ class Cart
         session(['cart' => []]);
         session(['total' => 0]);
         session(['totalItems' => 0]);
+        $this->items = [];
+        $this->total = 0;
+        $this->totalItems = 0;
     }
 
     public function convertToStripeData()
@@ -94,7 +97,6 @@ class Cart
                     'unit_amount' => $item->price * 100,
                     'product_data' => [
                         'name' => $item->startPoint->station->city->name.' - '.$item->endPoint->station->city->name,
-                        'description' => 'Тръва '.$item->course->start_time.' часа',
                         'metadata' => [
                             'ticket_id' => $item->id,
                         ],

@@ -34,7 +34,6 @@ class ShopController extends Controller
     {
         $user = Auth::user();
         $course = Course::find($courseId);
-
         $price = $priceCalculatorService->calculatePrice($course->price,$course->destination, $startPointId, $endPointId);
         Ticket::create([
             'user_id' => $user->id,
@@ -76,11 +75,11 @@ class ShopController extends Controller
             $ticket = Ticket::find($ticketId);
             $ticket->order_id = $order->id;
             $ticket->save();
-
-            $stripeAccountId = $ticket->course->destination->company->stripe_account_id;
-            $transferService->createTransfer($lineItem->amount_total, $stripeAccountId, 'ORDER100');
+            $stripeAccountId = $ticket->course->destination->company->stripeAccount->stripe_account_id;
+            $transferService->createTransfer($lineItem->amount_total, $stripeAccountId, 'Order'.$order->id);
         }
 
+        Cart::getInstance()->clear();
         return redirect()->route('user.showPurchases');
     }
 

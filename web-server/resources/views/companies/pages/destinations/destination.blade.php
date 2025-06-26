@@ -31,11 +31,11 @@
     <div class="container p-2 mb-2 col-12 card statistic-container">
         <div class="col-12 row ">
             <div class="col-4 text-center">
-                <p><b>10</b></p>
+                <p><b>{{$ticketCount}}</b></p>
                 <p>Закупени билета</p>
             </div>
             <div class="col-4 text-center">
-                <p><b>15лв</b></p>
+                <p><b>{{$totalPrice}} лв.</b></p>
                 <p>Оборот</p>
             </div>
             <div class="col-4 text-center">
@@ -54,7 +54,9 @@
                         - {{$destination->endStation->name}}</h3>
                     <i class="fas fa-arrow-down col align-self-center" style="cursor: pointer"
                        onclick="toggleTracks()"></i>
-                    <i class="fas fa-pen col align-self-center" style="cursor: pointer"></i>
+                    <a href="{{route('company.showDestinationsForm', ['destinationId' => $destination->id])}}" class="col align-self-center">
+                        <i class="fas fa-pen col align-self-center" style="cursor: pointer"></i>
+                    </a>
                 </div>
                 <div id="tracks-container" class="destinations row"
                      style="border-left: 4px solid green; margin-left: 1em;">
@@ -72,13 +74,15 @@
                                 </div>
                             </div>
                             <div class="pl-2 form-group col-12" style="padding-left: 1.5em;">
-                                <label for="exampleInputEmail1">@if($loop->iteration == 1)
+                                <label for="exampleInputEmail1">
+                                    @if($loop->iteration == 1)
                                         Начална
                                     @elseif($loop->iteration == count($destination->points))
                                         Крайна
                                     @else
-                                        Проходна
-                                    @endif</label>
+                                        Прeходна
+                                    @endif
+                                </label>
                                 <input type="text" class="form-control" value="{{$point->station->name}}" readonly>
                             </div>
                         </div>

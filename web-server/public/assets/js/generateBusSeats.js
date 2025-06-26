@@ -1,4 +1,4 @@
-function generateSeats(totalSeats, seatsPerRow) {
+function generateSeats(totalSeats, seatsPerRow, redSeats = []) {
     var container = document.getElementById('bus-seats');
     var rows = Math.ceil(totalSeats / seatsPerRow);
 
@@ -9,14 +9,6 @@ function generateSeats(totalSeats, seatsPerRow) {
     flexContainer.style.border = '1px solid black';
     container.innerHTML = '';
     container.appendChild(flexContainer);
-
-    // // Create a driver seat at the beginning
-    // var driverSeat = document.createElement('div');
-    // driverSeat.style.width = '20px';
-    // driverSeat.style.height = '20px';
-    // driverSeat.style.margin = '2px';
-    // driverSeat.style.backgroundColor = 'red'; // Driver seat color
-    // flexContainer.appendChild(driverSeat);
 
     // Create a flex container to hold the rows (now acting as columns)
     var seatsContainer = document.createElement('div');
@@ -37,13 +29,11 @@ function generateSeats(totalSeats, seatsPerRow) {
             seat.style.width = '30px';
             seat.style.height = '30px';
             seat.style.margin = '2px';
-
+            seat.style.backgroundColor = redSeats.includes(seatNumber) ? 'red' : 'white';
             seat.style.border = '1px solid black';
             seat.style.textAlign = 'center';
             seat.style.verticalAlign = 'center';
 
-
-            // Add seat number
             var seatText = document.createTextNode(seatNumber.toString());
             seat.appendChild(seatText);
 

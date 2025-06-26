@@ -7,7 +7,7 @@
 @section("content")
 
     <div class="card col-9 mt-5 mx-auto">
-        <div class="card-title">
+        <div class="card-title mt-5">
             <h3 class="p-3 pb-0 text-center">
                 Количка
             </h3>
@@ -33,7 +33,7 @@
                             <td>{{$ticket?->course->destination->name}}</td>
                             <td>{{$ticket?->startPoint->station?->name}}</td>
                             <td> {{$ticket?->endPoint->station?->name}}</td>
-                            <td> {{$ticket?->course->date}} {{$ticket?->course->startTime}}</td>
+                            <td> {{$ticket?->course->date}} {{$ticket?->course->start_time}}</td>
                             <td> {{$ticket?->price}} лв.</td>
                             <td>
                                 <form action="{{route("user.removeFromCart", ["id" => $ticket?->id])}}" method="post"

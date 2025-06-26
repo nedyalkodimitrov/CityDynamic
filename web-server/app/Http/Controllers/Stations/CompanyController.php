@@ -38,7 +38,7 @@ class CompanyController extends Controller
         $station = $user->getStation();
 
         return view('stations.pages.companies.companiesRequest', [
-            'companies' => $station->companyRequests,
+            'companies' => $station->companyConnectionRequests,
         ]);
     }
 

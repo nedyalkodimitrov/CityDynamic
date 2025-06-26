@@ -19,7 +19,7 @@
                         <i class="fas fa-gem me-3"></i>Dynamic City
                     </h6>
                     <p>
-                        Your partner for transport between cities!
+                        Твоят партньор в транспорта между градовете!
                     </p>
                 </div>
                 <!-- Grid column -->
@@ -28,16 +28,16 @@
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                     <!-- Links -->
                     <h6 class="text-uppercase fw-bold mb-4">
-                        Companies
+                        Компании
                     </h6>
                     <p>
-                        <a href="#!" class="text-reset">Courses</a>
+                        <a href="#!" class="text-reset">Курсове</a>
                     </p>
                     <p>
-                        <a href="#!" class="text-reset">Information</a>
+                        <a href="#!" class="text-reset">Информация</a>
                     </p>
                     <p>
-                        <a href="#!" class="text-reset">Contacts</a>
+                        <a href="#!" class="text-reset">Контакти</a>
                     </p>
                 </div>
                 <!-- Grid column -->
@@ -46,16 +46,13 @@
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                     <!-- Links -->
                     <h6 class="text-uppercase fw-bold mb-4">
-                        Useful links
+                        Полезни връзки
                     </h6>
                     <p>
-                        <a href="#!" class="text-reset">Pricing</a>
+                        <a href="#!" class="text-reset">Цени</a>
                     </p>
                     <p>
-                        <a href="#!" class="text-reset">BDZ</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Orders</a>
+                        <a href="#!" class="text-reset">Поръчки</a>
                     </p>
 
                 </div>
@@ -64,13 +61,12 @@
                 <!-- Grid column -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                     <!-- Links -->
-                    <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                    <p><i class="fas fa-home me-3"></i> Varna, Bulagaria</p>
+                    <h6 class="text-uppercase fw-bold mb-4">Контакци</h6>
+                    <p><i class="fas fa-home me-3"></i>Варна, България</p>
                     <p>
                         <i class="fas fa-envelope me-3"></i>
-                        contact@ned-dimitrov.com
+                        12621121@nvna.eu
                     </p>
-                    <p><i class="fas fa-phone me-3"></i> + 359 0014 456</p>
                 </div>
                 <!-- Grid column -->
             </div>
@@ -81,7 +77,7 @@
 
     <!-- Copyright -->
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2023 Copyright:
+        © {{now()->year}} Copyright:
         <a class="text-reset fw-bold" href="#">Dynamic City</a>
     </div>
     <!-- Copyright -->

@@ -19,24 +19,22 @@
 
         </div>
         <div class="card-body">
-            <p class="col-12    p-0 m-0 " style="align-self: center"><b>Час на тръгване:</b> {{$course->startTime}} <i
-                    class="fas fa-clock"></i></p>
-            <p class="col-12    p-0 m-0" style="align-self: center"><b>Час на пристигане:</b> {{$course->endTime}} <i
+            <p class="col-12    p-0 m-0 " style="align-self: center"><b>Час на тръгване:</b> {{$course->start_time}} <i
                     class="fas fa-clock"></i></p>
             <p class="col-12    p-0 m-0 " style="align-self: center"><b>Превозващ автобус:</b> {{$course->bus->name}}
                 ({{$course->bus->model}}) - {{$course->bus->seats}} места </p>
             <p class="col-12  p-0 m-0" style="align-self: center">
                 <b>Компания:</b> {{$course->destination->company->name}} </p>
-            <p class="col-12  p-0 m-0" style="align-self: center"><b>Цена:</b> {{$course->price}} лв.</p>
+            <p class="col-12  p-0 m-0" style="align-self: center"><b>Цена:</b> {{$clearDataCourse['price']}} лв.</p>
 
             <div class="mt-1 row justify-content-center col-12">
                 @if(\Illuminate\Support\Facades\Auth::check())
                     @if($boughtCourseTicketNumbers >= $course->bus->seats)
                         <button class="btn btn-danger">Изчерпана наличност</button>
                     @else
-                        <form action="{{route("user.putInCart", ["id" => $course->id, "startPointId" => $startPoint->id,"endPointId" => $endPoint->id])}}" method="post">
+                        <form class="mx-auto col-10 mt-2 row" action="{{route("user.putInCart", ["id" => $course->id, "startPointId" => $startPoint->id,"endPointId" => $endPoint->id])}}" method="post">
                             @csrf
-                            <button class="btn btn-success">Сложи в количката</button>
+                            <button class="btn btn-success mx-auto">Сложи в количката</button>
                         </form>
 
                     @endif

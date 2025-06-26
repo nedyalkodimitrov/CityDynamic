@@ -14,10 +14,10 @@
         </div>
 
         <div class="form-group col-12 mt-3">
-            <label for="exampleInputPassword1">Админ</label>
+            <label for="exampleInputPassword1">Град</label>
             <select class="form form-select" name="city">
                 @foreach($cities as $city)
-                    @if($city->id == $station->city)
+                    @if($city->id == $station->city_id)
                         <option selected value="{{$city->id}}">
                             {{$city->name}}
                         </option>

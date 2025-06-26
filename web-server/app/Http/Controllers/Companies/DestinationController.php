@@ -8,6 +8,7 @@ use App\Http\Requests\Company\Destination\CreateDestinationRequest;
 use App\Http\Requests\Company\Destination\EditDestinationRequest;
 use App\Http\Services\DestinationService;
 use App\Models\Destination;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
 
 class DestinationController extends Controller
@@ -39,8 +40,13 @@ class DestinationController extends Controller
             return redirect()->route('company.showDestinations');
         }
 
+        $courses = $destination->courses->pluck('id')->toArray();
+        $ticketCount = Ticket::whereIn('course_id', $courses)->count();
+        $totalPrice = Ticket::whereIn('course_id', $courses)->sum('price');
         return view('companies.pages.destinations.destination', [
             'destination' => $destination,
+            'ticketCount' => $ticketCount,
+            'totalPrice' => $totalPrice,
         ]);
     }
 

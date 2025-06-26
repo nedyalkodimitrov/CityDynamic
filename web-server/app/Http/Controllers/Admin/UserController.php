@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Repositories\UserRepository;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -25,7 +26,10 @@ class UserController extends Controller
 
     public function showUserCreate()
     {
-        return view('admin.pages.users.userForm');
+        $roles = Role::all();
+        return view('admin.pages.users.userForm', [
+            'roles' => $roles,
+        ]);
     }
 
     public function createUser(Request $request, UserRepository $userRepository)

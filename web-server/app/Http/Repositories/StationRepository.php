@@ -21,31 +21,30 @@ class StationRepository
 
     public function acceptCompanyRequest($station, $companyId)
     {
-        $company = $station->getCompanyRequests()->where('bus_company', $companyId)->first();
-        $station->getCompanyRequests()->detach($company->id);
+        $company = $station->companyConnectionRequests()->where('company_id', $companyId)->first();
+        $station->companyConnectionRequests()->detach($company->id);
         $station->companies()->attach($company->id);
     }
 
     public function declineCompanyRequest($station, $companyId)
     {
-        $company = $station->getCompanyRequests()->where('bus_company', $companyId)->first();
-        $station->getCompanyRequests()->detach($company->id);
+        $company = $station->companyConnectionRequests()->where('company_id', $companyId)->first();
+        $station->companyConnectionRequests()->detach($company->id);
     }
 
     public function getRequestFromCompany($station, $companyId)
     {
-        return $station->getCompanyRequests()->where('bus_company', $companyId)->first();
+        return $station->companyConnectionRequests()->where('company_id', $companyId)->first();
     }
 
     public function getCompanyOnStation($station, $companyId)
     {
-        return $station->companies()->where('bus_company', $companyId)->first();
+        return $station->companies()->where('company_id', $companyId)->first();
     }
 
     public function getCompaniesOnStation(Station $station)
     {
-        //todo
-        return [];
+        return $station->companies()->get();
     }
 
     public function findAll()

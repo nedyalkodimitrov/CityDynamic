@@ -30,7 +30,7 @@ class Station extends Model
 
     public function companyConnectionRequests()
     {
-        return $this->belongsToMany(Company::class, 'companies_stations_request', 'station_id', 'company_id');
+        return $this->belongsToMany(Company::class, 'companies_stations_connection_requests', 'station_id', 'company_id');
     }
 
     public function destinations()

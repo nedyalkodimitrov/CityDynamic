@@ -15,7 +15,8 @@
     <div class="col-12 row mb-3 px-4">
         <h2 class="col-10 m-0 p-0 ">Начало</h2>
         @if($company->stripeAccount?->is_charges_enabled)
-            <a class="btn btn-primary col-2" target="_blank" href="{{route('company.openStripeDashboard')}}">Отвори Stripe табло</a>
+            <a class="btn btn-primary col-2" target="_blank" href="{{route('company.openStripeDashboard')}}">Отвори
+                Stripe табло</a>
         @endif
     </div>
     <div class="col-12 row mb-3">
@@ -55,27 +56,49 @@
     <div class="col-12 card">
         <div class="col-12 card-body">
             <h1 class="col-12 text-center">Курсове</h1>
-            <table class="table">
+            <table class="table ">
                 <thead>
                 <tr>
-                    <th scope="col"></th>
-                    <th scope="col">По тестинация</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col">Име</th>
                     <th scope="col">Начална точка</th>
                     <th scope="col">Крайна точка</th>
-                    <th scope="col">Заминаване</th>
+                    <th scope="col">Дата и час</th>
+                    <th scope="col">Действие</th>
                 </tr>
                 </thead>
                 <tbody>
-
-                @foreach($courses as $course)
+                @forelse($courses as $course)
                     <tr>
-                        <th scope="row"></th>
+                        <th scope="row">
+                            @if(\Carbon\Carbon::parse($course->date)->isToday() && \Carbon\Carbon::parse($course->start_time)->isPast() && \Carbon\Carbon::parse($course->end_time)->isFuture())
+                                <div class="alert alert-success p-1 text-center">
+                                    Активен
+                                </div>
+                            @elseif(\Carbon\Carbon::parse($course->date)->isFuture() || \Carbon\Carbon::parse($course->date)->isToday() && \Carbon\Carbon::parse($course->start_time)->isFuture())
+                                <div class="alert alert-primary p-1 text-center">
+                                    Предстоящ
+                                </div>
+                            @else
+                                <div class="alert alert-light p-1 text-center">
+                                    Изминал
+                                </div>
+                            @endif
+                        </th>
                         <td>{{$course->destination->name}}</td>
                         <td>{{$course->destination->startStation->name}}</td>
-                        <td>{{$course->destination->endStation->name}}</td>
-                        <td>{{$course->start_time}} {{$course->date}}</td>
+                        <td>{{$course->destination->endStation->name}} </td>
+                        <td>{{\Carbon\Carbon::parse($course->start_time)->format('H:i')}}
+                            - {{\Carbon\Carbon::parse($course->end_time)->format('H:i')}} |
+                            {{\Carbon\Carbon::parse($course->date)->format('d/m/Y')}} </td>
+                        <td><a href="{{route("company.showCourse", ["id" => $course->id])}}"><i
+                                    class="fa fa-eye"></i></a></td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="4" class="text-center">Няма добавени дистанции</td>
+                    </tr>
+                @endforelse
                 </tbody>
             </table>
         </div>

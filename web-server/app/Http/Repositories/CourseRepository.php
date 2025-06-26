@@ -37,7 +37,7 @@ class CourseRepository
             'driver_id' => 3,
             'date' => $params['date'],
             'start_time' => $params['startTime'],
-            //            'end_time' => $params['endTime'],
+            'end_time' => $params['endTime'],
             'price' => $params['price'],
         ]);
     }
@@ -46,6 +46,8 @@ class CourseRepository
     {
         return Course::whereIn('destination_id', $destinationIds)
             ->with('destination', 'destination.startStation', 'destination.endStation')
+            ->orderBy('date','desc' )
+            ->orderBy('start_time', 'desc')
             ->get();
     }
 }

@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-lg-12 mt-4">
                         <div class="section-title-area text-center m-0">
-                            <h1 class="section-title">{{__("Sign in")}}</h1>
+                            <h1 class="section-title">Вход</h1>
                         </div>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                             <form action="{{route("login")}}" method="post" class="ltn__form-box contact-form-box">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="username" class="form-label">{{__("Email")}}</label>
+                                    <label for="username" class="form-label">Имейл</label>
                                     <input name="email" type="email"
                                            class="form-control @error('email') is-invalid @enderror"
                                            placeholder="{{ old('email', 'youremail@gmail.com') }}" id="username" autocomplete="email" autofocus>
@@ -34,7 +34,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">{{__("Password")}}</label>
+                                    <label class="form-label">Парола</label>
                                     <div class="input-group auth-pass-inputgroup @error('password') is-invalid @enderror">
                                         <input type="password" name="password"
                                                class="form-control  @error('password') is-invalid @enderror"
@@ -52,12 +52,12 @@
                                     <input class="form-check-input" type="checkbox"
                                            id="remember" {{ old('remember') ? 'checked' : '' }}>
                                     <label class="form-check-label" for="remember">
-                                        {{__("Remember me")}}
+                                        Запомни ме
                                     </label>
                                 </div>
 
                                 <div class="mt-3 d-grid">
-                                    <button class="theme-btn-1 btn btn-block btn btn-primary" type="submit">{{__("SIGN IN")}}</button>
+                                    <button class="theme-btn-1 btn btn-block btn btn-primary" type="submit">Влез</button>
                                 </div>
                             </form>
                         </div>

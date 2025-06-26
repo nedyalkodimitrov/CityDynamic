@@ -52,6 +52,6 @@
         </div>
 
         <button type="button" class="btn btn-secondary col-12 mt-3" wire:click="addPoint">Добави точка</button>
-        <button type="submit" class="btn btn-primary col-12 mt-3">Създай дестинация</button>
+        <button type="submit" class="btn btn-primary col-12 mt-3">{{$destination?'Редактирай': 'Създай'}}</button>
     </form>
 </div>

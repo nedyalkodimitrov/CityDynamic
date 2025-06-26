@@ -18,6 +18,7 @@ class CourseService
         foreach ($courses as $course) {
             $startPoint = DestinationPointRepository::getDestinatioPointByCity($startCity, $course->destination);
             $endPoint = DestinationPointRepository::getDestinatioPointByCity($endCity, $course->destination);
+//            dd($course->price);
             $coursesData[] = [
                 'id' => $course->id,
                 'startCity' => $course->destination->startStation->city->name,

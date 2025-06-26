@@ -18,11 +18,11 @@
 
         <!-- LOGIN AREA START -->
         <div class="ltn__login-area pb-65">
-            <div class="container card col-12 col-md-9 col-lg-6 ">
+            <div class="container card col-12 col-md-9 col-lg-9 ">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="section-title-area text-center m-0">
-                            <h1 class="section-title">{{__("Sign up")}}</h1>
+                        <div class="section-title-area text-center m-0 mt-2">
+                            <h1 class="section-title">Регистрация</h1>
                         </div>
                     </div>
                 </div>

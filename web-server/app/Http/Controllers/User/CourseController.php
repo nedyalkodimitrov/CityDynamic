@@ -28,10 +28,10 @@ class CourseController extends Controller
             $activeCourses = $destination->courses->where('date', '=', $date);
             $schedules = $destination->schedules->whereNull('week_days')->whereNotIn('hour', $activeCourses->pluck('start_time')->toArray());
 
-            $courses = array_merge($courses, $courseService->convertCourses($activeCourses, $startCity, $endCity),
+            $courses = array_merge($courses,
+                $courseService->convertCourses($activeCourses, $startCity, $endCity),
                 $courseService->getCoursesFromSchedules($schedules, $startCity, $endCity));
         }
-
         $cities = City::all();
 
         return view('user.pages.courses.courses', [
@@ -43,7 +43,7 @@ class CourseController extends Controller
         ]);
     }
 
-    public function showCourse($id, ?City $startCity, ?City $endCity)
+    public function showCourse($id, ?City $startCity, ?City $endCity, CourseService $courseService)
     {
         $course = Course::with('destination', 'destination.startStation', 'destination.startStation.city',
             'destination.endStation', 'destination.endStation.city')->find($id);
@@ -51,8 +51,10 @@ class CourseController extends Controller
         $startPoint = DestinationPointRepository::getDestinatioPointByCity($startCity, $course->destination);
         $endPoint = DestinationPointRepository::getDestinatioPointByCity($endCity, $course->destination);
 
+        $clearDataCourse = $courseService->convertCourses([$course], $startCity, $endCity)[0];
         return view('user.pages.courses.course', [
             'course' => $course,
+            'clearDataCourse' => $clearDataCourse,
             'startCity' => $startCity,
             'endCity' => $endCity,
             'startPoint' => $startPoint,

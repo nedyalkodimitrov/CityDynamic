@@ -1,7 +1,7 @@
 <div>
     <div class="col-12 mx-auto searchBar-container">
         <img src="{{asset("assets/images/road.jpg")}}" alt="" class="image">
-        <h1 class="title">Пътувайте из цялата страна</h1>
+        <h1 class="title">Пътуваите навсякъде в България</h1>
         <form method="post" action="{{route("user.searchCourses")}}" class="col-11 col-md-10 mx-auto row searchBar">
             @csrf
             <div class="col-6 col-lg-4 ">

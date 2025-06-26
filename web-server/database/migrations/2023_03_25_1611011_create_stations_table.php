@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('contact_email');
             $table->string('contact_phone');
             $table->string('contact_address');
-            $table->string('location', 200);
+            $table->string('location', 200)->nullable();
             $table->timestamps();
         });
     }

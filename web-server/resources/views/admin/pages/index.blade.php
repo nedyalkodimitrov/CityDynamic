@@ -53,7 +53,7 @@
                 <div class="card-body">
                     <div style="margin-left: 0.5em;">
                         <p style="font-size: 1.3em;margin: 0; text-align: center">{{$userCount}} </p>
-                        <p style="font-size: 1.1em;margin: 0; text-align: center">Потребителя</p>
+                        <p style="font-size: 1.1em;margin: 0; text-align: center"><b>Потребителя</b></p>
                     </div>
                 </div>
             </div>

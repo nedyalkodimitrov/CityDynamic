@@ -5,10 +5,56 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="71d97d52-fcb5-40a4-a863-c24366fa679c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/bus-transport-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/bus-transport-system.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-server/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-server/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/app/Http/Controllers/Admin/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/app/Http/Controllers/Admin/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/app/Http/Controllers/Companies/CourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/app/Http/Controllers/Companies/CourseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/app/Http/Controllers/Companies/DestinationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/app/Http/Controllers/Companies/DestinationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/app/Http/Controllers/Companies/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/app/Http/Controllers/Companies/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/app/Http/Controllers/Stations/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/app/Http/Controllers/Stations/CompanyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/app/Http/Controllers/User/CourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/app/Http/Controllers/User/CourseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/app/Http/Controllers/User/ShopController.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/app/Http/Controllers/User/ShopController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/app/Http/Repositories/CourseRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/app/Http/Repositories/CourseRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/app/Http/Repositories/StationRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/app/Http/Repositories/StationRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/app/Http/Services/CourseService.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/app/Http/Services/CourseService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/app/Http/Services/DestinationService.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/app/Http/Services/DestinationService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/app/Http/Utils/Cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/app/Http/Utils/Cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/app/Models/Station.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/app/Models/Station.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/app/Observers/TickerObserver.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/app/Observers/TickerObserver.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/database/migrations/2023_03_25_1611010_create_companies_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/database/migrations/2023_03_25_1611010_create_companies_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/database/migrations/2023_03_25_1611011_create_stations_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/database/migrations/2023_03_25_1611011_create_stations_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/database/seeders/RoleSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/database/seeders/RoleSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/public/assets/js/generateBusSeats.js" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/public/assets/js/generateBusSeats.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/admin/pages/companies/company.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/admin/pages/companies/company.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/admin/pages/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/admin/pages/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/admin/pages/stations/station.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/admin/pages/stations/station.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/companies/pages/buses/bus.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/companies/pages/buses/bus.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/companies/pages/courses/course.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/companies/pages/courses/course.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/companies/pages/courses/courses.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/companies/pages/courses/courses.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/companies/pages/destinations/destination.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/companies/pages/destinations/destination.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/companies/pages/destinations/destinationForm.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/companies/pages/destinations/destinationForm.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/companies/pages/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/companies/pages/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/companies/pages/stations/station.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/companies/pages/stations/station.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/companies/pages/stations/stations.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/companies/pages/stations/stations.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/livewire/companies/destinations/destination-form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/livewire/companies/destinations/destination-form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/livewire/destination-search.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/livewire/destination-search.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/stations/layouts/head.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/stations/layouts/head.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/stations/pages/companies/companies.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/stations/pages/companies/companies.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/stations/pages/companies/companiesRequest.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/stations/pages/companies/companiesRequest.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/stations/pages/companies/company.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/stations/pages/companies/company.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/stations/pages/companies/companyRequest.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/stations/pages/companies/companyRequest.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/user/layouts/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/user/layouts/footer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/user/pages/cart/cart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/user/pages/cart/cart.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/user/pages/courses/course.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/user/pages/courses/course.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/user/pages/courses/courses.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/user/pages/courses/courses.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-server/resources/views/user/pages/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/resources/views/user/pages/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/websocket-server/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/websocket-server/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,41 +251,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.Dockerfile.executor": "Run",
-    "Docker.docker-compose.yml.websocket-server: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
-    "Docker.websocket-server: Compose Deployment.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.laravel_idea.run_console_parameters_ask": "true",
-    "git-widget-placeholder": "feature/add-websocket-server",
-    "laravel_idea.dialogs.run_console_settings.width": "255",
-    "laravel_idea.dialogs.run_console_settings.x": "640",
-    "laravel_idea.dialogs.run_console_settings.y": "320",
-    "last_opened_file_path": "D:/Development/Projects/Laravel/bus-transport-system/websocket-server",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.websocket-server: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.websocket-server: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.laravel_idea.run_console_parameters_ask&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/add-websocket-server&quot;,
+    &quot;laravel_idea.dialogs.run_console_settings.width&quot;: &quot;255&quot;,
+    &quot;laravel_idea.dialogs.run_console_settings.x&quot;: &quot;640&quot;,
+    &quot;laravel_idea.dialogs.run_console_settings.y&quot;: &quot;320&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Development/Projects/Laravel/bus-transport-system/web-server/resources/views/companies/pages/courses&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\az236\\AppData\\Local\\Programs\\PhpStorm\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Development\Projects\Laravel\bus-transport-system\web-server\resources\views\companies\pages\courses" />
+      <recent name="D:\Development\Projects\Laravel\bus-transport-system\web-server\public\assets\images" />
       <recent name="D:\Development\Projects\Laravel\bus-transport-system\websocket-server" />
       <recent name="D:\Development\Projects\Laravel\bus-transport-system\web-server" />
       <recent name="D:\Development\Projects\Laravel\bus-transport-system" />
-      <recent name="D:\Development\Projects\Laravel\bus-transport-system\web-server\public\images" />
-      <recent name="D:\Development\Projects\Laravel\bus-transport-system\websocket-client" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Development\Projects\Laravel\bus-transport-system" />
@@ -322,8 +370,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PS-243.26053.13" />
-        <option value="bundled-php-predefined-a98d8de5180a-1ec7b7818973-com.jetbrains.php.sharedIndexes-PS-243.26053.13" />
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-PS-251.26094.133" />
+        <option value="bundled-php-predefined-a98d8de5180a-c5828cf854d9-com.jetbrains.php.sharedIndexes-PS-251.26094.133" />
       </set>
     </attachedChunks>
   </component>
@@ -366,7 +414,23 @@
       <workItem from="1748625603139" duration="2130000" />
       <workItem from="1748844053957" duration="43000" />
       <workItem from="1749379769616" duration="46000" />
-      <workItem from="1749880638056" duration="1759000" />
+      <workItem from="1749880638056" duration="4531000" />
+      <workItem from="1750053904801" duration="122000" />
+      <workItem from="1750170846989" duration="1645000" />
+      <workItem from="1750232587129" duration="10000" />
+      <workItem from="1750365393695" duration="1493000" />
+      <workItem from="1750403108226" duration="165000" />
+      <workItem from="1750706344931" duration="3195000" />
+      <workItem from="1750752145805" duration="73000" />
+      <workItem from="1750781417921" duration="889000" />
+      <workItem from="1750795535950" duration="5704000" />
+      <workItem from="1750835726533" duration="5000" />
+      <workItem from="1750838418132" duration="1100000" />
+      <workItem from="1750846124517" duration="1733000" />
+      <workItem from="1750867847088" duration="215000" />
+      <workItem from="1750868207245" duration="4237000" />
+      <workItem from="1750950811292" duration="11560000" />
+      <workItem from="1750965505807" duration="1167000" />
     </task>
     <servers />
   </component>

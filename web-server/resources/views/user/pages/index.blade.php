@@ -19,8 +19,6 @@
                     <div class="card-body">
                         <h3>За {{$destination->startStation->name}}</h3>
                         <h6>От {{$destination->endStation->name}}</h6>
-{{--                        <a href="{{route("user.showCourses", ["id" => $destination->id])}}" class="btn btn-primary col-12 ">Вижте--}}
-{{--                            курсове</a>--}}
                     </div>
                 </div>
             </div>
@@ -31,7 +29,7 @@
         @foreach($companies as $company)
             <div class="col-6 col-md-4 col-lg-2 mt-2 p-0">
                 <div class="col-11 mx-auto" style="border: 1px solid grey; border-radius: 5px">
-                    <img style="width: 100%; height: 100px;object-fit: contain" src="{{asset("assets/images/".$company->profilePhoto)}}"><br>
+                    <img style="width: 100%; height: 100px;object-fit: contain" src="{{asset("assets/images/".$company->profile_photo)}}"><br>
                     <p class="text-center">{{$company->name}}</p>
                 </div>
             </div>

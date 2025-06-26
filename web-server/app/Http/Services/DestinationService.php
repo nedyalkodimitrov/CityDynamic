@@ -28,10 +28,14 @@ class DestinationService
     {
         $destination->update([
             'name' => $editData['name'],
+            'start_station_id' => $editData['stations'][1],
+            'end_station_id' => $editData['stations'][count($editData['stations'])],
         ]);
 
         $destination->points()->delete();
         $this->createDestinationPoint($destination, $editData['stations']);
+
+
     }
 
     public static function getLastBusStation($destination)
