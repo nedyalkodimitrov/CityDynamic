@@ -1,7 +1,6 @@
 <?php
 
 namespace util;
-
 use MongoDB\Client;
 
 class Mongo

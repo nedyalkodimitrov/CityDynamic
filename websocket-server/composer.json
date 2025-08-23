@@ -3,6 +3,12 @@
     "require": {
         "mongodb/mongodb": "^2.1"
     },
+    "autoload": {
+        "psr-4": {
+          "util\\": "util/"
+        }
+    },
+
     "authors": [
         {
             "name": "Nedyalko Dimitrov",

@@ -3,6 +3,9 @@ FROM php:8.2-apache
 
 # Install required dependencies for Kafka and Redis
 RUN apt-get update && apt-get install -y \
+    git\
+    zip \
+    unzip\
     librdkafka-dev \
     redis-server \
     && rm -rf /var/lib/apt/lists/*
@@ -23,8 +26,6 @@ WORKDIR /var/www/html
 # Copy your PHP application code into the container
 COPY . .
 
-# Expose port 80 for Apache
 EXPOSE 8000
 RUN composer install
 
-#RUN php artisan serve --host 0.0.0.0 --port 8000

@@ -8,7 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/web-server/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/web-server/tests/Feature" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/web-server/tests/Unit" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/websocket-server/utils" isTestSource="false" packagePrefix="util\" />
+      <sourceFolder url="file://$MODULE_DIR$/websocket-server/util" isTestSource="false" packagePrefix="util\" />
       <excludeFolder url="file://$MODULE_DIR$/storage/app" />
       <excludeFolder url="file://$MODULE_DIR$/storage/debugbar" />
       <excludeFolder url="file://$MODULE_DIR$/storage/framework" />

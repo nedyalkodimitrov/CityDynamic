@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'websocket/server',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => '27963fa580fc0add0a4f9f26282b4313e18c5331',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => null,
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -44,9 +44,9 @@
             'dev_requirement' => false,
         ),
         'websocket/server' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '27963fa580fc0add0a4f9f26282b4313e18c5331',
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => null,
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

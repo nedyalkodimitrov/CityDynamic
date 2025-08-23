@@ -3,7 +3,7 @@ services:
     build:
       context: ./web-server
       dockerfile: Dockerfile
-    container_name: web_server
+    container_name: city-dynamic.web-server
     volumes:
       - ./web-server:/var/www/html
       - ./ca-certs:/etc/ssl/certs/custom
@@ -14,8 +14,8 @@ services:
       - redis
       - kafka
     networks:
-      - app-net
-    command: sh -c "php artisan migrate:fresh --seed && php artisan serve --host=0.0.0.0 --port=8000"
+      - city-dynamic-network
+    command: sh -c "cp .env.example .env && composer install --no-interaction --prefer-dist --optimize-autoloader && php artisan key:generate && php artisan migrate:fresh --seed --force && php artisan serve --host=0.0.0.0 --port=8000"
     environment:
       DB_HOST: mysql
       DB_DATABASE: dynamic_city
@@ -26,7 +26,7 @@ services:
     build:
       context: ./websocket-server
       dockerfile: Dockerfile
-    container_name: websocket_server
+    container_name: city-dynamic.websocket-server
     volumes:
       - ./websocket-server:/var/www/html
       - ./ca-certs:/etc/ssl/certs/custom
@@ -35,13 +35,13 @@ services:
     depends_on:
       - kafka
     networks:
-      - app-net
+      - city-dynamic-network
 
   websocket-client:
     build:
       context: ./websocket-client
       dockerfile: Dockerfile
-    container_name: websocket_client
+    container_name: city-dynamic.websocket-client
     volumes:
       - ./websocket-client:/var/www/html
       - ./ca-certs:/etc/ssl/certs/custom
@@ -50,19 +50,19 @@ services:
     depends_on:
       - websocket-server
     networks:
-      - app-net
+      - city-dynamic-network
 
   redis:
     image: redis:latest
-    container_name: redis
+    container_name: city-dynamic.redis
     ports:
       - "6379:6379"
     networks:
-      - app-net
+      - city-dynamic-network
 
   kafka:
     image: wurstmeister/kafka:latest
-    container_name: kafka2
+    container_name: city-dynamic.kafka2
     environment:
       KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9093
       KAFKA_LISTENERS: INSIDE://0.0.0.0:9093
@@ -72,19 +72,19 @@ services:
     ports:
       - "9093:9093"
     networks:
-      - app-net
+      - city-dynamic-network
 
   zookeeper:
     image: wurstmeister/zookeeper:latest
-    container_name: zookeeper
+    container_name: city-dynamic.zookeeper
     ports:
       - "2181:2181"
     networks:
-      - app-net
+      - city-dynamic-network
 
   mysql:
     image: mysql:latest
-    container_name: mysql
+    container_name: city-dynamic.mysql
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: dynamic_city
@@ -93,18 +93,20 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
-      - app-net
+      - city-dynamic-network
 
   mongo:
     image: mongo
+    container_name: city-dynamic.mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     networks:
-      - app-net
+      - city-dynamic-network
 
   mongo-express:
     image: mongo-express
+    container_name: city-dynamic.mongo-express
     ports:
       - 8082:8081
     environment:
@@ -113,10 +115,10 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
       ME_CONFIG_BASICAUTH: false
     networks:
-      - app-net
+      - city-dynamic-network
 
 networks:
-  app-net:
+  city-dynamic-network:
     driver: bridge
 
 volumes:
